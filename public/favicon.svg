@@ -25,7 +25,7 @@
   <rect x="695" y="92" width="37" height="90" fill="#000"/>
   <polygon points="377.0,146.0 506.0,220.5 506.0,369.5 377.0,444.0 248.0,369.5 248.0,220.5" fill="url(#hy)" stroke="#000" stroke-width="32"/>
   <polygon points="899.0,146.0 1028.0,220.5 1028.0,369.5 899.0,444.0 770.0,369.5 770.0,220.5" fill="url(#hy)" stroke="#000" stroke-width="32"/>
-  <polygon points="638.0,146.0 767.0,220.5 767.0,369.5 638.0,444.0 509.0,369.5 509.0,220.5" fill="url(#hb)" stroke="#000" stroke-width="32"/>
+  <polygon points="638.0,146.0 767.0,220.5 767.0,369.5 638.0,444.0 509.0,369.5 509.0,220.5" fill="url(#hw)" stroke="#000" stroke-width="32"/>
   <polygon points="638,295 767.0,369.5 638,444 509.0,369.5" fill="url(#hy)" stroke="#000" stroke-width="32"/>
   <!-- Thin top highlight on the yellow cells for a bit of bevel -->
   <g fill="none" stroke="#FFF6B0" stroke-opacity="0.55" stroke-width="7" stroke-linecap="round">
