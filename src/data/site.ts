@@ -3,7 +3,7 @@
 // and the official price sheet (Oct 26 2026). Change it here and every page updates.
 
 export const SITE = {
-  name: 'A&E Factory Sales',
+  name: 'AE Factory Sales',
   url: 'https://aefactorysales.com',
   tagline: 'Patio enclosures & screens',
   street: '2609 William Tell Street',
@@ -18,11 +18,12 @@ export const SITE = {
   factoryStreet: '2605 William Tell Street',
   factorySite: 'https://aecustomize.com',
   founded: '2022',
-  hours: 'Open 24/7 by appointment',
+  hours: 'Visits by appointment',
   // Paste the short review link from Google Business Profile (Home > Ask for reviews), e.g. https://g.page/r/XXXX/review
   googleReviewUrl: '',
   // YouTube link for the fold-away video (paste the Shorts or watch URL). Empty hides the link.
-  youtubeFold: 'https://youtu.be/e296PKRxLe4',
+  youtubeFold: '',
+  youtubeFactory: 'https://youtu.be/e296PKRxLe4',
   // Web3Forms access key. Free at web3forms.com, tied to info@aefactorysales.com.
   // Leave empty and the forms run in preview mode (nothing is sent).
   // Web3Forms access keys are public by design (they only allow sending to the inbox they were created for).
@@ -31,13 +32,13 @@ export const SITE = {
 
 export const WARRANTY = 'Lifetime on the frame, 3 years on parts';
 export const WARRANTY_FULL =
-  'Lifetime on the frame and 3 years on all parts, installed and maintained by the manufacturer. Excludes accidents, intentional damage and acts of God.';
+  'Manufacturer-stated lifetime frame and 3-year parts coverage, plus a 1-year workmanship warranty. Coverage is subject to written terms and exclusions; parts claims may not include labor and service fees may apply.';
 export const FRAME = {
   short: 'Heat-welded PVC-fiber blend, aluminum core, ceramic coating',
   long: 'Every A&E frame is heat welded, with no screws: a PVC and fiber blend with an aluminum rod inside for strength and a scratch-resistant ceramic coating outside.',
   colors: ['Night Gray', 'Bright White'],
 };
-export const INSTALL = 'Within a month of your order, by our own crew';
+export const INSTALL = 'Purchase to completed installation: under one month for standard projects, subject to confirmed scope and scheduling';
 export const FINANCING =
   'We work with accredited lenders offering low rates and long terms. Subject to credit approval. Third-party lenders; A&E is not a lender.';
 
@@ -63,10 +64,10 @@ export const PRODUCTS: Product[] = [
     msrp: 31,
     href: '/three-season-rooms/',
     specs: [
-      ['Panel', '4 mm polycarbonate, Midnight Smoke or Storm Blue'],
+      ['Panel', '4 mm polycarbonate, Smoky Gray or Morning Blue'],
       ['Frame', 'Heat-welded PVC-fiber blend, aluminum core, ceramic coating'],
       ['Panel size', 'Up to 3.5 × 10 ft each, arches available'],
-      ['Wind', 'Fixed panels rated to 100 mph'],
+      ['Wind', 'Ask for model- and installation-specific wind documentation'],
     ],
   },
   {
@@ -82,7 +83,7 @@ export const PRODUCTS: Product[] = [
       ['Panel', 'Polycarbonate sunshade panel'],
       ['Hardware', 'High-end handle, ramp water stop included'],
       ['Opening', 'Up to 5 ft per pull, 10 ft meeting in the middle'],
-      ['Wind', 'Operates to about 40 mph; retract and secure for 100+ mph'],
+      ['Wind', 'Ask for current model-specific operating and stowed wind guidance'],
     ],
   },
   {
@@ -98,7 +99,7 @@ export const PRODUCTS: Product[] = [
       ['Mesh', 'Honeycomb aluminum, about 115 holes per sq in'],
       ['Frame', 'Heat-welded PVC-fiber blend, aluminum core, ceramic coating; stainless steel wheels'],
       ['Opening', 'Up to 10 × 10 ft per pull, 20 ft wide meeting in the middle'],
-      ['Wind', 'Operates to about 40 mph; retract and secure for 100+ mph'],
+      ['Wind', 'Ask for current model-specific operating and stowed wind guidance'],
     ],
   },
   {
@@ -202,7 +203,7 @@ export const FAQ: Record<string, QA[]> = {
   room: [
     {
       q: 'Is a polycarbonate patio enclosure cheaper than a glass sunroom?',
-      a: 'Usually by a wide margin. For a 16 × 14 ft patio, a 3-season sunroom runs about $18,000 to $52,000 and a 4-season glass sunroom $45,000 to $90,000 (HomeGuide, Oct 2026). Clearfixed or Clearfold on the same patio runs about $7,400 to $9,600. Polycarbonate is also much lighter than glass and flexes instead of shattering.',
+      a: 'Usually by a wide margin. For a 16 × 14 ft patio, glass enclosures can have very different structural, ventilation and thermal scopes. Clearfixed or Clearfold on the same patio runs about $7,400 to $9,600. Polycarbonate is also much lighter than glass and flexes instead of shattering.',
     },
     {
       q: 'Is it air-conditioned?',
@@ -214,7 +215,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'How much light and heat comes through the panels?',
-      a: 'Midnight Smoke panels tested at 48% visible light transmission and a 0.45 solar heat gain coefficient. That means they cut glare like sunglasses while you still see the yard. These values were measured on Midnight Smoke panels.',
+      a: 'The reported reference values for one polycarbonate panel specification are 48% visible light transmission and 0.45 solar heat gain coefficient. Applicable reports for each tint and finished assembly are pending verification; these numbers do not guarantee indoor temperature.',
     },
     {
       q: 'How do I clean polycarbonate?',
@@ -228,7 +229,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Will metal patio screens keep out snakes and mice?',
-      a: 'Yes. Fixed Screen uses 304 stainless steel mesh and Hexfold uses honeycomb aluminum mesh. Both keep out mosquitoes, insects, mice and snakes, and every piece is CNC-cut to your openings for a tight fit.',
+      a: 'Yes. Fixed Screen uses 304 stainless steel mesh and Hexfold uses honeycomb aluminum mesh. These systems are designed to reduce insect entry when fitted and closed; they are not certified animal barriers.',
     },
     {
       q: 'How long do metal screens last compared to nylon?',
@@ -246,7 +247,7 @@ export const FAQ: Record<string, QA[]> = {
   general: [
     {
       q: 'Are patio screens safe in Houston storms?',
-      a: 'Fixed polycarbonate panels are rated to 100 mph. Hexfold and the other folding systems operate in winds up to about 40 mph; retract and secure them before a big storm and they are good for 100+ mph. These are everyday durability ratings, not a hurricane rating.',
+      a: 'Wind ratings vary by product, size, anchorage and installation. Request the model-specific reports and the correct storm-preparation instructions. Do not treat any of these systems as hurricane-proof.',
     },
     {
       q: 'Do I need a roof over my patio?',
@@ -254,7 +255,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'How long does installation take?',
-      a: 'Within a month of your order. We measure at the free site visit, build and test your whole job at our Houston factory, then our own crew installs it, usually in a day or two.',
+      a: 'Our target is under one month from purchase to completed installation for standard projects. The confirmed project scope and schedule determine the written installation window.',
     },
     {
       q: 'What does the warranty cover?',
@@ -262,7 +263,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'What are the frames made of, and what colors come standard?',
-      a: 'Every frame is heat welded with no screws: a PVC and fiber blend with an aluminum rod inside and a scratch-resistant ceramic coating outside. Frames come in Night Gray or Bright White. Polycarbonate panels come in Midnight Smoke or Storm Blue.',
+      a: 'Every frame is heat welded with no screws: a PVC and fiber blend with an aluminum rod inside and a scratch-resistant ceramic coating outside. Frames come in Night Gray or Bright White. Polycarbonate panels come in Smoky Gray or Morning Blue.',
     },
     {
       q: 'Do you work with HOAs?',
@@ -274,7 +275,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Can I see it in person?',
-      a: 'Yes. We are open 24/7 by appointment. Visit the showroom at 2609 William Tell Street, Houston, TX 77093, or book a free site visit and we will bring samples to your home.',
+      a: 'Office visits are by appointment. Visit the showroom at 2609 William Tell Street, Houston, TX 77093, or book a free site visit and we will bring samples to your home.',
     },
   ],
 };
