@@ -26,17 +26,10 @@ const business = {
   image: `${SITE.url}/og/og-default.jpg`,
   telephone: SITE.phoneE164,
   email: SITE.email,
-  foundingDate: SITE.founded,
   priceRange: '$$',
-  openingHoursSpecification: [{
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-    opens: '00:00',
-    closes: '23:59',
-  }],
   contactPoint: [{ '@type': 'ContactPoint', telephone: SITE.phoneE164, contactType: 'sales', areaServed: 'US-TX', availableLanguage: ['English'] }],
   description:
-    'Patio enclosures, polycarbonate 3-season rooms and metal patio screens built in our Houston factory and installed by our own crew within a month.',
+    'Custom patio enclosures for existing covered patios in Houston. Polycarbonate fixed and folding panels, aluminum retractable mesh, and fixed stainless steel mesh.',
   address: {
     '@type': 'PostalAddress',
     streetAddress: SITE.street,
@@ -46,7 +39,6 @@ const business = {
     addressCountry: 'US',
   },
   areaServed: CITIES.map((c) => ({ '@type': 'City', name: `${c}, TX` })),
-  sameAs: [SITE.factorySite],
   knowsAbout: ['Patio enclosures', 'Retractable patio screens', 'Polycarbonate 3-season rooms', 'Stainless steel screens', 'Garage screens'],
 };
 
@@ -96,16 +88,16 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
     <a class="skip" href="#main">Skip to content</a>
     <header class="top">
       <div class="wrap">
-        <a class="brand" href="/" aria-label="A&E Factory Sales home">
+        <a class="brand" href="/" aria-label="AE Factory Sales home">
           <img src="/brand/ae-bee-logo-on-dark.svg" alt="" width="104" height="53" />
-          <span><b>A&amp;E Factory Sales</b><small>{SITE.tagline}</small></span>
+          <span><b>AE Factory Sales</b><small>{SITE.tagline}</small></span>
         </a>
         <nav class="nav" aria-label="Main">
           {NAV.map((n) => <a href={n.href} aria-current={isCurrent(n.href) ? 'page' : undefined}>{n.label}</a>)}
         </nav>
         <div class="top-actions">
           <a class="top-phone" href={SITE.phoneHref}>{SITE.phone}</a>
-          <a class="btn" href="/free-quote/">Get my price</a>
+          <a class="btn" href="/free-quote/">Free Design &amp; Estimate</a>
           <details class="menu">
             <summary aria-label="Open menu">Menu</summary>
             <nav aria-label="Mobile">
@@ -114,7 +106,7 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
               <a href="/garage-screens/">Garage screens</a>
               <a href="/faq/">FAQ</a>
               <a href={SITE.phoneHref}>Call {SITE.phone}</a>
-              <a class="btn" href="/free-quote/">Get my price</a>
+              <a class="btn" href="/free-quote/">Free Design &amp; Estimate</a>
             </nav>
           </details>
         </div>
@@ -136,7 +128,7 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
       <div class="wrap">
         <div class="cols">
           <div>
-            <img src="/brand/ae-bee-logo-on-dark.svg" alt="A&E Factory Sales bee logo" width="120" height="61" style="width:120px;margin-bottom:14px" />
+            <img src="/brand/ae-bee-logo-on-dark.svg" alt="AE Factory Sales bee logo" width="120" height="61" style="width:120px;margin-bottom:14px" />
             <address>
               <strong style="color:var(--ink)">{SITE.name}</strong><br />
               {SITE.street}<br />
@@ -170,7 +162,7 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
           <div>
             <h2>Company</h2>
             <ul>
-              <li><a href="/why-ae/">Why A&amp;E</a></li>
+              <li><a href="/why-ae/">Why AE</a></li>
               <li><a href="/projects/">Projects</a></li>
               <li><a href="/how-we-build/">Our factory</a></li>
               <li><a href="/reviews/">Leave a review</a></li>
@@ -181,11 +173,11 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
           </div>
         </div>
         <p class="small">
-          Serving Houston and the greater Houston area. Warranty: lifetime on the frame, 3 years on parts, installed and maintained by the manufacturer (excludes accidents, intentional damage and acts of God).
+          Serving Greater Houston. Written product and workmanship warranty terms, limitations and exclusions are available upon request.
           © {new Date().getFullYear()} {SITE.name}.
         </p>
       </div>
     </footer>
-    <div class="callbar"><a href={SITE.phoneHref}>Call us</a><a href="/free-quote/">Get my price</a></div>
+    <div class="callbar"><a href={SITE.phoneHref}>Call us</a><a href="/free-quote/">Free Design &amp; Estimate</a></div>
   </body>
 </html>
