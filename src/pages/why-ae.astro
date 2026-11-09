@@ -11,35 +11,35 @@ import wide from '../assets/projects/p35/1-wide.jpg';
 
 const crumbs = [{ name: 'Why A&E', href: '/why-ae/' }];
 const ask: QA[] = [
-  { q: 'Who makes the product, and where?', a: 'A&E: in our own factory at 2605 William Tell Street, Houston. You can visit the showroom next door.' },
-  { q: 'Who installs it?', a: 'Our own crew. We do not subcontract installs.' },
-  { q: 'Who do I call if something goes wrong in year five?', a: `The same people: ${SITE.phone}. We made it and we installed it, so the warranty is ours to honor.` },
-  { q: 'Can you match a replacement part years from now?', a: 'Yes. Over 30 manufacturers make parts specifically for A&E, and we know the maker of every one.' },
-  { q: 'How long from order to install?', a: 'Within a month of your order. Every piece is CNC-cut and test-assembled first, so install day goes fast.' },
+  { q: 'Who makes the product, and where?', a: 'A&E operates the Houston factory at 2605 William Tell Street. AE Factory Sales coordinates the customer experience from the nearby sales office.' },
+  { q: 'Who installs it?', a: 'Your proposal identifies the professional installation team and its workmanship coverage.' },
+  { q: 'Who do I call if something goes wrong in year five?', a: `The same people: ${SITE.phone}. We coordinate warranty requests according to the written manufacturer and workmanship terms.` },
+  { q: 'Can you match a replacement part years from now?', a: 'Ask us about the specific system and the availability of factory replacement parts. We can help identify the appropriate components.' },
+  { q: 'How long from order to install?', a: 'Our target is under one month from purchase to completed installation for standard projects, subject to confirmed scope and scheduling.' },
   { q: 'Is the price all-in?', a: 'Yes. Design, the site visit, fabrication, installation, parts and the warranty are in one number. Options like locks or arches are listed line by line.' },
 ];
 const warrantyFaq: QA[] = [
   { q: 'What does the warranty cover?', a: WARRANTY_FULL },
-  { q: 'How do I make a warranty request?', a: `Call or text ${SITE.phone}, or email ${SITE.email}, with a photo of the issue. We schedule a visit with our own crew.` },
-  { q: 'Is the warranty from a third party?', a: 'No. A&E manufactures, installs and maintains the system, so the warranty comes straight from us.' },
+  { q: 'How do I make a warranty request?', a: `Call or text ${SITE.phone}, or email ${SITE.email}, with a photo of the issue. We will help coordinate the next warranty or service step.` },
+  { q: 'Is the warranty from a third party?', a: 'Product and installation responsibilities are explained in the written warranty and customer agreement.' },
 ];
 const ld = {
-  '@context': 'https://schema.org', '@type': 'AboutPage', name: 'Why A&E Factory Sales',
+  '@context': 'https://schema.org', '@type': 'AboutPage', name: 'Why AE Factory Sales',
   about: { '@id': `${SITE.url}/#business` },
-  description: 'A&E Factory Sales is a Houston manufacturer and installer of patio enclosures and screens, backed by a lifetime frame warranty.',
+  description: 'AE Factory Sales provides custom patio enclosure solutions backed by A&E manufacturing in Houston and professional installation support.',
 };
 ---
 <Base
-  title="Why A&E: Houston Manufacturer & Installer | A&E"
-  description="Made in our Houston factory, installed by our own crew, warrantied by us. One company from tape measure to last screw, with a lifetime frame warranty."
+  title="Why AE Factory Sales | Houston Patio Enclosures"
+  description="See how Houston-made patio enclosure systems are specified, fabricated, installed and supported. Learn about the process and ask for full warranty terms."
   crumbs={crumbs}
   schema={[ld]}
 >
   <PageHero crumbs={crumbs}>
     <div class="split">
       <div class="stack-lg">
-        <h1 class="display">One company, <span class="y">start to finish</span></h1>
-        <p class="sub">We make it in Houston, our own crew installs it, and we stand behind it for the life of the frame. No distributor, no subcontractor, no out-of-state call center.</p>
+        <h1 class="display">One clear team, <span class="y">from design to installation</span></h1>
+        <p class="sub">AE Factory Sales helps you select and plan custom systems manufactured by A&amp;E in Houston. We coordinate design and professional installation, with product and workmanship warranty terms available in writing.</p>
         <div class="actions"><a class="btn" href="/free-quote/">Book a free site visit</a><a class="btn btn-line" href="/compare/">Compare your options</a></div>
       </div>
       <figure class="dim-frame draw" style="margin:30px 0 0">
@@ -55,7 +55,7 @@ const ld = {
         <h2 id="chain-title" class="h2">Fewer hands <span class="y">on your project</span></h2>
         <p class="lede">Patio enclosures are often designed by one company, sold by another and installed by a third. Every handoff adds cost and time, and makes it harder to know who fixes what later.</p>
       </div>
-      <div class="chain" role="img" aria-label="Typical path: brand, distributor, local dealer, subcontracted installer, then you. A&E path: our Houston factory, our own crew, then you.">
+      <div class="chain" role="img" aria-label="Typical multi-step supply chain compared with a coordinated AE Factory Sales design and installation experience.">
         <div class="lane">
           <p class="lane-k">A common path</p>
           <ol>
@@ -65,15 +65,15 @@ const ld = {
         <div class="lane ours">
           <p class="lane-k">The A&amp;E path</p>
           <ol>
-            <li>Our factory, Houston</li><li>Our own crew</li><li class="you">You</li>
+            <li>Houston manufacturer</li><li>AE Factory Sales coordination</li><li class="you">You</li>
           </ol>
         </div>
       </div>
       <div class="gets">
         <div><h3>One phone number</h3><p>Sales, scheduling, install and warranty all go through {SITE.phone}.</p></div>
-        <div><h3>Factory pricing</h3><p>No distributor or dealer markup between our factory and your patio.</p></div>
-        <div><h3>Faster</h3><p>Installed within a month of your order, because we control the schedule from cutting to install.</p></div>
-        <div><h3>Accountable</h3><p>The people who built it are the people who come back if it ever needs attention.</p></div>
+        <div><h3>Transparent pricing</h3><p>We explain product choices and provide an itemized quote, so you can compare installations on an equal basis.</p></div>
+        <div><h3>Faster</h3><p>Our target is purchase to completed installation in under one month for standard projects, subject to your approved scope and schedule.</p></div>
+        <div><h3>Accountable</h3><p>A local contact helps coordinate service questions and manufacturer warranty requests.</p></div>
       </div>
     </div>
   </section>
@@ -82,7 +82,7 @@ const ld = {
     <div class="wrap split">
       <div class="stack-lg">
         <h2 id="local-title" class="h2">Houston made, <span class="y">Houston tested</span></h2>
-        <p class="lede">Our systems are in their fourth generation, refined over four years on Houston patios through heat, humidity, storms and mosquito season. Three decades of working with glass and door manufacturers taught us what lasts before we built our own.</p>
+        <p class="lede">See locally produced systems and discuss how the material, design and installation choices fit your covered patio.</p>
         <table class="facts">
           <caption>Where to find us</caption>
           <tbody>
@@ -90,7 +90,7 @@ const ld = {
             <tr><th scope="row">Factory</th><td>{SITE.factoryStreet}, same compound</td></tr>
             <tr><th scope="row">Hours</th><td>{SITE.hours}</td></tr>
             <tr><th scope="row">Phone</th><td><a href={SITE.phoneHref}>{SITE.phone}</a></td></tr>
-            <tr><th scope="row">In business since</th><td>{SITE.founded}</td></tr>
+            <tr><th scope="row">Our background</th><td>Local manufacturing and enclosure expertise</td></tr>
           </tbody>
         </table>
       </div>
@@ -115,7 +115,7 @@ const ld = {
         <div class="warranty-card">
           <p class="w-big">Lifetime</p><p class="w-sub">on the frame</p>
           <p class="w-big">3 years</p><p class="w-sub">on all parts</p>
-          <p class="fine">Installed and maintained by the manufacturer. Covers normal wear and tear. Excludes accidents, intentional damage and acts of God.</p>
+          <p class="fine">Ask for the full written terms, including product and labor coverage, workmanship, exclusions and any applicable service fees.</p>
         </div>
       </div>
       <Faq items={warrantyFaq} />
