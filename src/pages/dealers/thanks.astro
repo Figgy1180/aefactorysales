@@ -1,0 +1,13 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE } from '../../data/site';
+---
+<Base title="Application Received | A&E Dealers" description="Your dealer application is in. We reply within 2 business days." noindex>
+  <section class="band blueprint">
+    <div class="wrap stack-lg" style="max-width:46em">
+      <h1 class="display">Application in. <span class="y">Talk soon.</span></h1>
+      <p class="sub">We review every application and reply within 2 business days. Questions in the meantime? Call {SITE.dealerContact} at {SITE.dealerPhone} or email {SITE.dealerEmail}.</p>
+      <div class="actions"><a class="btn btn-line" href="/how-we-build/">See how we build</a></div>
+    </div>
+  </section>
+</Base>

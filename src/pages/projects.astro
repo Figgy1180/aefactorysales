@@ -1,0 +1,96 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { PROJECTS, photos, altFor, fit } from '../data/projects';
+import { SITE } from '../data/site';
+
+const crumbs = [{ name: 'Projects', href: '/projects/' }];
+const counts = { Patio: 0, Door: 0, Garage: 0 } as Record<string, number>;
+PROJECTS.forEach((p) => counts[p.kind]++);
+const cities = [...new Set(PROJECTS.map((p) => p.city))];
+const list = {
+  '@context': 'https://schema.org', '@type': 'ItemList', name: 'Finished A&E screen projects in greater Houston, installed by the A&E crew',
+  itemListElement: PROJECTS.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: `${p.city} ${p.title.toLowerCase()}`, ...(photos(p).length ? { url: new URL(`/projects/${p.slug}/`, SITE.url).href } : {}) })),
+};
+const src = (u: string, w: number) => `${u}?scale-down-to=${w}`;
+---
+<Base
+  title="Patio & Door Screen Projects in Houston | A&E Factory Sales"
+  description="Finished A&E patio enclosures across greater Houston, built in our factory and installed by our own crew in Houston, Katy, Richmond, Cypress and more."
+  crumbs={crumbs}
+  schema={[list]}
+>
+  <PageHero crumbs={crumbs}>
+    <div class="stack-lg" style="max-width:54em">
+      <h1 class="display">Finished projects <span class="y">across greater Houston</span></h1>
+      <p class="sub">Real jobs built in our Houston factory and installed by our own crew in {cities.join(', ')}.</p>
+    </div>
+  </PageHero>
+
+  <section class="band">
+    <div class="wrap">
+      <ul class="pgrid">
+        {PROJECTS.map((p, i) => {
+          const ph = photos(p);
+          const href = ph.length ? `/projects/${p.slug}/` : null;
+          const Tag = href ? 'a' : 'div';
+          return (
+            <li class={i === 0 && ph.length ? 'lead' : ''}>
+              <Tag class="card" href={href ?? undefined}>
+                <figure>
+                  {ph.length
+                    ? <Image src={ph[0].img} widths={fit([480, 900, 1280], ph[0].img)} sizes={i === 0 ? '(max-width: 1000px) 100vw, 760px' : '(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 380px'} alt={altFor(p, ph[0].caption)} loading={i < 3 ? 'eager' : 'lazy'} />
+                    : <img src={src(p.img, 1024)} srcset={`${src(p.img, 512)} 512w, ${src(p.img, 1024)} 1024w`} sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 380px" alt={altFor(p)} loading={i < 3 ? 'eager' : 'lazy'} decoding="async" width="1024" height="768" />}
+                  <span class="tag">{p.kind}{ph.length > 1 ? ` · ${ph.length} photos` : ''}</span>
+                </figure>
+                <div class="pbody">
+                  <h2>{p.title}</h2>
+                  <p class="city">{p.city}, TX</p>
+                  {p.note && <p class="note">{p.note}</p>}
+                  <ul class="sys">{p.systems.map((s) => <li>{s}</li>)}</ul>
+                  {href && <span class="more">See the project</span>}
+                </div>
+              </Tag>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  </section>
+
+  <section class="band on-paper">
+    <div class="wrap split">
+      <div class="stack">
+        <h2 class="h2">Want yours <span class="y">on this page?</span></h2>
+        <p class="lede">Book a free site visit. We measure every opening, bring samples, and build it in our Houston factory.</p>
+        <div class="actions"><a class="btn" href="/free-quote/">Price my patio</a><a class="btn btn-line" href={SITE.phoneHref}>Call {SITE.phone}</a></div>
+      </div>
+      <p class="muted">Showroom at {SITE.street}, Houston. {SITE.hours}.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .pgrid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+  .pgrid > li { min-width: 0; display: flex; }
+  .pgrid > li.lead { grid-column: span 2; }
+  .card { background: var(--honey-2); border-top: 4px solid var(--yellow); display: flex; flex-direction: column; width: 100%; color: var(--ink); text-decoration: none; }
+  a.card:hover h2, a.card:hover .more { color: var(--yellow); }
+  .card figure { margin: 0; position: relative; aspect-ratio: 4 / 3; background-color: var(--honey);
+    background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 20px 20px; }
+  .lead .card figure { aspect-ratio: 16 / 10; }
+  .card figure { overflow: hidden; }
+  .card img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .card .tag { z-index: 1; }
+  .pbody { padding: 16px 18px 20px; display: grid; gap: 6px; }
+  .pbody h2 { font-weight: 800; font-stretch: 78%; font-size: 1.35rem; text-transform: uppercase; line-height: 1.05; }
+  .lead .pbody h2 { font-size: 2rem; }
+  .city { font-family: var(--mono); font-size: 0.8rem; font-weight: 600; color: var(--yellow); }
+  .note { color: var(--ink-2); font-size: 0.95rem; }
+  .sys { list-style: none; margin: 6px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .sys li { border: 1px solid var(--line); padding: 3px 9px; font-size: 0.82rem; }
+  .more { font-weight: 700; text-decoration: underline; text-decoration-color: var(--yellow); text-underline-offset: 3px; margin-top: 4px; }
+  @media (max-width: 1000px) { .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .lead .card figure { aspect-ratio: 4 / 3; } }
+  @media (max-width: 640px) { .pgrid { grid-template-columns: minmax(0, 1fr); } .pgrid > li.lead { grid-column: auto; } }
+</style>

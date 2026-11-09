@@ -1,0 +1,92 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Why from '../components/Why.astro';
+import { SITE } from '../data/site';
+import cnc from '../assets/photos/factory-cnc.jpg';
+import angle from '../assets/photos/factory-angle.jpg';
+import pc from '../assets/photos/factory-pc.jpg';
+import packed from '../assets/photos/factory-packed.jpg';
+import interior from '../assets/photos/showroom-room-interior.jpg';
+
+const crumbs = [{ name: 'Our factory', href: '/how-we-build/' }];
+const stations = [
+  { t: 'Barcode on every part', d: 'Each order prints barcode stickers that follow every part from station to station, so nothing gets mixed up between jobs.' },
+  { t: 'CNC length cutting', d: 'A dual-head CNC saw cuts frame profiles to fractions of a millimeter. No gaps means no pests.', img: cnc, alt: 'CNC dual-head saw cutting frame profiles' },
+  { t: 'Angle cutting', d: 'Architectural shapes, like a 47 degree gable, are cut on a dedicated angle saw.', img: angle, alt: 'Angle saw for architectural shapes' },
+  { t: 'Heat welding', d: 'Every frame is heat welded at about 350°C instead of screwed together: no screws to rust, no cracked corners. The PVC and fiber blend has an aluminum rod inside and a scratch-resistant ceramic coating outside.' },
+  { t: 'Lock routing', d: 'Handles and locks are set into a channel routed into the frame, so they are part of the frame, not screwed on.' },
+  { t: 'Panel room', d: 'Polycarbonate is cut in its own room, and mesh on dedicated screen-cutting tables.', img: pc, alt: 'Polycarbonate panels on a rack in the panel room' },
+  { t: 'Staging and testing', d: 'Every job is fully assembled in our staging area and tested, then taken apart for delivery.' },
+  { t: 'Labeled and packed', d: 'Every piece is labeled, numbered and wrapped, so install day goes fast.', img: packed, alt: 'Finished order wrapped and labeled for delivery' },
+];
+---
+<Base
+  title="How We Build It: Our Houston Factory | A&E Factory Sales"
+  description="Every A&E patio enclosure is CNC-cut, heat welded and fully test-assembled in our factory on William Tell Street in Houston, then installed by our own crew."
+  crumbs={crumbs}
+>
+  <PageHero crumbs={crumbs}>
+    <div class="split">
+      <div class="stack-lg">
+        <h1 class="display">Made here, <span class="y">on William Tell Street</span></h1>
+        <p class="sub">A&amp;E Factory Sales is the sales arm of A&amp;E Custom Screenwork. We own the factory, and our own crew installs every job. One company from tape measure to last screw.</p>
+      </div>
+      <figure class="dim-frame draw" style="margin:30px 0 0">
+        <span class="dim h" aria-hidden="true"><span>{SITE.factoryStreet}, Houston</span></span>
+        <Image src={interior} alt="Inside the A&E showroom: an enclosure combining polycarbonate panels and metal mesh" widths={[480, 900]} sizes="(max-width: 820px) 100vw, 540px" loading="eager" style="aspect-ratio:16/10;object-fit:cover" />
+      </figure>
+    </div>
+  </PageHero>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="h2">Station <span class="y">by station</span></h2>
+        <p class="lede">Fourth-generation design, tested on Houston patios for four years. Here is how your job moves through the shop.</p>
+      </div>
+      <ol class="stations">
+        {stations.map((s) => (
+          <li class={s.img ? 'has-img' : ''}>
+            {s.img && <Image src={s.img} alt={s.alt!} widths={[360, 640]} sizes="(max-width: 640px) 100vw, 360px" loading="lazy" />}
+            <div><h3>{s.t}</h3><p>{s.d}</p></div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="band raised">
+    <div class="wrap stack-lg">
+      <div class="sec-head" style="margin-bottom:0">
+        <h2 class="h2">Our name <span class="y">on the parts</span></h2>
+        <p class="lede">Over 30 manufacturers make parts specifically for A&amp;E, to our spec. We know the maker of every screw, screen and wheel, which makes service and replacement parts straightforward. Three decades of working with glass and door manufacturers taught us what lasts.</p>
+      </div>
+      <Why />
+    </div>
+  </section>
+
+  <section class="band on-paper">
+    <div class="wrap split">
+      <div class="stack">
+        <h2 class="h2">See it <span class="y">in person</span></h2>
+        <p class="lede">The showroom is at {SITE.street}, Houston, TX {SITE.zip}, next to the factory. See every system working, side by side.</p>
+        <div class="actions"><a class="btn" href="/free-quote/">Book a site visit</a><a class="btn btn-line" href={SITE.phoneHref}>Call {SITE.phone}</a></div>
+      </div>
+      <p class="muted">Dealers and contractors: we also build for partners. <a href="/dealers/" style="color:var(--paper-ink)">Learn about carrying A&amp;E</a>.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .stations { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 26px 22px; counter-reset: st; }
+  .stations li { counter-increment: st; border-top: 2px solid var(--yellow); padding-top: 14px; display: grid; gap: 12px; align-content: start; min-width: 0; }
+  .stations li img { aspect-ratio: 16 / 10; width: 100%; object-fit: cover; order: -1; border: 2px solid var(--yellow); }
+  .stations li.has-img { border-top: 0; padding-top: 0; }
+  .stations h3 { font-weight: 800; font-stretch: 78%; font-size: 1.3rem; text-transform: uppercase; }
+  .stations h3::before { content: counter(st) ". "; color: var(--yellow); }
+  .stations p { color: var(--ink-2); margin-top: 6px; font-size: 0.97rem; }
+  @media (max-width: 1000px) { .stations { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .stations { grid-template-columns: minmax(0, 1fr); } }
+</style>

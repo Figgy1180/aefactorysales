@@ -1,0 +1,147 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CompareBars from '../components/CompareBars.astro';
+import { SITE, EXAMPLE } from '../data/site';
+
+const crumbs = [{ name: 'Compare', href: '/compare/' }];
+type Row = { name: string; ours?: boolean; cost: string; bugs: string; weather: string; opens: string; parts: string; ongoing: string; href?: string };
+const rows: Row[] = [
+  { name: 'A&E Fixed Screen', ours: true, href: '/screens/', cost: '$5,800', bugs: 'Yes: 304 stainless steel mesh', weather: 'No', opens: 'No, stays in place', parts: 'None', ongoing: 'Lifetime frame warranty' },
+  { name: 'A&E Hexfold', ours: true, href: '/hexfold/', cost: '$6,700', bugs: 'Yes: honeycomb aluminum mesh', weather: 'No', opens: 'Yes, folds by hand', parts: 'Wheels and track, no motor', ongoing: 'Lifetime frame warranty' },
+  { name: 'A&E 3-season room', ours: true, href: '/three-season-rooms/', cost: '$7,400 to $9,600', bugs: 'Yes', weather: 'Yes: tinted polycarbonate', opens: 'Clearfold and Hybrid fold open', parts: 'No motor', ongoing: 'Lifetime frame warranty' },
+  { name: 'Nylon or fiberglass screen', cost: '$2,200 to $5,600', bugs: 'Insects, until it tears', weather: 'No', opens: 'Usually no', parts: 'None', ongoing: 'Rescreen every 5 to 10 years' },
+  { name: 'Motorized roll-down screens', cost: '$9,600 to $10,800', bugs: 'Insects; varies by mesh', weather: 'Varies by product', opens: 'Yes, by motor', parts: 'Motor, wiring, remote', ongoing: 'Motor and electronics to maintain' },
+  { name: '3-season sunroom', cost: '$18,000 to $52,000', bugs: 'Yes', weather: 'Yes', opens: 'Depends on windows', parts: 'Windows and doors', ongoing: 'Varies' },
+  { name: '4-season glass sunroom', cost: '$45,000 to $90,000', bugs: 'Yes', weather: 'Yes, and conditioned', opens: 'Depends on windows', parts: 'Windows, doors, HVAC', ongoing: 'Conditioned space to heat and cool' },
+  { name: 'Mosquito yard spraying', cost: '$350 to $1,000 per season', bugs: 'Reduces mosquitoes only', weather: 'No', opens: 'Not applicable', parts: 'None', ongoing: '$3,500 to $10,000 over 10 years' },
+];
+const bars = [
+  ...EXAMPLE.rows,
+  { name: 'Nylon screen, one rescreen', low: 2700, high: 6600, ours: false },
+  { name: 'Mosquito spraying, 10 years', low: 3500, high: 10000, ours: false },
+].sort((a, b) => b.high - a.high);
+const vs = [
+  {
+    id: 'nylon', t: 'Metal screens vs nylon screens',
+    lead: 'Nylon and fiberglass screen costs less up front. It also tears, sags, lets dogs push through and does not stop snakes or mice.',
+    rows: [['Mesh', '304 stainless steel (Fixed Screen) or honeycomb aluminum (Hexfold)', 'Nylon or fiberglass fabric'], ['Tears from pets and kids', 'Resists tearing', 'Tears and pushes out'], ['Keeps out', 'Mosquitoes, insects, mice and snakes', 'Insects, until it tears'], ['Upkeep', 'Lifetime frame warranty, 3 years on parts', 'Rescreen every 5 to 10 years at $2 to $4 per sq ft'], ['Example patio', '$5,800 to $6,700', '$2,200 to $5,600, or $2,700 to $6,600 with one rescreen']],
+    pick: 'Choose nylon if the lowest price today matters most and you have no pets. Choose metal if you want it to last and keep out more than bugs.',
+    link: ['/screens/', 'Stainless steel screens'],
+  },
+  {
+    id: 'motorized', t: 'Hexfold vs motorized roll-down screens',
+    lead: 'Both disappear when you want the view. Motorized screens roll up on a powered roller; Hexfold folds aside by hand on a top track.',
+    rows: [['Installed price, Houston', 'From $28 per sq ft of opening', 'About $40 to $45 per sq ft of opening'], ['Example patio', 'About $6,700', '$9,600 to $10,800'], ['Power needed', 'None', 'Yes, at each opening'], ['Operation', 'By hand, one smooth pull', 'Motor, remote or switch'], ['What can fail', 'Wheels and track, no electronics', 'Motor, wiring, remote']],
+    pick: 'Choose motorized for push-button convenience or hard-to-reach openings. Choose Hexfold for the high-end retractable look with less to maintain, for about a third less.',
+    link: ['/guides/folding-vs-motorized-patio-screens/', 'Full folding vs motorized guide'],
+  },
+  {
+    id: 'glass', t: '3-season room vs glass sunroom',
+    lead: 'A glass sunroom is priced like a home addition. An A&E polycarbonate room fills in the open sides of the patio roof you already have.',
+    rows: [['Example patio', '$7,400 to $9,600', '$18,000 to $52,000 (3-season), $45,000 to $90,000 (4-season)'], ['If something hits it', 'Polycarbonate flexes instead of shattering', 'Glass can crack or shatter'], ['Weight', 'Much lighter, so panels can fold', 'Heavy'], ['Scratches', 'Needs gentle cleaning', 'Resists scratching better'], ['Air conditioning', 'No: ventilated 3-season room', '4-season rooms are conditioned']],
+    pick: 'Choose a 4-season glass room if you need an air-conditioned room in August. Choose a polycarbonate 3-season room for shade, shelter and airflow at a fraction of the price.',
+    link: ['/guides/polycarbonate-vs-glass-patio-enclosure-cost/', 'Full polycarbonate vs glass guide'],
+  },
+  {
+    id: 'spraying', t: 'Screens vs mosquito yard spraying',
+    lead: 'Spraying lowers mosquito numbers across the yard for a season. Screens keep bugs, mice and snakes off the patio itself, every season.',
+    rows: [['Cost', '$5,800 to $9,600 once, for the example patio', '$350 to $1,000 per season'], ['Over 10 years', 'Same one-time price', '$3,500 to $10,000'], ['Stops snakes and mice', 'Yes, on the patio', 'No'], ['Works in the yard', 'No, only the enclosed patio', 'Yes']],
+    pick: 'Spraying helps if you spend time across the whole yard. Screens pay for themselves on the patio where you actually sit, and the two work fine together.',
+    link: ['/pricing/', 'See our prices'],
+  },
+];
+const ld = {
+  '@context': 'https://schema.org', '@type': 'Article', headline: 'Patio enclosure options compared: screens, sunrooms, motorized and spraying (Houston, 2026)',
+  datePublished: '2026-11-09', dateModified: '2026-11-09', author: { '@id': `${SITE.url}/#business` }, publisher: { '@id': `${SITE.url}/#business` },
+  mainEntityOfPage: `${SITE.url}/compare/`,
+};
+---
+<Base
+  title="Patio Enclosure Options Compared: Houston Costs (2026) | A&E"
+  description="A&E metal screens and 3-season rooms compared with nylon screens, motorized screens, glass sunrooms and mosquito spraying, with real costs for a 16 × 14 ft Houston patio."
+  crumbs={crumbs}
+  schema={[ld]}
+>
+  <PageHero crumbs={crumbs}>
+    <div class="stack-lg" style="max-width:56em">
+      <h1 class="display">Every option, <span class="y">side by side</span></h1>
+      <p class="sub">What it costs to take back the same 16 × 14 ft Houston patio, and what you get for the money. Including when another option is the better pick.</p>
+      <nav aria-label="On this page"><ul class="jump">
+        <li><a href="#table">At a glance</a></li><li><a href="#cost">Cost</a></li>
+        {vs.map((v) => <li><a href={`#${v.id}`}>{v.t}</a></li>)}
+      </ul></nav>
+    </div>
+  </PageHero>
+
+  <section class="band on-paper" id="table" aria-labelledby="table-title">
+    <div class="wrap stack-lg">
+      <div class="sec-head" style="margin-bottom:0">
+        <h2 id="table-title" class="h2">At <span class="y">a glance</span></h2>
+        <p class="lede">Example patio: {EXAMPLE.label} (about {EXAMPLE.openings} sq ft of openings, {EXAMPLE.floor} sq ft of floor).</p>
+      </div>
+      <div class="table-wrap">
+        <table class="tbl matrix">
+          <thead><tr><th scope="col">Option</th><th scope="col">Example patio</th><th scope="col">Bugs, mice, snakes</th><th scope="col">Wind and rain</th><th scope="col">Opens up</th><th scope="col">Moving parts</th><th scope="col">Ongoing</th></tr></thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr class={r.ours ? 'mine' : ''}>
+                <th scope="row">{r.href ? <a href={r.href}>{r.name}</a> : r.name}</th>
+                <td class="tnum">{r.cost}</td><td>{r.bugs}</td><td>{r.weather}</td><td>{r.opens}</td><td>{r.parts}</td><td>{r.ongoing}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="fine">A&amp;E prices are our lowest installed prices on 240 sq ft of openings. Nylon screen, sunroom and spraying ranges from HomeGuide and Bob Vila cost guides (Oct 2026); motorized screens at $40 to $45 per sq ft of opening, Houston market pricing. Competitor features vary by product; ask your installer.</p>
+    </div>
+  </section>
+
+  <section class="band on-paper" id="cost" style="padding-top:0">
+    <div class="wrap">
+      <CompareBars rows={bars} title="What the same patio costs" footnote="Ranges for the example patio. Nylon screen includes one rescreen at $2 to $4 per sq ft. Spraying at $350 to $1,000 per season for 10 seasons. Sources as above." />
+    </div>
+  </section>
+
+  {vs.map((v, i) => (
+    <section class={`band${i % 2 ? ' raised' : ''}`} id={v.id} aria-labelledby={`${v.id}-t`}>
+      <div class="wrap stack-lg">
+        <div class="sec-head" style="margin-bottom:0">
+          <h2 id={`${v.id}-t`} class="h2">{v.t}</h2>
+          <p class="lede">{v.lead}</p>
+        </div>
+        <div class="table-wrap">
+          <table class="tbl">
+            <thead><tr><th scope="col"><span class="sr-only">Feature</span></th><th scope="col">A&amp;E</th><th scope="col">The alternative</th></tr></thead>
+            <tbody>{v.rows.map(([k, a, b]) => <tr><th scope="row">{k}</th><td class="ours">{a}</td><td>{b}</td></tr>)}</tbody>
+          </table>
+        </div>
+        <div class="pick"><p class="pick-k">Straight answer</p><p>{v.pick}</p></div>
+        <p><a href={v.link[0]}>{v.link[1]}</a></p>
+      </div>
+    </section>
+  ))}
+
+  <section class="band on-paper">
+    <div class="wrap split">
+      <div class="stack">
+        <h2 class="h2">Still deciding? <span class="y">Let us measure.</span></h2>
+        <p class="lede">A free 45-minute site visit gets you a real number for your patio, and we'll tell you straight if another option fits better.</p>
+        <div class="actions"><a class="btn" href="/free-quote/">Price my patio</a><a class="btn btn-line" href="/learn/">Read the specs</a></div>
+      </div>
+      <p class="muted">Prefer to talk? {SITE.phone}. {SITE.hours}.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .jump { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .jump a { display: inline-block; border: 1px solid var(--line); padding: 8px 14px; color: var(--ink); text-decoration: none; font-weight: 600; }
+  .jump a:hover { border-color: var(--yellow); color: var(--yellow); }
+  .matrix { min-width: 980px; }
+  .matrix tr.mine th, .matrix tr.mine td { background: rgba(242, 194, 48, 0.28); }
+  .matrix tbody th a { color: var(--paper-ink); }
+  .pick { border-left: 6px solid var(--yellow); background: var(--honey-2); padding: 16px 20px; display: grid; gap: 6px; max-width: 72ch; }
+  .raised .pick { background: var(--honey); }
+  .pick-k { font-weight: 800; font-stretch: 80%; text-transform: uppercase; color: var(--yellow); }
+</style>

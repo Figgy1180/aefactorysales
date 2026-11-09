@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../data/site';
+---
+<Base title="Thanks, We Got Your Request | A&E Factory Sales" description="Your site visit request is in. We'll call within one business day." noindex>
+  <section class="band blueprint">
+    <div class="wrap stack-lg" style="max-width:46em">
+      <h1 class="display">Got it. <span class="y">We'll call you soon.</span></h1>
+      <p class="sub">Expect a call from our team within one business day to set up your free site visit.</p>
+      <div class="stack">
+        <h2 class="h3">Speed things up</h2>
+        <p class="lede">Text a few photos of your patio to <a href={`sms:+17137918073`}>{SITE.phone}</a>: one wide shot from the yard and one of each opening.</p>
+      </div>
+      <div class="actions"><a class="btn btn-line" href="/three-season-rooms/">Compare rooms and screens</a><a class="btn btn-line" href="/">Back to home</a></div>
+    </div>
+  </section>
+</Base>

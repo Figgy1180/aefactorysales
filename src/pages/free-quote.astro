@@ -1,0 +1,280 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import CornerArt from '../components/CornerArt.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import { PRODUCTS, SIZES, SITE, FINANCING, WARRANTY } from '../data/site';
+import clearfixed from '../assets/photos/clearfixed-polycarbonate-panels.jpg';
+import smoke from '../assets/photos/showroom-polycarbonate-smoke.jpg';
+import interior from '../assets/photos/showroom-room-interior.jpg';
+import handle from '../assets/photos/hexfold-patio-closed.jpg';
+import colors from '../assets/photos/fixed-screen-frame-colors.jpg';
+
+const imgs: Record<string, any> = { clearfixed, clearfold: smoke, hybrid: interior, hexfold: handle, fixed: colors };
+const uses = [
+  { id: 'enclose', t: 'Enclose it', s: 'A polycarbonate 3-season room. Blocks wind and rain, lets in light.', p: 'From $31 per sq ft', show: ['clearfixed', 'clearfold'] },
+  { id: 'open', t: 'Keep it open-air', s: 'Premium metal screens. Keep the breeze, lose the bugs.', p: 'From $24 per sq ft', show: ['hexfold', 'fixed'] },
+  { id: 'both', t: 'Both', s: 'Half room, half screen, in one folding system.', p: 'From $56 per sq ft', show: ['hybrid'] },
+  { id: 'all', t: 'Show me everything', s: 'All five A&E systems side by side.', p: '$24 to $56 per sq ft', show: ['clearfixed', 'clearfold', 'hybrid', 'hexfold', 'fixed'] },
+];
+const data = JSON.stringify({ products: PRODUCTS.map(({ id, name, msrp, family }) => ({ id, name, msrp, family })), sizes: SIZES, uses });
+// Floor plan drawings, all on one scale so the sizes compare at a glance.
+// House along the top, yellow = open sides we fill, gray = existing wall, squares = posts.
+const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
+  const k = 5.4, W = s.w * k, D = s.d * k, x0 = (160 - W) / 2, y0 = 16, x1 = x0 + W, y1 = y0 + D;
+  const front = `<line x1="${x0}" y1="${y1}" x2="${x1}" y2="${y1}"/>`;
+  const right = `<line x1="${x1}" y1="${y0}" x2="${x1}" y2="${y1}"/>`;
+  const left = `<line x1="${x0}" y1="${y0}" x2="${x0}" y2="${y1}"/>`;
+  const open = s.sides >= 3 ? front + right + left : front + right;
+  const wall = s.sides >= 3 ? '' : `<line x1="${x0}" y1="${y0}" x2="${x0}" y2="${y1}" stroke="currentColor" stroke-opacity=".55" stroke-width="3"/>`;
+  const n = s.posts ?? 0;
+  const xs = [x0, x1, ...Array.from({ length: n }, (_, i) => x0 + (W * (i + 1)) / (n + 1))];
+  const posts = xs.map((x) => `<rect x="${x - 3.5}" y="${y1 - 3.5}" width="7" height="7" fill="currentColor"/>`).join('');
+  return `<svg viewBox="0 0 160 104" class="plan" aria-hidden="true"><rect x="${x0 - 6}" y="${y0 - 6}" width="${W + 12}" height="6" fill="currentColor" opacity=".35"/><text x="80" y="${y0 - 8}" text-anchor="middle" font-size="7" fill="currentColor" opacity=".7">HOUSE</text><rect x="${x0}" y="${y0}" width="${W}" height="${D}" fill="#F2C230" fill-opacity=".08"/>${wall}<g stroke="#F2C230" stroke-width="4" stroke-linecap="square">${open}</g>${posts}</svg>`;
+};
+---
+<Base
+  title="Price My Patio | Free Site Visit | A&E Factory Sales"
+  description="Price your Houston patio enclosure in 4 steps, then book a free site visit. Polycarbonate 3-season rooms and premium metal screens, installed within a month."
+  crumbs={[{ name: 'Free quote', href: '/free-quote/' }]}
+>
+  <section class="band blueprint quiz-band" id="quiz" data-json={data}>
+    <CornerArt />
+    <div class="wrap">
+      <div class="quiz-head">
+        <div class="stack">
+          <h1 class="h2">Price <span class="y">your patio</span></h1>
+          <p class="muted">Free estimate, about a minute. Then book a free site visit for your exact number.</p>
+        </div>
+        <ol class="progress" aria-label="Steps">
+          <li data-step="1" class="now">Size</li><li data-step="2">Room or screens</li><li data-step="3">System</li><li data-step="4">Your price</li>
+        </ol>
+      </div>
+
+      <div class="panel" data-panel="1">
+        <div>
+          <h2 class="q">How big is your patio?</h2>
+          <p class="hint">Pick the closest match. Yellow lines are the open sides we'd fill in; squares are posts.</p>
+          <div class="opts">
+            {SIZES.map((s) => (
+              <button type="button" class="opt" data-size={s.id} aria-pressed="false">
+                <Fragment set:html={plan(s)} />
+                <span class="t">{s.name}</span><span class="s">{s.eg}</span><span class="p">{s.low} to {s.high} sq ft of openings</span>
+              </button>
+            ))}
+            <button type="button" class="opt" data-size="x" aria-pressed="false">
+              <span class="t">Not sure</span><span class="s">No problem. We measure every opening at the free site visit.</span><span class="p">Show me prices per sq ft</span>
+            </button>
+          </div>
+        </div>
+        <aside class="aside"><h3>Why we ask</h3><p>We price by the open wall area we fill in, not your floor space. Two open sides on a 16 × 14 ft patio at 8 ft tall is about <b>240 sq ft</b>.</p><p>Every A&amp;E system is CNC-cut to your exact measurements in our Houston factory, so it fits the first time.</p></aside>
+      </div>
+
+      <div class="panel" data-panel="2" hidden>
+        <div>
+          <h2 class="q">How do you want to use it?</h2>
+          <p class="hint">This decides between polycarbonate panels and metal mesh. You can mix them opening by opening later.</p>
+          <div class="opts">
+            {uses.map((u) => (
+              <button type="button" class="opt" data-use={u.id} aria-pressed="false"><span class="t">{u.t}</span><span class="s">{u.s}</span><span class="p">{u.p}</span></button>
+            ))}
+          </div>
+          <div class="nav-row"><button type="button" class="linkish" data-back="1">Back to size</button></div>
+        </div>
+        <aside class="aside"><h3>Room or screens?</h3><p>Polycarbonate (Clearfixed, Clearfold) turns the patio into a 3-season room for a fraction of a glass sunroom. It flexes instead of shattering.</p><p>Metal mesh (Hexfold, Fixed Screen) keeps out mosquitoes, mice and snakes, and resists tearing where nylon fails.</p></aside>
+      </div>
+
+      <div class="panel" data-panel="3" hidden>
+        <div>
+          <h2 class="q">Pick your system</h2>
+          <p class="hint">Here's what each one does. Estimates are for your patio size.</p>
+          <div class="syscards">
+            {PRODUCTS.map((p) => (
+              <article class="prod" data-sys={p.id}>
+                <figure><Image src={imgs[p.id]} alt={`${p.name}: ${p.kind}`} widths={[400, 640]} sizes="(max-width: 700px) 100vw, 320px" loading="lazy" /></figure>
+                <div class="prod-body">
+                  <h3>{p.name}</h3><p class="kind">{p.kind}</p><p>{p.blurb}</p>
+                  <dl class="specs">{p.specs.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+                  <div class="price-line"><b>${p.msrp}<small style="font-size:.55em"> / sq ft</small></b><span class="est" data-est={p.id}></span></div>
+                  <button type="button" class="btn btn-line pick" data-pick={p.id} aria-pressed="false">Choose {p.name}</button>
+                </div>
+              </article>
+            ))}
+          </div>
+          <fieldset class="tint-pick" hidden>
+            <legend>Polycarbonate tint</legend>
+            <label><input type="radio" name="tint" value="Midnight Smoke" checked /> <i style="background:#2a2a2c"></i> Midnight Smoke (black)</label>
+            <label><input type="radio" name="tint" value="Storm Blue" /> <i style="background:#3d6a9a"></i> Storm Blue</label>
+          </fieldset>
+          <div class="nav-row"><button type="button" class="btn" data-go="4" disabled>See my price</button><button type="button" class="linkish" data-back="2">Back</button></div>
+        </div>
+        <aside class="aside"><h3>Good to know</h3><p>Every system rides on our own track, is built and tested at our factory, and is installed by our crew within a month.</p><p>Price includes design, fabrication, installation, parts and the warranty: <b>{WARRANTY.toLowerCase()}</b>.</p></aside>
+      </div>
+
+      <div class="panel" data-panel="4" hidden>
+        <div class="result">
+          <div class="sumcard on-paper">
+            <p class="fine">Estimated installed price</p>
+            <p class="big tnum" id="q-total">$5,600 to $8,400</p>
+            <dl>
+              <div><dt>Patio</dt><dd id="q-size">Medium, 200 to 300 sq ft</dd></div>
+              <div><dt>System</dt><dd id="q-sys">Hexfold</dd></div>
+              <div id="q-tint-row" hidden><dt>Tint</dt><dd id="q-tint">Midnight Smoke</dd></div>
+            </dl>
+            <ul class="ticks">
+              <li>Design and free site visit</li><li>CNC fabrication and testing in Houston</li><li>Installation by our own crew, within a month</li><li>Lifetime frame warranty, 3 years on parts</li>
+            </ul>
+            <p class="fine">Arches, extra posts and locks add to the price. Your exact number comes from the site visit.</p>
+            <button type="button" class="linkish dark" data-back="1">Change my answers</button>
+          </div>
+          <div class="stack">
+            <h2 class="q">Book your free site visit</h2>
+            <QuoteForm id="quiz-visit" compact source="Price quiz" />
+            <div class="aside"><h3>Financing available</h3><p>{FINANCING}</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band raised">
+    <div class="wrap split" style="align-items:start">
+      <div class="stack">
+        <h2 class="h2">Rather <span class="y">talk now?</span></h2>
+        <p class="lede">Call <a href={SITE.phoneHref}>{SITE.phone}</a> or email <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+        <p class="muted">Or visit the showroom and factory at {SITE.street}, Houston, TX {SITE.zip}.</p>
+      </div>
+      <div class="stack">
+        <h2 class="h3">What happens next</h2>
+        <ol class="next">
+          <li>We call within one business day to set a time.</li>
+          <li>A 45-minute site visit: we measure every opening and bring samples.</li>
+          <li>Your written quote follows within 1 to 3 days.</li>
+          <li>Sign off, and our crew installs within a month.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .quiz-band { overflow: hidden; }
+  .quiz-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 18px 32px; }
+  .progress { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; flex: 1 1 420px; max-width: 620px; counter-reset: s; }
+  .progress li { counter-increment: s; border-top: 4px solid var(--line); padding-top: 8px; font-family: var(--mono); font-size: 0.74rem; font-weight: 600; color: var(--ink-2); }
+  .progress li::before { content: counter(s) " · "; }
+  .progress li.done { border-color: var(--yellow); color: var(--ink); }
+  .progress li.now { border-color: var(--yellow); color: var(--yellow); }
+  .panel { margin-top: 34px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 290px); gap: 40px; align-items: start; }
+  .panel > * { min-width: 0; }
+  .q { font-weight: 800; font-stretch: 70%; font-size: clamp(2rem, 4.4vw, 2.9rem); line-height: 1; text-transform: uppercase; }
+  .hint { margin-top: 10px; color: var(--ink-2); }
+  .aside { border: 2px solid var(--line); padding: 18px 20px; display: grid; gap: 8px; }
+  .aside h3 { font-weight: 800; font-stretch: 80%; font-size: 1.05rem; text-transform: uppercase; color: var(--yellow); }
+  .aside p { font-size: 0.95rem; color: var(--ink-2); }
+  .aside b { color: var(--ink); }
+  .opts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 24px; }
+  .opt { display: flex; flex-direction: column; gap: 6px; text-align: left; padding: 16px; background: var(--honey); color: var(--ink); border: 2px solid var(--line); font: inherit; cursor: pointer; min-height: 44px; }
+  .opt:hover { border-color: var(--yellow); }
+  .opt[aria-pressed="true"] { border-color: var(--yellow); background: rgba(242, 194, 48, 0.12); box-shadow: inset 0 0 0 2px var(--yellow); }
+  .opt :global(.plan) { width: 100%; height: auto; color: var(--ink-2); margin-bottom: 4px; }
+  .opt .t { font-weight: 800; font-stretch: 78%; font-size: 1.5rem; line-height: 1.05; text-transform: uppercase; }
+  .opt .s { font-size: 0.9rem; color: var(--ink-2); line-height: 1.35; }
+  .opt .p { font-family: var(--mono); font-size: 0.78rem; font-weight: 600; color: var(--yellow); margin-top: auto; padding-top: 6px; }
+  .nav-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 26px; }
+  .linkish { background: none; border: 0; color: var(--ink-2); font: inherit; font-weight: 600; text-decoration: underline; cursor: pointer; min-height: 44px; padding: 0 4px; }
+  .linkish:hover { color: var(--yellow); }
+  .linkish.dark { color: var(--paper-2); justify-self: start; }
+  .syscards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 18px; margin-top: 24px; }
+  .syscards .prod h3 { font-size: 2rem; }
+  .syscards .prod.sel { box-shadow: 0 0 0 3px var(--yellow); }
+  .est { font-family: var(--mono); font-size: 0.8rem; font-weight: 600; color: var(--ink) !important; }
+  .pick { width: 100%; margin-top: 4px; }
+  .pick[aria-pressed="true"] { background: var(--yellow); color: var(--honey); }
+  .tint-pick { margin-top: 22px; border: 2px solid var(--line); padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 10px 26px; }
+  .tint-pick legend { padding: 0 6px; font-weight: 700; }
+  .tint-pick label { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; cursor: pointer; }
+  .tint-pick i { width: 22px; height: 22px; border: 2px solid var(--yellow); display: inline-block; }
+  .tint-pick input { accent-color: var(--yellow); width: 18px; height: 18px; }
+  .result { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 32px; align-items: start; grid-column: 1 / -1; }
+  .panel[data-panel="4"] { grid-template-columns: minmax(0, 1fr); }
+  .sumcard { padding: 24px 26px; border-left: 8px solid var(--yellow); display: grid; gap: 12px; }
+  .sumcard .big { font-weight: 800; font-stretch: 70%; font-size: clamp(2.5rem, 6vw, 3.6rem); line-height: 1; }
+  .sumcard dl { margin: 0; }
+  .sumcard dl div { display: grid; grid-template-columns: 90px 1fr; gap: 10px; padding: 7px 0; border-top: 1px solid var(--paper-line); }
+  .sumcard dt { font-weight: 700; color: var(--paper-2); }
+  .sumcard dd { margin: 0; font-weight: 600; }
+  .ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .ticks li { position: relative; padding-left: 26px; }
+  .ticks li::before { content: ""; position: absolute; left: 2px; top: 0.35em; width: 13px; height: 7px; border-left: 2.5px solid var(--paper-ink); border-bottom: 2.5px solid var(--paper-ink); transform: rotate(-45deg); }
+  .next { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; color: var(--ink-2); }
+  @media (max-width: 1100px) { .opts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 900px) { .panel, .result { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 640px) { .progress li { font-size: 0.62rem; } }
+</style>
+
+<script>
+  const root = document.getElementById('quiz')!;
+  const D = JSON.parse(root.dataset.json!);
+  const st: { size?: string; use?: string; sys?: string } = {};
+  const fmt = (n: number) => '$' + (Math.round(n / 100) * 100).toLocaleString('en-US');
+  const $ = <T extends Element = HTMLElement>(s: string) => root.querySelector<T>(s)!;
+  const $$ = <T extends Element = HTMLElement>(s: string) => Array.from(root.querySelectorAll<T>(s));
+
+  function go(n: number) {
+    $$('[data-panel]').forEach((p) => (p.hidden = p.dataset.panel !== String(n)));
+    $$('.progress li').forEach((li) => {
+      const k = Number(li.dataset.step);
+      li.className = k < n ? 'done' : k === n ? 'now' : '';
+    });
+    if (n === 3) paintSystems();
+    if (n === 4) paintResult();
+    root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    ($(`[data-panel="${n}"] h2`) as HTMLElement).setAttribute('tabindex', '-1');
+    ($(`[data-panel="${n}"] h2`) as HTMLElement).focus({ preventScroll: true });
+  }
+  const size = () => D.sizes.find((s: any) => s.id === st.size);
+  function estText(msrp: number) {
+    const s = size();
+    return s ? `${fmt(msrp * s.low)} to ${fmt(msrp * s.high)} for your patio` : `$${msrp} per sq ft of opening`;
+  }
+  function paintSystems() {
+    const use = D.uses.find((u: any) => u.id === st.use) || D.uses[3];
+    $$('[data-sys]').forEach((c) => (c.hidden = !use.show.includes(c.dataset.sys!)));
+    D.products.forEach((p: any) => ($(`[data-est="${p.id}"]`).textContent = estText(p.msrp)));
+    if (st.sys && !use.show.includes(st.sys)) st.sys = undefined;
+    if (!st.sys && use.show.length === 1) pick(use.show[0]);
+    syncPick();
+  }
+  function syncPick() {
+    $$('[data-pick]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.pick === st.sys)));
+    $$('[data-sys]').forEach((c) => c.classList.toggle('sel', c.dataset.sys === st.sys));
+    const p = D.products.find((x: any) => x.id === st.sys);
+    $('.tint-pick').hidden = !(p && p.family !== 'screen');
+    $<HTMLButtonElement>('[data-go="4"]').disabled = !st.sys;
+  }
+  function pick(id: string) { st.sys = id; syncPick(); }
+  function paintResult() {
+    const p = D.products.find((x: any) => x.id === st.sys);
+    const s = size();
+    $('#q-total').textContent = s ? `${fmt(p.msrp * s.low)} to ${fmt(p.msrp * s.high)}` : `$${p.msrp} per sq ft`;
+    $('#q-size').textContent = s ? `${s.name}, ${s.low} to ${s.high} sq ft of openings` : 'Not sure yet, we measure at the visit';
+    $('#q-sys').textContent = p.name;
+    const tinted = p.family !== 'screen';
+    const tint = (root.querySelector('input[name="tint"]:checked') as HTMLInputElement)?.value;
+    $('#q-tint-row').hidden = !tinted;
+    $('#q-tint').textContent = tint;
+    const est = root.querySelector<HTMLInputElement>('form input[name="estimate"]');
+    if (est) est.value = `${p.name}${tinted ? ` (${tint})` : ''}, ${$('#q-size').textContent}: ${$('#q-total').textContent}`;
+  }
+
+  root.addEventListener('click', (e) => {
+    const t = (e.target as HTMLElement).closest<HTMLElement>('button');
+    if (!t) return;
+    if (t.dataset.size) { st.size = t.dataset.size === 'x' ? undefined : t.dataset.size; $$('[data-size]').forEach((b) => b.setAttribute('aria-pressed', String(b === t))); go(2); }
+    else if (t.dataset.use) { st.use = t.dataset.use; $$('[data-use]').forEach((b) => b.setAttribute('aria-pressed', String(b === t))); go(3); }
+    else if (t.dataset.pick) pick(t.dataset.pick);
+    else if (t.dataset.go) go(Number(t.dataset.go));
+    else if (t.dataset.back) go(Number(t.dataset.back));
+  });
+</script>

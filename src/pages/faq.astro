@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { FAQ } from '../data/site';
+
+const crumbs = [{ name: 'FAQ', href: '/faq/' }];
+const groups = [
+  { id: 'cost', t: 'Cost and financing', items: FAQ.cost },
+  { id: 'rooms', t: '3-season rooms', items: FAQ.room },
+  { id: 'screens', t: 'Hexfold and screens', items: FAQ.screens },
+  { id: 'install', t: 'Install, storms and warranty', items: FAQ.general },
+];
+const all = groups.flatMap((g) => g.items);
+const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: all.map((i) => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: i.a } })) };
+---
+<Base
+  title="Patio Enclosure FAQ: Cost, Storms, Warranty | A&E Factory Sales"
+  description="Straight answers on Houston patio enclosures and screens: cost, polycarbonate vs glass, Hexfold, snakes, storm ratings, install time and warranty."
+  crumbs={crumbs}
+  schema={[ld]}
+>
+  <PageHero crumbs={crumbs}>
+    <div class="stack-lg" style="max-width:50em">
+      <h1 class="display">Patio enclosure <span class="y">questions</span></h1>
+      <p class="sub">Straight answers from the people who build and install it.</p>
+      <nav aria-label="FAQ sections"><ul class="jump">{groups.map((g) => <li><a href={`#${g.id}`}>{g.t}</a></li>)}</ul></nav>
+    </div>
+  </PageHero>
+  {groups.map((g, i) => (
+    <section class={`band${i % 2 ? ' on-paper' : ''}`} id={g.id}>
+      <div class="wrap split" style="align-items:start">
+        <h2 class="h2">{g.t}</h2>
+        <div class="faq">
+          {g.items.map((q) => <details open={i === 0}><summary>{q.q}</summary><p>{q.a}</p></details>)}
+        </div>
+      </div>
+    </section>
+  ))}
+</Base>
+<style>
+  .jump { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .jump a { display: inline-block; border: 1px solid var(--line); padding: 8px 14px; color: var(--ink); text-decoration: none; font-weight: 600; }
+  .jump a:hover { border-color: var(--yellow); color: var(--yellow); }
+</style>

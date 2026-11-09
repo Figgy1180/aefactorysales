@@ -1,0 +1,100 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE, PRODUCTS } from '../data/site';
+import gable from '../assets/photos/gabled-opening-screens.jpg';
+import packed from '../assets/photos/factory-packed.jpg';
+
+const crumbs = [{ name: 'Dealers', href: '/dealers/' }];
+---
+<Base
+  title="Become a Dealer: Patio Enclosure Systems | A&E Factory Sales"
+  description="Carry factory-direct patio enclosure systems built in Houston: retractable mesh, stainless screens and polycarbonate rooms, shipped as test-assembled kits."
+  crumbs={crumbs}
+>
+  <PageHero crumbs={crumbs}>
+    <div class="split">
+      <div class="stack-lg">
+        <h1 class="display">Sell a system <span class="y">built to install fast</span></h1>
+        <p class="sub">For patio and outdoor living installers, window and door dealers, contractors and showrooms. You sell and install. We build complete, test-assembled kits in our Houston factory.</p>
+        <div class="actions"><a class="btn" href={SITE.dealerPhoneHref}>Call {SITE.dealerContact} {SITE.dealerPhone}</a><a class="btn btn-line" href="#apply">Apply online</a></div>
+      </div>
+      <figure class="dim-frame" style="margin:0"><Image src={packed} alt="A finished A&E order wrapped and labeled for shipping" widths={[480, 900]} sizes="(max-width: 820px) 100vw, 540px" loading="eager" style="aspect-ratio:16/10;object-fit:cover" /></figure>
+    </div>
+  </PageHero>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head"><h2 class="h2">Why dealers <span class="y">carry A&amp;E</span></h2></div>
+      <div class="reasons">
+        <div><h3>Factory direct</h3><p>No distributor in the middle, and a real margin between dealer price and installed MSRP.</p></div>
+        <div><h3>Complete kits</h3><p>Trim, wall stripping and hardware in the box. Every piece cut, labeled, numbered and test-assembled before it ships.</p></div>
+        <div><h3>Fast installs</h3><p>Proprietary track absorbs out-of-square openings, and the wall trim levels and seals as it's set. About 20 minutes per panel.</p></div>
+        <div><h3>Proven design</h3><p>Fourth generation, tested on Houston patios for four years. Lifetime frame warranty, 3 years on parts.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band on-paper">
+    <div class="wrap split" style="align-items:start">
+      <div class="stack">
+        <h2 class="h2">Product <span class="y">lines</span></h2>
+        <p class="lede">Dealer pricing is shared with approved dealers.</p>
+        <figure style="margin:0"><Image src={gable} alt="Gabled opening enclosed with A&E metal mesh screens" widths={[480, 800]} sizes="(max-width: 820px) 100vw, 520px" loading="lazy" style="aspect-ratio:4/3;object-fit:cover;border:2px solid var(--paper-ink)" /></figure>
+      </div>
+      <div class="table-wrap">
+        <table class="tbl" style="min-width:420px">
+          <thead><tr><th scope="col">Line</th><th scope="col">What it is</th><th scope="col" class="num">Installed MSRP from</th></tr></thead>
+          <tbody>{PRODUCTS.map((p) => <tr><th scope="row">{p.name}</th><td>{p.kind}</td><td class="num">${p.msrp}/sq ft</td></tr>)}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="band raised" id="apply">
+    <div class="wrap split" style="align-items:start">
+      <div class="stack">
+        <h2 class="h2">Apply to <span class="y">become a dealer</span></h2>
+        <p class="lede">Best fit: you have an install crew, an active sales team, and a showroom or strong online presence. We reply within 2 business days.</p>
+        <div class="contact-card">
+          <p class="k">Talk to {SITE.dealerContact} directly</p>
+          <a class="big" href={SITE.dealerPhoneHref}>{SITE.dealerPhone}</a>
+          <a href={`mailto:${SITE.dealerEmail}`}>{SITE.dealerEmail}</a>
+        </div>
+      </div>
+      <form class="form dealer-form" data-key={SITE.dealerFormKey} data-next="/dealers/thanks/" novalidate>
+        <input type="hidden" name="subject" value="New dealer application from aefactorysales.com" />
+        <input type="hidden" name="from_name" value="A&E website (dealers)" />
+        <label class="hp" aria-hidden="true">Leave this empty <input type="checkbox" name="botcheck" tabindex="-1" /></label>
+        <div class="field"><label for="d-company">Company name</label><input id="d-company" name="company" autocomplete="organization" required /></div>
+        <div class="field"><label for="d-name">Your name</label><input id="d-name" name="name" autocomplete="name" required /></div>
+        <div class="field"><label for="d-phone">Phone</label><input id="d-phone" name="phone" type="tel" autocomplete="tel" required /></div>
+        <div class="field"><label for="d-email">Email</label><input id="d-email" name="email" type="email" autocomplete="email" required /></div>
+        <div class="field"><label for="d-region">City and region you cover</label><input id="d-region" name="region" required /></div>
+        <div class="field"><label for="d-type">Business type</label>
+          <select id="d-type" name="business_type"><option>Patio and outdoor living installer</option><option>Window and door dealer</option><option>Motorized shade dealer</option><option>General contractor or builder</option><option>Retail showroom</option><option>Other</option></select></div>
+        <div class="field"><label for="d-years">Years in business</label><input id="d-years" name="years" inputmode="numeric" /></div>
+        <div class="field"><label for="d-volume">Expected volume</label>
+          <select id="d-volume" name="volume"><option>Just getting started</option><option>1 to 2 jobs a month</option><option>3 to 5 jobs a month</option><option>6 or more jobs a month</option></select></div>
+        <div class="field full"><label for="d-notes">Anything else we should know?</label><textarea id="d-notes" name="message"></textarea></div>
+        <div class="form-foot"><button class="btn" type="submit">Send my application</button></div>
+        <p class="form-note" role="status" hidden></p>
+      </form>
+    </div>
+  </section>
+</Base>
+<script>
+  import '../scripts/forms';
+</script>
+<style>
+  .contact-card { border-left: 6px solid var(--yellow); background: var(--honey); padding: 18px 20px; display: grid; gap: 4px; justify-items: start; }
+  .contact-card .k { font-weight: 800; font-stretch: 80%; text-transform: uppercase; color: var(--yellow); }
+  .contact-card .big { font-weight: 800; font-stretch: 76%; font-size: 2.2rem; line-height: 1.05; color: var(--ink); text-decoration: none; }
+  .reasons { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+  .reasons > div { border-top: 2px solid var(--yellow); padding-top: 16px; min-width: 0; }
+  .reasons h3 { font-weight: 800; font-stretch: 78%; font-size: 1.35rem; text-transform: uppercase; }
+  .reasons p { color: var(--ink-2); margin-top: 6px; }
+  @media (max-width: 900px) { .reasons { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 520px) { .reasons { grid-template-columns: minmax(0, 1fr); } }
+</style>

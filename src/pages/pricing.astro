@@ -1,0 +1,120 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CompareBars from '../components/CompareBars.astro';
+import Faq from '../components/Faq.astro';
+import { PRODUCTS, SIZES, FAQ, FINANCING, range, byId } from '../data/site';
+
+const crumbs = [{ name: 'Pricing', href: '/pricing/' }];
+const order = ['fixed', 'hexfold', 'clearfixed', 'clearfold', 'hybrid'].map(byId);
+const article = {
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: 'Patio enclosure cost in Houston (2026)',
+  dateModified: '2026-11-05', datePublished: '2026-11-05',
+  author: { '@id': 'https://aefactorysales.com/#business' }, publisher: { '@id': 'https://aefactorysales.com/#business' },
+  mainEntityOfPage: 'https://aefactorysales.com/pricing/',
+};
+---
+<Base
+  title="Patio Enclosure Cost in Houston (2026 Prices) | A&E Factory Sales"
+  description="Real installed prices for Houston patio screens and 3-season rooms: $24 to $56 per sq ft of opening, with totals by patio size and sunroom comparisons."
+  crumbs={crumbs}
+  schema={[article]}
+>
+  <PageHero crumbs={crumbs}>
+    <div class="stack-lg" style="max-width:52em">
+      <h1 class="display">Patio enclosure cost <span class="y">in Houston, 2026</span></h1>
+      <p class="sub">Our real installed prices, per square foot of opening. No "call for pricing." Updated November 2026.</p>
+      <p class="lede"><strong style="color:var(--ink)">Short answer:</strong> a 16 × 14 ft covered patio with two open sides runs about $5,800 to $6,700 in metal screens, or $7,400 to $9,600 as a polycarbonate 3-season room, installed by our crew with the warranty included.</p>
+    </div>
+  </PageHero>
+
+  <section class="band on-paper">
+    <div class="wrap stack-lg">
+      <div class="sec-head" style="margin-bottom:0">
+        <h2 class="h2">Every system, <span class="y">every patio size</span></h2>
+        <p class="lede">We price the open wall area we fill in, not your floor. Two open sides on a 16 × 14 ft patio at 8 ft tall is about 240 sq ft of openings.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="tbl tnum">
+          <thead>
+            <tr><th scope="col">System</th><th scope="col">What it is</th><th scope="col" class="num">Per sq ft</th>
+              {SIZES.map((s) => <th scope="col" class="num">{s.name}<br />{s.low} to {s.high} sq ft</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {order.map((p) => (
+              <tr>
+                <th scope="row"><a href={p.href} style="color:inherit">{p.name}</a></th>
+                <td>{p.kind}</td>
+                <td class="num">${p.msrp}</td>
+                {SIZES.map((s) => <td class="num" style="font-size:1rem !important">{range(p.msrp, s.low, s.high)}</td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <dl class="sizes">
+        {SIZES.map((s) => <div><dt>{s.name}</dt><dd>{s.eg}</dd></div>)}
+      </dl>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap split" style="align-items:start">
+      <div class="stack">
+        <h2 class="h2">What moves <span class="y">the price</span></h2>
+        <ol class="factors">
+          <li><h3>Opening size</h3><p>The biggest factor. We measure the width and height of every opening at the free site visit.</p></li>
+          <li><h3>Fixed or folding</h3><p>Fixed panels cost least. Folding systems cost more and give you the open patio back.</p></li>
+          <li><h3>Mesh or polycarbonate</h3><p>Metal mesh keeps the breeze and stops bugs. Polycarbonate adds shelter from wind and rain.</p></li>
+          <li><h3>Shapes and options</h3><p>Arched and angled fixed panels are 1.5 times the base rate. Locks, extra posts, a ramp water stop on Hexfold and full steel track are add-ons.</p></li>
+        </ol>
+      </div>
+      <div class="stack">
+        <h2 class="h3">Always included</h2>
+        <ul class="checks">
+          <li>Design and the free site visit</li>
+          <li>CNC fabrication and full test assembly in our Houston factory</li>
+          <li>Trim, wall stripping and hardware</li>
+          <li>Installation by our own crew, within a month</li>
+          <li>Lifetime frame warranty, 3 years on parts</li>
+        </ul>
+        <h2 class="h3" style="margin-top:18px">Why factory-direct costs less</h2>
+        <p class="muted">We are the manufacturer and the installer. There is no distributor or subcontractor between your patio and our factory.</p>
+        <h2 class="h3" style="margin-top:18px">Financing</h2>
+        <p class="muted">{FINANCING}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band on-paper">
+    <div class="wrap"><CompareBars /></div>
+  </section>
+
+  <section class="band">
+    <div class="wrap split" style="align-items:start">
+      <div class="stack">
+        <h2 class="h2">Cost <span class="y">questions</span></h2>
+        <a class="btn" href="/free-quote/" style="justify-self:start">Price my patio in 4 steps</a>
+      </div>
+      <Faq items={[...FAQ.cost.slice(0, 3), FAQ.room[0], FAQ.screens[3], FAQ.cost[3]]} />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .sizes { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .sizes div { border-left: 3px solid var(--paper-ink); padding-left: 12px; }
+  .sizes dt { font-weight: 800; font-stretch: 80%; text-transform: uppercase; }
+  .sizes dd { margin: 2px 0 0; color: var(--paper-2); font-size: 0.95rem; }
+  .factors { list-style: none; margin: 0; padding: 0; display: grid; counter-reset: f; border-top: 2px solid var(--yellow); }
+  .factors li { counter-increment: f; padding: 16px 0 16px 48px; border-bottom: 1px solid var(--line); position: relative; }
+  .factors li::before { content: counter(f); position: absolute; left: 0; top: 16px; width: 32px; height: 32px; display: grid; place-items: center; background: var(--yellow); color: var(--honey); font-weight: 800; border-radius: 50%; }
+  .factors h3 { font-weight: 800; font-stretch: 80%; font-size: 1.2rem; text-transform: uppercase; }
+  .factors p { color: var(--ink-2); margin-top: 4px; }
+  .checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .checks li { position: relative; padding-left: 28px; }
+  .checks li::before { content: ""; position: absolute; left: 2px; top: 0.35em; width: 14px; height: 8px; border-left: 2.5px solid var(--yellow); border-bottom: 2.5px solid var(--yellow); transform: rotate(-45deg); }
+  @media (max-width: 640px) { .sizes { grid-template-columns: minmax(0, 1fr); } }
+</style>

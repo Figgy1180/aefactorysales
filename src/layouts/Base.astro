@@ -1,0 +1,191 @@
+---
+import '../styles/global.css';
+import { SITE, NAV, CITIES } from '../data/site';
+import archivoUrl from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  noindex?: boolean;
+  schema?: Record<string, unknown>[];
+  crumbs?: { name: string; href: string }[];
+}
+const { title, description, image = '/og/og-default.jpg', noindex = false, schema = [], crumbs = [] } = Astro.props;
+const path = Astro.url.pathname;
+const canonical = new URL(path, SITE.url).href;
+const ogImage = new URL(image, SITE.url).href;
+
+const business = {
+  '@context': 'https://schema.org',
+  '@type': 'HomeAndConstructionBusiness',
+  '@id': `${SITE.url}/#business`,
+  name: SITE.name,
+  url: `${SITE.url}/`,
+  logo: `${SITE.url}/brand/ae-bee-logo.png`,
+  image: `${SITE.url}/og/og-default.jpg`,
+  telephone: SITE.phoneE164,
+  email: SITE.email,
+  foundingDate: SITE.founded,
+  priceRange: '$$',
+  openingHoursSpecification: [{
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+    opens: '00:00',
+    closes: '23:59',
+  }],
+  contactPoint: [{ '@type': 'ContactPoint', telephone: SITE.phoneE164, contactType: 'sales', areaServed: 'US-TX', availableLanguage: ['English'] }],
+  description:
+    'Patio enclosures, polycarbonate 3-season rooms and metal patio screens built in our Houston factory and installed by our own crew within a month.',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: SITE.street,
+    addressLocality: SITE.city,
+    addressRegion: SITE.region,
+    postalCode: SITE.zip,
+    addressCountry: 'US',
+  },
+  areaServed: CITIES.map((c) => ({ '@type': 'City', name: `${c}, TX` })),
+  sameAs: [SITE.factorySite],
+  knowsAbout: ['Patio enclosures', 'Retractable patio screens', 'Polycarbonate 3-season rooms', 'Stainless steel screens', 'Garage screens'],
+};
+
+const breadcrumb = crumbs.length
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [{ name: 'Home', href: '/' }, ...crumbs].map((c, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: c.name,
+        item: new URL(c.href, SITE.url).href,
+      })),
+    }
+  : null;
+
+const allSchema = [business, ...(breadcrumb ? [breadcrumb] : []), ...schema];
+const isCurrent = (href: string) => path === href || path === href.replace(/\/$/, '') || path === href.replace(/\/$/, '.html');
+---
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex ? <meta name="robots" content="noindex, follow" /> : <meta name="robots" content="index, follow, max-image-preview:large" />}
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#2E2118" />
+    <meta name="geo.region" content="US-TX" />
+    <meta name="geo.placename" content="Houston" />
+    <link rel="preload" href={archivoUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    {allSchema.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="top">
+      <div class="wrap">
+        <a class="brand" href="/" aria-label="A&E Factory Sales home">
+          <img src="/brand/ae-bee-logo-on-dark.svg" alt="" width="104" height="53" />
+          <span><b>A&amp;E Factory Sales</b><small>{SITE.tagline}</small></span>
+        </a>
+        <nav class="nav" aria-label="Main">
+          {NAV.map((n) => <a href={n.href} aria-current={isCurrent(n.href) ? 'page' : undefined}>{n.label}</a>)}
+        </nav>
+        <div class="top-actions">
+          <a class="top-phone" href={SITE.phoneHref}>{SITE.phone}</a>
+          <a class="btn" href="/free-quote/">Get my price</a>
+          <details class="menu">
+            <summary aria-label="Open menu">Menu</summary>
+            <nav aria-label="Mobile">
+              {NAV.map((n) => <a href={n.href}>{n.label}</a>)}
+              <a href="/compare/">Compare options</a>
+              <a href="/garage-screens/">Garage screens</a>
+              <a href="/faq/">FAQ</a>
+              <a href={SITE.phoneHref}>Call {SITE.phone}</a>
+              <a class="btn" href="/free-quote/">Get my price</a>
+            </nav>
+          </details>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <section class="foot-cta" aria-label="Free design and estimate">
+      <div class="wrap">
+        <b>Free design &amp; estimate</b>
+        <a class="phone" href={SITE.phoneHref}>{SITE.phone}</a>
+        <a class="btn" href="/free-quote/">Book a site visit</a>
+      </div>
+    </section>
+    <footer class="foot blueprint">
+      <div class="wrap">
+        <div class="cols">
+          <div>
+            <img src="/brand/ae-bee-logo-on-dark.svg" alt="A&E Factory Sales bee logo" width="96" height="46" style="width:96px;margin-bottom:14px" />
+            <address>
+              <strong style="color:var(--ink)">{SITE.name}</strong><br />
+              {SITE.street}<br />
+              {SITE.city}, {SITE.region} {SITE.zip}<br />
+              <a href={SITE.phoneHref}>{SITE.phone}</a><br />
+              <a href={`mailto:${SITE.email}`}>{SITE.email}</a><br />
+              {SITE.hours}
+            </address>
+          </div>
+          <div>
+            <h2>Systems</h2>
+            <ul>
+              <li><a href="/three-season-rooms/">3-season rooms</a></li>
+              <li><a href="/hexfold/">Hexfold retractable screens</a></li>
+              <li><a href="/screens/">Stainless steel screens</a></li>
+              <li><a href="/garage-screens/">Garage screens</a></li>
+            </ul>
+          </div>
+          <div>
+            <h2>Plan</h2>
+            <ul>
+              <li><a href="/pricing/">Pricing</a></li>
+              <li><a href="/compare/">Compare options</a></li>
+              <li><a href="/learn/">Learn: specs and care</a></li>
+              <li><a href="/free-quote/">Free site visit</a></li>
+              <li><a href="/guides/">Guides</a></li>
+              <li><a href="/faq/">FAQ</a></li>
+              <li><a href="/service-area/">Service area</a></li>
+            </ul>
+          </div>
+          <div>
+            <h2>Company</h2>
+            <ul>
+              <li><a href="/why-ae/">Why A&amp;E</a></li>
+              <li><a href="/projects/">Projects</a></li>
+              <li><a href="/how-we-build/">Our factory</a></li>
+              <li><a href="/reviews/">Leave a review</a></li>
+              <li><a href="/dealers/">Become a dealer</a></li>
+              <li><a href={SITE.factorySite} rel="noopener">Factory site</a></li>
+              <li><a href="/privacy/">Privacy</a></li>
+            </ul>
+          </div>
+        </div>
+        <p class="small">
+          Serving Houston and the greater Houston area. Warranty: lifetime on the frame, 3 years on parts, installed and maintained by the manufacturer (excludes accidents, intentional damage and acts of God).
+          © {new Date().getFullYear()} {SITE.name}.
+        </p>
+      </div>
+    </footer>
+    <div class="callbar"><a href={SITE.phoneHref}>Call us</a><a href="/free-quote/">Get my price</a></div>
+  </body>
+</html>

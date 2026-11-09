@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import { SITE } from '../data/site';
+---
+<Base title="Page Not Found | A&E Factory Sales" description="That page isn't here." noindex>
+  <section class="band blueprint">
+    <div class="wrap stack-lg" style="max-width:46em">
+      <h1 class="display">That page <span class="y">isn't here.</span></h1>
+      <p class="sub">The link may be old. Try one of these, or call {SITE.phone}.</p>
+      <div class="actions"><a class="btn" href="/free-quote/">Price my patio</a><a class="btn btn-line" href="/">Home</a><a class="btn btn-line" href="/faq/">FAQ</a></div>
+    </div>
+  </section>
+</Base>

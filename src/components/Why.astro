@@ -1,0 +1,23 @@
+---
+const items = [
+  { t: 'Our name is on the parts', d: 'Designed by A&E and made to our spec by over 30 manufacturers who build parts for us. We know the maker of every one.', icon: 'tag' },
+  { t: 'Cut by CNC to fit', d: 'Every piece is cut to your measurements to fractions of a millimeter, so it fits the first time. No gaps means no pests.', icon: 'saw' },
+  { t: 'Local in Houston', d: 'Our factory is on William Tell Street. If anything ever comes up, we are right here.', icon: 'pin' },
+  { t: 'One price, all in', d: 'Design, fabrication, installation, parts and the factory warranty in one number.', icon: 'clip' },
+];
+const icons: Record<string, string> = {
+  tag: '<path d="M4 14 14 4h10v10L14 24z"/><circle cx="19" cy="9" r="2"/>',
+  saw: '<circle cx="14" cy="14" r="9"/><circle cx="14" cy="14" r="2.5"/><path d="M14 2v3M14 23v3M2 14h3M23 14h3M5.5 5.5l2 2M20.5 20.5l2 2M22.5 5.5l-2 2M7.5 20.5l-2 2"/>',
+  pin: '<path d="M14 25s8-7.5 8-13a8 8 0 0 0-16 0c0 5.5 8 13 8 13z"/><circle cx="14" cy="12" r="3"/>',
+  clip: '<rect x="6" y="5" width="16" height="20" rx="1.5"/><path d="M11 3h6v4h-6zM10 13h8M10 17h8M10 21h5"/>',
+};
+---
+<div class="why">
+  {items.map((i) => (
+    <div>
+      <svg width="30" height="30" viewBox="0 0 28 28" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={icons[i.icon]} />
+      <h3>{i.t}</h3>
+      <p>{i.d}</p>
+    </div>
+  ))}
+</div>

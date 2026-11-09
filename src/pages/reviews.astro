@@ -1,0 +1,81 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE } from '../data/site';
+import { PROJECTS } from '../data/projects';
+import { REVIEWS } from '../data/reviews';
+const crumbs = [{ name: 'Reviews', href: '/reviews/' }];
+---
+<Base
+  title="Reviews: Tell Us How We Did | A&E Factory Sales"
+  description="Had a patio enclosure or screens installed by A&E? Leave a quick review. It helps your Houston neighbors and helps us build better."
+  crumbs={crumbs}
+>
+  <PageHero crumbs={crumbs}>
+    <div class="stack-lg" style="max-width:52em">
+      <h1 class="display">How did <span class="y">we do?</span></h1>
+      <p class="sub">If we built your patio, screens or garage enclosure, a two-minute review helps your neighbors decide and tells us what to keep doing.</p>
+      {SITE.googleReviewUrl && (
+        <div class="actions"><a class="btn" href={SITE.googleReviewUrl} rel="noopener">Review us on Google</a><a class="btn btn-line" href="#write">Or write it here</a></div>
+      )}
+    </div>
+  </PageHero>
+
+  {REVIEWS.length > 0 && (
+    <section class="band on-paper">
+      <div class="wrap">
+        <h2 class="h2" style="margin-bottom:28px">What customers <span class="y">say</span></h2>
+        <ul class="rv">{REVIEWS.map((r) => <li><blockquote>{r.text}</blockquote><p><strong>{r.name}</strong>, {r.city}</p><p class="fine">{r.source}</p></li>)}</ul>
+      </div>
+    </section>
+  )}
+
+  <section class="band raised" id="write">
+    <div class="wrap split" style="align-items:start">
+      <div class="stack">
+        <h2 class="h2">Write <span class="y">a review</span></h2>
+        <p class="lede">Your words go straight to our team. We only put a review on this website if you say yes below, and we show it exactly as you wrote it, with your first name and city.</p>
+        <p class="muted">Something not right? Tell us here too, or call {SITE.phone}. We built it, so we'll fix it.</p>
+      </div>
+      <form class="form quote-form review-form" data-key={SITE.formKey} data-next="/reviews/thanks/" novalidate>
+        <input type="hidden" name="subject" value="New customer review from aefactorysales.com" />
+        <input type="hidden" name="from_name" value="A&E website (reviews)" />
+        <label class="hp" aria-hidden="true">Leave this empty <input type="checkbox" name="botcheck" tabindex="-1" /></label>
+        <div class="field"><label for="r-name">Your name</label><input id="r-name" name="name" autocomplete="name" required /></div>
+        <div class="field"><label for="r-zip">ZIP code</label><input id="r-zip" name="zip" inputmode="numeric" pattern="[0-9]{5}" autocomplete="postal-code" required /></div>
+        <div class="field"><label for="r-phone">Phone (so we can match your job)</label><input id="r-phone" name="phone" type="tel" autocomplete="tel" required /></div>
+        <div class="field"><label for="r-what">What did we install?</label>
+          <select id="r-what" name="project"><option>Patio enclosure</option><option>Hexfold retractable screens</option><option>Fixed stainless steel screens</option><option>Polycarbonate 3-season room</option><option>Garage screens</option><option>Door screen</option><option>Other</option></select></div>
+        <fieldset class="field full stars"><legend>Rating</legend>
+          {[5, 4, 3, 2, 1].map((n) => <label><input type="radio" name="rating" value={n} checked={n === 5} /> {n} star{n > 1 ? 's' : ''}</label>)}
+        </fieldset>
+        <div class="field full"><label for="r-text">Your review</label><textarea id="r-text" name="message" required placeholder="How was the visit, the install, and how is it working for you?"></textarea></div>
+        <label class="field full check"><input type="checkbox" name="ok_to_publish" value="Yes, A&E may show this review on its website with my first name, last initial and city" /> A&amp;E may show my review on its website with my first name, last initial and city.</label>
+        <div class="form-foot"><button class="btn" type="submit">Send my review</button></div>
+        <p class="form-note" role="status" hidden></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap stack">
+      <h2 class="h3">See our work</h2>
+      <ul class="olist">{PROJECTS.map((p) => <li><a href={`/projects/${p.slug}/`}>{p.city}: {p.title}</a></li>)}</ul>
+    </div>
+  </section>
+</Base>
+<script>
+  import '../scripts/forms';
+</script>
+<style>
+  .stars { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px 18px; }
+  .stars legend { margin-bottom: 6px; }
+  .stars label, .check { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 600; cursor: pointer; }
+  .stars input, .check input { width: 20px; height: 20px; accent-color: var(--yellow); flex-shrink: 0; }
+  .check { align-items: flex-start; font-weight: 500; }
+  .check input { margin-top: 2px; }
+  .rv { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 22px; }
+  .rv li { border-left: 6px solid var(--yellow); background: var(--cream-2); padding: 18px 20px; display: grid; gap: 8px; }
+  .rv blockquote { margin: 0; font-size: 1.05rem; }
+  .olist { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 24px; }
+</style>

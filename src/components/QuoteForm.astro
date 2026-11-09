@@ -1,0 +1,56 @@
+---
+// Site-visit request form. Sends through Web3Forms (free, works on a static site) to info@aefactorysales.com.
+// With no access key set, it runs in preview mode and sends nothing.
+import { SITE } from '../data/site';
+interface Props { id?: string; compact?: boolean; source?: string }
+const { id = 'visit', compact = false, source = 'Website' } = Astro.props;
+---
+<form class="form quote-form" id={id} data-key={SITE.formKey} data-next="/thank-you/" novalidate>
+  <input type="hidden" name="subject" value="New site visit request from aefactorysales.com" />
+  <input type="hidden" name="from_name" value="A&E website" />
+  <input type="hidden" name="lead_source" value={source} />
+  <input type="hidden" name="estimate" value="" />
+  <label class="hp" aria-hidden="true">Leave this empty <input type="checkbox" name="botcheck" tabindex="-1" /></label>
+  <div class="field"><label for={`${id}-name`}>Name</label><input id={`${id}-name`} name="name" autocomplete="name" required /></div>
+  <div class="field"><label for={`${id}-phone`}>Phone</label><input id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" required /></div>
+  <div class="field"><label for={`${id}-email`}>Email</label><input id={`${id}-email`} name="email" type="email" autocomplete="email" /></div>
+  <div class="field"><label for={`${id}-zip`}>ZIP code</label><input id={`${id}-zip`} name="zip" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" required /></div>
+  {!compact && (
+    <>
+      <div class="field"><label for={`${id}-project`}>What are you thinking about?</label>
+        <select id={`${id}-project`} name="project">
+          <option>Not sure yet</option>
+          <option>3-season room (polycarbonate panels)</option>
+          <option>Hexfold retractable screens</option>
+          <option>Fixed stainless steel screens</option>
+          <option>Mix of panels and screens</option>
+          <option>Garage screen</option>
+        </select>
+      </div>
+      <div class="field"><label for={`${id}-size`}>Patio size</label>
+        <select id={`${id}-size`} name="patio_size">
+          <option>Not sure</option>
+          <option>Small (about 12 × 10 ft)</option>
+          <option>Medium (about 16 × 14 ft, two open sides)</option>
+          <option>Large (about 16 × 14 ft, three open sides, or bigger)</option>
+        </select>
+      </div>
+    </>
+  )}
+  <div class="field"><label for={`${id}-time`}>Best time to call</label>
+    <select id={`${id}-time`} name="best_time"><option>Any time</option><option>Morning</option><option>Afternoon</option><option>Evening</option></select>
+  </div>
+  <div class="field"><label for={`${id}-hoa`}>HOA?</label>
+    <select id={`${id}-hoa`} name="hoa"><option>Not sure</option><option>Yes</option><option>No</option></select>
+  </div>
+  <div class="field full"><label for={`${id}-notes`}>Anything we should know? (optional)</label><textarea id={`${id}-notes`} name="message"></textarea></div>
+  <div class="form-foot">
+    <button class="btn" type="submit">Request my site visit</button>
+    <small>We call you back to set a time. No pressure, no obligation. Have photos? Text them to {SITE.phone}.</small>
+  </div>
+  <p class="form-note" role="status" hidden></p>
+</form>
+
+<script>
+  import '../scripts/forms';
+</script>

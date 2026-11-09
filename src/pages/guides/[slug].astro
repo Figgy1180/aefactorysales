@@ -1,0 +1,57 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import { SITE } from '../../data/site';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  return guides.map((g) => ({ params: { slug: g.id }, props: { g } }));
+}
+const { g } = Astro.props;
+const { Content } = await render(g);
+const href = `/guides/${g.id}/`;
+const crumbs = [{ name: 'Guides', href: '/guides/' }, { name: g.data.title, href }];
+const fmt = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+const article = {
+  '@context': 'https://schema.org', '@type': 'Article',
+  headline: g.data.title, description: g.data.description,
+  datePublished: g.data.published, dateModified: g.data.updated,
+  author: { '@id': `${SITE.url}/#business` }, publisher: { '@id': `${SITE.url}/#business` },
+  mainEntityOfPage: new URL(href, SITE.url).href,
+};
+---
+<Base title={g.data.seoTitle} description={g.data.description} crumbs={crumbs} schema={[article]}>
+  <PageHero crumbs={crumbs}>
+    <div class="stack-lg" style="max-width:52em">
+      <h1 class="h2">{g.data.title}</h1>
+      <p class="fine">By {SITE.name} · Updated <time datetime={g.data.updated}>{fmt(g.data.updated)}</time></p>
+      <div class="answer"><p class="answer-k">Short answer</p><p>{g.data.answer}</p></div>
+    </div>
+  </PageHero>
+  <section class="band">
+    <div class="wrap guide-grid">
+      <article class="prose"><Content /></article>
+      <aside class="stack">
+        <h2 class="h3">Related</h2>
+        <ul class="rel">{g.data.related.map((r) => <li><a href={r.href}>{r.label}</a></li>)}</ul>
+        <a class="btn" href="/free-quote/">Price my patio</a>
+      </aside>
+    </div>
+  </section>
+  <section class="band raised">
+    <div class="wrap split" style="align-items:start">
+      <div class="stack"><h2 class="h2">Get your <span class="y">exact price</span></h2><p class="lede">Free site visit, about 45 minutes.</p></div>
+      <QuoteForm id="guide-visit" source={`Guide: ${g.data.title}`} />
+    </div>
+  </section>
+</Base>
+<style>
+  .answer { border-left: 6px solid var(--yellow); background: var(--honey-2); padding: 16px 20px; display: grid; gap: 6px; max-width: 70ch; }
+  .answer-k { font-weight: 800; font-stretch: 80%; text-transform: uppercase; color: var(--yellow); }
+  .guide-grid { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 48px; align-items: start; }
+  .guide-grid aside { position: sticky; top: 100px; border-top: 2px solid var(--yellow); padding-top: 16px; }
+  .rel { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  @media (max-width: 900px) { .guide-grid { grid-template-columns: minmax(0, 1fr); } .guide-grid aside { position: static; } }
+</style>

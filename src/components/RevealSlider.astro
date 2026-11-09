@@ -1,0 +1,71 @@
+---
+// Drag-to-open photo: the same patio with screens closed (top layer) and open (bottom layer).
+// A native range input drives it, so it works with touch, mouse and keyboard.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+interface Props { closed: ImageMetadata; open: ImageMetadata; alt: string; label?: string; href?: string; eager?: boolean; id?: string }
+const { closed, open, alt, label, href, eager = false, id = 'reveal' } = Astro.props;
+---
+<figure class="reveal" data-reveal id={id} style="--pos: 62%">
+  <Image class="r-open" src={open} alt={`${alt}, screens folded open`} widths={[480, 720, 1080]} sizes="(max-width: 900px) 100vw, 620px" loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} />
+  <div class="r-closed" aria-hidden="true">
+    <Image src={closed} alt={`${alt}, screens closed`} widths={[480, 720, 1080]} sizes="(max-width: 900px) 100vw, 620px" loading={eager ? 'eager' : 'lazy'} />
+  </div>
+  <span class="r-line" aria-hidden="true"><span class="r-knob"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></span>
+  <span class="r-tag r-tag-l" aria-hidden="true">Closed</span>
+  <span class="r-tag r-tag-r" aria-hidden="true">Open</span>
+  <label class="sr-only" for={`${id}-range`}>Drag to open and close the screens</label>
+  <input id={`${id}-range`} class="r-range" type="range" min="0" max="100" value="62" aria-valuetext="Screens partly open" />
+  {label && <figcaption class="r-cap">{href ? <a href={href}>{label}</a> : label}</figcaption>}
+</figure>
+
+<style>
+  .reveal { position: relative; margin: 0; aspect-ratio: 4 / 3; overflow: hidden; border: 3px solid var(--yellow); background: var(--honey-2); touch-action: pan-y; user-select: none; }
+  .reveal :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+  .r-closed { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+  .r-line { position: absolute; top: 0; bottom: 0; left: 0; width: 100%; transform: translateX(var(--pos)); pointer-events: none; will-change: transform; }
+  .r-line::before { content: ""; position: absolute; top: 0; bottom: 0; left: -1.5px; width: 3px; background: var(--yellow); box-shadow: 0 0 0 1px rgba(46, 33, 24, 0.35); }
+  .r-knob { position: absolute; top: 50%; left: 0; width: 52px; height: 52px; transform: translate(-50%, -50%); border-radius: 50%; background: var(--yellow); color: var(--honey); display: grid; place-items: center; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35); }
+  .r-tag { position: absolute; top: 12px; background: var(--honey); color: var(--yellow); font-family: var(--mono); font-size: 0.74rem; font-weight: 600; padding: 4px 9px; pointer-events: none; }
+  .r-tag-l { left: 12px; }
+  .r-tag-r { right: 12px; }
+  .r-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; -webkit-appearance: none; appearance: none; background: transparent; }
+  .r-range:focus-visible + .r-cap, .reveal:has(.r-range:focus-visible) { outline: 3px solid var(--yellow-hi); outline-offset: 3px; }
+  .r-cap { position: absolute; left: 12px; bottom: 12px; background: var(--honey); color: var(--ink); font-size: 0.85rem; font-weight: 600; padding: 6px 10px; z-index: 2; }
+  .r-cap a { color: var(--ink); }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => {
+    const range = el.querySelector<HTMLInputElement>('.r-range')!;
+    const set = (v: number) => {
+      el.style.setProperty('--pos', v + '%');
+      range.value = String(v);
+      range.setAttribute('aria-valuetext', v > 85 ? 'Screens closed' : v < 15 ? 'Screens open' : 'Screens partly open');
+    };
+    let touched = false;
+    range.addEventListener('input', () => { touched = true; set(Number(range.value)); });
+    // One orchestrated moment: sweep closed to open and settle, unless the visitor prefers less motion.
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const start = performance.now(), keys = [[0, 98], [900, 98], [2100, 12], [3000, 62]];
+      const ease = (t: number) => (t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2);
+      const io = new IntersectionObserver((entries) => {
+        if (!entries[0].isIntersecting) return;
+        io.disconnect();
+        const t0 = performance.now();
+        const step = (now: number) => {
+          if (touched) return;
+          const t = now - t0;
+          let i = 0; while (i < keys.length - 2 && t > keys[i + 1][0]) i++;
+          const [ta, va] = keys[i], [tb, vb] = keys[i + 1];
+          const p = Math.min(1, Math.max(0, (t - ta) / (tb - ta)));
+          set(Math.round(va + (vb - va) * ease(p)));
+          if (t < keys[keys.length - 1][0]) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+      }, { threshold: 0.5 });
+      io.observe(el);
+      void start;
+    }
+  });
+</script>

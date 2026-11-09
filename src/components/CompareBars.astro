@@ -1,0 +1,26 @@
+---
+import { EXAMPLE } from '../data/site';
+interface Props { rows?: { name: string; low: number; high: number; ours: boolean }[]; title?: string; footnote?: string }
+const rows = Astro.props.rows ?? EXAMPLE.rows;
+const title = Astro.props.title ?? 'Same patio, other options';
+const footnote = Astro.props.footnote ?? EXAMPLE.footnote;
+const max = 90000;
+const k = (n: number) => `$${+(n / 1000).toFixed(1)}k`;
+---
+<figure class="compare" style="margin:0">
+  <figcaption class="h3" style="margin-bottom:6px">{title}</figcaption>
+  <p class="muted" style="margin-bottom:18px">Example: {EXAMPLE.label}.</p>
+  <div class="bars" role="list">
+    {rows.map((r) => (
+      <div class={`bar-row${r.ours ? ' ours' : ''}`} role="listitem">
+        <span class="lbl">{r.name}</span>
+        <span class="track" aria-hidden="true">
+          <span class="fill" style={`left:${(r.low / max) * 100}%;width:${Math.max(((r.high - r.low) / max) * 100, 1.2)}%`} />
+        </span>
+        <span class="val">{k(r.low)} to {k(r.high)}</span>
+      </div>
+    ))}
+    <div class="axis" aria-hidden="true"><div></div><div><span>$0</span><span>$30k</span><span>$60k</span><span>$90k</span></div><div></div></div>
+  </div>
+  <p class="fine" style="margin-top:16px">{footnote}</p>
+</figure>

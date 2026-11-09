@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import { SITE } from '../data/site';
+
+const crumbs = [{ name: 'Service area', href: '/service-area/' }];
+const regions = [
+  { t: 'West and southwest', c: ['Katy', 'Sugar Land', 'Missouri City', 'Richmond', 'Memorial', 'Bellaire', 'West University Place'] },
+  { t: 'North', c: ['The Woodlands', 'Spring', 'Cypress', 'Tomball', 'Kingwood', 'Humble', 'Conroe'] },
+  { t: 'South and southeast', c: ['Pearland', 'Friendswood', 'League City'] },
+  { t: 'Inside the city', c: ['Houston, all neighborhoods'] },
+];
+---
+<Base
+  title="Patio Enclosures Across Greater Houston | A&E Factory Sales"
+  description="A&E Factory Sales builds and installs patio enclosures and screens across greater Houston, from Katy and Sugar Land to The Woodlands, Pearland and League City."
+  crumbs={crumbs}
+>
+  <PageHero crumbs={crumbs}>
+    <div class="stack-lg" style="max-width:52em">
+      <h1 class="display">Greater Houston, <span class="y">from our factory</span></h1>
+      <p class="sub">Every job is built at {SITE.factoryStreet} in north Houston and installed by our own crew. No subcontractors, wherever you are in the metro.</p>
+    </div>
+  </PageHero>
+  <section class="band">
+    <div class="wrap">
+      <div class="regions">
+        {regions.map((r) => (
+          <div><h2 class="h3">{r.t}</h2><ul>{r.c.map((c) => <li>{c}</li>)}</ul></div>
+        ))}
+      </div>
+      <p class="muted" style="margin-top:28px;max-width:46em">Not on the list? If you're within driving distance of north Houston, call <a href={SITE.phoneHref}>{SITE.phone}</a> and we'll tell you straight whether we can get there.</p>
+    </div>
+  </section>
+  <section class="band on-paper">
+    <div class="wrap split">
+      <div class="stack">
+        <h2 class="h2">Showroom <span class="y">and factory</span></h2>
+        <address class="lede" style="font-style:normal">{SITE.name}<br />{SITE.street}<br />Houston, TX {SITE.zip}<br /><a href={SITE.phoneHref} style="color:var(--paper-ink)">{SITE.phone}</a></address>
+        <a class="btn btn-line" href="https://www.google.com/maps/search/?api=1&query=2609+William+Tell+St+Houston+TX+77093" rel="noopener">Get directions</a>
+      </div>
+      <p class="muted">In north Houston, ZIP 77093. Call ahead and we'll show you every system working, side by side.</p>
+    </div>
+  </section>
+  <section class="band raised">
+    <div class="wrap split" style="align-items:start">
+      <div class="stack"><h2 class="h2">Book a <span class="y">site visit</span></h2><p class="lede">We come to you anywhere in our service area. Free, about 45 minutes.</p></div>
+      <QuoteForm id="area-visit" source="Service area page" />
+    </div>
+  </section>
+</Base>
+<style>
+  .regions { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 28px; }
+  .regions > div { border-top: 2px solid var(--yellow); padding-top: 16px; min-width: 0; }
+  .regions ul { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 6px; color: var(--ink-2); }
+  @media (max-width: 900px) { .regions { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 520px) { .regions { grid-template-columns: minmax(0, 1fr); } }
+</style>

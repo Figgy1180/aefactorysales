@@ -1,0 +1,17 @@
+---
+import CornerArt from './CornerArt.astro';
+interface Props { crumbs: { name: string; href: string }[] }
+const { crumbs } = Astro.props;
+---
+<section class="page-hero blueprint">
+  <CornerArt />
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        {crumbs.map((c, i) => <li>{i === crumbs.length - 1 ? <span aria-current="page">{c.name}</span> : <a href={c.href}>{c.name}</a>}</li>)}
+      </ol>
+    </nav>
+    <slot />
+  </div>
+</section>

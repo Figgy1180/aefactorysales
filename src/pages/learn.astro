@@ -1,0 +1,271 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE, PRODUCTS, SIZES, FAQ, FACTS, FINANCING, WARRANTY_FULL, FRAME, byId, range } from '../data/site';
+
+const crumbs = [{ name: 'Learn', href: '/learn/' }];
+const order = ['fixed', 'hexfold', 'clearfixed', 'clearfold', 'hybrid'].map(byId);
+const sizeLimits = [
+  ['Fixed Screen', 'Up to 3.5 ft wide × 10 ft tall per panel, joined side by side', '1 ft × 1.3 ft', 'Yes, at 1.5 × the base rate'],
+  ['Clearfixed', 'Up to 3.5 ft wide × 10 ft tall per panel, joined side by side', '1 ft × 1.3 ft', 'Yes, at 1.5 × the base rate'],
+  ['Hexfold', 'Up to 10 ft wide × 10 ft tall per pull; 20 ft wide meeting in the middle', '1 ft × 1.3 ft', 'Pair with fixed panels cut to the shape above'],
+  ['Clearfold', 'Up to 5 ft wide × 10 ft tall per pull; 10 ft wide meeting in the middle', '1 ft × 1.3 ft', 'Pair with fixed panels above'],
+  ['Hybrid', 'Up to 5 ft wide × 10 ft tall per pull; 8 ft wide meeting in the middle', '1 ft × 1.3 ft', 'Pair with fixed panels above'],
+];
+const options = [
+  ['Locks', 'Keyed cylinder set into the frame rail, functional or dummy', 'Folding systems'],
+  ['Handles', 'High-end handle routed into the frame, standard', 'Folding systems'],
+  ['Ramp water stop', 'Keeps rain from running in along the bottom track', 'Standard on Clearfold and Hybrid, option on Hexfold'],
+  ['Full steel bottom track', 'Upgrade from the steel-sleeved aluminum track; standard on openings over 16.5 ft wide', 'Folding systems'],
+  ['Pet door', 'Built into a fixed panel', 'Fixed Screen, Clearfixed'],
+  ['Arches and angles', 'Panels cut to your roofline on a dedicated angle saw', 'Fixed Screen, Clearfixed'],
+  ['Extra posts or framing', 'Added where an opening needs support', 'All systems'],
+  ['Frame color', 'Night Gray or Bright White', 'All systems'],
+  ['Polycarbonate tint', 'Midnight Smoke (black) or Storm Blue', 'Clearfixed, Clearfold, Hybrid'],
+];
+const glossary = [
+  ['Opening', 'One open side of your patio, measured width × height. We price by the total square feet of openings we fill.'],
+  ['Single pull', 'A folding system that opens from one side.'],
+  ['Meeting in the middle', 'Two folding stacks that close toward each other, for wider openings. Also called bi-parting.'],
+  ['Fixed panel', 'A panel that stays in place, like a wall of screen or a window.'],
+  ['Free-floating panel', 'A folding panel that hangs from the top track, so its weight never drags on the bottom.'],
+  ['Top track', 'The track along the top of an opening that carries folding panels.'],
+  ['Bottom track', 'The low guide along the floor. Standard is steel-sleeved aluminum; full steel is the heavy-duty option.'],
+  ['Ramp water stop', 'A sloped piece on the bottom track that keeps rain from running in.'],
+  ['U and H trim', 'Standard trim profiles that mount to your wall or posts, level the frame and seal the edge.'],
+  ['Heat welding', 'Joining frame corners by melting them together at about 350°C, instead of screws.'],
+  ['CNC cutting', 'Computer-controlled saws that cut every piece to your measurements, to fractions of a millimeter.'],
+  ['304 stainless steel', 'A corrosion-resistant steel used for Fixed Screen mesh.'],
+  ['Honeycomb aluminum mesh', 'The folding mesh used on Hexfold and the Hybrid, about 115 holes per square inch.'],
+  ['Polycarbonate', 'A tough, lightweight clear material that flexes instead of shattering. Used for Clearfixed, Clearfold and the Hybrid.'],
+  ['VLT', 'Visible light transmission: how much daylight passes through. Midnight Smoke tested at 48%.'],
+  ['SHGC', 'Solar heat gain coefficient: how much of the sun’s heat passes through, from 0 to 1. Midnight Smoke tested at 0.45.'],
+  ['3-season room', 'An enclosed, ventilated room without air conditioning, comfortable most of the year in Houston.'],
+  ['Midnight Smoke / Storm Blue', 'The two factory tints for our polycarbonate panels: black, like sunglasses, and blue.'],
+  ['Night Gray / Bright White', 'The two frame colors.'],
+];
+const sections = [
+  { id: 'systems', t: 'The five systems' },
+  { id: 'sizes', t: 'Sizes and limits' },
+  { id: 'materials', t: 'Materials and build' },
+  { id: 'options', t: 'Options and add-ons' },
+  { id: 'performance', t: 'Tested numbers' },
+  { id: 'pricing', t: 'How pricing works' },
+  { id: 'process', t: 'The process, start to finish' },
+  { id: 'prepare', t: 'Before your site visit' },
+  { id: 'warranty', t: 'Warranty' },
+  { id: 'care', t: 'Care and maintenance' },
+  { id: 'storms', t: 'Storms and wind' },
+  { id: 'glossary', t: 'Glossary' },
+  { id: 'faq', t: 'Every question we get' },
+];
+const allFaq = [...FAQ.cost, ...FAQ.room, ...FAQ.screens, ...FAQ.general];
+const ld = [
+  { '@context': 'https://schema.org', '@type': 'Article', headline: 'Patio enclosure specs, options, warranty and care: the A&E reference', datePublished: '2026-11-09', dateModified: '2026-11-09', author: { '@id': `${SITE.url}/#business` }, publisher: { '@id': `${SITE.url}/#business` }, mainEntityOfPage: `${SITE.url}/learn/` },
+  { '@context': 'https://schema.org', '@type': 'DefinedTermSet', name: 'Patio enclosure glossary', hasDefinedTerm: glossary.map(([n, d]) => ({ '@type': 'DefinedTerm', name: n, description: d })) },
+];
+---
+<Base
+  title="Learn: Patio Enclosure Specs, Options & Care | A&E Factory Sales"
+  description="A&E patio screens and 3-season rooms in one place: specs, sizes, materials, options, tested numbers, pricing, warranty, care and a glossary."
+  crumbs={crumbs}
+  schema={ld}
+>
+  <PageHero crumbs={crumbs}>
+    <div class="stack-lg" style="max-width:54em">
+      <h1 class="display">The spec sheet, <span class="y">the fine print, all of it</span></h1>
+      <p class="sub">Every size, material, option, number and rule we work by, in one place. Use the contents or search for a topic.</p>
+      <div class="finder">
+        <label for="learn-find" class="sr-only">Find a topic</label>
+        <input id="learn-find" type="search" placeholder="Find a topic: track, warranty, pet door, wind…" autocomplete="off" />
+        <p class="find-note fine" aria-live="polite"></p>
+      </div>
+    </div>
+  </PageHero>
+
+  <div class="wrap learn">
+    <aside class="toc" aria-label="Contents">
+      <p class="toc-k">Contents</p>
+      <ol>{sections.map((s) => <li><a href={`#${s.id}`}>{s.t}</a></li>)}</ol>
+      <a class="btn" href="/free-quote/">Price my patio</a>
+    </aside>
+
+    <div class="topics">
+      <section id="systems" class="topic">
+        <h2 class="h3">The five systems</h2>
+        <p class="lede">Two families: metal screens for breeze without bugs, and tinted polycarbonate for shelter from wind and rain. Mix them opening by opening.</p>
+        <div class="table-wrap"><table class="tbl">
+          <thead><tr><th scope="col">System</th><th scope="col">What it is</th><th scope="col">Mesh or panel</th><th scope="col">Operation</th><th scope="col" class="num">From, installed</th></tr></thead>
+          <tbody>{order.map((p) => <tr><th scope="row"><a href={p.href}>{p.name}</a></th><td>{p.kind}</td><td>{p.specs[0][1]}</td><td>{['fixed', 'clearfixed'].includes(p.id) ? 'Fixed' : 'Folds by hand'}</td><td class="num">${p.msrp}/sq ft</td></tr>)}</tbody>
+        </table></div>
+      </section>
+
+      <section id="sizes" class="topic">
+        <h2 class="h3">Sizes and limits</h2>
+        <div class="table-wrap"><table class="tbl">
+          <thead><tr><th scope="col">System</th><th scope="col">Largest opening</th><th scope="col">Smallest</th><th scope="col">Arches and gables</th></tr></thead>
+          <tbody>{sizeLimits.map(([a, b, c, d]) => <tr><th scope="row">{a}</th><td>{b}</td><td>{c}</td><td>{d}</td></tr>)}</tbody>
+        </table></div>
+        <p class="muted">Fixed panels taller than 8.5 ft get a center support bar. Wider openings are split into several panels or stacks.</p>
+      </section>
+
+      <section id="materials" class="topic">
+        <h2 class="h3">Materials and build</h2>
+        <dl class="defs">
+          <div><dt>Frames</dt><dd>{FRAME.long} Colors: {FRAME.colors.join(' or ')}.</dd></div>
+          <div><dt>Fixed Screen mesh</dt><dd>304 stainless steel. Resists tearing where nylon fails.</dd></div>
+          <div><dt>Hexfold and Hybrid mesh</dt><dd>Honeycomb aluminum, about 115 holes per square inch.</dd></div>
+          <div><dt>Polycarbonate</dt><dd>4 mm panels on Clearfixed; polycarbonate sunshade panels on Clearfold and the Hybrid. Factory tinted Midnight Smoke or Storm Blue. Much lighter than glass and far more impact resistant (general polycarbonate properties, Palram Industries).</dd></div>
+          <div><dt>Track</dt><dd>Folding panels hang from the top track. The bottom track is steel-sleeved aluminum as standard under 16.5 ft wide, full steel above that. It sweeps clear of debris instead of jamming.</dd></div>
+          <div><dt>Wheels and hardware</dt><dd>Stainless steel wheels on Hexfold, double wheels and guards on every folding panel. Handles and locks are routed into the frame, not screwed on. Some small parts, like end caps, are nylon.</dd></div>
+          <div><dt>Complete kit</dt><dd>Every system ships with trim, wall stripping and hardware. The U-shaped wall trim levels and seals the frame as it is set.</dd></div>
+          <div><dt>Traceable parts</dt><dd>Over 30 manufacturers make parts specifically for A&amp;E, and we know the maker of every one.</dd></div>
+        </dl>
+      </section>
+
+      <section id="options" class="topic">
+        <h2 class="h3">Options and add-ons</h2>
+        <div class="table-wrap"><table class="tbl">
+          <thead><tr><th scope="col">Option</th><th scope="col">What it does</th><th scope="col">Available on</th></tr></thead>
+          <tbody>{options.map(([a, b, c]) => <tr><th scope="row">{a}</th><td>{b}</td><td>{c}</td></tr>)}</tbody>
+        </table></div>
+        <p class="muted">Options are priced on your written quote, item by item.</p>
+      </section>
+
+      <section id="performance" class="topic">
+        <h2 class="h3">Tested numbers</h2>
+        <table class="facts">
+          <tbody>
+            <tr><th scope="row">Visible light transmission</th><td>{FACTS.vlt} (Midnight Smoke)</td></tr>
+            <tr><th scope="row">Solar heat gain coefficient</th><td>{FACTS.shgc} (Midnight Smoke)</td></tr>
+            <tr><th scope="row">Fixed polycarbonate panels, wind</th><td>Rated to {FACTS.fixedWind}</td></tr>
+            <tr><th scope="row">Folding systems, operating wind</th><td>{FACTS.foldWind}</td></tr>
+            <tr><th scope="row">Folding systems, retracted and secured</th><td>{FACTS.foldStowed}</td></tr>
+            <tr><th scope="row">Hexfold mesh density</th><td>{FACTS.mesh}</td></tr>
+            <tr><th scope="row">Product generation</th><td>Fourth generation, tested in Houston for four years</td></tr>
+          </tbody>
+        </table>
+        <p class="fine">Light and heat values measured on Midnight Smoke panels from manufacturer test data. Wind values are everyday durability ratings, not a hurricane rating.</p>
+      </section>
+
+      <section id="pricing" class="topic">
+        <h2 class="h3">How pricing works</h2>
+        <p>We price by the square foot of opening: the open wall area we fill in, not your floor. Two open sides on a 16 × 14 ft patio at 8 ft tall is about 240 sq ft.</p>
+        <div class="table-wrap"><table class="tbl tnum">
+          <thead><tr><th scope="col">Patio</th>{order.map((p) => <th scope="col" class="num">{p.name}</th>)}</tr></thead>
+          <tbody>{SIZES.map((s) => <tr><th scope="row">{s.name}<br /><span class="muted" style="font-weight:400;font-size:.85rem">{s.low} to {s.high} sq ft</span></th>{order.map((p) => <td class="num" style="font-size:.95rem !important">{range(p.msrp, s.low, s.high)}</td>)}</tr>)}</tbody>
+        </table></div>
+        <ul>
+          <li>Included: design, site visit, fabrication, factory test assembly, installation by our crew, parts and the warranty.</li>
+          <li>Added when needed: arched or angled fixed panels (1.5 × base rate), extra posts, locks, ramp water stop on Hexfold, full steel track.</li>
+          <li>Financing: {FINANCING}</li>
+        </ul>
+        <p><a href="/pricing/">Full pricing page</a> · <a href="/free-quote/">Price my patio in 4 steps</a></p>
+      </section>
+
+      <section id="process" class="topic">
+        <h2 class="h3">The process, start to finish</h2>
+        <ol class="steps-list">
+          <li><b>Request.</b> Book online or call {SITE.phone}. We call back within one business day.</li>
+          <li><b>Free site visit, about 45 minutes.</b> We measure every opening, show samples and talk through options.</li>
+          <li><b>Written quote in 1 to 3 days.</b> Every item listed.</li>
+          <li><b>Built in our factory.</b> Each order gets barcode labels, CNC cutting, heat welding and lock routing.</li>
+          <li><b>Test assembly.</b> Your whole job is assembled in our staging area and checked, then labeled, numbered and packed.</li>
+          <li><b>Install by our crew, within a month of your order.</b> Most installs take a day or two; a panel takes about 20 minutes.</li>
+        </ol>
+      </section>
+
+      <section id="prepare" class="topic">
+        <h2 class="h3">Before your site visit</h2>
+        <ul>
+          <li><b>A roof is required.</b> Our systems are built for existing roofed patios, porches and garages.</li>
+          <li><b>Photos help.</b> Text a wide shot from the yard and one of each opening to {SITE.phone}.</li>
+          <li><b>Think about use.</b> Where do you walk through? Which side gets afternoon sun or blowing rain? Pets?</li>
+          <li><b>HOA.</b> If you have one, we provide drawings, colors and product details for your application.</li>
+          <li><b>Permits.</b> Requirements vary by city. Ask us at the visit and we will tell you what applies to your address.</li>
+        </ul>
+      </section>
+
+      <section id="warranty" class="topic">
+        <h2 class="h3">Warranty</h2>
+        <p>{WARRANTY_FULL}</p>
+        <p>To make a request, call or text {SITE.phone} or email {SITE.email} with a photo. Because we make and install it, our own crew handles it. <a href="/why-ae/#warranty">More on our warranty</a></p>
+      </section>
+
+      <section id="care" class="topic">
+        <h2 class="h3">Care and maintenance</h2>
+        <dl class="defs">
+          <div><dt>Metal mesh</dt><dd>Rinse with a garden hose. For pollen or dust, a soft brush and mild soapy water.</dd></div>
+          <div><dt>Polycarbonate</dt><dd>Soft cloth, mild soap and water. No abrasive pads or harsh cleaners; polycarbonate scratches more easily than glass.</dd></div>
+          <div><dt>Frames</dt><dd>Wipe with a damp cloth. The ceramic coating resists scratches.</dd></div>
+          <div><dt>Tracks</dt><dd>Sweep or vacuum leaves and grit from the bottom track every few weeks so folding panels glide easily.</dd></div>
+          <div><dt>Before storms</dt><dd>Fold and secure folding panels when high winds are forecast.</dd></div>
+        </dl>
+      </section>
+
+      <section id="storms" class="topic">
+        <h2 class="h3">Storms and wind</h2>
+        <p>Fixed polycarbonate panels are rated to {FACTS.fixedWind}. Hexfold and the other folding systems operate in winds up to {FACTS.foldWind}; retracted and secured, they are rated for {FACTS.foldStowed}. These are everyday durability ratings, not a hurricane rating, so follow local guidance during a hurricane.</p>
+      </section>
+
+      <section id="glossary" class="topic">
+        <h2 class="h3">Glossary</h2>
+        <dl class="defs gloss">{glossary.map(([n, d]) => <div><dt>{n}</dt><dd>{d}</dd></div>)}</dl>
+      </section>
+
+      <section id="faq" class="topic">
+        <h2 class="h3">Every question we get</h2>
+        <div class="faq">{allFaq.map((q) => <details><summary>{q.q}</summary><p>{q.a}</p></details>)}</div>
+        <p style="margin-top:18px">Didn't find it? Call {SITE.phone} or <a href="/free-quote/">book a visit</a>. See also <a href="/compare/">how we compare</a> and <a href="/why-ae/">why A&amp;E</a>.</p>
+      </section>
+    </div>
+  </div>
+</Base>
+
+<style>
+  .finder { display: grid; gap: 6px; max-width: 560px; }
+  .finder input { width: 100%; min-height: 52px; padding: 10px 14px; font: inherit; font-size: 17px; background: var(--honey); color: var(--ink); border: 2px solid var(--yellow); border-radius: 0; }
+  .finder input:focus { outline: 3px solid var(--yellow-hi); outline-offset: 2px; }
+  .learn { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: clamp(28px, 4vw, 56px); padding-block: var(--sec); align-items: start; }
+  .toc { position: sticky; top: 96px; display: grid; gap: 12px; border-top: 2px solid var(--yellow); padding-top: 14px; }
+  .toc-k { font-weight: 800; font-stretch: 80%; text-transform: uppercase; color: var(--yellow); }
+  .toc ol { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; font-size: 0.95rem; }
+  .toc a:not(.btn) { color: var(--ink); text-decoration: none; }
+  .toc a:not(.btn):hover, .toc a.on { color: var(--yellow); text-decoration: underline; }
+  .toc .btn { margin-top: 8px; font-size: 1rem; min-height: 46px; }
+  .topics { display: grid; gap: 0; min-width: 0; }
+  .topic { padding-block: 34px; border-top: 1px solid var(--line); display: grid; gap: 16px; scroll-margin-top: 90px; min-width: 0; }
+  .topic:first-child { padding-top: 0; border-top: 0; }
+  .topic .h3 { font-size: clamp(1.7rem, 3vw, 2.2rem); color: var(--yellow); }
+  .topic ul, .topic ol { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; color: var(--ink-2); }
+  .topic ul b, .topic ol b { color: var(--ink); }
+  .topic p { max-width: 72ch; }
+  .defs { margin: 0; display: grid; border-top: 1px solid var(--line); }
+  .defs div { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .defs dt { font-weight: 700; color: var(--yellow); }
+  .defs dd { margin: 0; color: var(--ink-2); }
+  .tbl tbody th a { color: var(--ink); }
+  .topic[hidden] { display: none; }
+  @media (max-width: 900px) {
+    .learn { grid-template-columns: minmax(0, 1fr); }
+    .toc { position: static; }
+    .toc ol { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+  }
+  @media (max-width: 560px) { .defs div { grid-template-columns: minmax(0, 1fr); gap: 4px; } .toc ol { grid-template-columns: minmax(0, 1fr); } }
+</style>
+
+<script>
+  const input = document.getElementById('learn-find') as HTMLInputElement;
+  const note = document.querySelector('.find-note') as HTMLElement;
+  const topics = Array.from(document.querySelectorAll<HTMLElement>('.topic'));
+  const index = topics.map((t) => (t.textContent || '').toLowerCase());
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    let n = 0;
+    topics.forEach((t, i) => { const hit = !q || q.split(/\s+/).every((w) => index[i].includes(w)); t.hidden = !hit; if (hit) n++; });
+    note.textContent = q ? (n ? `${n} of ${topics.length} topics match "${input.value.trim()}".` : `Nothing matches "${input.value.trim()}". Try another word, or call ${'(713) 791-8073'}.`) : '';
+  });
+  const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.toc a[href^="#"]'));
+  const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) links.forEach((a) => a.classList.toggle('on', a.hash === '#' + e.target.id)); }), { rootMargin: '-30% 0px -60% 0px' });
+  topics.forEach((t) => io.observe(t));
+</script>

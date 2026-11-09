@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+const guides = (await getCollection('guides')).sort((a, b) => b.data.updated.localeCompare(a.data.updated));
+const crumbs = [{ name: 'Guides', href: '/guides/' }];
+---
+<Base title="Patio Enclosure Guides for Houston Homeowners | A&E Factory Sales" description="Plain-English guides to patio screens and 3-season rooms in Houston: costs, materials, and how the options compare." crumbs={crumbs}>
+  <PageHero crumbs={crumbs}>
+    <div class="stack-lg" style="max-width:50em">
+      <h1 class="display">Guides <span class="y">for Houston patios</span></h1>
+      <p class="sub">Real prices and straight comparisons, from the people who build it.</p>
+    </div>
+  </PageHero>
+  <section class="band">
+    <div class="wrap">
+      <ul class="glist">
+        {guides.map((g) => (
+          <li><a href={`/guides/${g.id}/`}><h2 class="h3">{g.data.title}</h2><p>{g.data.description}</p><span>Updated {new Date(g.data.updated + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span></a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+<style>
+  .glist { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 22px; }
+  .glist a { display: grid; gap: 10px; height: 100%; padding: 22px 24px; background: var(--honey-2); border-top: 4px solid var(--yellow); color: var(--ink); text-decoration: none; }
+  .glist a:hover h2 { color: var(--yellow); }
+  .glist p { color: var(--ink-2); }
+  .glist span { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-2); }
+</style>

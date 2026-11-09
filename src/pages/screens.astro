@@ -1,0 +1,123 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Faq from '../components/Faq.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import { FAQ, SITE, byId, SIZES, range } from '../data/site';
+import doorsOpen from '../assets/photos/fixed-screen-doors-open.jpg';
+import doorsClosed from '../assets/photos/fixed-screen-doors-closed.jpg';
+import colors from '../assets/photos/fixed-screen-frame-colors.jpg';
+import roomCorner from '../assets/photos/screened-patio-room-corner.jpg';
+import doorWhite from '../assets/photos/fixed-screen-doors-white.jpg';
+import doorFrame from '../assets/photos/fixed-screen-door-frame.jpg';
+
+const fx = byId('fixed');
+const crumbs = [{ name: 'Stainless steel screens', href: '/screens/' }];
+const product = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Fixed Screen stainless steel patio screen',
+  brand: { '@type': 'Brand', name: 'A&E Factory Sales' },
+  manufacturer: { '@id': `${SITE.url}/#business` },
+  description: 'Fixed patio screen panels with 304 stainless steel mesh in a heat-welded frame: PVC-fiber blend with an aluminum core and ceramic coating. Panels up to 3.5 × 10 ft, arches and angles available, pet doors available.',
+  material: '304 stainless steel mesh, heat-welded PVC-fiber frame with aluminum core and ceramic coating',
+  offers: {
+    '@type': 'Offer', priceCurrency: 'USD', availability: 'https://schema.org/InStock', seller: { '@id': `${SITE.url}/#business` },
+    priceSpecification: { '@type': 'UnitPriceSpecification', price: fx.msrp, priceCurrency: 'USD', unitText: 'square foot of opening, installed' },
+  },
+};
+---
+<Base
+  title="Stainless Steel Patio Screens in Houston | A&E Factory Sales"
+  description="Fixed Screen panels with 304 stainless steel mesh resist tearing and keep out mosquitoes, mice and snakes. Built in Houston. From $24 per sq ft installed."
+  crumbs={crumbs}
+  schema={[product]}
+>
+  <PageHero crumbs={crumbs}>
+    <div class="split">
+      <div class="stack-lg">
+        <h1 class="display">Screens that <span class="y">outlast nylon</span></h1>
+        <p class="sub">Fixed Screen panels with 304 stainless steel mesh in a heat-welded frame. For patios, French doors, front doors and garages.</p>
+        <div class="actions"><a class="btn" href="/free-quote/">Get my price</a><a class="btn btn-line" href="#vs-nylon">Stainless vs nylon</a></div>
+      </div>
+      <div class="pair" style="padding-top:30px">
+        <figure class="dim-frame draw"><span class="dim h" aria-hidden="true"><span>Open</span></span><Image src={doorsOpen} alt="French doors with A&E stainless steel screen doors open" widths={[320, 600]} sizes="(max-width: 820px) 46vw, 270px" loading="eager" style="aspect-ratio:3/5" /></figure>
+        <figure class="dim-frame draw"><span class="dim h" aria-hidden="true"><span>Closed</span></span><Image src={doorsClosed} alt="The same French doors with stainless steel screens closed" widths={[320, 600]} sizes="(max-width: 820px) 46vw, 270px" loading="eager" style="aspect-ratio:3/5" /></figure>
+      </div>
+    </div>
+  </PageHero>
+
+  <section class="band on-paper" id="vs-nylon">
+    <div class="wrap stack-lg">
+      <div class="sec-head" style="margin-bottom:0">
+        <h2 class="h2">Stainless steel <span class="y">vs nylon screen</span></h2>
+        <p class="lede">Nylon and fiberglass screening is cheaper up front and typically needs rescreening every 5 to 10 years.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th scope="col"><span class="sr-only">Feature</span></th><th scope="col">A&amp;E Fixed Screen</th><th scope="col">Nylon or fiberglass screen</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">Mesh</th><td class="ours">304 stainless steel</td><td>Fabric mesh</td></tr>
+            <tr><th scope="row">Dogs and cats</th><td class="ours">Resists tearing where nylon fails</td><td>Tears and pushes out</td></tr>
+            <tr><th scope="row">Keeps out</th><td class="ours">Mosquitoes, insects, mice and snakes</td><td>Insects, until it tears</td></tr>
+            <tr><th scope="row">Frame</th><td class="ours">Heat welded with no screws. PVC-fiber blend, aluminum core, scratch-resistant ceramic coating</td><td>Usually screwed or snapped together</td></tr>
+            <tr><th scope="row">Fit</th><td class="ours">CNC-cut to your openings, no gaps</td><td>Cut on site</td></tr>
+            <tr><th scope="row">Price</th><td class="ours">From ${fx.msrp} per sq ft of opening, installed</td><td>About $10 to $25 per floor sq ft, plus rescreening every 5 to 10 years</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="fine">Nylon pricing and rescreen interval from HomeGuide. A 16 × 14 ft patio with two open sides runs about $5,800 in Fixed Screen.</p>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap split" style="align-items:start">
+      <div>
+        <span class="facts-label">The facts</span>
+        <table class="facts">
+          <caption>Fixed Screen</caption>
+          <tbody>
+            {fx.specs.map(([k, v]) => <tr><th scope="row">{k}</th><td>{v}</td></tr>)}
+            <tr><th scope="row">Arches and angles</th><td>Cut on a dedicated angle saw, priced at 1.5 times the base rate</td></tr>
+            <tr><th scope="row">Typical patio</th><td class="tnum">{SIZES.map((s) => `${s.name} ${range(fx.msrp, s.low, s.high)}`).join('; ')}</td></tr>
+            <tr><th scope="row">Frame colors</th><td>Night Gray or Bright White</td></tr>
+            <tr><th scope="row">Warranty</th><td>Lifetime on the frame, 3 years on parts</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <figure style="margin:0"><Image src={colors} alt="Two Fixed Screen panels with 304 stainless steel mesh, one in Night Gray and one in Bright White" widths={[480, 1000]} sizes="(max-width: 820px) 100vw, 540px" loading="lazy" style="border:2px solid var(--yellow)" /><figcaption class="fine" style="padding-top:8px">Frames in Night Gray or Bright White. We bring samples to your site visit.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="band on-paper">
+    <div class="wrap stack-lg">
+      <div class="sec-head" style="margin-bottom:0">
+        <h2 class="h2">Where <span class="y">it goes</span></h2>
+        <p class="lede">Full patio walls, French doors, front doors and garage openings. Want the screen to disappear when you're not using it? Look at <a href="/hexfold/">Hexfold</a>.</p>
+      </div>
+      <div class="gallery">
+        <figure><Image src={roomCorner} alt="Patio enclosed with fixed metal mesh screens" widths={[360, 700]} sizes="(max-width: 640px) 50vw, 380px" loading="lazy" /><figcaption>Patio walls</figcaption></figure>
+        <figure><Image src={doorWhite} alt="Stainless steel screen door on a white French door" widths={[360, 700]} sizes="(max-width: 640px) 50vw, 380px" loading="lazy" /><figcaption>French doors</figcaption></figure>
+        <figure><Image src={doorFrame} alt="Screen door frame detail on a brick wall" widths={[360, 700]} sizes="(max-width: 640px) 50vw, 380px" loading="lazy" /><figcaption>Frame detail</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap split" style="align-items:start">
+      <h2 class="h2">Screen <span class="y">questions</span></h2>
+      <Faq items={[FAQ.screens[1], FAQ.screens[2], FAQ.screens[4], FAQ.general[1], FAQ.general[3], FAQ.general[4]]} />
+    </div>
+  </section>
+
+  <section class="band raised" id="quote">
+    <div class="wrap split" style="align-items:start">
+      <div class="stack">
+        <h2 class="h2">Get your <span class="y">exact price</span></h2>
+        <p class="lede">Free site visit, about 45 minutes. We measure every opening and bring mesh and frame samples.</p>
+      </div>
+      <QuoteForm id="screen-visit" source="Screens page" />
+    </div>
+  </section>
+</Base>

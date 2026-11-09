@@ -1,0 +1,25 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import type { Product } from '../data/site';
+interface Props { p: Product; img: ImageMetadata; alt: string; note?: string; link?: boolean }
+const { p, img, alt, note, link = true } = Astro.props;
+---
+<article class="prod">
+  <figure>
+    <Image src={img} alt={alt} style={p.id === "clearfixed" ? "object-position:center 20%" : undefined} widths={[400, 720]} sizes="(max-width: 700px) 100vw, 380px" loading="lazy" />
+    {note && <span class="tag">{note}</span>}
+  </figure>
+  <div class="prod-body">
+    <h3>{p.name}</h3>
+    <p class="kind">{p.kind}</p>
+    <p>{p.blurb}</p>
+    <dl class="specs">
+      {p.specs.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}
+    </dl>
+    <div class="price-line">
+      <b>${p.msrp}<small style="font-size:.55em"> / sq ft</small></b>
+      {link ? <a href={p.href}>About {p.name}</a> : <span>installed</span>}
+    </div>
+  </div>
+</article>
