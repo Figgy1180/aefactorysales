@@ -23,16 +23,10 @@ export const SITE = {
   googleReviewUrl: '',
   // YouTube link for the fold-away video (paste the Shorts or watch URL). Empty hides the link.
   youtubeFold: 'https://youtu.be/e296PKRxLe4',
-  dealerContact: 'Fei Yang',
-  dealerPhone: '(512) 800-0117',
-  dealerPhoneHref: 'tel:+15128000117',
-  dealerEmail: 'fei@aefactorysales.com',
   // Web3Forms access key. Free at web3forms.com, tied to info@aefactorysales.com.
   // Leave empty and the forms run in preview mode (nothing is sent).
   // Web3Forms access keys are public by design (they only allow sending to the inbox they were created for).
-  formKey: import.meta.env.PUBLIC_PREVIEW ? '' : import.meta.env.PUBLIC_WEB3FORMS_KEY || '7fdb1023-5888-4467-b512-4679a328c925', // info@aefactorysales.com
-  // Optional second key so dealer applications go straight to Fei. Falls back to the main key.
-  dealerFormKey: import.meta.env.PUBLIC_PREVIEW ? '' : import.meta.env.PUBLIC_WEB3FORMS_DEALER_KEY || '320f63a1-10b0-44d8-9462-c0ea9f6a76cc', // fei@aefactorysales.com
+  formKey: import.meta.env.PUBLIC_PREVIEW ? '' : import.meta.env.PUBLIC_WEB3FORMS_KEY || '7fdb1023-5888-4467-b512-4679a328c925', // all forms (quotes, reviews, dealers) deliver to info@aefactorysales.com
 } as const;
 
 export const WARRANTY = 'Lifetime on the frame, 3 years on parts';

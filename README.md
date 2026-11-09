@@ -32,6 +32,6 @@ npm run build      # production build into dist/
 
 Every push to GitHub redeploys automatically.
 
-## Before launch: confirm with Fei
+## Before launch: confirm
 
 See `LAUNCH-CHECKLIST.md`.

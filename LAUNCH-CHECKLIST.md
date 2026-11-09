@@ -1,7 +1,7 @@
 # Launch checklist
 
 ## Needed to go live
-- [x] Web3Forms keys: info@ for homeowner forms, fei@ for dealer applications
+- [x] Web3Forms: one key, every form (quotes, reviews, dealers) delivers to info@aefactorysales.com
 - [ ] Cloudflare account + GitHub repo (see README)
 - [ ] Domain DNS pointed at Cloudflare Pages
 
@@ -9,7 +9,7 @@
 - [x] Frames: heat welded, no screws, PVC-fiber blend, aluminum core, ceramic coating (confirmed Nov 5)
 - [x] Frame colors: Night Gray and Bright White (confirmed Nov 5)
 - [x] Hours: 24/7 by appointment (in schema and footer)
-- [x] Dealer contact: Fei Yang, (512) 800-0117, fei@aefactorysales.com
+- [x] Dealer contact: (713) 791-8073 and info@aefactorysales.com. No personal names or numbers on the site.
 - [x] Projects were installed by the A&E crew (that department is now part of the company)
 - [ ] **Project photos are loaded from the aesds.com (Framer) image host.** Self-host them once downloaded so the page doesn't break if aesds.com changes.
 - [ ] **Response times.** "We call within one business day" and "written quote within 1 to 3 days" came from the Oct 29 draft. Keep?
