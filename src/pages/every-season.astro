@@ -8,7 +8,7 @@ import ProductCard from '../components/ProductCard.astro';
 import Faq from '../components/Faq.astro';
 import QuoteForm from '../components/QuoteForm.astro';
 import { SITE, FACTS, WARRANTY, byId, range, type QA } from '../data/site';
-import freestanding from '../assets/projects/p34/1-corner-closed.jpg';
+import mix from '../assets/photos/hexfold-handle-mesh.jpg';
 import panels from '../assets/photos/clearfixed-polycarbonate-panels.jpg';
 import hexOpen from '../assets/photos/hexfold-patio-open.jpg';
 import hexClosed from '../assets/photos/hexfold-patio-closed.jpg';
@@ -37,8 +37,8 @@ const faq: QA[] = [
         <p class="fine">Free design and estimate. Built in our Houston factory. {WARRANTY}.</p>
       </div>
       <figure class="dim-frame draw" style="margin:30px 0 0">
-        <span class="dim h" aria-hidden="true"><span>Built and installed in Houston</span></span>
-        <Image src={freestanding} alt="Houston A&E enclosure with tinted polycarbonate panels and Hexfold screens" widths={[480, 900]} sizes="(max-width: 820px) 100vw, 540px" loading="eager" style="aspect-ratio:4/3;object-fit:cover" />
+        <span class="dim h" aria-hidden="true"><span>Panels left, Hexfold right</span></span>
+        <Image src={mix} alt="Tinted polycarbonate panels beside folded Hexfold screen in one A&E frame system" widths={[480, 960]} sizes="(max-width: 820px) 100vw, 540px" loading="eager" style="aspect-ratio:4/3;object-fit:cover" />
       </figure>
     </div>
   </PageHero>
@@ -63,7 +63,7 @@ const faq: QA[] = [
       <div class="lineup">
         <ProductCard p={byId('clearfold')} img={panels} alt="Tinted polycarbonate panels" link={false} />
         <ProductCard p={byId('hexfold')} img={hexClosed} alt="Hexfold retractable screens on a Houston patio" link={false} />
-        <ProductCard p={byId('hybrid')} img={freestanding} alt="Enclosure with panels and screens" link={false} />
+        <ProductCard p={byId('hybrid')} img={mix} alt="Tinted panels beside Hexfold mesh in one frame system" link={false} />
       </div>
       <p style="margin-top:22px"><a class="btn" href="/free-quote/?use=all">Compare all five systems for my patio</a></p>
     </div>

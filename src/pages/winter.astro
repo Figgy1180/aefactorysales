@@ -8,7 +8,7 @@ import Faq from '../components/Faq.astro';
 import QuoteForm from '../components/QuoteForm.astro';
 import { SITE, FACTS, SIZES, WARRANTY, byId, range, type QA } from '../data/site';
 import panels from '../assets/photos/clearfixed-polycarbonate-panels.jpg';
-import freestanding from '../assets/projects/p34/1-corner-closed.jpg';
+import mix from '../assets/photos/hexfold-handle-mesh.jpg';
 
 const crumbs = [{ name: 'Winter', href: '/winter/' }];
 const cf = byId('clearfixed'), cfo = byId('clearfold');
@@ -75,7 +75,7 @@ const faq: QA[] = [
         <p class="fine">Clearfixed panels stay put. Clearfold panels fold open on a track. Your quote lists every item.</p>
         <p><a class="btn" href="/free-quote/?use=enclose">Get my exact price</a></p>
       </div>
-      <figure style="margin:0"><Image src={freestanding} alt="A&E enclosure in Houston with tinted panels and folding screens" widths={[480, 900]} sizes="(max-width: 820px) 100vw, 540px" loading="lazy" style="aspect-ratio:4/3;object-fit:cover;border:2px solid var(--yellow)" /><figcaption class="fine" style="padding-top:8px">Panels and Hexfold screens in one Houston enclosure. <a href="/every-season/">Panels for winter, screens for summer</a></figcaption></figure>
+      <figure style="margin:0"><Image src={mix} alt="Tinted polycarbonate panels beside folded Hexfold screen in one A&E frame system" widths={[480, 960]} sizes="(max-width: 820px) 100vw, 540px" loading="lazy" style="aspect-ratio:4/3;object-fit:cover;border:2px solid var(--yellow)" /><figcaption class="fine" style="padding-top:8px">Tinted panels on the left, Hexfold screen on the right. <a href="/every-season/">Panels for winter, screens for summer</a></figcaption></figure>
     </div>
   </section>
 
