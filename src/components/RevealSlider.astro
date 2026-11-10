@@ -7,9 +7,9 @@ interface Props { closed: ImageMetadata; open: ImageMetadata; alt: string; label
 const { closed, open, alt, label, href, eager = false, id = 'reveal' } = Astro.props;
 ---
 <figure class="reveal" data-reveal id={id} style="--pos: 62%">
-  <Image class="r-open" src={open} alt={`${alt}, screens folded open`} widths={[480, 720, 1080]} sizes="(max-width: 900px) 100vw, 620px" loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} />
+  <Image class="r-open" src={open} alt={`${alt}, screens folded open`} widths={[480, 720, 1080]} quality={68} sizes="(max-width: 900px) 100vw, 620px" loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} />
   <div class="r-closed" aria-hidden="true">
-    <Image src={closed} alt={`${alt}, screens closed`} widths={[480, 720, 1080]} sizes="(max-width: 900px) 100vw, 620px" loading={eager ? 'eager' : 'lazy'} />
+    <Image src={closed} alt={`${alt}, screens closed`} widths={[480, 720, 1080]} quality={68} sizes="(max-width: 900px) 100vw, 620px" loading={eager ? 'eager' : 'lazy'} />
   </div>
   <span class="r-line" aria-hidden="true"><span class="r-knob"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></span>
   <span class="r-tag r-tag-l" aria-hidden="true">Closed</span>

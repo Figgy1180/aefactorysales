@@ -8,8 +8,8 @@ import Why from '../components/Why.astro';
 import Faq from '../components/Faq.astro';
 import RevealSlider from '../components/RevealSlider.astro';
 import ProjectMosaic from '../components/ProjectMosaic.astro';
-import heroClosed from '../assets/projects/p35/3-inside-closed.jpg';
-import heroOpen from '../assets/projects/p35/4-inside-open.jpg';
+import heroClosed from '../assets/projects/p34/2-front-closed.jpg';
+import heroOpen from '../assets/projects/p34/3-front-open.jpg';
 import { PRODUCTS, SIZES, FAQ, FACTS, CITIES, SITE, byId, range, FINANCING } from '../data/site';
 
 import open from '../assets/photos/hexfold-patio-open.jpg';
@@ -71,8 +71,8 @@ const videoLd = {
       </div>
       <div class="hero-media">
         <div class="hero-frame draw">
-          <span class="dim h" aria-hidden="true"><span>About 20 ft wide, Houston, TX</span></span>
-          <RevealSlider closed={heroClosed} open={heroOpen} alt="Houston covered patio enclosed with A&E aluminum folding screens" eager id="hero-reveal" label="See this project" href="/projects/houston-20-ft-patio-enclosure/" />
+          <span class="dim h" aria-hidden="true"><span>Freestanding patio, Houston, TX</span></span>
+          <RevealSlider closed={heroClosed} open={heroOpen} alt="Houston freestanding patio enclosed with A&E folding and fixed screens" eager id="hero-reveal" label="See this project" href="/projects/houston-freestanding-patio-enclosure/" />
         </div>
         <p class="hint"><span aria-hidden="true">&#8596;</span> Drag to open the screens. Same patio, same spot.</p>
       </div>
@@ -308,7 +308,7 @@ const videoLd = {
   .trust { background: var(--yellow); color: var(--honey); }
   .trust-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; }
   .trust-row > div { display: flex; align-items: center; gap: 14px; padding-block: 26px; padding-inline: 18px; min-width: 0; }
-  .trust-row > div + div { border-left: 2px solid rgba(46, 33, 24, 0.25); }
+  .trust-row > div + div { border-left: 2px solid rgba(42, 37, 34, 0.25); }
   .trust-row > div:first-child { padding-left: 0; }
   .trust svg { width: 38px; height: 38px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
   .trust b { font-weight: 800; font-stretch: 74%; font-size: clamp(1.1rem, 1.7vw, 1.5rem); line-height: 1.05; text-transform: uppercase; }
@@ -324,7 +324,7 @@ const videoLd = {
   .fold-facts dd { margin: 4px 0 0; font-size: 0.9rem; color: var(--ink-2); }
   @media (max-width: 760px) { .fold-grid { grid-template-columns: minmax(0, 1fr); } .fold-video { max-width: 240px; } }
   .row-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: clamp(24px, 3vw, 36px); }
-  @media (max-width: 900px) { .trust-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } .trust-row > div:nth-child(3) { border-left: 0; padding-left: 0; } .trust-row > div:nth-child(n+3) { border-top: 2px solid rgba(46, 33, 24, 0.25); } }
+  @media (max-width: 900px) { .trust-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } .trust-row > div:nth-child(3) { border-left: 0; padding-left: 0; } .trust-row > div:nth-child(n+3) { border-top: 2px solid rgba(42, 37, 34, 0.25); } }
   @media (max-width: 480px) { .trust-row > div { padding-inline: 10px; gap: 10px; } .trust svg { width: 30px; height: 30px; } }
   .paths { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; }
   .path { background: var(--honey-2); border-top: 4px solid var(--yellow); display: flex; flex-direction: column; min-width: 0; }

@@ -1,14 +1,16 @@
 ---
-// Six real projects as a bold photo mosaic. Each tile links to its project page.
+// Eight real project photos as a bold photo mosaic. Each tile links to its project page.
 import { Image } from 'astro:assets';
 import { PROJECTS, photos, altFor, fit } from '../data/projects';
-const pick: { id: string; shape: string; photo?: string }[] = [
+const pick: { id: string; shape: string; photo?: string; label?: string }[] = [
   { id: 'p36', shape: 'tall', photo: '1-outside-closed' },
   { id: 'p35', shape: 'wide', photo: '1-wide' },
   { id: 'p6', shape: '', photo: '1-kitchen-inside' },
-  { id: 'p34', shape: '', photo: '1-corner-closed' },
+  { id: 'p34', shape: '', photo: '5-inside-seating' },
   { id: 'p14', shape: '', photo: '1-corner-closed' },
   { id: 'p4', shape: '', photo: '1-front' },
+  { id: 'p36', shape: 'wide', photo: '5-side-kitchen', label: 'Screened patio by the outdoor kitchen' },
+  { id: 'p14', shape: 'wide', photo: '4-inside-closed', label: 'Inside the brick home patio' },
 ];
 const tiles = pick.map((t) => {
   const p = PROJECTS.find((x) => x.id === t.id)!;
@@ -21,19 +23,19 @@ const tiles = pick.map((t) => {
   {tiles.map((t) => (
     <a class={`tile ${t.shape}`} href={`/projects/${t.p.slug}/`}>
       <Image src={t.img.img} widths={fit([480, 800, 1200], t.img.img)} sizes={t.shape === 'wide' ? '(max-width: 760px) 100vw, 580px' : '(max-width: 760px) 50vw, 290px'} alt={altFor(t.p, t.img.caption)} loading="lazy" />
-      <span class="cap"><b>{t.p.title}</b><span>{t.p.city}, TX</span></span>
+      <span class="cap"><b>{t.label ?? t.p.title}</b><span>{t.p.city}, TX</span></span>
     </a>
   ))}
 </div>
 
 <style>
-  .mosaic { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: clamp(180px, 20vw, 270px); gap: 12px; }
+  .mosaic { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: clamp(180px, 20vw, 270px); grid-auto-flow: dense; gap: 12px; }
   .tile { position: relative; overflow: hidden; display: block; background: var(--honey-2); color: var(--ink); text-decoration: none; }
   .tile.tall { grid-row: span 2; }
   .tile.wide { grid-column: span 2; }
   .tile :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(.2,.7,.2,1); }
   .tile:hover :global(img), .tile:focus-visible :global(img) { transform: scale(1.04); }
-  .tile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(46, 33, 24, 0.88) 0%, rgba(46, 33, 24, 0) 46%); pointer-events: none; }
+  .tile::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(42, 37, 34, 0.88) 0%, rgba(42, 37, 34, 0) 46%); pointer-events: none; }
   .cap { position: absolute; left: 14px; right: 14px; bottom: 12px; z-index: 1; display: grid; gap: 2px; }
   .cap b { font-weight: 800; font-stretch: 78%; font-size: 1.25rem; text-transform: uppercase; line-height: 1.05; }
   .cap span { font-family: var(--mono); font-size: 0.76rem; font-weight: 600; color: var(--yellow); }

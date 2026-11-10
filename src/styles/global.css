@@ -10,17 +10,17 @@
 
 :root {
   /* color */
-  --honey: #2E2118;        /* base, from the Nov 3 door hangers */
-  --honey-2: #3A2A1E;      /* raised panel on honey */
-  --honey-3: #4A3626;      /* hover / input fill */
+  --honey: #2A2522;        /* base: warm charcoal (toned down from #2E2118) */
+  --honey-2: #36302B;      /* raised panel on honey */
+  --honey-3: #453D37;      /* hover / input fill */
   --yellow: #F2C230;       /* lines, accents, primary action */
   --yellow-hi: #FFD24A;
   --cream: #F3E6D3;        /* light bands */
   --cream-2: #EADAC2;
   --ink: #FBF5EC;          /* text on honey */
   --ink-2: #E3D2BA;        /* secondary text on honey */
-  --paper-ink: #2E2118;    /* text on cream */
-  --paper-2: #5E4838;      /* secondary text on cream */
+  --paper-ink: #2A2522;    /* text on cream */
+  --paper-2: #5A4E45;      /* secondary text on cream */
   --paper-line: #C9B49A;
   --line: rgba(242, 194, 48, 0.4);
   --grid: rgba(242, 194, 48, 0.07);
@@ -137,7 +137,8 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font); text-wrap: balance; line-h
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 31; background: var(--honey); }
 .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 22px; padding-block: 10px; }
 .brand { flex: none; display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; }
-.brand img { width: 104px; max-width: none; height: auto; display: block; }
+.brand img, .foot-logo { width: 104px; max-width: none; height: auto; display: block; filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.55)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.28)); }
+.foot-logo { width: 120px; margin-bottom: 14px; }
 .brand b { display: block; font-weight: 800; font-stretch: 80%; font-size: 1.3rem; line-height: 1; }
 .brand small { display: block; margin-top: 3px; padding-top: 3px; border-top: 1px solid var(--yellow); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
 .nav { display: flex; align-items: center; gap: 12px; white-space: nowrap; }
