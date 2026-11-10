@@ -163,6 +163,9 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* mobile call bar */
 .callbar { display: none; }
+.fast { font-size: var(--step--1); margin: 6px 0 10px; }
+.linkbtn { background: none; border: 0; padding: 0; font: inherit; font-weight: 700; color: var(--yellow); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.on-paper .linkbtn, .raised .linkbtn { color: inherit; }
 
 /* footer */
 .foot-cta { background: var(--yellow); color: var(--honey); }
@@ -369,8 +372,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
     border-top: 2px solid var(--yellow); background: var(--honey);
     padding: 0 env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
   }
-  .callbar a { min-height: 58px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-stretch: 80%; font-size: 1.1rem; text-transform: uppercase; text-decoration: none; color: var(--ink); }
-  .callbar a + a { background: var(--yellow); color: var(--honey); }
+  .callbar a, .callbar button { min-height: 58px; border: 0; font-family: inherit; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: 800; font-stretch: 80%; font-size: 1.1rem; text-transform: uppercase; text-decoration: none; color: var(--ink); }
+  .callbar a + a, .callbar button { background: var(--yellow); color: var(--honey); }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }

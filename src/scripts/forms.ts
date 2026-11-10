@@ -7,10 +7,11 @@ captureSource();
     e.preventDefault();
     if (!form.checkValidity()) {
       note.hidden = false;
-      note.textContent = 'Please fill in your name, phone and a 5-digit ZIP code so we can reach you.';
+      note.textContent = form.dataset.invalid || 'Please fill in your name, phone and a 5-digit ZIP code so we can reach you.';
       (form.querySelector(':invalid') as HTMLElement | null)?.focus();
       return;
     }
+    note.hidden = true;
     const key = form.dataset.key;
     if (!key) {
       note.hidden = false;
@@ -33,6 +34,14 @@ captureSource();
       const r = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
       const j = await r.json();
       if (!j.success) throw new Error(j.message);
+      if (form.dataset.inline) {
+        // Short forms (Call me back) confirm in place instead of leaving the page.
+        form.hidden = true;
+        const done = form.parentElement?.querySelector<HTMLElement>('.cb-done');
+        if (done) { done.hidden = false; done.querySelector<HTMLElement>('button')?.focus(); }
+        form.parentElement?.querySelector<HTMLElement>('.cb-lede')?.setAttribute('hidden', '');
+        return;
+      }
       location.href = form.dataset.next || '/thank-you/';
     } catch {
       btn.disabled = false;
