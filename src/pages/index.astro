@@ -10,7 +10,8 @@ import RevealSlider from '../components/RevealSlider.astro';
 import ProjectMosaic from '../components/ProjectMosaic.astro';
 import heroClosed from '../assets/projects/p34/2-front-closed.jpg';
 import heroOpen from '../assets/projects/p34/3-front-open.jpg';
-import { PRODUCTS, SIZES, FAQ, FACTS, CITIES, SITE, byId, range, FINANCING } from '../data/site';
+import { PRODUCTS, SIZES, FAQ, FACTS, CITIES, SITE, byId, range, FINANCING, WARRANTY } from '../data/site';
+import { HOLIDAY } from '../data/season';
 
 import open from '../assets/photos/hexfold-patio-open.jpg';
 import clearfixed from '../assets/photos/clearfixed-polycarbonate-panels.jpg';
@@ -34,6 +35,8 @@ const order = ['clearfixed', 'clearfold', 'hybrid', 'hexfold', 'fixed'];
 const homeFaq = [FAQ.cost[0], FAQ.room[0], FAQ.screens[0], FAQ.screens[1], FAQ.general[0], FAQ.general[1], FAQ.general[2], FAQ.cost[3]];
 const pickerData = JSON.stringify({ products: PRODUCTS.map(({ id, name, msrp }) => ({ id, name, msrp })), sizes: SIZES });
 const hex = byId('hexfold');
+// Holiday season: the homepage leads with 3-season rooms, and the price picker starts on Clearfixed.
+const defSys = HOLIDAY ? byId('clearfixed') : hex;
 const cf = byId('clearfixed');
 const ytId = (SITE.youtubeFold.match(/(?:shorts\/|v=|youtu\.be\/)([\w-]{11})/) || [])[1];
 const videoLd = {
@@ -47,10 +50,41 @@ const videoLd = {
 };
 ---
 <Base
-  title="Patio Enclosures & 3-Season Rooms Houston | A&E Factory Sales"
-  description="Polycarbonate 3-season rooms and metal patio screens built in our Houston factory, installed by our crew within a month. See prices, book a free site visit."
+  title={HOLIDAY ? 'Winter Patio Enclosures & 3-Season Rooms Houston | A&E' : 'Patio Enclosures & 3-Season Rooms Houston | A&E Factory Sales'}
+  description={HOLIDAY ? 'Cold snap? Keep using your patio. Tinted polycarbonate 3-season rooms block wind and rain on Houston covered patios. Built here, installed within a month.' : 'Polycarbonate 3-season rooms and metal patio screens built in our Houston factory, installed by our crew within a month. See prices, book a free site visit.'}
   schema={[videoLd]}
 >
+  {HOLIDAY ? (
+  <section class="hero blueprint winter-hero" aria-labelledby="hero-title">
+    <div class="snow" aria-hidden="true"></div>
+    <CornerArt />
+    <div class="wrap hero-grid">
+      <div class="h-title">
+        <p class="eyebrow">Winter in Texas</p>
+        <h1 id="hero-title" class="display">Cold snap? <span class="y">Keep using your patio.</span></h1>
+      </div>
+      <div class="h-body stack-lg">
+        <p class="sub">Tinted polycarbonate panels turn your covered patio into a 3-season room that blocks the north wind and keeps rain off the furniture. Built in our Houston factory, installed by our own crew.</p>
+        <div class="actions">
+          <a class="btn" href="/free-quote/?use=enclose">Price my 3-season room</a>
+          <a class="btn btn-line" href={SITE.phoneHref}>{SITE.phone}</a>
+        </div>
+        <dl class="proof">
+          <div><dt>From ${cf.msrp}</dt><dd>per sq ft of opening, installed</dd></div>
+          <div><dt>1 month</dt><dd>or less, order to install</dd></div>
+          <div><dt>Lifetime</dt><dd>frame warranty, 3 years on parts</dd></div>
+        </dl>
+      </div>
+      <div class="hero-media">
+        <div class="hero-frame draw">
+          <span class="dim h" aria-hidden="true"><span>Real A&amp;E tinted panels</span></span>
+          <figure class="winter-photo"><Image src={clearfixed} alt="A&E wall of tinted polycarbonate panels with a door, on a covered patio" widths={[420, 621]} quality={80} sizes="(max-width: 900px) 90vw, 470px" loading="eager" fetchpriority="high" /></figure>
+        </div>
+        <p class="hint">Midnight Smoke panels: {FACTS.vlt} of daylight in, wind and rain out. <a href="/winter/">What a winter room does, and doesn't</a></p>
+      </div>
+    </div>
+  </section>
+  ) : (
   <section class="hero blueprint" aria-labelledby="hero-title">
     <CornerArt />
     <div class="wrap hero-grid">
@@ -78,6 +112,7 @@ const videoLd = {
       </div>
     </div>
   </section>
+  )}
 
   <section class="trust" aria-label="Why A&E">
     <div class="wrap trust-row">
@@ -87,6 +122,24 @@ const videoLd = {
       <div><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M14 3l9 4v7c0 6-4 9-9 11-5-2-9-5-9-11V7z"/><path d="M10 14l3 3 5-6"/></svg><b>Lifetime frame warranty</b></div>
     </div>
   </section>
+
+  {HOLIDAY && (
+  <section class="band on-paper" aria-labelledby="winter-title">
+    <div class="wrap stack-lg">
+      <div class="row-head">
+        <h2 id="winter-title" class="h2">What changes <span class="y">this winter</span></h2>
+        <a class="btn btn-line" href="/winter/">More on winter rooms</a>
+      </div>
+      <div class="gets">
+        <div><h3>The wind stays out</h3><p>Panels fill every opening you choose, so the north wind stops at the patio edge.</p></div>
+        <div><h3>The rain stays off</h3><p>Dry cushions, dry floor, dry grill. No more blowing rain under the roof.</p></div>
+        <div><h3>The daylight stays in</h3><p>Midnight Smoke panels let through {FACTS.vlt} of visible light, so the room stays bright.</p></div>
+        <div><h3>A heater finally works</h3><p>Out of the wind, a patio heater or fire table turns the patio into a winter hangout.</p></div>
+      </div>
+      <p class="straight"><b>Straight talk:</b> it is a sheltered room, not an insulated one. No heat or air conditioning is built in. On a cold night you are out of the wind and rain, not toasty. When spring comes, fold Clearfold panels open or pair them with Hexfold screens.</p>
+    </div>
+  </section>
+  )}
 
   <section class="band" aria-labelledby="mosaic-title">
     <div class="wrap">
@@ -144,7 +197,7 @@ const videoLd = {
         {SITE.youtubeFold && <figcaption><a class="yt" href={SITE.youtubeFold} target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.4-1.6.5-4.8.5-4.8s0-3.2-.5-4.8zM9.7 15.1V8.9l5.8 3.1z"/></svg>Watch on YouTube</a></figcaption>}
       </figure>
       <div class="stack-lg">
-        <h2 id="fold-title" class="h2">Watch it <span class="y">fold away</span></h2>
+        <h2 id="fold-title" class="h2">{HOLIDAY ? <>Ready for spring? <span class="y">Watch it fold away</span></> : <>Watch it <span class="y">fold away</span></>}</h2>
         <p class="lede">Hexfold panels hang from the top track and glide aside by hand. No motor, no remote, nothing dragging on the ground. Close them in seconds when the mosquitoes come out.</p>
         <dl class="fold-facts">
           <div><dt>20 ft</dt><dd>wide, meeting in the middle</dd></div>
@@ -173,14 +226,14 @@ const videoLd = {
           <fieldset>
             <legend>System</legend>
             {order.map((id) => { const p = byId(id); return (
-              <label class="opt"><input type="radio" name="sys" value={p.id} checked={p.id === 'hexfold'} /><span><b>{p.name}</b> <small>{p.kind} · ${p.msrp}/sq ft</small></span></label>
+              <label class="opt"><input type="radio" name="sys" value={p.id} checked={p.id === defSys.id} /><span><b>{p.name}</b> <small>{p.kind} · ${p.msrp}/sq ft</small></span></label>
             ); })}
           </fieldset>
         </div>
         <div class="estimate" aria-live="polite">
-          <p class="est-label" id="est-label">Hexfold, medium patio</p>
-          <p class="est-range tnum" id="est-range">{range(hex.msrp, 200, 300)}</p>
-          <p id="est-note" class="muted">200 to 300 sq ft of openings at ${hex.msrp} per sq ft, installed.</p>
+          <p class="est-label" id="est-label">{defSys.name}, medium patio</p>
+          <p class="est-range tnum" id="est-range">{range(defSys.msrp, 200, 300)}</p>
+          <p id="est-note" class="muted">200 to 300 sq ft of openings at ${defSys.msrp} per sq ft, installed.</p>
           <ul class="ticks">
             <li>Design and free site visit</li>
             <li>CNC fabrication and testing in Houston</li>
@@ -376,6 +429,25 @@ const videoLd = {
   }
   @media (max-width: 760px) { .paths { grid-template-columns: minmax(0, 1fr); } }
   @media (max-width: 480px) { .proof dt { font-size: 1.3rem; } .proof { gap: 10px; } }
+
+  /* Holiday season */
+  .eyebrow { font-family: var(--mono); font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; color: var(--yellow); margin-bottom: 10px; }
+  .winter-hero { position: relative; }
+  .winter-photo { margin: 0 auto; border: 3px solid var(--yellow); aspect-ratio: 4 / 5; max-width: 470px; overflow: hidden; background: var(--honey-2); }
+  .winter-photo :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block; }
+  .snow { position: absolute; inset: 0; pointer-events: none; z-index: 0; opacity: .8;
+    background-image: radial-gradient(2px 2px at 20px 30px, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 90px 120px, #fff 50%, transparent 51%), radial-gradient(2.5px 2.5px at 160px 60px, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 230px 170px, #fff 50%, transparent 51%), radial-gradient(2px 2px at 290px 20px, #fff 50%, transparent 51%);
+    background-size: 320px 220px; animation: snow 14s linear infinite; }
+  .winter-hero .wrap { position: relative; z-index: 1; }
+  @keyframes snow { from { background-position: 0 0; } to { background-position: 60px 220px; } }
+  @media (prefers-reduced-motion: reduce) { .snow { animation: none; } }
+  .gets { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
+  .gets > div { border-top: 2px solid var(--paper-ink); padding-top: 14px; min-width: 0; }
+  .gets h3 { font-weight: 800; font-stretch: 78%; font-size: 1.3rem; text-transform: uppercase; }
+  .gets p { color: var(--paper-2); margin-top: 6px; }
+  .straight { border-left: 6px solid var(--yellow); background: var(--cream-2); padding: 18px 22px; max-width: 820px; color: var(--paper-ink); }
+  @media (max-width: 900px) { .gets { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 520px) { .gets { grid-template-columns: minmax(0, 1fr); } }
 </style>
 
 <script is:inline>
