@@ -4,6 +4,8 @@ import { SITE, NAV, CITIES } from '../data/site';
 import archivoUrl from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
 
 interface Props {
+  /** Campaign code stored for visitors who arrive without ?src (e.g. typed the hanger address). */
+  defaultSrc?: string;
   title: string;
   description: string;
   image?: string;
@@ -92,7 +94,7 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
     <link rel="sitemap" href="/sitemap-index.xml" />
     {allSchema.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
   </head>
-  <body>
+  <body data-default-src={Astro.props.defaultSrc}>
     <a class="skip" href="#main">Skip to content</a>
     <header class="top">
       <div class="wrap">
@@ -187,5 +189,9 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
       </div>
     </footer>
     <div class="callbar"><a href={SITE.phoneHref}>Call us</a><a href="/free-quote/">Get my price</a></div>
-  </body>
+    <script>
+    import { captureSource } from '../scripts/source';
+    captureSource();
+  </script>
+</body>
 </html>

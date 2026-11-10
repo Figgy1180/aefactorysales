@@ -1,0 +1,120 @@
+---
+// Landing page for the winter door hanger (QR: /winter/?src=hanger-winter-qr, typed: /winter).
+// Every form lead from here is tagged "Winter door hanger" in the email to info@.
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Faq from '../components/Faq.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import { SITE, FACTS, SIZES, WARRANTY, byId, range, type QA } from '../data/site';
+import panels from '../assets/photos/clearfixed-polycarbonate-panels.jpg';
+import freestanding from '../assets/projects/p34/1-corner-closed.jpg';
+
+const crumbs = [{ name: 'Winter', href: '/winter/' }];
+const cf = byId('clearfixed'), cfo = byId('clearfold');
+const faq: QA[] = [
+  { q: 'Will my patio be warm?', a: 'It will be out of the wind and rain, which is most of what makes a Houston cold snap miserable outside. It is not insulated or heated, so on a 40 degree night it feels like a sheltered porch, not a living room. Most homeowners add a patio heater or fire table.' },
+  { q: 'What happens when it warms up?', a: 'Clearfold panels fold to the side, so the patio opens back up in spring. You can also put panels on the windy side and Hexfold screens facing the yard, so summer gets the breeze without the mosquitoes.' },
+  { q: 'Can it be done before the next cold front?', a: `We install within a month of your order. Book the free site visit now and we measure, quote and schedule. Call ${SITE.phone}.` },
+  { q: 'Do I need to change my patio roof?', a: 'No. A&E systems are built for existing roofed patios. We fit the frame to the roof, posts and slab you already have.' },
+];
+---
+<Base
+  title="Winter Patio Enclosure in Houston | A&E Factory Sales"
+  description="Cold snap? Keep using your patio. Tinted polycarbonate panels block the north wind and rain on your covered patio. Built in Houston, installed within a month."
+  crumbs={crumbs}
+  defaultSrc="hanger-winter-url"
+>
+  <PageHero crumbs={crumbs}>
+    <div class="split">
+      <div class="stack-lg">
+        <p class="eyebrow">Houston winter, sorted</p>
+        <h1 class="display">Cold snap? <span class="y">Keep using your patio.</span></h1>
+        <p class="sub">Tinted polycarbonate panels turn your covered patio into a 3-season room that blocks the north wind and keeps rain off the furniture. When spring comes, fold them open.</p>
+        <div class="actions"><a class="btn" href="/free-quote/?use=enclose">Get my price in 60 seconds</a><a class="btn btn-line" href={SITE.phoneHref}>Call {SITE.phone}</a></div>
+        <p class="fine">Free design and estimate. Built in our Houston factory. {WARRANTY}.</p>
+      </div>
+      <figure class="dim-frame draw" style="margin:30px 30px 0 0">
+        <span class="dim v" aria-hidden="true"><span>Panels up to 10 ft tall</span></span>
+        <Image src={panels} alt="A&E patio wall of tinted polycarbonate panels with a door" widths={[420, 621]} sizes="(max-width: 820px) 100vw, 480px" loading="eager" style="aspect-ratio:4/5;object-fit:cover" />
+      </figure>
+    </div>
+  </PageHero>
+
+  <section class="band on-paper" aria-labelledby="w-what">
+    <div class="wrap stack-lg">
+      <h2 id="w-what" class="h2">What changes <span class="y">this winter</span></h2>
+      <div class="gets">
+        <div><h3>The wind stays out</h3><p>Panels fill every opening you choose, so the north wind stops at the patio edge.</p></div>
+        <div><h3>The rain stays off</h3><p>Dry cushions, dry floor, dry grill. No more blowing rain under the roof.</p></div>
+        <div><h3>The daylight stays in</h3><p>Midnight Smoke panels let through {FACTS.vlt} of visible light, so the room stays bright.</p></div>
+        <div><h3>A heater finally works</h3><p>Out of the wind, a patio heater or fire table turns the patio into a winter hangout.</p></div>
+      </div>
+      <div class="straight">
+        <p class="k">Straight talk</p>
+        <p>It is a sheltered room, not an insulated one. There is no heat or air conditioning built in. On a cold night it is out of the wind and rain, not toasty. We would rather tell you now than at the site visit.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="w-price">
+    <div class="wrap split" style="align-items:start">
+      <div class="stack">
+        <h2 id="w-price" class="h2">What it <span class="y">costs</span></h2>
+        <p class="lede">Installed prices for typical Houston patios. We price by the open wall area we fill, measured at your free site visit.</p>
+        <div class="table-wrap">
+          <table class="tbl">
+            <thead><tr><th scope="col">Patio</th><th scope="col">Clearfixed (${cf.msrp}/sq ft)</th><th scope="col">Clearfold (${cfo.msrp}/sq ft)</th></tr></thead>
+            <tbody>
+              {SIZES.map((s) => (
+                <tr><th scope="row">{s.name}<br /><small>{s.eg}</small></th><td>{range(cf.msrp, s.low, s.high)}</td><td>{range(cfo.msrp, s.low, s.high)}</td></tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <p class="fine">Clearfixed panels stay put. Clearfold panels fold open on a track. Your quote lists every item.</p>
+        <p><a class="btn" href="/free-quote/?use=enclose">Get my exact price</a></p>
+      </div>
+      <figure style="margin:0"><Image src={freestanding} alt="A&E enclosure in Houston with tinted panels and folding screens" widths={[480, 900]} sizes="(max-width: 820px) 100vw, 540px" loading="lazy" style="aspect-ratio:4/3;object-fit:cover;border:2px solid var(--yellow)" /><figcaption class="fine" style="padding-top:8px">Panels and Hexfold screens in one Houston enclosure. <a href="/every-season/">Panels for winter, screens for summer</a></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="band raised" aria-labelledby="w-how">
+    <div class="wrap stack-lg">
+      <h2 id="w-how" class="h2">Three steps, <span class="y">one company</span></h2>
+      <ol class="steps3">
+        <li><b>Free site visit</b><span>About 45 minutes. We measure every opening and show you panel and frame samples.</span></li>
+        <li><b>Built in Houston</b><span>CNC-cut and heat welded in our factory at {SITE.factoryStreet}, then test-assembled.</span></li>
+        <li><b>Installed by our crew</b><span>Our own installers, within a month of your order. {WARRANTY}.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="band on-paper" id="visit" aria-labelledby="w-form">
+    <div class="wrap split" style="align-items:start">
+      <div class="stack">
+        <h2 id="w-form" class="h2">Book your <span class="y">free site visit</span></h2>
+        <p class="lede">Tell us a little about your patio and we will call you to set a time. Rather talk now? Call {SITE.phone}.</p>
+        <Faq items={faq} />
+      </div>
+      <QuoteForm id="winter-visit" source="Winter landing page" />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .eyebrow { font-family: var(--mono); font-size: .85rem; letter-spacing: .08em; text-transform: uppercase; color: var(--yellow); }
+  .gets { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
+  .gets > div { border-top: 2px solid var(--paper-ink); padding-top: 14px; min-width: 0; }
+  .gets h3 { font-weight: 800; font-stretch: 78%; font-size: 1.3rem; text-transform: uppercase; }
+  .gets p { color: var(--paper-2); margin-top: 6px; }
+  .straight { border-left: 6px solid var(--yellow); background: var(--cream-2); padding: 18px 22px; max-width: 760px; }
+  .straight .k { font-weight: 800; text-transform: uppercase; font-stretch: 80%; margin-bottom: 4px; }
+  .steps3 { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; counter-reset: s; }
+  .steps3 li { counter-increment: s; border-top: 3px solid var(--yellow); padding-top: 14px; display: grid; gap: 6px; min-width: 0; }
+  .steps3 li::before { content: counter(s, decimal-leading-zero); font-family: var(--mono); color: var(--yellow); font-weight: 700; }
+  .steps3 b { font-size: 1.25rem; font-weight: 800; font-stretch: 80%; text-transform: uppercase; }
+  .steps3 span { color: var(--ink-2); }
+  @media (max-width: 900px) { .gets { grid-template-columns: repeat(2, minmax(0, 1fr)); } .steps3 { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 520px) { .gets { grid-template-columns: minmax(0, 1fr); } }
+</style>

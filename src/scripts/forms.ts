@@ -1,3 +1,6 @@
+import { captureSource, sourceLabel } from './source';
+captureSource();
+
   document.querySelectorAll<HTMLFormElement>('form.quote-form, form.dealer-form, form.review-form').forEach((form) => {
   const note = form.querySelector<HTMLElement>('.form-note')!;
   form.addEventListener('submit', async (e) => {
@@ -18,6 +21,14 @@
     btn.disabled = true;
     const data = new FormData(form);
     data.append('access_key', key);
+    // Tag the lead with its campaign so info@ can see which door hanger or ad brought it in.
+    const src = sourceLabel();
+    if (src) {
+      data.set('lead_source', src.label);
+      data.set('landing_page', src.landing);
+      data.set('subject', `${data.get('subject') || 'New request from aefactorysales.com'} [${src.label}]`);
+    }
+    data.set('page', location.pathname);
     try {
       const r = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
       const j = await r.json();

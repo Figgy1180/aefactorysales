@@ -220,6 +220,12 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
   const fmt = (n: number) => '$' + (Math.round(n / 100) * 100).toLocaleString('en-US');
   const $ = <T extends Element = HTMLElement>(s: string) => root.querySelector<T>(s)!;
   const $$ = <T extends Element = HTMLElement>(s: string) => Array.from(root.querySelectorAll<T>(s));
+  // Hanger landing pages link here with ?use=enclose|both so the visitor skips a step they already answered.
+  const preUse = new URLSearchParams(location.search).get('use');
+  if (preUse && D.uses.some((u: any) => u.id === preUse)) {
+    st.use = preUse;
+    $$('[data-use]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.use === preUse)));
+  }
 
   function go(n: number) {
     $$('[data-panel]').forEach((p) => (p.hidden = p.dataset.panel !== String(n)));
@@ -271,7 +277,7 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
   root.addEventListener('click', (e) => {
     const t = (e.target as HTMLElement).closest<HTMLElement>('button');
     if (!t) return;
-    if (t.dataset.size) { st.size = t.dataset.size === 'x' ? undefined : t.dataset.size; $$('[data-size]').forEach((b) => b.setAttribute('aria-pressed', String(b === t))); go(2); }
+    if (t.dataset.size) { st.size = t.dataset.size === 'x' ? undefined : t.dataset.size; $$('[data-size]').forEach((b) => b.setAttribute('aria-pressed', String(b === t))); go(preUse && st.use === preUse ? 3 : 2); }
     else if (t.dataset.use) { st.use = t.dataset.use; $$('[data-use]').forEach((b) => b.setAttribute('aria-pressed', String(b === t))); go(3); }
     else if (t.dataset.pick) pick(t.dataset.pick);
     else if (t.dataset.go) go(Number(t.dataset.go));
