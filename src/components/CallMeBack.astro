@@ -65,6 +65,8 @@ import { SITE } from '../data/site';
 </style>
 
 <script>
+  // Load the shared submit handler here too: pages without a quote form (like the homepage) need it.
+  import '../scripts/forms';
   const dlg = document.getElementById('callback') as HTMLDialogElement | null;
   if (dlg) {
     document.addEventListener('click', (e) => {

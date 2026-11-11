@@ -1,0 +1,51 @@
+---
+// Book a free site visit: 2 required fields (name, phone) + optional ZIP and best time.
+// Used inline on the homepage (#book) and in the site-wide dialog. Sends to info@ via Web3Forms;
+// subject starts "SITE VISIT" so it stands out; `page_version` marks which homepage version sent it.
+import { SITE } from '../data/site';
+interface Props { id: string; version?: string; }
+const { id, version = 'v2' } = Astro.props;
+---
+<form class="form quote-form book-form" id={id} data-key={SITE.formKey} data-inline="1" data-invalid="Please add your name and a phone number we can call." novalidate>
+  <input type="hidden" name="subject" value="SITE VISIT request from aefactorysales.com" />
+  <input type="hidden" name="from_name" value="A&E website" />
+  <input type="hidden" name="lead_source" value="Book free site visit" />
+  <input type="hidden" name="page_version" value={version} />
+  <label class="hp" aria-hidden="true">Leave this empty <input type="checkbox" name="botcheck" tabindex="-1" /></label>
+  <div class="bf-row">
+    <div class="field"><label for={`${id}-name`}>Name</label><input id={`${id}-name`} name="name" autocomplete="name" required /></div>
+    <div class="field"><label for={`${id}-phone`}>Phone</label><input id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" inputmode="tel" minlength="10" required /></div>
+  </div>
+  <div class="bf-row">
+    <div class="field"><label for={`${id}-zip`}>ZIP <span class="opt-l">(optional)</span></label><input id={`${id}-zip`} name="zip" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" /></div>
+    <div class="field"><label for={`${id}-when`}>Best time <span class="opt-l">(optional)</span></label>
+      <select id={`${id}-when`} name="best_time">
+        <option>Any time</option>
+        <option>Weekday morning</option>
+        <option>Weekday afternoon</option>
+        <option>Weekday evening</option>
+        <option>Saturday</option>
+        <option>Sunday</option>
+      </select>
+    </div>
+  </div>
+  <button class="btn" type="submit">Book my free visit</button>
+  <p class="fine bf-note">Free, about 45 minutes. We call to confirm your time.</p>
+  <p class="form-note" role="status" hidden></p>
+</form>
+<div class="cb-done" hidden>
+  <p class="cb-big">You're on the list.</p>
+  <p>We'll call you to confirm a time for your free site visit. Need us now? <a href={SITE.phoneHref}>Call {SITE.phone}</a></p>
+</div>
+
+<style>
+  .book-form { display: grid; gap: 12px; }
+  .bf-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .book-form .btn { width: 100%; justify-content: center; }
+  .bf-note { text-align: center; }
+  .opt-l { font-weight: 400; opacity: .75; }
+  .cb-done { display: grid; gap: 10px; }
+  .cb-done[hidden] { display: none; }
+  .cb-big { font-weight: 900; font-stretch: 70%; font-size: 1.8rem; text-transform: uppercase; color: var(--yellow); }
+  @media (max-width: 480px) { .bf-row { grid-template-columns: minmax(0, 1fr); } }
+</style>
