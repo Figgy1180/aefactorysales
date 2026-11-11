@@ -3,9 +3,17 @@
 // Used inline on the homepage (#book) and in the site-wide dialog. Sends to info@ via Web3Forms;
 // subject starts "SITE VISIT" so it stands out; `page_version` marks which homepage version sent it.
 import { SITE } from '../data/site';
+import QuoteForm from './QuoteForm.astro';
 interface Props { id: string; version?: string; }
 const { id, version = 'v2' } = Astro.props;
 ---
+<div class="bv" data-bv>
+<fieldset class="bv-pick">
+  <legend>What are you interested in?</legend>
+  <label><input type="radio" name={`${id}-want`} value="visit" checked /> <span>Patio enclosure</span></label>
+  <label><input type="radio" name={`${id}-want`} value="screens" /> <span>Screens</span></label>
+</fieldset>
+<div class="bv-visit">
 <form class="form quote-form book-form" id={id} data-key={SITE.formKey} data-inline="1" data-invalid="Please add your name and a phone number we can call." novalidate>
   <input type="hidden" name="subject" value="SITE VISIT request from aefactorysales.com" />
   <input type="hidden" name="from_name" value="A&E website" />
@@ -37,8 +45,45 @@ const { id, version = 'v2' } = Astro.props;
   <p class="cb-big">You're on the list.</p>
   <p>We'll call you to confirm a time for your free site visit. Need us now? <a href={SITE.phoneHref}>Call {SITE.phone}</a></p>
 </div>
+</div>
+<div class="bv-screens" hidden>
+  <p class="bv-say">Fill this in and a rep will call you with a quote.</p>
+  <QuoteForm id={`${id}-scr`} kind="screens" source="Book form: screens" />
+</div>
+</div>
+
+<script>
+  // Patio enclosure keeps the quick visit booking; Screens swaps in the v1 form and a rep calls with a quote.
+  document.querySelectorAll<HTMLElement>('[data-bv]').forEach((el) => {
+    const show = () => {
+      const scr = (el.querySelector('input[type=radio]:checked') as HTMLInputElement | null)?.value === 'screens';
+      (el.querySelector('.bv-visit') as HTMLElement).hidden = scr;
+      (el.querySelector('.bv-screens') as HTMLElement).hidden = !scr;
+      // The heading above the form (pop-up or homepage card) follows the choice.
+      const box = el.closest('dialog, .book-card');
+      const h = box?.querySelector<HTMLElement>('[data-bv-title]');
+      if (h) { h.dataset.visit ??= h.textContent ?? ''; h.textContent = scr ? h.dataset.screens! : h.dataset.visit; }
+      const lede = box?.querySelector<HTMLElement>('.cb-lede');
+      if (lede) lede.hidden = scr;
+    };
+    el.addEventListener('change', (e) => { if ((e.target as HTMLInputElement).type === 'radio') show(); });
+    show();
+  });
+</script>
 
 <style>
+  .bv { display: grid; gap: 14px; }
+  .bv-visit[hidden], .bv-screens[hidden] { display: none; }
+  .bv-pick { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .bv-pick legend { font-weight: 700; margin-bottom: 8px; padding: 0; }
+  .bv-pick label { display: inline-flex; align-items: center; cursor: pointer; }
+  .bv-pick input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .bv-pick span { border: 2px solid var(--yellow); padding: 9px 16px; font-weight: 800; font-stretch: 82%; text-transform: uppercase; color: var(--ink); min-height: 44px; display: inline-flex; align-items: center; }
+  .bv-pick input:checked + span { background: var(--yellow); color: var(--honey); }
+  .bv-pick input:focus-visible + span { outline: 3px solid var(--cream); outline-offset: 2px; }
+  .bv-say { color: var(--ink-2); }
+  .bv-screens :global(.quote-form) { grid-template-columns: minmax(0, 1fr); }
+
   .book-form { display: grid; gap: 12px; }
   .bf-row { display: grid; align-items: end; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .book-form .btn { width: 100%; justify-content: center; }

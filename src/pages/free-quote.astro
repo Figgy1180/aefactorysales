@@ -129,8 +129,15 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
             <button type="button" class="linkish dark" data-back="1">Change my answers</button>
           </div>
           <div class="stack">
-            <h2 class="q">Book your free site visit</h2>
-            <QuoteForm id="quiz-visit" compact source="Price quiz" />
+            <div class="quiz-visit">
+              <h2 class="q">Book your free site visit</h2>
+              <QuoteForm id="quiz-visit" compact source="Price quiz" />
+            </div>
+            <div class="quiz-screens" hidden>
+              <h2 class="q">Get your screen quote</h2>
+              <p class="muted">Fill this in and a rep will call you with a quote.</p>
+              <QuoteForm id="quiz-screens" kind="screens" source="Price quiz: screens" />
+            </div>
             <div class="aside"><h3>Financing available</h3><p>{FINANCING}</p></div>
           </div>
         </div>
@@ -271,7 +278,9 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
     const tint = (root.querySelector('input[name="tint"]:checked') as HTMLInputElement)?.value;
     $('#q-tint-row').hidden = !tinted;
     $('#q-tint').textContent = tint;
-    const est = root.querySelector<HTMLInputElement>('form input[name="estimate"]');
+    $('.quiz-visit').hidden = !tinted;
+    $('.quiz-screens').hidden = tinted;
+    const est = root.querySelector<HTMLInputElement>(`${tinted ? '#quiz-visit' : '#quiz-screens'} input[name="estimate"]`);
     if (est) est.value = `${p.name}${tinted ? ` (${tint})` : ''}, ${$('#q-size').textContent}: ${$('#q-total').textContent}`;
   }
 

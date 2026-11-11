@@ -1,13 +1,17 @@
 ---
-// Site-visit request form. Sends through Web3Forms (free, works on a static site) to info@aefactorysales.com.
-// With no access key set, it runs in preview mode and sends nothing.
+// The v1 request form. Sends through Web3Forms (free, works on a static site) to info@aefactorysales.com.
+// kind="visit" (default): asks for a free site visit, then goes to /thank-you/.
+// kind="screens": screen shoppers fill this in and a rep calls them with a quote. Confirms in place.
 import { SITE } from '../data/site';
-interface Props { id?: string; compact?: boolean; source?: string }
-const { id = 'visit', compact = false, source = 'Website' } = Astro.props;
+interface Props { id?: string; compact?: boolean; source?: string; kind?: 'visit' | 'screens' }
+const { id = 'visit', compact = false, source = 'Website', kind = 'visit' } = Astro.props;
+const scr = kind === 'screens';
 ---
-<p class="fast">In a hurry? <button type="button" class="linkbtn" data-cb-open>Book with just your name and phone</button></p>
-<form class="form quote-form" id={id} data-key={SITE.formKey} data-next="/thank-you/" novalidate>
-  <input type="hidden" name="subject" value="New site visit request from aefactorysales.com" />
+{!scr && <p class="fast">In a hurry? <button type="button" class="linkbtn" data-cb-open>Book with just your name and phone</button></p>}
+<div class="qf-wrap">
+<form class="form quote-form" id={id} data-key={SITE.formKey} data-next={scr ? undefined : '/thank-you/'} data-inline={scr ? '1' : undefined} data-invalid={scr ? 'Please add your name, a phone number and your ZIP code.' : undefined} novalidate>
+  <input type="hidden" name="subject" value={scr ? 'SCREEN QUOTE request from aefactorysales.com' : 'New site visit request from aefactorysales.com'} />
+  <input type="hidden" name="request" value={scr ? 'Screens: rep to call with a quote' : 'Site visit'} />
   <input type="hidden" name="from_name" value="A&E website" />
   <input type="hidden" name="lead_source" value={source} />
   <input type="hidden" name="estimate" value="" />
@@ -20,12 +24,24 @@ const { id = 'visit', compact = false, source = 'Website' } = Astro.props;
     <>
       <div class="field"><label for={`${id}-project`}>What are you thinking about?</label>
         <select id={`${id}-project`} name="project">
-          <option>Not sure yet</option>
-          <option>3-season room (polycarbonate panels)</option>
-          <option>Hexfold retractable screens</option>
-          <option>Fixed stainless steel screens</option>
-          <option>Mix of panels and screens</option>
-          <option>Garage screen</option>
+          {scr ? (
+            <>
+              <option>Not sure which screen</option>
+              <option>Hexfold retractable screens</option>
+              <option>Fixed stainless steel screens</option>
+              <option>Garage screen</option>
+              <option>Screen door</option>
+            </>
+          ) : (
+            <>
+              <option>Not sure yet</option>
+              <option>3-season room (polycarbonate panels)</option>
+              <option>Hexfold retractable screens</option>
+              <option>Fixed stainless steel screens</option>
+              <option>Mix of panels and screens</option>
+              <option>Garage screen</option>
+            </>
+          )}
         </select>
       </div>
       <div class="field"><label for={`${id}-size`}>Patio size</label>
@@ -46,11 +62,23 @@ const { id = 'visit', compact = false, source = 'Website' } = Astro.props;
   </div>
   <div class="field full"><label for={`${id}-notes`}>Anything we should know? (optional)</label><textarea id={`${id}-notes`} name="message"></textarea></div>
   <div class="form-foot">
-    <button class="btn" type="submit">Request my site visit</button>
-    <small>We call you back to set a time. No pressure, no obligation. Have photos? Text them to {SITE.phone}.</small>
+    <button class="btn" type="submit">{scr ? 'Have a rep call me with a quote' : 'Request my site visit'}</button>
+    <small>{scr ? <>A rep calls you to go over your screens and give you a quote. Have photos? Text them to {SITE.phone}.</> : <>We call you back to set a time. No pressure, no obligation. Have photos? Text them to {SITE.phone}.</>}</small>
   </div>
   <p class="form-note" role="status" hidden></p>
 </form>
+{scr && (
+  <div class="cb-done qf-done" hidden>
+    <p class="cb-big">Got it.</p>
+    <p>A rep will call you with a quote for your screens. Need us now? <a href={SITE.phoneHref}>Call {SITE.phone}</a></p>
+  </div>
+)}
+</div>
+<style>
+  .qf-done { display: grid; gap: 10px; border: 2px solid var(--yellow); padding: 20px; }
+  .qf-done[hidden] { display: none; }
+  .qf-done .cb-big { font-weight: 900; font-stretch: 70%; font-size: 1.8rem; text-transform: uppercase; color: var(--yellow); }
+</style>
 
 <script>
   import '../scripts/forms';

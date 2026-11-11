@@ -8,8 +8,9 @@ import Why from '../components/Why.astro';
 import Faq from '../components/Faq.astro';
 import RevealSlider from '../components/RevealSlider.astro';
 import ProjectMosaic from '../components/ProjectMosaic.astro';
-import heroClosed from '../assets/projects/p34/2-front-closed.jpg';
-import heroOpen from '../assets/projects/p34/3-front-open.jpg';
+// Aligned pair: the closed photo is warped to match the open photo, so the posts and beam line up under the slider.
+import heroClosed from '../assets/hero/p34-closed-aligned.jpg';
+import heroOpen from '../assets/hero/p34-open-aligned.jpg';
 import { PRODUCTS, SIZES, FAQ, FACTS, CITIES, SITE, byId, range, FINANCING, WARRANTY, CITY_PAGES, type QA } from '../data/site';
 import BookVisitForm from '../components/BookVisitForm.astro';
 import { HOLIDAY } from '../data/season';
@@ -107,7 +108,7 @@ const videoLd = {
         <p class="offer-cost">What the visit costs you: <b>nothing.</b></p>
       </div>
       <div class="book-card">
-        <p class="book-k">Book your free visit</p>
+        <p class="book-k" data-bv-title data-screens="Get your screen quote">Book your free visit</p>
         <BookVisitForm id="home-book" />
       </div>
     </div>
