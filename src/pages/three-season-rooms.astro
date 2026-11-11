@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
 import PageHero from '../components/PageHero.astro';
 import ProductCard from '../components/ProductCard.astro';
 import CompareBars from '../components/CompareBars.astro';
@@ -126,9 +127,9 @@ const cf = byId('clearfixed'), cfo = byId('clearfold');
         <p class="lede">Typical medium patio (about 16 × 14 ft, two open sides): Clearfixed {range(31, 200, 300)}, Clearfold {range(40, 200, 300)}, Hybrid {range(56, 200, 300)}.</p>
       </div>
       <div class="lineup">
-        <ProductCard p={byId('clearfixed')} img={clearfixed} alt="Clearfixed polycarbonate panels" link={false} />
-        <ProductCard p={byId('clearfold')} img={smoke} alt="Folding polycarbonate panels in the A&E showroom" link={false} />
-        <ProductCard p={byId('hybrid')} img={interior} alt="Showroom room with polycarbonate panels and metal mesh" link={false} />
+        <ProductCard p={byId('clearfixed')} img={clearfixed} alt="Clearfixed polycarbonate panels" />
+        <ProductCard p={byId('clearfold')} img={smoke} alt="Folding polycarbonate panels in the A&E showroom" />
+        <ProductCard p={byId('hybrid')} img={interior} alt="Showroom room with polycarbonate panels and metal mesh" />
       </div>
       <p class="fine" style="margin-top:16px">Arched and angled fixed panels are priced at 1.5 times the base rate. Locks and some track upgrades are extra; your quote lists every item.</p>
     </div>
@@ -143,6 +144,8 @@ const cf = byId('clearfixed'), cfo = byId('clearfold');
       <Faq items={[...FAQ.room, FAQ.general[0], FAQ.general[1]]} />
     </div>
   </section>
+
+  <RelatedLinks match="any" title="Patios our crew has enclosed" />
 
   <section class="band raised" id="quote">
     <div class="wrap split" style="align-items:start">

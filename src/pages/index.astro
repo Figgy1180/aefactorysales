@@ -10,7 +10,7 @@ import RevealSlider from '../components/RevealSlider.astro';
 import ProjectMosaic from '../components/ProjectMosaic.astro';
 import heroClosed from '../assets/projects/p34/2-front-closed.jpg';
 import heroOpen from '../assets/projects/p34/3-front-open.jpg';
-import { PRODUCTS, SIZES, FAQ, FACTS, CITIES, SITE, byId, range, FINANCING, WARRANTY, type QA } from '../data/site';
+import { PRODUCTS, SIZES, FAQ, FACTS, CITIES, SITE, byId, range, FINANCING, WARRANTY, CITY_PAGES, type QA } from '../data/site';
 import BookVisitForm from '../components/BookVisitForm.astro';
 import { HOLIDAY } from '../data/season';
 
@@ -60,8 +60,8 @@ const videoLd = {
 };
 ---
 <Base
-  title='Patio Enclosures & 3-Season Rooms Houston | A&E Factory Sales'
-  description='Polycarbonate 3-season rooms and metal patio screens built in our Houston factory, installed by our crew within a month. See prices, book a free site visit.'
+  title='Patio Enclosures and Screens in Houston | A&E Factory Sales'
+  description='Patio enclosures and screens in Houston: polycarbonate 3-season rooms and metal patio screens built in our own factory, installed by our crew within a month. See prices, book a free site visit.'
   schema={[videoLd]}
 >
   <section class:list={['hero blueprint', HOLIDAY && 'winter-hero']} aria-labelledby="hero-title">
@@ -69,8 +69,7 @@ const videoLd = {
     <CornerArt />
     <div class="wrap hero-grid">
       <div class="h-title">
-        <p class="eyebrow">Houston patio enclosures, made here</p>
-        <h1 id="hero-title" class="display">Use your covered patio <span class="y">all year.</span></h1>
+        <h1 id="hero-title" class="display"><span class="eyebrow">Patio enclosures and screens in Houston</span> Use your covered patio <span class="y">all year.</span></h1>
       </div>
       <div class="h-body stack-lg">
         <p class="sub">Screens that keep mosquitoes out in summer. Tinted panels that block wind and rain when it turns cold. Built in our Houston factory, installed by our own crew within a month of your order.</p>
@@ -113,24 +112,6 @@ const videoLd = {
       </div>
     </div>
   </section>
-
-  {HOLIDAY && (
-  <section class="band on-paper" aria-labelledby="winter-title">
-    <div class="wrap stack-lg">
-      <div class="row-head">
-        <h2 id="winter-title" class="h2">What changes <span class="y">this winter</span></h2>
-        <a class="btn btn-line" href="/winter/">More on winter rooms</a>
-      </div>
-      <div class="gets">
-        <div><h3>The wind stays out</h3><p>Panels fill every opening you choose, so the north wind stops at the patio edge.</p></div>
-        <div><h3>The rain stays off</h3><p>Dry cushions, dry floor, dry grill. No more blowing rain under the roof.</p></div>
-        <div><h3>The daylight stays in</h3><p>Midnight Smoke panels let through {FACTS.vlt} of visible light, so the room stays bright.</p></div>
-        <div><h3>A heater finally works</h3><p>Out of the wind, a patio heater or fire table turns the patio into a winter hangout.</p></div>
-      </div>
-      <p class="straight"><b>Straight talk:</b> it is a sheltered room, not an insulated one. No heat or air conditioning is built in. On a cold night you are out of the wind and rain, not toasty. When spring comes, fold Clearfold panels open or pair them with Hexfold screens.</p>
-    </div>
-  </section>
-  )}
 
   <section class="band" aria-labelledby="mosaic-title">
     <div class="wrap">
@@ -188,7 +169,7 @@ const videoLd = {
               <li>Opens by hand, no motor to fail</li>
               <li>Up to 20 ft wide meeting in the middle</li>
             </ul>
-            <div class="price-line"><b>From $24</b><span>per sq ft installed</span></div>
+            <div class="price-line"><b>From ${hex.msrp}</b><span>per sq ft installed. <a href="/screens/">Fixed Screen</a> from ${byId('fixed').msrp}.</span></div>
             <a class="btn btn-line" href="/hexfold/">See Hexfold</a>
           </div>
         </article>
@@ -300,7 +281,7 @@ const videoLd = {
         <div class="stack">
           <h3 class="h3">Serving greater Houston</h3>
           <p class="muted">Visit the showroom at {SITE.streetShort}, Houston, TX {SITE.zip}, or book a free site visit at your home.</p>
-          <ul class="cities">{CITIES.slice(0, 15).map((c) => <li>{c}</li>)}</ul>
+          <ul class="cities">{CITIES.map((c) => <li>{CITY_PAGES[c] ? <a href={CITY_PAGES[c]}>{c}</a> : c}</li>)}</ul>
           <a href="/service-area/">See our service area</a>
         </div>
       </div>
@@ -398,7 +379,7 @@ const videoLd = {
   @media (max-width: 480px) { .proof dt { font-size: 1.3rem; } .proof { gap: 10px; } }
 
   /* Conversion revision */
-  .eyebrow { font-family: var(--mono); font-size: .85rem; letter-spacing: .1em; text-transform: uppercase; color: var(--yellow); margin-bottom: 10px; }
+  .eyebrow { display: block; font-family: var(--mono); font-size: .85rem; font-weight: 600; font-stretch: 100%; line-height: 1.4; letter-spacing: .1em; text-transform: uppercase; color: var(--yellow); margin-bottom: 10px; }
   .btn-big { font-size: 1.15rem; padding: 18px 26px; }
   .micro { font-size: var(--step--1); color: var(--ink-2); margin-top: -6px; }
   .micro a { color: var(--yellow); }

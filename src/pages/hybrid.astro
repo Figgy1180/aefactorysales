@@ -1,0 +1,18 @@
+---
+import ProductPage from '../components/ProductPage.astro';
+import { FAQ } from '../data/site';
+import img from '../assets/photos/showroom-room-interior.jpg';
+---
+<ProductPage
+  id="hybrid"
+  title="Hybrid Patio Enclosure: Panels and Screens Houston | A&E"
+  description="The A&E Hybrid puts polycarbonate panels and honeycomb aluminum mesh in one folding system: half 3-season room, half screened patio. From $56 per sq ft."
+  h1={['Hybrid', 'panels and screens in one']}
+  img={img} alt="A&E showroom room with polycarbonate panels and metal mesh" caption="Panels and mesh together in our Houston showroom."
+  points={[
+    ['Two systems in one', 'Polycarbonate panels and honeycomb aluminum mesh share one folding system.'],
+    ['Half room, half screened patio', 'Shelter from wind and rain where you want it, open-air mesh where you want the breeze.'],
+    ['Our top shelf', 'Folds open by hand: up to 5 ft per pull, or 8 ft meeting in the middle. High-end handle and ramp water stop included.'],
+  ]}
+  faq={[FAQ.room[1], FAQ.room[3], FAQ.room[4], FAQ.screens[1], FAQ.general[0], FAQ.general[1]]}
+/>

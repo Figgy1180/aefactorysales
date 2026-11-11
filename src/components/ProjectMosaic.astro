@@ -1,7 +1,8 @@
 ---
-// Eight real project photos as a bold photo mosaic. Each tile links to its project page.
+// Seven real projects (one tile each, no repeats) plus one tile for stainless screen doors.
 import { Image } from 'astro:assets';
 import { PROJECTS, photos, altFor, fit } from '../data/projects';
+import doors from '../assets/photos/fixed-screen-doors-closed.jpg';
 const pick: { id: string; shape: string; photo?: string; label?: string }[] = [
   { id: 'p36', shape: 'tall', photo: '1-outside-closed' },
   { id: 'p35', shape: 'wide', photo: '1-wide' },
@@ -9,8 +10,7 @@ const pick: { id: string; shape: string; photo?: string; label?: string }[] = [
   { id: 'p34', shape: '', photo: '5-inside-seating' },
   { id: 'p14', shape: '', photo: '1-corner-closed' },
   { id: 'p4', shape: '', photo: '1-front' },
-  { id: 'p36', shape: 'wide', photo: '5-side-kitchen', label: 'Screened patio by the outdoor kitchen' },
-  { id: 'p14', shape: 'wide', photo: '4-inside-closed', label: 'Inside the brick home patio' },
+  { id: 'p5', shape: 'wide', photo: '4-porch' },
 ];
 const tiles = pick.map((t) => {
   const p = PROJECTS.find((x) => x.id === t.id)!;
@@ -26,6 +26,10 @@ const tiles = pick.map((t) => {
       <span class="cap"><b>{t.label ?? t.p.title}</b><span>{t.p.city}, TX</span></span>
     </a>
   ))}
+  <a class="tile wide" href="/screens/">
+    <Image src={doors} widths={fit([480, 800, 1200], doors)} sizes="(max-width: 760px) 100vw, 580px" alt="French doors with A&E stainless steel screen doors closed" loading="lazy" />
+    <span class="cap"><b>Stainless steel screen doors</b><span>Fixed Screen</span></span>
+  </a>
 </div>
 
 <style>

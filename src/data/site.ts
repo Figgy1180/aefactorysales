@@ -15,7 +15,6 @@ export const SITE = {
   phoneHref: 'tel:+17137918073',
   phoneE164: '+1-713-791-8073',
   email: 'info@aefactorysales.com',
-  factoryStreet: '2605 William Tell Street',
   factorySite: 'https://aecustomize.com',
   founded: '2022',
   hours: 'Open 24/7 by appointment',
@@ -61,7 +60,7 @@ export const PRODUCTS: Product[] = [
     blurb:
       'A wall of tinted panels that turns a covered patio into a 3-season room. Can be cut into arches and angles to match your roofline.',
     msrp: 31,
-    href: '/three-season-rooms/',
+    href: '/clearfixed/',
     specs: [
       ['Panel', '4 mm polycarbonate, Midnight Smoke or Storm Blue'],
       ['Frame', 'Heat-welded PVC-fiber blend, aluminum core, ceramic coating'],
@@ -77,7 +76,7 @@ export const PRODUCTS: Product[] = [
     blurb:
       'Polycarbonate panels that fold open on our track. Close them for a 3-season room, fold them away for an open patio.',
     msrp: 40,
-    href: '/three-season-rooms/',
+    href: '/clearfold/',
     specs: [
       ['Panel', 'Polycarbonate sunshade panel'],
       ['Hardware', 'High-end handle, ramp water stop included'],
@@ -125,7 +124,7 @@ export const PRODUCTS: Product[] = [
     blurb:
       'Our top shelf. Polycarbonate panels and honeycomb aluminum mesh in one folding system: half 3-season room, half screened patio.',
     msrp: 56,
-    href: '/three-season-rooms/',
+    href: '/hybrid/',
     specs: [
       ['Panel', 'Polycarbonate sunshade panel and honeycomb aluminum mesh'],
       ['Hardware', 'High-end handle, ramp water stop included'],
@@ -168,6 +167,13 @@ export const CITIES = [
   'League City', 'Friendswood', 'Kingwood', 'Missouri City', 'Tomball', 'Bellaire',
   'West University Place', 'Memorial', 'Humble', 'Richmond', 'Conroe',
 ];
+
+// Cities that have their own page (built from a real project there). Key = name as shown in lists.
+export const CITY_PAGES: Record<string, string> = {
+  Katy: '/service-area/katy/',
+  Richmond: '/service-area/richmond/',
+  Conroe: '/service-area/lake-conroe/',
+};
 
 export const FACTS = {
   vlt: '48%',
@@ -239,8 +245,8 @@ export const FAQ: Record<string, QA[]> = {
       a: 'Motorized roll-down screens run about $40 to $45 per sq ft of opening in Houston. Hexfold starts at $28 per sq ft installed, with the look and feel of a high-end retractable and no motor to maintain.',
     },
     {
-      q: 'What about my dog?',
-      a: 'We can build a pet door right into a Fixed Screen panel so your dog can come and go.',
+      q: 'Do you make a pet-proof screen?',
+      a: 'Fixed Screen is our answer for homes with dogs and cats. The mesh is 304 stainless steel in a heat-welded frame, and it resists tearing where nylon and fiberglass screens fail. We can also build a pet door right into a panel so your dog can come and go.',
     },
   ],
   general: [
@@ -270,7 +276,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Where do you install?',
-      a: 'Houston and the greater Houston area, including Katy, Sugar Land, Cypress, The Woodlands, Pearland, Spring, League City, Friendswood, Kingwood, Missouri City, Tomball, Bellaire, West University and Memorial.',
+      a: 'Houston and the greater Houston area, including Katy, Sugar Land, Cypress, The Woodlands, Pearland, Spring, League City, Friendswood, Kingwood, Missouri City, Tomball, Bellaire, West University Place, Memorial, Humble, Richmond and Conroe.',
     },
     {
       q: 'Can I see it in person?',

@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import QuoteForm from '../components/QuoteForm.astro';
-import { SITE } from '../data/site';
+import { SITE, CITY_PAGES } from '../data/site';
 
 const crumbs = [{ name: 'Service area', href: '/service-area/' }];
 const regions = [
@@ -20,17 +20,18 @@ const regions = [
   <PageHero crumbs={crumbs}>
     <div class="stack-lg" style="max-width:52em">
       <h1 class="display">Greater Houston, <span class="y">from our factory</span></h1>
-      <p class="sub">Every job is built at {SITE.factoryStreet} in north Houston and installed by our own crew. No subcontractors, wherever you are in the metro.</p>
+      <p class="sub">Every job is built in our north Houston factory, next door to the showroom at {SITE.streetShort}, and installed by our own crew. No subcontractors, wherever you are in the metro.</p>
     </div>
   </PageHero>
   <section class="band">
     <div class="wrap">
       <div class="regions">
         {regions.map((r) => (
-          <div><h2 class="h3">{r.t}</h2><ul>{r.c.map((c) => <li>{c}</li>)}</ul></div>
+          <div><h2 class="h3">{r.t}</h2><ul>{r.c.map((c) => <li>{CITY_PAGES[c] ? <a href={CITY_PAGES[c]}>{c === 'Conroe' ? 'Conroe and Lake Conroe' : c}</a> : c}</li>)}</ul></div>
         ))}
       </div>
-      <p class="muted" style="margin-top:28px;max-width:46em">Not on the list? If you're within driving distance of north Houston, call <a href={SITE.phoneHref}>{SITE.phone}</a> and we'll tell you straight whether we can get there.</p>
+      <p class="muted" style="margin-top:28px;max-width:46em">Linked areas have their own page with a real A&amp;E project there. More are added as we photograph finished jobs.</p>
+      <p class="muted" style="margin-top:10px;max-width:46em">Not on the list? If you're within driving distance of north Houston, call <a href={SITE.phoneHref}>{SITE.phone}</a> and we'll tell you straight whether we can get there.</p>
     </div>
   </section>
   <section class="band on-paper">

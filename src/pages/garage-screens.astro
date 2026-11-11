@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
 import PageHero from '../components/PageHero.astro';
 import Faq from '../components/Faq.astro';
 import QuoteForm from '../components/QuoteForm.astro';
@@ -71,6 +72,8 @@ const service = {
       <Faq items={faq} />
     </div>
   </section>
+
+  <RelatedLinks match="fold" title="More A&E projects" skip="/garage-screens/" />
 
   <section class="band raised" id="quote">
     <div class="wrap split" style="align-items:start">

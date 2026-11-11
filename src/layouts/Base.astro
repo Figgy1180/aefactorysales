@@ -1,6 +1,10 @@
 ---
 import '../styles/global.css';
 import { SITE, NAV, CITIES } from '../data/site';
+import { getImage } from 'astro:assets';
+import { HOLIDAY, LOGO, FAVICON, LOGO_H } from '../data/season';
+import CallMeBack from '../components/CallMeBack.astro';
+import type { ImageMetadata } from 'astro';
 import archivoUrl from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
 
 interface Props {
@@ -8,15 +12,34 @@ interface Props {
   defaultSrc?: string;
   title: string;
   description: string;
-  image?: string;
+  /** Share image: a photo import (cropped to 1200 x 630 here) or a path. Defaults to this page's photo in OG_PHOTOS. */
+  image?: string | ImageMetadata;
   noindex?: boolean;
   schema?: Record<string, unknown>[];
   crumbs?: { name: string; href: string }[];
 }
-const { title, description, image = '/og/og-default.jpg', noindex = false, schema = [], crumbs = [] } = Astro.props;
+const { title, description, image, noindex = false, schema = [], crumbs = [] } = Astro.props;
 const path = Astro.url.pathname;
 const canonical = new URL(path, SITE.url).href;
-const ogImage = new URL(image, SITE.url).href;
+// Every page gets its own share image: a real photo, cropped to 1200 x 630.
+const OG_PHOTOS: Record<string, string> = {
+  '/': 'projects/p34/2-front-closed', '/three-season-rooms/': 'photos/factory-pc', '/clearfixed/': 'photos/clearfixed-polycarbonate-panels',
+  '/clearfold/': 'photos/showroom-polycarbonate-smoke', '/hybrid/': 'photos/showroom-room-interior', '/winter/': 'photos/clearfixed-polycarbonate-panels',
+  '/hexfold/': 'photos/hexfold-patio-closed', '/screens/': 'photos/fixed-screen-doors-closed', '/garage-screens/': 'projects/p4/3-right-bays',
+  '/pricing/': 'projects/p35/2-long-side', '/projects/': 'projects/p36/2-outside-open', '/why-ae/': 'photos/factory-cnc',
+  '/how-we-build/': 'photos/factory-angle', '/learn/': 'photos/hexfold-handle-mesh', '/compare/': 'projects/p14/3-long-side-open',
+  '/faq/': 'projects/p6/2-outside-closed', '/free-quote/': 'projects/p34/5-inside-seating', '/service-area/': 'projects/p6/4-wide',
+  '/every-season/': 'photos/hexfold-patio-open', '/guides/': 'photos/gabled-opening-screens', '/reviews/': 'photos/screened-patio-room-corner',
+  '/dealers/': 'photos/fixed-screen-frame-colors', '/guides/folding-vs-motorized-patio-screens/': 'photos/hexfold-handle',
+  '/guides/polycarbonate-vs-glass-patio-enclosure-cost/': 'photos/brick-home-screened-patio',
+};
+const ogFiles = import.meta.glob('../assets/{photos,projects}/**/*.jpg', { eager: true }) as Record<string, { default: ImageMetadata }>;
+const ogKey = OG_PHOTOS[path.endsWith('/') ? path : path + '/'];
+const ogPhoto = typeof image === 'object' ? image : !image && ogKey ? ogFiles[`../assets/${ogKey}.jpg`]?.default : undefined;
+const ogSrc = ogPhoto
+  ? (await getImage({ src: ogPhoto, width: Math.min(1200, ogPhoto.width), height: Math.round(Math.min(1200, ogPhoto.width) * 0.525), fit: 'cover', format: 'jpg', quality: 80 })).src
+  : typeof image === 'string' ? image : '/og/og-default.jpg';
+const ogImage = new URL(ogSrc, SITE.url).href;
 
 const business = {
   '@context': 'https://schema.org',
@@ -67,8 +90,6 @@ const breadcrumb = crumbs.length
 
 const allSchema = [business, ...(breadcrumb ? [breadcrumb] : []), ...schema];
 const isCurrent = (href: string) => path === href || path === href.replace(/\/$/, '') || path === href.replace(/\/$/, '.html');
-import { HOLIDAY, LOGO, FAVICON, LOGO_H } from '../data/season';
-import CallMeBack from '../components/CallMeBack.astro';
 ---
 <!doctype html>
 <html lang="en-US">

@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import RelatedLinks from '../components/RelatedLinks.astro';
 import PageHero from '../components/PageHero.astro';
 import Faq from '../components/Faq.astro';
 import QuoteForm from '../components/QuoteForm.astro';
@@ -125,6 +126,8 @@ const product = {
       <Faq items={[FAQ.screens[0], FAQ.screens[3], FAQ.screens[1], FAQ.general[0], FAQ.general[1], FAQ.general[3]]} />
     </div>
   </section>
+
+  <RelatedLinks match="fold" title="Hexfold on real Houston homes" />
 
   <section class="band raised" id="quote">
     <div class="wrap split" style="align-items:start">

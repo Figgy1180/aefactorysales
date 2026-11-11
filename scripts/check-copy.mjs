@@ -11,6 +11,7 @@ const rules = [
   [/\$0 down/i, 'No "$0 down" in marketing'],
   [/close your patio/i, 'Say "enclose", not "close"'],
   [/2 to 3 weeks|2-3 weeks|two to three weeks/i, 'Install is "within a month"'],
+  [/2605 William/i, 'Public address is 2609 William Tell St only (say "our factory next door")'],
   [/\b\d+[- ]?(min|minute|minutes|hour|hours)\b[^.]{0,40}(visit|patio)|(visit|patio)[^.]{0,40}\b\d+[- ]?(min|minute)s?\b|45[- ]min/i, 'No stated length for the site visit (not confirmed)'],
   [/fei@|sales@aefactory|\bFei\b|512\)? ?800|800-0117/i, 'Use info@aefactorysales.com and (713) 791-8073 only'],
   [/hexfold(?:(?!fixed screen)[^.]){0,60}304 stainless/i, '304 stainless is Fixed Screen only'],

@@ -1,0 +1,49 @@
+---
+// Cross-links for product pages: matching real projects, then garage screens, pricing and compare.
+import { Image } from 'astro:assets';
+import { PROJECTS, photos, altFor, fit } from '../data/projects';
+interface Props { match?: 'fold' | 'fixed' | 'any'; title?: string; skip?: string }
+const { match = 'any', title = 'See it on real Houston homes', skip } = Astro.props;
+const want = match === 'fold' ? 'Aluminum folding screens' : match === 'fixed' ? 'Fixed steel mesh' : null;
+const hits = PROJECTS.filter((p) => photos(p).length && (!want || p.systems.includes(want)));
+// Fixed Screen has few projects, so fill up with the others to always show three.
+const list = [...hits, ...PROJECTS.filter((p) => photos(p).length && !hits.includes(p))].filter((p) => p.kind !== 'Door' || match === 'fixed').slice(0, 3);
+const more = [
+  { href: '/garage-screens/', t: 'Garage screens', d: 'Folding screen doors for one, two or three bays.' },
+  { href: '/pricing/', t: 'Pricing', d: 'Installed prices for every system, by patio size.' },
+  { href: '/compare/', t: 'Compare', d: 'How A&E stacks up against sunrooms and motorized screens.' },
+  { href: '/projects/', t: 'All projects', d: 'Every finished job, with open and closed photos.' },
+].filter((m) => m.href !== skip);
+---
+<section class="band" aria-labelledby="rel-title">
+  <div class="wrap stack-lg">
+    <h2 id="rel-title" class="h2">{title}</h2>
+    <div class="rel-grid">
+      {list.map((p) => { const ph = photos(p)[0]; return (
+        <a class="rel-card" href={`/projects/${p.slug}/`}>
+          <Image src={ph.img} widths={fit([400, 720], ph.img)} sizes="(max-width: 760px) 100vw, 380px" alt={altFor(p, ph.caption)} loading="lazy" />
+          <span class="rel-cap"><b>{p.title}</b><span>{p.city}, TX · {p.systems.join(' + ')}</span></span>
+        </a>
+      ); })}
+    </div>
+    <ul class="rel-more">
+      {more.map((m) => <li><a href={m.href}>{m.t}</a><span>{m.d}</span></li>)}
+    </ul>
+  </div>
+</section>
+<style>
+  .rel-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .rel-card { display: block; position: relative; overflow: hidden; color: var(--ink); text-decoration: none; background: var(--honey-2); aspect-ratio: 4 / 3; }
+  .rel-card :global(img) { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .rel-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(42, 37, 34, .9) 0%, rgba(42, 37, 34, 0) 55%); }
+  .rel-cap { position: absolute; left: 14px; right: 14px; bottom: 12px; z-index: 1; display: grid; gap: 2px; }
+  .rel-cap b { font-weight: 800; font-stretch: 78%; font-size: 1.2rem; text-transform: uppercase; line-height: 1.05; }
+  .rel-cap span { font-family: var(--mono); font-size: .76rem; font-weight: 600; color: var(--yellow); }
+  .rel-card:hover b { color: var(--yellow); }
+  .rel-more { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .rel-more li { border-top: 2px solid var(--yellow); padding-top: 12px; display: grid; gap: 4px; min-width: 0; }
+  .rel-more a { font-weight: 800; font-stretch: 80%; font-size: 1.15rem; text-transform: uppercase; }
+  .rel-more span { color: var(--ink-2); font-size: var(--step--1); }
+  @media (max-width: 900px) { .rel-more { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 760px) { .rel-grid { grid-template-columns: minmax(0, 1fr); } }
+</style>

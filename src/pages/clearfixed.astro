@@ -1,0 +1,18 @@
+---
+import ProductPage from '../components/ProductPage.astro';
+import { FAQ } from '../data/site';
+import img from '../assets/photos/clearfixed-polycarbonate-panels.jpg';
+---
+<ProductPage
+  id="clearfixed"
+  title="Clearfixed Polycarbonate Patio Panels Houston | A&E"
+  description="Clearfixed turns a covered patio into a 3-season room with a wall of tinted polycarbonate panels. Built in Houston, installed by our crew. From $31 per sq ft."
+  h1={['Clearfixed', 'tinted panel walls']}
+  img={img} alt="Clearfixed tinted polycarbonate panels with a door on an A&E patio enclosure" caption="Clearfixed panels with a door."
+  points={[
+    ['A wall of windows', 'Tinted panels stay in place and fill every opening you choose, so wind and rain stop at the patio edge.'],
+    ['Cut to your roofline', 'Panels can be cut into arches and angles on our angle saw, priced at 1.5 times the base rate.'],
+    ['The lowest price of the three', 'Clearfixed starts at $31 per sq ft of opening, installed. Fixed panels are rated to 100 mph.'],
+  ]}
+  faq={[FAQ.room[2], FAQ.room[1], FAQ.room[3], FAQ.room[4], FAQ.general[0], FAQ.general[1]]}
+/>

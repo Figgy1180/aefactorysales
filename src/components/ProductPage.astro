@@ -1,0 +1,132 @@
+---
+// One page per polycarbonate system (Clearfixed, Clearfold, Hybrid). All facts come from src/data/site.ts.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Base from '../layouts/Base.astro';
+import PageHero from './PageHero.astro';
+import Faq from './Faq.astro';
+import QuoteForm from './QuoteForm.astro';
+import RelatedLinks from './RelatedLinks.astro';
+import { FAQ, FACTS, SITE, SIZES, WARRANTY, byId, range, type QA } from '../data/site';
+interface Props {
+  id: 'clearfixed' | 'clearfold' | 'hybrid';
+  title: string; description: string; h1: [string, string];
+  img: ImageMetadata; alt: string; caption: string;
+  points: [string, string][]; faq: QA[];
+}
+const { id, title, description, h1, img, alt, caption, points, faq } = Astro.props;
+const p = byId(id);
+const trio = ['clearfixed', 'clearfold', 'hybrid'].map(byId);
+const moves = { clearfixed: 'Stays in place', clearfold: 'Folds open on our track', hybrid: 'Folds open on our track' } as Record<string, string>;
+const crumbs = [{ name: '3-season rooms', href: '/three-season-rooms/' }, { name: p.name, href: p.href }];
+const product = {
+  '@context': 'https://schema.org', '@type': 'Product',
+  name: `${p.name}: ${p.kind.toLowerCase()}`,
+  brand: { '@type': 'Brand', name: 'A&E Factory Sales' },
+  manufacturer: { '@id': `${SITE.url}/#business` },
+  description: p.blurb,
+  image: new URL(img.src, SITE.url).href,
+  offers: {
+    '@type': 'Offer', priceCurrency: 'USD', availability: 'https://schema.org/InStock', seller: { '@id': `${SITE.url}/#business` },
+    priceSpecification: { '@type': 'UnitPriceSpecification', price: p.msrp, priceCurrency: 'USD', unitText: 'square foot of opening, installed' },
+  },
+};
+---
+<Base title={title} description={description} crumbs={crumbs} schema={[product]} image={img}>
+  <PageHero crumbs={crumbs}>
+    <div class="split">
+      <div class="stack-lg">
+        <h1 class="display">{h1[0]} <span class="y">{h1[1]}</span></h1>
+        <p class="sub">{p.blurb}</p>
+        <div class="actions"><a class="btn" href="#quote">Book my free site visit</a><a class="btn btn-line" href="#price">What it costs</a></div>
+      </div>
+      <figure class="dim-frame draw" style="margin:30px 30px 0 0">
+        <span class="dim h" aria-hidden="true"><span>{p.name}</span></span>
+        <Image src={img} alt={alt} widths={[420, 720]} sizes="(max-width: 820px) 100vw, 520px" loading="eager" fetchpriority="high" style="aspect-ratio:4/5;object-fit:cover" />
+        <figcaption class="fine" style="padding-top:8px">{caption}</figcaption>
+      </figure>
+    </div>
+  </PageHero>
+
+  <section class="band on-paper">
+    <div class="wrap stack-lg">
+      <h2 class="h2">Why choose <span class="y">{p.name}</span></h2>
+      <div class="pp-points">
+        {points.map(([t, d]) => <div><h3>{t}</h3><p>{d}</p></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="band raised" id="price">
+    <div class="wrap split" style="align-items:start">
+      <div>
+        <span class="facts-label">The facts</span>
+        <table class="facts">
+          <caption>{p.name}</caption>
+          <tbody>
+            {p.specs.map(([k, v]) => <tr><th scope="row">{k}</th><td>{v}</td></tr>)}
+            <tr><th scope="row">Price</th><td>From ${p.msrp} per sq ft of opening, installed</td></tr>
+            <tr><th scope="row">Typical patio</th><td class="tnum">{SIZES.map((s) => `${s.name} ${range(p.msrp, s.low, s.high)}`).join('; ')}</td></tr>
+            <tr><th scope="row">Frame colors</th><td>Night Gray or Bright White</td></tr>
+            <tr><th scope="row">Install</th><td>Within a month of your order, by our own crew</td></tr>
+            <tr><th scope="row">Warranty</th><td>{WARRANTY}</td></tr>
+          </tbody>
+        </table>
+        <p class="fine" style="margin-top:10px">Sizes: {SIZES.map((s) => `${s.name.toLowerCase()} is ${s.eg.toLowerCase()}`).join('; ')}. We price the open wall area we fill, and your exact number comes from a free site visit.</p>
+      </div>
+      <div class="stack">
+        <h2 class="h3">What a 3-season room is, and isn't</h2>
+        <p class="muted">It is shaded, sheltered and ventilated through screen doors and doors that open on both sides. It is not air-conditioned. On the hottest August afternoons it feels close to the outdoor temperature, just out of the sun, wind and rain. Spring, fall and most of winter are when it shines.</p>
+        <p class="muted">Midnight Smoke panels tested at {FACTS.vlt} visible light transmission and {FACTS.shgc} solar heat gain coefficient.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap stack-lg">
+      <h2 class="h2">{p.name} next to <span class="y">the other two</span></h2>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead><tr><th scope="col">System</th><th scope="col">What it is</th><th scope="col">Opens?</th><th scope="col">Installed price</th></tr></thead>
+          <tbody>
+            {trio.map((t) => (
+              <tr>
+                <th scope="row">{t.id === id ? t.name : <a href={t.href}>{t.name}</a>}</th>
+                <td class={t.id === id ? 'ours' : undefined}>{t.kind}</td>
+                <td class={t.id === id ? 'ours' : undefined}>{moves[t.id]}</td>
+                <td class={t.id === id ? 'ours' : undefined}>From ${t.msrp} per sq ft</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="muted">Want screens instead of panels on some openings? Look at <a href="/hexfold/">Hexfold</a> folding screens or <a href="/screens/">Fixed Screen</a> in stainless steel. We mix systems opening by opening. See the whole family on the <a href="/three-season-rooms/">3-season rooms page</a>.</p>
+    </div>
+  </section>
+
+  <section class="band on-paper">
+    <div class="wrap split" style="align-items:start">
+      <h2 class="h2">{p.name} <span class="y">questions</span></h2>
+      <Faq items={faq} />
+    </div>
+  </section>
+
+  <RelatedLinks match="any" title="Patios our crew has enclosed" />
+
+  <section class="band raised" id="quote">
+    <div class="wrap split" style="align-items:start">
+      <div class="stack">
+        <h2 class="h2">Get your <span class="y">exact price</span></h2>
+        <p class="lede">Free site visit. We measure every opening, bring tint samples and give you a number you can plan around.</p>
+      </div>
+      <QuoteForm id={`${id}-visit`} source={`${p.name} page`} />
+    </div>
+  </section>
+</Base>
+<style>
+  .pp-points { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+  .pp-points > div { border-top: 2px solid var(--paper-ink); padding-top: 14px; min-width: 0; }
+  .pp-points h3 { font-weight: 800; font-stretch: 78%; font-size: 1.3rem; text-transform: uppercase; }
+  .pp-points p { color: var(--paper-2); margin-top: 6px; }
+  @media (max-width: 760px) { .pp-points { grid-template-columns: minmax(0, 1fr); } }
+</style>

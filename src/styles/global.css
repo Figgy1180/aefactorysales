@@ -268,6 +268,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .faq details { border-bottom: 1px solid var(--line); }
 .on-paper .faq details { border-bottom-color: var(--paper-line); }
 .faq summary { cursor: pointer; list-style: none; padding: 18px 44px 18px 0; position: relative; font-weight: 700; font-size: 1.15rem; }
+.faq summary h3 { font: inherit; margin: 0; display: inline; }
 .faq summary::-webkit-details-marker { display: none; }
 .faq summary::after { content: "+"; position: absolute; right: 6px; top: 10px; font-size: 1.9rem; font-weight: 400; color: var(--yellow); }
 .on-paper .faq summary::after { color: var(--paper-ink); }
