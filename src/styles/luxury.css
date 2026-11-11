@@ -1,0 +1,100 @@
+/* Luxury layer (branch luxury-2026). Sits on top of global.css so the whole look can be switched off
+   by removing one import. Direction: quiet, architectural, high-end. Deep warm black, brass used
+   sparingly, an editorial serif for headlines, sentence case, more air, thin rules, no blueprint grid. */
+@import '@fontsource/instrument-serif/latin-400.css';
+@import '@fontsource/instrument-serif/latin-400-italic.css';
+
+:root {
+  --honey: #171412;        /* near-black, warm */
+  --honey-2: #211D1A;
+  --honey-3: #2C2723;
+  --yellow: #C9A86A;       /* brass: accents, rules, primary action */
+  --yellow-hi: #DDBF83;
+  --cream: #F1ECE4;        /* stone */
+  --cream-2: #E6DFD4;
+  --ink: #F4EFE7;
+  --ink-2: #B9AFA2;
+  --paper-ink: #171412;
+  --paper-2: #5E554C;
+  --paper-line: #CFC5B6;
+  --line: rgba(201, 168, 106, 0.28);
+  --grid: transparent;
+  --serif: 'Instrument Serif', 'Cormorant Garamond', Georgia, serif;
+  --mono: var(--font);
+  --step-3: clamp(2.2rem, 4.4vw, 3.2rem);
+  --step-4: clamp(2.6rem, 5.6vw, 4.2rem);
+  --step-5: clamp(3rem, 7.2vw, 5.8rem);
+  --sec: clamp(72px, 10vw, 136px);
+}
+body { font-weight: 380; letter-spacing: .005em; }
+
+/* Headlines: editorial serif, sentence case, normal width */
+.display, .h2, .h3, h1, h2,
+[class*="title"], .cb h2, .cb-big, .book-k, .sec-head h2 {
+  font-family: var(--serif) !important;
+  font-weight: 400 !important;
+  font-stretch: 100% !important;
+  text-transform: none !important;
+  letter-spacing: -0.012em !important;
+}
+.display { line-height: 1.0; }
+.h2 { line-height: 1.04; }
+.display .y, .h2 .y { color: var(--yellow); font-style: italic; }
+.on-paper .h2 .y { color: var(--paper-ink); text-decoration: none; font-style: italic; }
+h3, .h3 { font-size: clamp(1.45rem, 2.2vw, 1.8rem); line-height: 1.12; }
+
+/* Small labels: tracked caps in brass instead of mono */
+.eyebrow, .k, .kicker, .tag, .cap span, .rel-cap span, .price-line span, figcaption, legend {
+  letter-spacing: .16em; font-weight: 500;
+}
+.eyebrow { font-family: var(--font) !important; font-size: .78rem !important; text-transform: uppercase; color: var(--yellow); }
+
+/* Remove the blueprint grid and heavy rules */
+.blueprint { background-image: none !important; }
+hr, .rule { border-color: var(--line); }
+
+/* Buttons: refined, tracked, square */
+.btn {
+  font-family: var(--font); font-weight: 600; font-stretch: 100%; text-transform: uppercase;
+  letter-spacing: .14em; font-size: .82rem; padding: 17px 28px; border-width: 1px; border-radius: 0;
+  box-shadow: none;
+}
+.btn-big { padding: 20px 34px; font-size: .86rem; }
+.btn-line { color: var(--ink); border-color: rgba(244, 239, 231, .45); }
+.btn-line:hover { color: var(--ink); background: rgba(244, 239, 231, .07); border-color: var(--ink); }
+.on-paper .btn-line { color: var(--paper-ink); border-color: var(--paper-ink); }
+.cb-fab { font-stretch: 100%; letter-spacing: .14em; font-size: .8rem; font-weight: 600; border-width: 1px; }
+
+/* Cards and panels: thinner borders, quieter */
+.book-card, .card, .product, .pick, .estimate, .rel-card, .tile { border-top-width: 1px !important; }
+input, select, textarea { border-width: 1px !important; border-radius: 0; }
+
+/* Photos: let them breathe */
+.hero-media, .mosaic .tile, .rel-card { box-shadow: 0 30px 80px rgba(0, 0, 0, .35); }
+
+/* Positioning band: A&E vs ordinary nylon screens */
+.vs { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); border-top: 1px solid var(--line); }
+.vs > div { padding: 18px 12px 18px 0; border-bottom: 1px solid var(--line); min-width: 0; }
+.vs .vs-h { font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-2); padding-top: 22px; }
+.vs .vs-k { color: var(--ink-2); }
+.vs .vs-us { color: var(--ink); }
+.vs .vs-us b { color: var(--yellow); font-weight: 500; }
+@media (max-width: 640px) {
+  .vs { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .vs .vs-k { grid-column: 1 / -1; padding-bottom: 0; border-bottom: 0; color: var(--yellow); font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; }
+  .vs .vs-h:first-child { display: none; }
+}
+
+/* Stats, captions and card titles: serif numbers, no condensed caps */
+.proof dt, .est-range, .fold-facts dt, .trust b, .fam-h, .cap b, .rel-cap b, .pets h3, .rel-more a, .price-line b {
+  font-family: var(--serif) !important; font-weight: 400 !important; font-stretch: 100% !important;
+  text-transform: none !important; letter-spacing: -0.01em !important;
+}
+.proof dt, .fold-facts dt, .price-line b { font-size: 1.9rem !important; }
+.cap b, .rel-cap b { font-size: 1.35rem !important; }
+.picker legend { font-stretch: 100% !important; letter-spacing: .16em; font-size: .78rem !important; font-weight: 600 !important; }
+.sub { font-style: normal; }
+.visit-steps h3 { font-family: var(--serif) !important; font-weight: 400 !important; font-stretch: 100% !important; text-transform: none !important; font-size: 1.5rem; }
+.visit-steps .n, .visit-steps b:first-child { background: transparent; border: 1px solid var(--yellow); color: var(--paper-ink); font-family: var(--serif); font-weight: 400; }
+legend { letter-spacing: 0; }
+.bv-pick span { font-stretch: 100% !important; letter-spacing: .12em; font-size: .78rem; font-weight: 600 !important; border-width: 1px !important; }
