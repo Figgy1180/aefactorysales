@@ -133,6 +133,10 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font); text-wrap: balance; line-h
 .actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
 /* header */
+.season-bar { background: var(--yellow); color: var(--paper-ink); font-size: var(--step--1); }
+.season-bar p { padding-block: 8px; text-align: center; }
+.season-bar a { color: var(--paper-ink); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; white-space: nowrap; }
+.season-bar span { margin-right: 4px; }
 .top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: var(--honey); border-bottom: 2px solid var(--yellow); }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 31; background: var(--honey); }
 .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 22px; padding-block: 10px; }

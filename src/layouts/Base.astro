@@ -67,6 +67,7 @@ const breadcrumb = crumbs.length
 
 const allSchema = [business, ...(breadcrumb ? [breadcrumb] : []), ...schema];
 const isCurrent = (href: string) => path === href || path === href.replace(/\/$/, '') || path === href.replace(/\/$/, '.html');
+import { HOLIDAY, LOGO, FAVICON, LOGO_H } from '../data/season';
 import CallMeBack from '../components/CallMeBack.astro';
 ---
 <!doctype html>
@@ -90,17 +91,22 @@ import CallMeBack from '../components/CallMeBack.astro';
     <meta name="geo.region" content="US-TX" />
     <meta name="geo.placename" content="Houston" />
     <link rel="preload" href={archivoUrl} as="font" type="font/woff2" crossorigin />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href={FAVICON} type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     {allSchema.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
   </head>
   <body data-default-src={Astro.props.defaultSrc}>
     <a class="skip" href="#main">Skip to content</a>
+    {HOLIDAY && (
+      <div class="season-bar">
+        <p class="wrap"><span aria-hidden="true">&#10052;</span> <b>Winter in Texas:</b> 78&deg; Monday, 39&deg; Tuesday. Keep using your patio either way. <a href="/winter/">See winter rooms</a></p>
+      </div>
+    )}
     <header class="top">
       <div class="wrap">
         <a class="brand" href="/" aria-label="A&E Factory Sales home">
-          <img src="/brand/ae-bee-logo-on-dark.svg" alt="" width="104" height="53" />
+          <img src={LOGO} alt="" width="104" height={LOGO_H} />
           <span><b>A&amp;E Factory Sales</b><small>{SITE.tagline}</small></span>
         </a>
         <nav class="nav" aria-label="Main">
@@ -139,7 +145,7 @@ import CallMeBack from '../components/CallMeBack.astro';
       <div class="wrap">
         <div class="cols">
           <div>
-            <img class="foot-logo" src="/brand/ae-bee-logo-on-dark.svg" alt="A&E Factory Sales bee logo" width="120" height="61" />
+            <img class="foot-logo" src={LOGO} alt="A&E Factory Sales bee logo" width="120" height={Math.round(LOGO_H * 120 / 104)} />
             <address>
               <strong style="color:var(--ink)">{SITE.name}</strong><br />
               {SITE.street}<br />

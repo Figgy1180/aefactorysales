@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="195 10 890 500" role="img" aria-label="A&amp;E bee logo with a Santa hat">
+<title>A&amp;E bee logo, holiday edition</title>
+<defs>
+  <!-- Shading: yellow cells lit from the top left, black body with a soft sheen, white clipboard with a slight falloff. -->
+  <linearGradient id="hy" x1="0" y1="0" x2="0.35" y2="1">
+    <stop offset="0" stop-color="#FFEC6B"/>
+    <stop offset="0.55" stop-color="#FEDA00"/>
+    <stop offset="1" stop-color="#D9A900"/>
+  </linearGradient>
+  <linearGradient id="hb" x1="0" y1="0" x2="0.3" y2="1">
+    <stop offset="0" stop-color="#3A3A3A"/>
+    <stop offset="0.5" stop-color="#111111"/>
+    <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <linearGradient id="hr" x1="0" y1="0" x2="0.4" y2="1">
+    <stop offset="0" stop-color="#E8322B"/>
+    <stop offset="1" stop-color="#A3161B"/>
+  </linearGradient>
+  <linearGradient id="hw" x1="0" y1="0" x2="0.4" y2="1">
+    <stop offset="0" stop-color="#FFFFFF"/>
+    <stop offset="1" stop-color="#E4E4E4"/>
+  </linearGradient>
+  <filter id="sh" x="-10%" y="-10%" width="120%" height="130%">
+    <feDropShadow dx="0" dy="10" stdDeviation="9" flood-color="#000" flood-opacity="0.55"/>
+  </filter>
+</defs>
+<g stroke-linejoin="round" filter="url(#sh)">
+  <polygon points="377.0,146.0 506.0,220.5 506.0,369.5 377.0,444.0 248.0,369.5 248.0,220.5" fill="url(#hy)" stroke="#000" stroke-width="32"/>
+  <polygon points="899.0,146.0 1028.0,220.5 1028.0,369.5 899.0,444.0 770.0,369.5 770.0,220.5" fill="url(#hy)" stroke="#000" stroke-width="32"/>
+  <polygon points="638.0,146.0 767.0,220.5 767.0,369.5 638.0,444.0 509.0,369.5 509.0,220.5" fill="url(#hw)" stroke="#000" stroke-width="32"/>
+  <polygon points="638,295 767.0,369.5 638,444 509.0,369.5" fill="url(#hy)" stroke="#000" stroke-width="32"/>
+  <!-- Thin top highlight on the yellow cells for a bit of bevel -->
+  <g fill="none" stroke="#FFF6B0" stroke-opacity="0.55" stroke-width="7" stroke-linecap="round">
+    <polyline points="270,232 377,170 484,232"/>
+    <polyline points="792,232 899,170 1006,232"/>
+  </g>
+  <g transform="translate(838 356) rotate(21)">
+    <rect x="-76" y="-84" width="152" height="168" rx="12" fill="url(#hw)" stroke="#000" stroke-width="11"/>
+    <rect x="-22" y="-96" width="44" height="22" rx="6" fill="#000"/>
+    <g stroke="#000" stroke-width="11" stroke-linecap="round">
+      <line x1="-44" y1="-40" x2="44" y2="-40"/>
+      <line x1="-44" y1="-12" x2="44" y2="-12"/>
+      <line x1="-44" y1="16" x2="44" y2="16"/>
+      <line x1="-44" y1="44" x2="10" y2="44"/>
+    </g>
+  </g>
+  <!-- Santa hat -->
+  <g stroke="#000" stroke-linejoin="round">
+    <path d="M532 200 Q 590 92 676 62 Q 772 34 826 132 L 788 150 Q 762 104 718 108 Q 696 150 748 200 Z" fill="url(#hr)" stroke-width="16"/>
+    <circle cx="808" cy="152" r="32" fill="url(#hw)" stroke-width="13"/>
+    <rect x="504" y="178" width="270" height="56" rx="28" fill="url(#hw)" stroke-width="15" transform="rotate(-5 639 206)"/>
+  </g>
+</g>
+</svg>
