@@ -60,43 +60,12 @@ const videoLd = {
 };
 ---
 <Base
-  title={HOLIDAY ? 'Winter Patio Enclosures & 3-Season Rooms Houston | A&E' : 'Patio Enclosures & 3-Season Rooms Houston | A&E Factory Sales'}
-  description={HOLIDAY ? 'Cold snap? Keep using your patio. Tinted polycarbonate 3-season rooms block wind and rain on Houston covered patios. Built here, installed within a month.' : 'Polycarbonate 3-season rooms and metal patio screens built in our Houston factory, installed by our crew within a month. See prices, book a free site visit.'}
+  title='Patio Enclosures & 3-Season Rooms Houston | A&E Factory Sales'
+  description='Polycarbonate 3-season rooms and metal patio screens built in our Houston factory, installed by our crew within a month. See prices, book a free site visit.'
   schema={[videoLd]}
 >
-  {HOLIDAY ? (
-  <section class="hero blueprint winter-hero" aria-labelledby="hero-title">
-    <div class="snow" aria-hidden="true"></div>
-    <CornerArt />
-    <div class="wrap hero-grid">
-      <div class="h-title">
-        <p class="eyebrow">Winter in Texas</p>
-        <h1 id="hero-title" class="display">Cold snap? <span class="y">Keep using your patio.</span></h1>
-      </div>
-      <div class="h-body stack-lg">
-        <p class="sub">Tinted polycarbonate panels turn your covered patio into a 3-season room that blocks the north wind and keeps rain off the furniture. Built in our Houston factory, installed by our own crew.</p>
-        <div class="actions">
-          <a class="btn btn-big" href="#book" data-cb-open>Book my free site visit</a>
-          <a class="btn btn-line" href="/free-quote/?use=enclose">See prices first</a>
-        </div>
-        <p class="micro">Free. We measure, bring samples and leave you a written quote. Or call <a href={SITE.phoneHref}>{SITE.phone}</a>.</p>
-        <dl class="proof">
-          <div><dt>From ${cf.msrp}</dt><dd>per sq ft of opening, installed</dd></div>
-          <div><dt>1 month</dt><dd>or less, order to install</dd></div>
-          <div><dt>Lifetime</dt><dd>frame warranty, 3 years on parts</dd></div>
-        </dl>
-      </div>
-      <div class="hero-media">
-        <div class="hero-frame draw">
-          <span class="dim h" aria-hidden="true"><span>Real A&amp;E tinted panels</span></span>
-          <figure class="winter-photo"><Image src={clearfixed} alt="A&E wall of tinted polycarbonate panels with a door, on a covered patio" widths={[420, 621]} quality={80} sizes="(max-width: 900px) 90vw, 470px" loading="eager" fetchpriority="high" /></figure>
-        </div>
-        <p class="hint">Midnight Smoke panels: {FACTS.vlt} of daylight in, wind and rain out. <a href="/winter/">What a winter room does, and doesn't</a></p>
-      </div>
-    </div>
-  </section>
-  ) : (
-  <section class="hero blueprint" aria-labelledby="hero-title">
+  <section class:list={['hero blueprint', HOLIDAY && 'winter-hero']} aria-labelledby="hero-title">
+    {HOLIDAY && <div class="snow" aria-hidden="true"></div>}
     <CornerArt />
     <div class="wrap hero-grid">
       <div class="h-title">
@@ -126,7 +95,6 @@ const videoLd = {
       </div>
     </div>
   </section>
-  )}
 
   <section class="band on-paper offer" id="book" aria-labelledby="offer-title">
     <div class="wrap offer-grid">
