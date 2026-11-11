@@ -108,7 +108,7 @@ import CallMeBack from '../components/CallMeBack.astro';
         </nav>
         <div class="top-actions">
           <a class="top-phone" href={SITE.phoneHref}>{SITE.phone}</a>
-          <a class="btn" href="/free-quote/">Get my price</a>
+          <a class="btn" href="/free-quote/" data-cb-open>Book free visit</a>
           <details class="menu">
             <summary aria-label="Open menu">Menu</summary>
             <nav aria-label="Mobile">
@@ -117,7 +117,7 @@ import CallMeBack from '../components/CallMeBack.astro';
               <a href="/garage-screens/">Garage screens</a>
               <a href="/faq/">FAQ</a>
               <a href={SITE.phoneHref}>Call {SITE.phone}</a>
-              <a class="btn" href="/free-quote/">Get my price</a>
+              <a class="btn" href="/free-quote/" data-cb-open>Book free visit</a>
             </nav>
           </details>
         </div>
@@ -132,7 +132,7 @@ import CallMeBack from '../components/CallMeBack.astro';
       <div class="wrap">
         <b>Free design &amp; estimate</b>
         <a class="phone" href={SITE.phoneHref}>{SITE.phone}</a>
-        <a class="btn" href="/free-quote/">Book a site visit</a>
+        <a class="btn" href="/free-quote/" data-cb-open>Book my free site visit</a>
       </div>
     </section>
     <footer class="foot blueprint">
@@ -189,7 +189,7 @@ import CallMeBack from '../components/CallMeBack.astro';
         </p>
       </div>
     </footer>
-    <div class="callbar"><a href={SITE.phoneHref}>Call us</a><button type="button" data-cb-open aria-haspopup="dialog">Call me back</button></div>
+    <div class="callbar"><a href={SITE.phoneHref}>Call us</a><button type="button" data-cb-open aria-haspopup="dialog">Book free visit</button></div>
     <CallMeBack />
     <script>
     import { captureSource } from '../scripts/source';

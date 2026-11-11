@@ -1,44 +1,21 @@
 ---
-// "Call me back": the fastest way to reach A&E. Name + phone, nothing else required.
-// Opens from any [data-cb-open] button (floating button, mobile bar, links on quote pages).
-// Sends to info@ through the same Web3Forms key, subject starts with "CALL BACK" so it stands out.
+// Site-wide "Book free visit" dialog. Opens from any [data-cb-open] button (header, floating button,
+// mobile bar, section buttons). Same two required fields as before (name, phone), so it stays fast.
 import { SITE } from '../data/site';
+import BookVisitForm from './BookVisitForm.astro';
 ---
 <button class="cb-fab" type="button" data-cb-open aria-haspopup="dialog">
-  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-  Call me back
+  <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 10h18M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+  Book free visit
 </button>
 
 <dialog class="cb" id="callback" aria-labelledby="cb-title">
   <div class="cb-head">
-    <h2 id="cb-title">We'll call you</h2>
+    <h2 id="cb-title">Book your free site visit</h2>
     <button type="button" class="cb-x" data-cb-close aria-label="Close">&times;</button>
   </div>
-  <p class="cb-lede">Leave your name and number. A real person from our Houston team calls you back, no questionnaire.</p>
-  <form class="form quote-form" id="cb-form" data-key={SITE.formKey} data-inline="1" data-invalid="Please add your name and a phone number we can call." novalidate>
-    <input type="hidden" name="subject" value="CALL BACK request from aefactorysales.com" />
-    <input type="hidden" name="from_name" value="A&E website" />
-    <input type="hidden" name="lead_source" value="Call me back button" />
-    <label class="hp" aria-hidden="true">Leave this empty <input type="checkbox" name="botcheck" tabindex="-1" /></label>
-    <div class="field"><label for="cb-name">Name</label><input id="cb-name" name="name" autocomplete="name" required /></div>
-    <div class="field"><label for="cb-phone">Phone</label><input id="cb-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" minlength="10" required /></div>
-    <div class="field"><label for="cb-about">About <span class="opt-l">(optional)</span></label>
-      <select id="cb-about" name="project">
-        <option>Not sure yet</option>
-        <option>3-season room (polycarbonate panels)</option>
-        <option>Patio screens (Hexfold or fixed)</option>
-        <option>Garage screen</option>
-        <option>Repair or warranty</option>
-      </select>
-    </div>
-    <button class="btn" type="submit">Call me back</button>
-    <p class="form-note" role="status" hidden></p>
-  </form>
-  <div class="cb-done" hidden>
-    <p class="cb-big">Got it, thank you.</p>
-    <p>We'll call you shortly. Need us right now? <a href={SITE.phoneHref}>Call {SITE.phone}</a></p>
-    <button type="button" class="btn btn-line" data-cb-close>Close</button>
-  </div>
+  <p class="cb-lede">About 45 minutes at your patio. We measure, bring samples and leave you a written quote.</p>
+  <BookVisitForm id="cb-form" />
   <p class="cb-alt">Rather call yourself? <a href={SITE.phoneHref}>{SITE.phone}</a></p>
 </dialog>
 
@@ -48,18 +25,12 @@ import { SITE } from '../data/site';
   .cb-fab:hover { transform: translateY(-2px); }
   .cb-fab:focus-visible { outline: 3px solid var(--cream); outline-offset: 3px; }
   @media (max-width: 1060px) { .cb-fab { display: none; } }
-  .cb { width: min(440px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); border: 3px solid var(--yellow); background: var(--honey); color: var(--ink); padding: 26px 26px 20px; box-sizing: border-box; }
+  .cb { width: min(480px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); border: 3px solid var(--yellow); background: var(--honey); color: var(--ink); padding: 26px 26px 20px; box-sizing: border-box; }
   .cb::backdrop { background: rgba(0, 0, 0, .6); }
   .cb-head { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
-  .cb h2 { font-weight: 900; font-stretch: 70%; font-size: 2.1rem; line-height: 1; text-transform: uppercase; margin: 0; }
+  .cb h2 { font-weight: 900; font-stretch: 70%; font-size: 2rem; line-height: 1; text-transform: uppercase; margin: 0; }
   .cb-x { background: none; border: 0; color: var(--ink); font-size: 2rem; line-height: 1; cursor: pointer; padding: 0 4px; min-width: 44px; min-height: 44px; }
   .cb-lede { color: var(--ink-2); margin: 10px 0 16px; }
-  .cb .form { display: grid; gap: 12px; }
-  .cb .btn { width: 100%; justify-content: center; }
-  .opt-l { font-weight: 400; color: var(--ink-2); }
-  .cb-done { display: grid; gap: 12px; }
-  .cb-done[hidden] { display: none; }
-  .cb-big { font-weight: 900; font-stretch: 70%; font-size: 1.8rem; text-transform: uppercase; color: var(--yellow); }
   .cb-alt { margin-top: 14px; font-size: var(--step--1); color: var(--ink-2); text-align: center; }
   .cb a { color: var(--yellow); }
 </style>
@@ -71,14 +42,18 @@ import { SITE } from '../data/site';
   if (dlg) {
     document.addEventListener('click', (e) => {
       const t = e.target as HTMLElement;
-      if (t.closest('[data-cb-open]')) {
+      const opener = t.closest<HTMLElement>('[data-cb-open]');
+      if (opener) {
+        // A button that points at the on-page booking form scrolls there instead, when the form exists.
+        const inline = opener.getAttribute('href') === '#book' && document.getElementById('book');
+        if (inline) return;
         e.preventDefault();
         dlg.showModal();
-        (dlg.querySelector('#cb-name') as HTMLInputElement | null)?.focus();
+        (dlg.querySelector('input[name=name]') as HTMLInputElement | null)?.focus();
       } else if (t.closest('[data-cb-close]')) {
         dlg.close();
       } else if (t === dlg) {
-        dlg.close(); // click on the backdrop
+        dlg.close();
       }
     });
   }

@@ -5,7 +5,7 @@ import { SITE } from '../data/site';
 interface Props { id?: string; compact?: boolean; source?: string }
 const { id = 'visit', compact = false, source = 'Website' } = Astro.props;
 ---
-<p class="fast">In a hurry? <button type="button" class="linkbtn" data-cb-open>Just have us call you</button></p>
+<p class="fast">In a hurry? <button type="button" class="linkbtn" data-cb-open>Book with just your name and phone</button></p>
 <form class="form quote-form" id={id} data-key={SITE.formKey} data-next="/thank-you/" novalidate>
   <input type="hidden" name="subject" value="New site visit request from aefactorysales.com" />
   <input type="hidden" name="from_name" value="A&E website" />
