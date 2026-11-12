@@ -1,7 +1,7 @@
 ---
 title: Polycarbonate vs glass patio enclosure cost in Houston
 seoTitle: "Polycarbonate vs Glass Patio Enclosure Cost, Houston (2026)"
-description: What a polycarbonate 3-season room costs compared with a glass sunroom on the same Houston patio, plus the honest trade-offs on weight, impact, scratching and heat.
+description: What a polycarbonate 3-season room costs compared with a glass sunroom on the same Houston patio, plus the trade-offs on weight, impact, scratching and heat.
 answer: "On a 16 × 14 ft covered patio with two open sides, a polycarbonate 3-season room from AE runs about $7,400 to $9,600 installed. The same space as a 3-season sunroom runs about $18,000 to $52,000, and as a 4-season glass sunroom $45,000 to $90,000 (HomeGuide, Oct 2026). Polycarbonate is lighter and flexes instead of shattering; glass resists scratching better."
 published: "2026-11-05"
 updated: "2026-11-05"
