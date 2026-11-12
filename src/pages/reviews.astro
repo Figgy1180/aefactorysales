@@ -15,8 +15,8 @@ const crumbs = [{ name: 'Reviews', href: '/reviews/' }];
     <div class="stack-lg" style="max-width:52em">
       <h1 class="display">How did <span class="y">we do?</span></h1>
       <p class="sub">If we built your patio, screens or garage enclosure, a two-minute review helps your neighbors decide and tells us what to keep doing.</p>
-      {SITE.googleReviewUrl && (
-        <div class="actions"><a class="btn" href={SITE.googleReviewUrl} rel="noopener">Review us on Google</a><a class="btn btn-line" href="#write">Or write it here</a></div>
+      {(SITE.googleReviewUrl || SITE.googleProfileUrl) && (
+        <div class="actions"><a class="btn" href={SITE.googleReviewUrl || SITE.googleProfileUrl} rel="noopener">Review us on Google</a><a class="btn btn-line" href="#write">Or write it here</a></div>
       )}
     </div>
   </PageHero>

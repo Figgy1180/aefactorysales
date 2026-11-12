@@ -89,7 +89,7 @@ const service = {
     <div class="wrap split" style="align-items:start">
       <div class="stack">
         <h2 class="h2">Book a free site visit <span class="y">in {a.city}</span></h2>
-        <p class="lede">We come to your home, measure every opening, bring samples and leave you a written quote.</p>
+        <p class="lede">We come to your home, measure every opening, and bring samples. Your written quote is emailed within a day of the visit.</p>
         <p class="muted" style="color:var(--paper-2)">Also serving {others.map((o, i) => <>{i ? ' and ' : ''}<a href={`/service-area/${o.slug}/`} style="color:var(--paper-ink)">{o.label}</a></>)}, and the rest of <a href="/service-area/" style="color:var(--paper-ink)">greater Houston</a>.</p>
       </div>
       <div class="ca-card"><BookVisitForm id={`${a.slug}-book`} version={`city-${a.slug}`} /></div>

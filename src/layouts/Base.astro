@@ -71,7 +71,8 @@ const business = {
     addressCountry: 'US',
   },
   areaServed: CITIES.map((c) => ({ '@type': 'City', name: `${c}, TX` })),
-  sameAs: [SITE.factorySite, SITE.youtubeFold, ...(SITE.googleReviewUrl ? [SITE.googleReviewUrl] : [])],
+  sameAs: [SITE.googleProfileUrl, SITE.youtubeFold, SITE.factorySite],
+  hasMap: SITE.googleProfileUrl,
   knowsAbout: ['Patio enclosures', 'Retractable patio screens', 'Polycarbonate 3-season rooms', 'Stainless steel screens', 'Garage screens'],
 };
 
@@ -206,6 +207,7 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
               <li><a href="/projects/">Projects</a></li>
               <li><a href="/how-we-build/">Our factory</a></li>
               <li><a href="/reviews/">Leave a review</a></li>
+              <li><a href={SITE.googleProfileUrl} rel="noopener">Find us on Google</a></li>
               <li><a href="/dealers/">Become a dealer</a></li>
               <li><a href={SITE.factorySite} rel="noopener">Factory site</a></li>
               <li><a href="/privacy/">Privacy</a></li>

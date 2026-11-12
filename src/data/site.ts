@@ -17,9 +17,11 @@ export const SITE = {
   email: 'info@aefactorysales.com',
   factorySite: 'https://aecustomize.com',
   founded: '2022',
-  hours: 'Open 24/7 by appointment',
+  hours: 'Showroom by appointment only. Appointments available 24 hours.',
   // Paste the short review link from Google Business Profile (Home > Ask for reviews), e.g. https://g.page/r/XXXX/review
   googleReviewUrl: '',
+  // Public Google Business Profile (verified, listed as "AE Factory Sales", Patio enclosure supplier).
+  googleProfileUrl: 'https://www.google.com/maps?cid=7048360137294052373',
   // YouTube link for the fold-away video (paste the Shorts or watch URL). Empty hides the link.
   youtubeFold: 'https://youtu.be/e296PKRxLe4',
   // Web3Forms access key. Free at web3forms.com, tied to info@aefactorysales.com.
@@ -280,7 +282,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Can I see it in person?',
-      a: 'Yes. We are open 24/7 by appointment. Visit the showroom at 2609 William Tell Street, Houston, TX 77093, or book a free site visit and we will bring samples to your home.',
+      a: 'Yes. The showroom is by appointment only, and appointments are available 24 hours a day. Visit the showroom at 2609 William Tell Street, Houston, TX 77093, or book a free site visit and we will bring samples to your home.',
     },
   ],
 };
