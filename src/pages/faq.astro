@@ -14,7 +14,7 @@ const all = groups.flatMap((g) => g.items);
 const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: all.map((i) => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: i.a } })) };
 ---
 <Base
-  title="Patio Enclosure FAQ: Cost, Storms, Warranty | AE Factory Sales"
+  title="Patio Enclosure FAQ: Cost, Storms, Warranty | AE"
   description="Straight answers on Houston patio enclosures and screens: cost, polycarbonate vs glass, Hexfold, snakes, storm ratings, install time and warranty."
   crumbs={crumbs}
   schema={[ld]}
