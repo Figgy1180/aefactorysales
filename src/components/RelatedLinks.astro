@@ -9,10 +9,10 @@ const hits = PROJECTS.filter((p) => photos(p).length && (!want || p.systems.incl
 // Fixed Screen has few projects, so fill up with the others to always show three.
 const list = [...hits, ...PROJECTS.filter((p) => photos(p).length && !hits.includes(p))].filter((p) => p.kind !== 'Door' || match === 'fixed').slice(0, 3);
 const more = [
+  { href: '/patio-enclosures-houston/', t: 'Patio enclosures in Houston', d: 'Every system, prices by patio size and real projects.' },
   { href: '/garage-screens/', t: 'Garage screens', d: 'Folding screen doors for one, two or three bays.' },
   { href: '/pricing/', t: 'Pricing', d: 'Installed prices for every system, by patio size.' },
-  { href: '/compare/', t: 'Compare', d: 'How A&E stacks up against sunrooms and motorized screens.' },
-  { href: '/projects/', t: 'All projects', d: 'Every finished job, with open and closed photos.' },
+  { href: '/compare/', t: 'Compare', d: 'How AE stacks up against sunrooms and motorized screens.' },
 ].filter((m) => m.href !== skip);
 ---
 <section class="band" aria-labelledby="rel-title">

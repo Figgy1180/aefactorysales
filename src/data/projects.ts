@@ -1,4 +1,4 @@
-// Featured projects, installed by the A&E crew. Photos live in src/assets/projects/<id>/ and are
+// Featured projects, installed by the AE crew. Photos live in src/assets/projects/<id>/ and are
 // shown in file-name order (1-..., 2-...). Until a folder exists, the aesds.com photo is used.
 import type { ImageMetadata } from 'astro';
 
@@ -6,7 +6,7 @@ export type Project = {
   id: string; slug: string; title: string; city: string; kind: 'Patio' | 'Door' | 'Garage';
   systems: string[]; note?: string; img: string; source: string;
   captions?: Record<string, string>; openClosed?: [string, string]; facts?: [string, string][];
-  goal?: string; // what the homeowners wanted, in A&E's words (not a quote)
+  goal?: string; // what the homeowners wanted, in AE's words (not a quote)
 };
 const F = (id: string) => `https://framerusercontent.com/images/${id}.jpg`;
 const P = (n: number) => `https://aesds.com/page/p${n}`;

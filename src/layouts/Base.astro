@@ -25,7 +25,7 @@ const canonical = new URL(path, SITE.url).href;
 const OG_PHOTOS: Record<string, string> = {
   '/': 'projects/p34/2-front-closed', '/three-season-rooms/': 'photos/factory-pc', '/clearfixed/': 'photos/clearfixed-polycarbonate-panels',
   '/clearfold/': 'photos/showroom-polycarbonate-smoke', '/hybrid/': 'photos/showroom-room-interior', '/winter/': 'photos/clearfixed-polycarbonate-panels',
-  '/hexfold/': 'photos/hexfold-patio-closed', '/screens/': 'photos/fixed-screen-doors-closed', '/garage-screens/': 'projects/p4/3-right-bays',
+  '/hexfold/': 'photos/hexfold-patio-closed', '/screens/': 'photos/fixed-screen-doors-closed', '/patio-enclosures-houston/': 'projects/p36/4-inside-open', '/pet-proof-patio-screens/': 'photos/fixed-screen-doors-open', '/garage-screens/': 'projects/p4/3-right-bays',
   '/pricing/': 'projects/p35/2-long-side', '/projects/': 'projects/p36/2-outside-open', '/why-ae/': 'photos/factory-cnc',
   '/how-we-build/': 'photos/factory-angle', '/learn/': 'photos/hexfold-handle-mesh', '/compare/': 'projects/p14/3-long-side-open',
   '/faq/': 'projects/p6/2-outside-closed', '/free-quote/': 'projects/p34/5-inside-seating', '/service-area/': 'projects/p6/4-wide',
@@ -71,7 +71,7 @@ const business = {
     addressCountry: 'US',
   },
   areaServed: CITIES.map((c) => ({ '@type': 'City', name: `${c}, TX` })),
-  sameAs: [SITE.factorySite],
+  sameAs: [SITE.factorySite, SITE.youtubeFold, ...(SITE.googleReviewUrl ? [SITE.googleReviewUrl] : [])],
   knowsAbout: ['Patio enclosures', 'Retractable patio screens', 'Polycarbonate 3-season rooms', 'Stainless steel screens', 'Garage screens'],
 };
 
@@ -126,9 +126,9 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
     )}
     <header class="top">
       <div class="wrap">
-        <a class="brand" href="/" aria-label="A&E Factory Sales home">
+        <a class="brand" href="/" aria-label="AE Factory Sales home">
           <img src={LOGO} alt="" width="104" height={LOGO_H} />
-          <span><b>A&amp;E Factory Sales</b><small>{SITE.tagline}</small></span>
+          <span><b>AE Factory Sales</b><small>{SITE.tagline}</small></span>
         </a>
         <nav class="nav" aria-label="Main">
           {NAV.map((n) => <a href={n.href} aria-current={isCurrent(n.href) ? 'page' : undefined}>{n.label}</a>)}
@@ -166,7 +166,7 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
       <div class="wrap">
         <div class="cols">
           <div>
-            <img class="foot-logo" src={LOGO} alt="A&E Factory Sales bee logo" width="120" height={Math.round(LOGO_H * 120 / 104)} />
+            <img class="foot-logo" src={LOGO} alt="AE Factory Sales bee logo" width="120" height={Math.round(LOGO_H * 120 / 104)} />
             <address>
               <strong style="color:var(--ink)">{SITE.name}</strong><br />
               {SITE.street}<br />
@@ -179,10 +179,12 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
           <div>
             <h2>Systems</h2>
             <ul>
+              <li><a href="/patio-enclosures-houston/">Patio enclosures in Houston</a></li>
               <li><a href="/three-season-rooms/">3-season rooms</a></li>
               <li><a href="/hexfold/">Hexfold retractable screens</a></li>
               <li><a href="/screens/">Stainless steel screens</a></li>
               <li><a href="/garage-screens/">Garage screens</a></li>
+              <li><a href="/pet-proof-patio-screens/">Pet-proof patio screens</a></li>
             </ul>
           </div>
           <div>
@@ -200,7 +202,7 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
           <div>
             <h2>Company</h2>
             <ul>
-              <li><a href="/why-ae/">Why A&amp;E</a></li>
+              <li><a href="/why-ae/">Why AE</a></li>
               <li><a href="/projects/">Projects</a></li>
               <li><a href="/how-we-build/">Our factory</a></li>
               <li><a href="/reviews/">Leave a review</a></li>

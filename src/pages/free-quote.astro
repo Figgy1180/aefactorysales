@@ -15,7 +15,7 @@ const uses = [
   { id: 'enclose', t: 'Enclose it', s: 'A polycarbonate 3-season room. Blocks wind and rain, lets in light.', p: 'From $31 per sq ft', show: ['clearfixed', 'clearfold'] },
   { id: 'open', t: 'Keep it open-air', s: 'Premium metal screens. Keep the breeze, lose the bugs.', p: 'From $24 per sq ft', show: ['hexfold', 'fixed'] },
   { id: 'both', t: 'Both', s: 'Half room, half screen, in one folding system.', p: 'From $56 per sq ft', show: ['hybrid'] },
-  { id: 'all', t: 'Show me everything', s: 'All five A&E systems side by side.', p: '$24 to $56 per sq ft', show: ['clearfixed', 'clearfold', 'hybrid', 'hexfold', 'fixed'] },
+  { id: 'all', t: 'Show me everything', s: 'All five AE systems side by side.', p: '$24 to $56 per sq ft', show: ['clearfixed', 'clearfold', 'hybrid', 'hexfold', 'fixed'] },
 ];
 const data = JSON.stringify({ products: PRODUCTS.map(({ id, name, msrp, family }) => ({ id, name, msrp, family })), sizes: SIZES, uses });
 // Floor plan drawings, all on one scale so the sizes compare at a glance.
@@ -34,7 +34,7 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
 };
 ---
 <Base
-  title="Price My Patio | Free Site Visit | A&E Factory Sales"
+  title="Price My Patio | Free Site Visit | AE Factory Sales"
   description="Price your Houston patio enclosure in 4 steps, then book a free site visit. Polycarbonate 3-season rooms and premium metal screens, installed within a month."
   crumbs={[{ name: 'Free quote', href: '/free-quote/' }]}
 >
@@ -68,7 +68,7 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
             </button>
           </div>
         </div>
-        <aside class="aside"><h3>Why we ask</h3><p>We price by the open wall area we fill in, not your floor space. Two open sides on a 16 × 14 ft patio at 8 ft tall is about <b>240 sq ft</b>.</p><p>Every A&amp;E system is CNC-cut to your exact measurements in our Houston factory, so it fits the first time.</p></aside>
+        <aside class="aside"><h3>Why we ask</h3><p>We price by the open wall area we fill in, not your floor space. Two open sides on a 16 × 14 ft patio at 8 ft tall is about <b>240 sq ft</b>.</p><p>Every AE system is CNC-cut to your exact measurements in our Houston factory, so it fits the first time.</p></aside>
       </div>
 
       <div class="panel" data-panel="2" hidden>

@@ -15,7 +15,7 @@ captureSource();
     const key = form.dataset.key;
     if (!key) {
       note.hidden = false;
-      note.textContent = 'Preview only: on the live site this sends your request to A&E and opens the thank-you page. Nothing was sent.';
+      note.textContent = 'Preview only: on the live site this sends your request to AE and opens the thank-you page. Nothing was sent.';
       return;
     }
     const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;

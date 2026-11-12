@@ -7,9 +7,9 @@ import { SITE, EXAMPLE } from '../data/site';
 const crumbs = [{ name: 'Compare', href: '/compare/' }];
 type Row = { name: string; ours?: boolean; cost: string; bugs: string; weather: string; opens: string; parts: string; ongoing: string; href?: string };
 const rows: Row[] = [
-  { name: 'A&E Fixed Screen', ours: true, href: '/screens/', cost: '$5,800', bugs: 'Yes: 304 stainless steel mesh', weather: 'No', opens: 'No, stays in place', parts: 'None', ongoing: 'Lifetime frame warranty' },
-  { name: 'A&E Hexfold', ours: true, href: '/hexfold/', cost: '$6,700', bugs: 'Yes: honeycomb aluminum mesh', weather: 'No', opens: 'Yes, folds by hand', parts: 'Wheels and track, no motor', ongoing: 'Lifetime frame warranty' },
-  { name: 'A&E 3-season room', ours: true, href: '/three-season-rooms/', cost: '$7,400 to $9,600', bugs: 'Yes', weather: 'Yes: tinted polycarbonate', opens: 'Clearfold and Hybrid fold open', parts: 'No motor', ongoing: 'Lifetime frame warranty' },
+  { name: 'AE Fixed Screen', ours: true, href: '/screens/', cost: '$5,800', bugs: 'Yes: 304 stainless steel mesh', weather: 'No', opens: 'No, stays in place', parts: 'None', ongoing: 'Lifetime frame warranty' },
+  { name: 'AE Hexfold', ours: true, href: '/hexfold/', cost: '$6,700', bugs: 'Yes: honeycomb aluminum mesh', weather: 'No', opens: 'Yes, folds by hand', parts: 'Wheels and track, no motor', ongoing: 'Lifetime frame warranty' },
+  { name: 'AE 3-season room', ours: true, href: '/three-season-rooms/', cost: '$7,400 to $9,600', bugs: 'Yes', weather: 'Yes: tinted polycarbonate', opens: 'Clearfold and Hybrid fold open', parts: 'No motor', ongoing: 'Lifetime frame warranty' },
   { name: 'Nylon or fiberglass screen', cost: '$2,200 to $5,600', bugs: 'Insects, until it tears', weather: 'No', opens: 'Usually no', parts: 'None', ongoing: 'Rescreen every 5 to 10 years' },
   { name: 'Motorized roll-down screens', cost: '$9,600 to $10,800', bugs: 'Insects; varies by mesh', weather: 'Varies by product', opens: 'Yes, by motor', parts: 'Motor, wiring, remote', ongoing: 'Motor and electronics to maintain' },
   { name: '3-season sunroom', cost: '$18,000 to $52,000', bugs: 'Yes', weather: 'Yes', opens: 'Depends on windows', parts: 'Windows and doors', ongoing: 'Varies' },
@@ -38,7 +38,7 @@ const vs = [
   },
   {
     id: 'glass', t: '3-season room vs glass sunroom',
-    lead: 'A glass sunroom is priced like a home addition. An A&E polycarbonate room fills in the open sides of the patio roof you already have.',
+    lead: 'A glass sunroom is priced like a home addition. An AE polycarbonate room fills in the open sides of the patio roof you already have.',
     rows: [['Example patio', '$7,400 to $9,600', '$18,000 to $52,000 (3-season), $45,000 to $90,000 (4-season)'], ['If something hits it', 'Polycarbonate flexes instead of shattering', 'Glass can crack or shatter'], ['Weight', 'Much lighter, so panels can fold', 'Heavy'], ['Scratches', 'Needs gentle cleaning', 'Resists scratching better'], ['Air conditioning', 'No: ventilated 3-season room', '4-season rooms are conditioned']],
     pick: 'Choose a 4-season glass room if you need an air-conditioned room in August. Choose a polycarbonate 3-season room for shade, shelter and airflow at a fraction of the price.',
     link: ['/guides/polycarbonate-vs-glass-patio-enclosure-cost/', 'Full polycarbonate vs glass guide'],
@@ -58,8 +58,8 @@ const ld = {
 };
 ---
 <Base
-  title="Patio Enclosure Options Compared: Houston Costs (2026) | A&E"
-  description="A&E metal screens and 3-season rooms compared with nylon screens, motorized screens, glass sunrooms and mosquito spraying, with real costs for a 16 × 14 ft Houston patio."
+  title="Patio Enclosure Options Compared: Houston Costs (2026) | AE"
+  description="AE metal screens and 3-season rooms compared with nylon screens, motorized screens, glass sunrooms and mosquito spraying, with real costs for a 16 × 14 ft Houston patio."
   crumbs={crumbs}
   schema={[ld]}
 >
@@ -93,7 +93,7 @@ const ld = {
           </tbody>
         </table>
       </div>
-      <p class="fine">A&amp;E prices are our lowest installed prices on 240 sq ft of openings. Nylon screen, sunroom and spraying ranges from HomeGuide and Bob Vila cost guides (Oct 2026); motorized screens at $40 to $45 per sq ft of opening, Houston market pricing. Competitor features vary by product; ask your installer.</p>
+      <p class="fine">AE prices are our lowest installed prices on 240 sq ft of openings. Nylon screen, sunroom and spraying ranges from HomeGuide and Bob Vila cost guides (Oct 2026); motorized screens at $40 to $45 per sq ft of opening, Houston market pricing. Competitor features vary by product; ask your installer.</p>
     </div>
   </section>
 
@@ -112,7 +112,7 @@ const ld = {
         </div>
         <div class="table-wrap">
           <table class="tbl">
-            <thead><tr><th scope="col"><span class="sr-only">Feature</span></th><th scope="col">A&amp;E</th><th scope="col">The alternative</th></tr></thead>
+            <thead><tr><th scope="col"><span class="sr-only">Feature</span></th><th scope="col">AE</th><th scope="col">The alternative</th></tr></thead>
             <tbody>{v.rows.map(([k, a, b]) => <tr><th scope="row">{k}</th><td class="ours">{a}</td><td>{b}</td></tr>)}</tbody>
           </table>
         </div>

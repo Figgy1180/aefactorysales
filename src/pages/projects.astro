@@ -10,14 +10,14 @@ const counts = { Patio: 0, Door: 0, Garage: 0 } as Record<string, number>;
 PROJECTS.forEach((p) => counts[p.kind]++);
 const cities = [...new Set(PROJECTS.map((p) => p.city))];
 const list = {
-  '@context': 'https://schema.org', '@type': 'ItemList', name: 'Finished A&E screen projects in greater Houston, installed by the A&E crew',
+  '@context': 'https://schema.org', '@type': 'ItemList', name: 'Finished AE screen projects in greater Houston, installed by the AE crew',
   itemListElement: PROJECTS.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: `${p.city} ${p.title.toLowerCase()}`, ...(photos(p).length ? { url: new URL(`/projects/${p.slug}/`, SITE.url).href } : {}) })),
 };
 const src = (u: string, w: number) => `${u}?scale-down-to=${w}`;
 ---
 <Base
-  title="Patio & Door Screen Projects in Houston | A&E Factory Sales"
-  description="Finished A&E patio enclosures across greater Houston, built in our factory and installed by our own crew in Houston, Katy, Richmond, Cypress and more."
+  title="Patio & Door Screen Projects in Houston | AE Factory Sales"
+  description="Finished AE patio enclosures across greater Houston, built in our factory and installed by our own crew in Houston, Katy, Richmond, Cypress and more."
   crumbs={crumbs}
   schema={[list]}
 >

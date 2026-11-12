@@ -2,7 +2,7 @@
 title: Polycarbonate vs glass patio enclosure cost in Houston
 seoTitle: "Polycarbonate vs Glass Patio Enclosure Cost, Houston (2026)"
 description: What a polycarbonate 3-season room costs compared with a glass sunroom on the same Houston patio, plus the honest trade-offs on weight, impact, scratching and heat.
-answer: "On a 16 × 14 ft covered patio with two open sides, a polycarbonate 3-season room from A&E runs about $7,400 to $9,600 installed. The same space as a 3-season sunroom runs about $18,000 to $52,000, and as a 4-season glass sunroom $45,000 to $90,000 (HomeGuide, Oct 2026). Polycarbonate is lighter and flexes instead of shattering; glass resists scratching better."
+answer: "On a 16 × 14 ft covered patio with two open sides, a polycarbonate 3-season room from AE runs about $7,400 to $9,600 installed. The same space as a 3-season sunroom runs about $18,000 to $52,000, and as a 4-season glass sunroom $45,000 to $90,000 (HomeGuide, Oct 2026). Polycarbonate is lighter and flexes instead of shattering; glass resists scratching better."
 published: "2026-11-05"
 updated: "2026-11-05"
 related:
@@ -20,9 +20,9 @@ Example patio: 16 × 14 ft, two open sides, 8 ft tall. That is 240 sq ft of open
 |---|---|---|
 | 4-season glass sunroom | $200 to $400 per floor sq ft | $45,000 to $90,000 |
 | 3-season sunroom | $80 to $230 per floor sq ft | $18,000 to $52,000 |
-| A&E Clearfixed to Clearfold | $31 to $40 per sq ft of opening, installed | $7,400 to $9,600 |
+| AE Clearfixed to Clearfold | $31 to $40 per sq ft of opening, installed | $7,400 to $9,600 |
 
-Sunroom figures are from the HomeGuide cost guide (Oct 2026), applied to 224 sq ft of floor. A&E figures use our lowest installed prices on 240 sq ft of openings.
+Sunroom figures are from the HomeGuide cost guide (Oct 2026), applied to 224 sq ft of floor. AE figures use our lowest installed prices on 240 sq ft of openings.
 
 ## What you get for the difference
 
@@ -32,7 +32,7 @@ Sunroom figures are from the HomeGuide cost guide (Oct 2026), applied to 224 sq 
 
 **Tint you can see through.** Our Midnight Smoke panels tested at 48% visible light transmission and a 0.45 solar heat gain coefficient. They cut glare like sunglasses, and you still see the yard.
 
-**It installs faster.** Every A&E panel is CNC-cut to your openings, test-assembled in our Houston factory and installed by our own crew within a month of your order.
+**It installs faster.** Every AE panel is CNC-cut to your openings, test-assembled in our Houston factory and installed by our own crew within a month of your order.
 
 ## The honest trade-offs
 

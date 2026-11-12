@@ -29,11 +29,11 @@ import installed from '../assets/projects/p14/2-long-side-closed.jpg';
 // Proof placeholders render ONLY in preview builds, so an empty review slot can never ship live.
 const SHOW_PH = !!import.meta.env.PUBLIC_PREVIEW;
 const cardImg: Record<string, { img: any; alt: string; note?: string }> = {
-  clearfixed: { img: clearfixed, alt: 'Clearfixed tinted polycarbonate panels on an A&E patio enclosure' },
-  clearfold: { img: showroomSmoke, alt: 'Folding polycarbonate panels in the A&E showroom' },
+  clearfixed: { img: clearfixed, alt: 'Clearfixed tinted polycarbonate panels on an AE patio enclosure' },
+  clearfold: { img: showroomSmoke, alt: 'Folding polycarbonate panels in the AE showroom' },
   hexfold: { img: handle, alt: 'Brick Houston patio closed in with Hexfold folding screens' },
   fixed: { img: fixedColors, alt: 'Two Fixed Screen panels with 304 stainless steel mesh in Night Gray and Bright White frames' },
-  hybrid: { img: showroom, alt: 'A&E showroom room combining polycarbonate panels and metal mesh' },
+  hybrid: { img: showroom, alt: 'AE showroom room combining polycarbonate panels and metal mesh' },
 };
 const order = ['clearfixed', 'clearfold', 'hybrid', 'hexfold', 'fixed'];
 // Visit-first FAQ: the questions people ask right before booking.
@@ -53,7 +53,7 @@ const ytId = (SITE.youtubeFold.match(/(?:shorts\/|v=|youtu\.be\/)([\w-]{11})/) |
 const videoLd = {
   '@context': 'https://schema.org', '@type': 'VideoObject',
   name: 'Hexfold folding patio screens opening by hand',
-  description: 'A&E Hexfold aluminum mesh screens folding open by hand on a gabled Houston patio. No motor, no remote.',
+  description: 'AE Hexfold aluminum mesh screens folding open by hand on a gabled Houston patio. No motor, no remote.',
   thumbnailUrl: `${SITE.url}/video/gable-open-poster.jpg`,
   uploadDate: '2026-11-05', duration: 'PT15S',
   contentUrl: `${SITE.url}/video/gable-open.mp4`,
@@ -61,7 +61,7 @@ const videoLd = {
 };
 ---
 <Base
-  title='Patio Enclosures and Screens in Houston | A&E Factory Sales'
+  title='Patio Enclosures in Houston | AE Factory Sales'
   description='Patio enclosures and screens in Houston: polycarbonate 3-season rooms and metal patio screens built in our own factory, installed by our crew within a month. See prices, book a free site visit.'
   schema={[videoLd]}
 >
@@ -70,7 +70,7 @@ const videoLd = {
     <CornerArt />
     <div class="wrap hero-grid">
       <div class="h-title">
-        <h1 id="hero-title" class="display"><span class="eyebrow">Patio enclosures and screens in Houston</span> Use your covered patio <span class="y">all year.</span></h1>
+        <h1 id="hero-title" class="display"><span class="eyebrow">Patio enclosures in Houston</span> Use your covered patio <span class="y">all year.</span></h1>
       </div>
       <div class="h-body stack-lg">
         <p class="sub">Screens that keep mosquitoes out in summer. Tinted panels that block wind and rain when it turns cold. Built in our Houston factory, installed by our own crew within a month of your order.</p>
@@ -89,7 +89,7 @@ const videoLd = {
       <div class="hero-media">
         <div class="hero-frame draw">
           <span class="dim h" aria-hidden="true"><span>Freestanding patio, Houston, TX</span></span>
-          <RevealSlider closed={heroClosed} open={heroOpen} alt="Houston freestanding patio enclosed with A&E folding and fixed screens" eager id="hero-reveal" label="See this project" href="/projects/houston-freestanding-patio-enclosure/" />
+          <RevealSlider closed={heroClosed} open={heroOpen} alt="Houston freestanding patio enclosed with AE folding and fixed screens" eager id="hero-reveal" label="See this project" href="/projects/houston-freestanding-patio-enclosure/" />
         </div>
         <p class="hint"><span aria-hidden="true">&#8596;</span> Drag to open the screens. Same patio, same spot.</p>
       </div>
@@ -147,7 +147,7 @@ const videoLd = {
       </div>
       <div class="paths">
         <article class="path">
-          <figure class="two-up"><Image src={clearfixed} alt="A&E 3-season room wall with factory-tinted polycarbonate panels and a folding screen" widths={[300, 600]} sizes="(max-width: 820px) 50vw, 280px" loading="lazy" style="object-position:50% 30%" /><Image src={showroomSmoke} alt="Inside the A&E showroom room with tinted panels behind folding screens" widths={[480, 800]} sizes="(max-width: 820px) 50vw, 280px" loading="lazy" style="object-position:100% 50%" /></figure>
+          <figure class="two-up"><Image src={clearfixed} alt="AE 3-season room wall with factory-tinted polycarbonate panels and a folding screen" widths={[300, 600]} sizes="(max-width: 820px) 50vw, 280px" loading="lazy" style="object-position:50% 30%" /><Image src={showroomSmoke} alt="Inside the AE showroom room with tinted panels behind folding screens" widths={[480, 800]} sizes="(max-width: 820px) 50vw, 280px" loading="lazy" style="object-position:100% 50%" /></figure>
           <div class="path-body">
             <h3 class="h3">Enclose it</h3>
             <p>A polycarbonate 3-season room. Tinted panels block wind and rain and cut glare, with screen doors and doors that open on both sides for airflow. A fraction of a glass sunroom.</p>

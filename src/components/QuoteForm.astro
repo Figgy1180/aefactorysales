@@ -12,7 +12,7 @@ const scr = kind === 'screens';
 <form class="form quote-form" id={id} data-key={SITE.formKey} data-next={scr ? undefined : '/thank-you/'} data-inline={scr ? '1' : undefined} data-invalid={scr ? 'Please add your name, a phone number and your ZIP code.' : undefined} novalidate>
   <input type="hidden" name="subject" value={scr ? 'SCREEN QUOTE request from aefactorysales.com' : 'New site visit request from aefactorysales.com'} />
   <input type="hidden" name="request" value={scr ? 'Screens: rep to call with a quote' : 'Site visit'} />
-  <input type="hidden" name="from_name" value="A&E website" />
+  <input type="hidden" name="from_name" value="AE website" />
   <input type="hidden" name="lead_source" value={source} />
   <input type="hidden" name="estimate" value="" />
   <label class="hp" aria-hidden="true">Leave this empty <input type="checkbox" name="botcheck" tabindex="-1" /></label>

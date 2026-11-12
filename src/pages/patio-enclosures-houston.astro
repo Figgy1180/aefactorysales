@@ -1,0 +1,132 @@
+---
+// Main page for the phrase "patio enclosures Houston": what it is, the systems, prices for the three
+// patio sizes, real projects, FAQ and the quote form. Every number comes from src/data/site.ts.
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ProjectMosaic from '../components/ProjectMosaic.astro';
+import Faq from '../components/Faq.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import { SIZES, FAQ, SITE, CITIES, CITY_PAGES, range, byId, type QA } from '../data/site';
+
+const crumbs = [{ name: 'Patio enclosures in Houston', href: '/patio-enclosures-houston/' }];
+const order = ['fixed', 'hexfold', 'clearfixed', 'clearfold', 'hybrid'].map(byId);
+const lo = Math.min(...order.map((p) => p.msrp)), hi = Math.max(...order.map((p) => p.msrp));
+const faq: QA[] = [
+  { q: 'What is a patio enclosure?', a: `A patio enclosure closes in the open sides of a covered patio with screens, panels or both. AE Factory Sales builds 5 systems for existing roofed patios, from $${lo} to $${hi} per sq ft of opening, installed. Panels can be up to 10 ft tall.` },
+  FAQ.cost[0], FAQ.cost[2], FAQ.room[0], FAQ.general[2], FAQ.general[3], FAQ.general[1], FAQ.general[6],
+];
+const service = {
+  '@context': 'https://schema.org', '@type': 'Service',
+  name: 'Patio enclosures in Houston', serviceType: 'Patio enclosure design, fabrication and installation',
+  provider: { '@id': `${SITE.url}/#business` },
+  areaServed: CITIES.map((c) => ({ '@type': 'City', name: `${c}, TX` })),
+  url: `${SITE.url}/patio-enclosures-houston/`,
+  offers: { '@type': 'AggregateOffer', priceCurrency: 'USD', lowPrice: lo, highPrice: hi, description: 'Installed price per square foot of opening' },
+};
+---
+<Base
+  title="Patio Enclosures in Houston: Systems, Prices, Projects | AE Factory Sales"
+  description={`Patio enclosures in Houston from AE Factory Sales: 5 systems from $${lo} to $${hi} per sq ft of opening installed, prices for 3 patio sizes, real projects and a free quote.`}
+  crumbs={crumbs}
+  schema={[service]}
+>
+  <PageHero crumbs={crumbs}>
+    <div class="stack-lg" style="max-width:54em">
+      <h1 class="display">Patio enclosures <span class="y">in Houston</span></h1>
+      <p class="sub">A patio enclosure closes in the open sides of your covered patio with screens, polycarbonate panels or both. We build ours in our own Houston factory and our own crew installs them within a month of your order.</p>
+      <p class="lede"><strong style="color:var(--ink)">Short answer:</strong> {order.length} systems, from ${lo} to ${hi} per sq ft of opening, installed. Lifetime warranty on the frame, 3 years on all parts.</p>
+      <div class="actions"><a class="btn" href="#quote">Get my quote</a><a class="btn btn-line" href="#prices">See prices by patio size</a></div>
+    </div>
+  </PageHero>
+
+  <section class="band on-paper" aria-labelledby="what-title">
+    <div class="wrap stack-lg">
+      <div class="sec-head" style="margin-bottom:0">
+        <h2 id="what-title" class="h2">What a patio enclosure <span class="y">is</span></h2>
+        <p class="lede">You already have the roof. An enclosure fills the openings between your posts, so the patio works in more weather and more months of the year.</p>
+      </div>
+      <div class="pe-3">
+        <div><h3>Screens</h3><p>Metal mesh keeps the breeze and stops mosquitoes, mice and snakes. Fixed Screen uses 304 stainless steel; Hexfold uses honeycomb aluminum and folds to the side.</p><a href="/screens/">Screens</a> · <a href="/hexfold/">Hexfold</a></div>
+        <div><h3>Polycarbonate panels</h3><p>Tinted polycarbonate panels block wind and rain and make a 3-season room. Clearfixed stays in place; Clearfold folds open on a track.</p><a href="/three-season-rooms/">3-season rooms</a></div>
+        <div><h3>Both</h3><p>Hybrid puts panels and Hexfold mesh in one folding system, or we mix systems opening by opening around your patio.</p><a href="/hybrid/">Hybrid</a></div>
+      </div>
+      <p class="fine">Built for existing roofed patios. A 3-season room is not air-conditioned.</p>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="sys-title">
+    <div class="wrap stack-lg">
+      <h2 id="sys-title" class="h2">The {order.length} <span class="y">systems</span></h2>
+      <div class="table-wrap">
+        <table class="tbl tnum">
+          <thead><tr><th scope="col">System</th><th scope="col">What it is</th><th scope="col">Opens?</th><th scope="col" class="num">From, per sq ft installed</th></tr></thead>
+          <tbody>
+            {order.map((p) => (
+              <tr><th scope="row"><a href={p.href}>{p.name}</a></th><td>{p.kind}</td><td>{['hexfold', 'clearfold', 'hybrid'].includes(p.id) ? 'Folds open by hand' : 'Fixed in place'}</td><td class="num">${p.msrp}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="fine">Prices are per square foot of opening, not floor area. Source: AE Factory Sales price list, November 2026. <a href="/compare/">Compare with sunrooms and motorized screens</a>.</p>
+    </div>
+  </section>
+
+  <section class="band on-paper" id="prices" aria-labelledby="price-title">
+    <div class="wrap stack-lg">
+      <div class="sec-head" style="margin-bottom:0">
+        <h2 id="price-title" class="h2">Prices for three <span class="y">patio sizes</span></h2>
+        <p class="lede">Installed totals for typical Houston covered patios. Your exact quote comes after we measure.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="tbl tnum">
+          <thead><tr><th scope="col">System</th>{SIZES.map((s) => <th scope="col" class="num">{s.name}<br />{s.low} to {s.high} sq ft of opening</th>)}</tr></thead>
+          <tbody>
+            {order.map((p) => (<tr><th scope="row"><a href={p.href} style="color:inherit">{p.name}</a></th>{SIZES.map((s) => <td class="num">{range(p.msrp, s.low, s.high)}</td>)}</tr>))}
+          </tbody>
+        </table>
+      </div>
+      <dl class="pe-sizes">{SIZES.map((s) => <div><dt>{s.name}</dt><dd>{s.eg}</dd></div>)}</dl>
+      <p class="fine">Totals are the per sq ft price times the opening area, rounded to the nearest $100. Arched and angled panels, locks and extra posts add to the total. Source: AE Factory Sales price list, November 2026. <a href="/pricing/">Full pricing page</a>.</p>
+    </div>
+  </section>
+
+  <section class="band" aria-labelledby="proj-title">
+    <div class="wrap stack-lg">
+      <div class="sec-head" style="margin-bottom:0">
+        <h2 id="proj-title" class="h2">Real projects <span class="y">around Houston</span></h2>
+        <p class="lede">Finished jobs by our own crew. Tap any photo for the full project.</p>
+      </div>
+      <ProjectMosaic />
+      <p>We install in {CITIES.map((c, i) => <>{i > 0 && (i === CITIES.length - 1 ? ' and ' : ', ')}{CITY_PAGES[c] ? <a href={CITY_PAGES[c]}>{c}</a> : c}</>)}. <a href="/service-area/">Service area</a> · <a href="/projects/">All projects</a></p>
+    </div>
+  </section>
+
+  <section class="band raised" aria-labelledby="pefaq-title">
+    <div class="wrap stack-lg" style="max-width:900px">
+      <h2 id="pefaq-title" class="h2">Patio enclosure <span class="y">questions</span></h2>
+      <Faq items={faq} />
+    </div>
+  </section>
+
+  <section class="band" id="quote">
+    <div class="wrap split" style="align-items:start">
+      <div class="stack">
+        <h2 class="h2">Get your <span class="y">quote</span></h2>
+        <p class="lede">Book a free site visit. We measure every opening, bring samples and leave you a written quote.</p>
+        <p>Or call <a href={SITE.phoneHref}>{SITE.phone}</a>, or visit the showroom at {SITE.street}, {SITE.city}, {SITE.region} {SITE.zip}.</p>
+      </div>
+      <QuoteForm id="pe-visit" source="Patio enclosures Houston page" />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .pe-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .pe-3 > div { border-top: 3px solid var(--yellow); padding-top: 14px; min-width: 0; }
+  .pe-3 h3 { font-weight: 800; font-stretch: 78%; font-size: 1.4rem; text-transform: uppercase; }
+  .pe-3 p { color: var(--paper-2); margin: 6px 0 10px; }
+  .pe-sizes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 0; }
+  .pe-sizes dt { font-weight: 800; text-transform: uppercase; font-stretch: 80%; }
+  .pe-sizes dd { margin: 0; color: var(--paper-2); }
+  @media (max-width: 760px) { .pe-3, .pe-sizes { grid-template-columns: minmax(0, 1fr); } }
+</style>

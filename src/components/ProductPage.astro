@@ -22,7 +22,7 @@ const crumbs = [{ name: '3-season rooms', href: '/three-season-rooms/' }, { name
 const product = {
   '@context': 'https://schema.org', '@type': 'Product',
   name: `${p.name}: ${p.kind.toLowerCase()}`,
-  brand: { '@type': 'Brand', name: 'A&E Factory Sales' },
+  brand: { '@type': 'Brand', name: 'AE Factory Sales' },
   manufacturer: { '@id': `${SITE.url}/#business` },
   description: p.blurb,
   image: new URL(img.src, SITE.url).href,

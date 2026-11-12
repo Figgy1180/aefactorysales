@@ -3,7 +3,7 @@
 // and the official price sheet (Oct 26 2026). Change it here and every page updates.
 
 export const SITE = {
-  name: 'A&E Factory Sales',
+  name: 'AE Factory Sales',
   url: 'https://aefactorysales.com',
   tagline: 'Patio enclosures & screens',
   street: '2609 William Tell Street',
@@ -33,12 +33,12 @@ export const WARRANTY_FULL =
   'Lifetime on the frame and 3 years on all parts, installed and maintained by the manufacturer. Excludes accidents, intentional damage and acts of God.';
 export const FRAME = {
   short: 'Heat-welded PVC-fiber blend, aluminum core, ceramic coating',
-  long: 'Every A&E frame is heat welded, with no screws: a PVC and fiber blend with an aluminum rod inside for strength and a scratch-resistant ceramic coating outside.',
+  long: 'Every AE frame is heat welded, with no screws: a PVC and fiber blend with an aluminum rod inside for strength and a scratch-resistant ceramic coating outside.',
   colors: ['Night Gray', 'Bright White'],
 };
 export const INSTALL = 'Within a month of your order, by our own crew';
 export const FINANCING =
-  'We work with accredited lenders offering low rates and long terms. Subject to credit approval. Third-party lenders; A&E is not a lender.';
+  'We work with accredited lenders offering low rates and long terms. Subject to credit approval. Third-party lenders; AE is not a lender.';
 
 export type Product = {
   id: string;
@@ -155,11 +155,11 @@ export const EXAMPLE = {
     { name: '4-season glass sunroom', low: 45000, high: 90000, ours: false },
     { name: '3-season sunroom', low: 18000, high: 52000, ours: false },
     { name: 'Motorized roll-down screens', low: 9600, high: 10800, ours: false },
-    { name: 'A&E Clearfixed to Clearfold', low: 7400, high: 9600, ours: true },
-    { name: 'A&E Fixed Screen to Hexfold', low: 5800, high: 6700, ours: true },
+    { name: 'AE Clearfixed to Clearfold', low: 7400, high: 9600, ours: true },
+    { name: 'AE Fixed Screen to Hexfold', low: 5800, high: 6700, ours: true },
   ],
   footnote:
-    'Example patio: 16 × 14 ft, two open sides, 8 ft tall (240 sq ft of openings, 224 sq ft of floor). Sunroom ranges from the HomeGuide cost guide (Oct 2026), per floor sq ft applied to 224 sq ft. Motorized screens at $40 to $45 per sq ft of opening, Houston market pricing. A&E ranges use our lowest installed prices on 240 sq ft of openings.',
+    'Example patio: 16 × 14 ft, two open sides, 8 ft tall (240 sq ft of openings, 224 sq ft of floor). Sunroom ranges from the HomeGuide cost guide (Oct 2026), per floor sq ft applied to 224 sq ft. Motorized screens at $40 to $45 per sq ft of opening, Houston market pricing. AE ranges use our lowest installed prices on 240 sq ft of openings.',
 };
 
 export const CITIES = [
@@ -198,7 +198,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'What is included in the price?',
-      a: 'One price covers design, the free site visit, CNC fabrication and testing in our Houston factory, installation by our own crew, parts and the factory warranty. Arches, extra posts and locks add to the total, and your quote lists every item.',
+      a: 'One price covers design, the free site visit, CNC fabrication and testing in our Houston factory, installation by our own crew, parts and the factory warranty. Prices run from $24 to $56 per sq ft of opening, installed. Arches, extra posts and locks add to the total, and your quote lists every item.',
     },
     {
       q: 'Do you offer financing?',
@@ -216,7 +216,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'What is the difference between Clearfixed and Clearfold?',
-      a: 'Both are tinted polycarbonate. Clearfixed panels stay in place like a wall of windows and can be cut into arches and angles. Clearfold panels fold open on our track, so you can turn the room back into an open patio.',
+      a: 'Both are tinted polycarbonate. Clearfixed panels stay in place like a wall of windows and can be cut into arches and angles. Clearfold panels fold open on our track, so you can turn the room back into an open patio. Clearfixed starts at $31 per sq ft of opening installed and Clearfold at $40.',
     },
     {
       q: 'How much light and heat comes through the panels?',
@@ -256,11 +256,11 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Do I need a roof over my patio?',
-      a: 'Yes. Our enclosures and screens are built for existing roofed patios. Our track mounts to your posts, beams and slab, and we add posts or framing where an opening needs it.',
+      a: 'Yes. Our enclosures and screens are built for existing roofed patios. Our track mounts to your posts, beams and slab, and we add posts or framing where an opening needs it. Panels can be up to 10 ft tall.',
     },
     {
       q: 'How long does installation take?',
-      a: 'Within a month of your order. We measure at the free site visit, build and test your whole job at our Houston factory, then our own crew installs it, usually in a day or two.',
+      a: 'Within a month of your order. We measure at the free site visit, build and test your whole job at our Houston factory, then our own crew installs it, usually in 1 to 2 days.',
     },
     {
       q: 'What does the warranty cover?',
@@ -268,15 +268,15 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'What are the frames made of, and what colors come standard?',
-      a: 'Every frame is heat welded with no screws: a PVC and fiber blend with an aluminum rod inside and a scratch-resistant ceramic coating outside. Frames come in Night Gray or Bright White. Polycarbonate panels come in Midnight Smoke or Storm Blue.',
+      a: 'Every frame is heat welded with no screws: a PVC and fiber blend with an aluminum rod inside and a scratch-resistant ceramic coating outside. Frames come in Night Gray or Bright White. Polycarbonate panels come in Midnight Smoke or Storm Blue. Frames carry a lifetime warranty and all parts carry 3 years.',
     },
     {
       q: 'Do you work with HOAs?',
-      a: 'Yes. We can give you drawings, colors and product details for your HOA or architectural review application.',
+      a: 'Yes. We can give you drawings, colors and product details for your HOA or architectural review application. Frames come in 2 standard colors, Night Gray and Bright White.',
     },
     {
       q: 'Where do you install?',
-      a: 'Houston and the greater Houston area, including Katy, Sugar Land, Cypress, The Woodlands, Pearland, Spring, League City, Friendswood, Kingwood, Missouri City, Tomball, Bellaire, West University Place, Memorial, Humble, Richmond and Conroe.',
+      a: 'We install in Houston and 17 nearby areas. That includes Katy, Sugar Land, Cypress, The Woodlands, Pearland, Spring, League City, Friendswood, Kingwood, Missouri City, Tomball, Bellaire, West University Place, Memorial, Humble, Richmond and Conroe. Every job is built in our factory next to the showroom at 2609 William Tell St, Houston, TX 77093.',
     },
     {
       q: 'Can I see it in person?',
@@ -286,11 +286,12 @@ export const FAQ: Record<string, QA[]> = {
 };
 
 export const NAV = [
+  { href: '/patio-enclosures-houston/', label: 'Patio enclosures' },
   { href: '/three-season-rooms/', label: '3-season rooms' },
   { href: '/hexfold/', label: 'Hexfold' },
   { href: '/screens/', label: 'Screens' },
   { href: '/pricing/', label: 'Pricing' },
   { href: '/projects/', label: 'Projects' },
-  { href: '/why-ae/', label: 'Why A&E' },
+  { href: '/why-ae/', label: 'Why AE' },
   { href: '/learn/', label: 'Learn' },
 ];

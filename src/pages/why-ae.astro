@@ -9,28 +9,28 @@ import cnc from '../assets/photos/factory-cnc.jpg';
 import packed from '../assets/projects/p34/1-corner-closed.jpg';
 import wide from '../assets/projects/p35/1-wide.jpg';
 
-const crumbs = [{ name: 'Why A&E', href: '/why-ae/' }];
+const crumbs = [{ name: 'Why AE', href: '/why-ae/' }];
 const ask: QA[] = [
-  { q: 'Who makes the product, and where?', a: 'A&E: in our own Houston factory, next door to the showroom at 2609 William Tell Street. You can visit both.' },
+  { q: 'Who makes the product, and where?', a: 'AE: in our own Houston factory, next door to the showroom at 2609 William Tell Street. You can visit both.' },
   { q: 'Who installs it?', a: 'Our own crew. We do not subcontract installs.' },
   { q: 'Who do I call if something goes wrong in year five?', a: `The same people: ${SITE.phone}. We made it and we installed it, so the warranty is ours to honor.` },
-  { q: 'Can you match a replacement part years from now?', a: 'Yes. Over 30 manufacturers make parts specifically for A&E, and we know the maker of every one.' },
+  { q: 'Can you match a replacement part years from now?', a: 'Yes. Over 30 manufacturers make parts specifically for AE, and we know the maker of every one.' },
   { q: 'How long from order to install?', a: 'Within a month of your order. Every piece is CNC-cut and test-assembled first, so install day goes fast.' },
   { q: 'Is the price all-in?', a: 'Yes. Design, the site visit, fabrication, installation, parts and the warranty are in one number. Options like locks or arches are listed line by line.' },
 ];
 const warrantyFaq: QA[] = [
   { q: 'What does the warranty cover?', a: WARRANTY_FULL },
   { q: 'How do I make a warranty request?', a: `Call or text ${SITE.phone}, or email ${SITE.email}, with a photo of the issue. We schedule a visit with our own crew.` },
-  { q: 'Is the warranty from a third party?', a: 'No. A&E manufactures, installs and maintains the system, so the warranty comes straight from us.' },
+  { q: 'Is the warranty from a third party?', a: 'No. AE manufactures, installs and maintains the system, so the warranty comes straight from us.' },
 ];
 const ld = {
-  '@context': 'https://schema.org', '@type': 'AboutPage', name: 'Why A&E Factory Sales',
+  '@context': 'https://schema.org', '@type': 'AboutPage', name: 'Why AE Factory Sales',
   about: { '@id': `${SITE.url}/#business` },
-  description: 'A&E Factory Sales is a Houston manufacturer and installer of patio enclosures and screens, backed by a lifetime frame warranty.',
+  description: 'AE Factory Sales is a Houston manufacturer and installer of patio enclosures and screens, backed by a lifetime frame warranty.',
 };
 ---
 <Base
-  title="Why A&E: Houston Manufacturer & Installer | A&E"
+  title="Why AE: Houston Manufacturer & Installer | AE"
   description="Made in our Houston factory, installed by our own crew, warrantied by us. One company from tape measure to last screw, with a lifetime frame warranty."
   crumbs={crumbs}
   schema={[ld]}
@@ -44,7 +44,7 @@ const ld = {
       </div>
       <figure class="dim-frame draw" style="margin:30px 0 0">
         <span class="dim h" aria-hidden="true"><span>Built in Houston</span></span>
-        <Image src={cnc} alt="CNC dual-head saw cutting frame profiles in the A&E factory in Houston" widths={[480, 900]} sizes="(max-width: 820px) 100vw, 540px" loading="eager" style="aspect-ratio:16/10;object-fit:cover" />
+        <Image src={cnc} alt="CNC dual-head saw cutting frame profiles in the AE factory in Houston" widths={[480, 900]} sizes="(max-width: 820px) 100vw, 540px" loading="eager" style="aspect-ratio:16/10;object-fit:cover" />
       </figure>
     </div>
   </PageHero>
@@ -55,7 +55,7 @@ const ld = {
         <h2 id="chain-title" class="h2">Fewer hands <span class="y">on your project</span></h2>
         <p class="lede">Patio enclosures are often designed by one company, sold by another and installed by a third. Every handoff adds cost and time, and makes it harder to know who fixes what later.</p>
       </div>
-      <div class="chain" role="img" aria-label="Typical path: brand, distributor, local dealer, subcontracted installer, then you. A&E path: our Houston factory, our own crew, then you.">
+      <div class="chain" role="img" aria-label="Typical path: brand, distributor, local dealer, subcontracted installer, then you. AE path: our Houston factory, our own crew, then you.">
         <div class="lane">
           <p class="lane-k">A common path</p>
           <ol>
@@ -63,7 +63,7 @@ const ld = {
           </ol>
         </div>
         <div class="lane ours">
-          <p class="lane-k">The A&amp;E path</p>
+          <p class="lane-k">The AE path</p>
           <ol>
             <li>Our factory, Houston</li><li>Our own crew</li><li class="you">You</li>
           </ol>
@@ -94,7 +94,7 @@ const ld = {
           </tbody>
         </table>
       </div>
-      <figure style="margin:0"><Image src={packed} alt="Freestanding A&E patio enclosure built and installed in Houston" widths={[480, 900]} sizes="(max-width: 820px) 100vw, 540px" loading="lazy" style="aspect-ratio:4/3;object-fit:cover;border:2px solid var(--yellow)" /><figcaption class="fine" style="padding-top:8px">A freestanding enclosure we built and installed in Houston. <a href="/projects/houston-freestanding-patio-enclosure/">See the project</a></figcaption></figure>
+      <figure style="margin:0"><Image src={packed} alt="Freestanding AE patio enclosure built and installed in Houston" widths={[480, 900]} sizes="(max-width: 820px) 100vw, 540px" loading="lazy" style="aspect-ratio:4/3;object-fit:cover;border:2px solid var(--yellow)" /><figcaption class="fine" style="padding-top:8px">A freestanding enclosure we built and installed in Houston. <a href="/projects/houston-freestanding-patio-enclosure/">See the project</a></figcaption></figure>
     </div>
   </section>
 
@@ -134,7 +134,7 @@ const ld = {
 
   <section class="band raised">
     <div class="wrap split">
-      <figure style="margin:0"><Image src={wide} alt="Houston covered patio with A&E folding screens on two open sides" widths={[480, 900]} sizes="(max-width: 820px) 100vw, 540px" loading="lazy" style="aspect-ratio:4/3;object-fit:cover;border:2px solid var(--yellow)" /></figure>
+      <figure style="margin:0"><Image src={wide} alt="Houston covered patio with AE folding screens on two open sides" widths={[480, 900]} sizes="(max-width: 820px) 100vw, 540px" loading="lazy" style="aspect-ratio:4/3;object-fit:cover;border:2px solid var(--yellow)" /></figure>
       <div class="stack">
         <h2 class="h2">See it, <span class="y">then decide</span></h2>
         <p class="lede">Book a free site visit, or come see every system working in our showroom.</p>

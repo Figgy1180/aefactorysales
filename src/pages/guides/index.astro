@@ -5,7 +5,7 @@ import PageHero from '../../components/PageHero.astro';
 const guides = (await getCollection('guides')).sort((a, b) => b.data.updated.localeCompare(a.data.updated));
 const crumbs = [{ name: 'Guides', href: '/guides/' }];
 ---
-<Base title="Patio Enclosure Guides for Houston Homeowners | A&E Factory Sales" description="Plain-English guides to patio screens and 3-season rooms in Houston: costs, materials, and how the options compare." crumbs={crumbs}>
+<Base title="Patio Enclosure Guides for Houston Homeowners | AE Factory Sales" description="Plain-English guides to patio screens and 3-season rooms in Houston: costs, materials, and how the options compare." crumbs={crumbs}>
   <PageHero crumbs={crumbs}>
     <div class="stack-lg" style="max-width:50em">
       <h1 class="display">Guides <span class="y">for Houston patios</span></h1>
