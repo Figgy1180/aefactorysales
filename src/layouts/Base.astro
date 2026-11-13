@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { SITE, NAV, CITIES } from '../data/site';
+import { SITE, NAV, PRODUCT_MENU, CITIES } from '../data/site';
 import { getImage } from 'astro:assets';
 import { HOLIDAY, LOGO, FAVICON, LOGO_H } from '../data/season';
 import CallMeBack from '../components/CallMeBack.astro';
@@ -132,6 +132,17 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
           <span><b>AE Factory Sales</b><small>{SITE.tagline}</small></span>
         </a>
         <nav class="nav" aria-label="Main">
+          <details class="pm" data-pm>
+            <summary aria-current={PRODUCT_MENU.some((g) => g.items.some((i) => isCurrent(i.href))) ? 'page' : undefined}>Products</summary>
+            <div class="pm-panel">
+              {PRODUCT_MENU.map((g) => (
+                <div>
+                  <p class="pm-g">{g.group}</p>
+                  {g.items.map((i) => <a href={i.href} aria-current={isCurrent(i.href) ? 'page' : undefined}><b>{i.label}</b><span>{i.note}</span></a>)}
+                </div>
+              ))}
+            </div>
+          </details>
           {NAV.map((n) => <a href={n.href} aria-current={isCurrent(n.href) ? 'page' : undefined}>{n.label}</a>)}
         </nav>
         <div class="top-actions">
@@ -140,9 +151,10 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
           <details class="menu">
             <summary aria-label="Open menu">Menu</summary>
             <nav aria-label="Mobile">
+              {PRODUCT_MENU.map((g) => (<><p class="pm-g">{g.group}</p>{g.items.map((i) => <a href={i.href}>{i.label}</a>)}</>))}
+              <p class="pm-g">More</p>
               {NAV.map((n) => <a href={n.href}>{n.label}</a>)}
               <a href="/compare/">Compare options</a>
-              <a href="/garage-screens/">Garage screens</a>
               <a href="/faq/">FAQ</a>
               <a href={SITE.phoneHref}>Call {SITE.phone}</a>
               <a class="btn" href="/free-quote/" data-cb-open>Book free visit</a>
@@ -225,5 +237,11 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
     import { captureSource } from '../scripts/source';
     captureSource();
   </script>
+<script>
+  document.querySelectorAll('[data-pm]').forEach((d) => {
+    document.addEventListener('click', (e) => { if (!d.contains(e.target)) d.removeAttribute('open'); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && d.open) { d.removeAttribute('open'); d.querySelector('summary').focus(); } });
+  });
+</script>
 </body>
 </html>

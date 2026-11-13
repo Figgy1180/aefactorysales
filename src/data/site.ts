@@ -287,11 +287,24 @@ export const FAQ: Record<string, QA[]> = {
   ],
 };
 
+// Products menu in the header: every product page, grouped the way homeowners shop.
+export const PRODUCT_MENU = [
+  { group: 'Enclose it', items: [
+    { href: '/patio-enclosures-houston/', label: 'Patio enclosures', note: 'Overview, all systems' },
+    { href: '/three-season-rooms/', label: '3-season rooms', note: 'Polycarbonate panels' },
+    { href: '/clearfixed/', label: 'Clearfixed', note: 'Fixed panels' },
+    { href: '/clearfold/', label: 'Clearfold', note: 'Folding panels' },
+    { href: '/hybrid/', label: 'Hybrid', note: 'Panels and mesh in one' },
+  ] },
+  { group: 'Screen it', items: [
+    { href: '/hexfold/', label: 'Hexfold', note: 'Folding metal screens' },
+    { href: '/screens/', label: 'Fixed Screen', note: 'Stainless steel mesh' },
+    { href: '/pet-proof-patio-screens/', label: 'Pet-proof screens', note: 'For dogs and cats' },
+    { href: '/garage-screens/', label: 'Garage screens', note: 'One to three bays' },
+  ] },
+];
+
 export const NAV = [
-  { href: '/patio-enclosures-houston/', label: 'Patio enclosures' },
-  { href: '/three-season-rooms/', label: '3-season rooms' },
-  { href: '/hexfold/', label: 'Hexfold' },
-  { href: '/screens/', label: 'Screens' },
   { href: '/pricing/', label: 'Pricing' },
   { href: '/projects/', label: 'Projects' },
   { href: '/why-ae/', label: 'Why AE' },
