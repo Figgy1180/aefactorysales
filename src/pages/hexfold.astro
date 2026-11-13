@@ -33,16 +33,16 @@ const product = {
 ---
 <Base
   title="Hexfold Retractable Patio Screens in Houston | AE"
-  description="Hexfold folding walls of honeycomb aluminum mesh glide aside for the view and close in seconds. No motor, built in Houston. From $28 per sq ft installed."
+  description="Hexfold manual folding metal screens: honeycomb aluminum mesh, a metal-reinforced frame, opened by hand even in a power outage. From $28 per sq ft installed."
   crumbs={crumbs}
   schema={[product]}
 >
   <PageHero crumbs={crumbs}>
     <div class="split">
       <div class="stack-lg">
-        <h1 class="display">Hexfold. <span class="y">The wall that steps aside.</span></h1>
-        <p class="sub">Honeycomb aluminum mesh panels that fold neatly to the side when you want the whole view, and glide closed in seconds when the mosquitoes come out. The look of a high-end retractable, with no motor to fail.</p>
-        <div class="actions"><a class="btn" href="/free-quote/">See it on my patio</a><a class="btn btn-line" href="#price">What it costs</a></div>
+        <h1 class="display">Folding metal patio screens, <span class="y">opened by hand</span></h1>
+        <p class="sub">Hexfold's honeycomb aluminum mesh folds to the side when you want an open patio and closes when you want a screen across the opening. You move it by hand, so its operation does not depend on electricity.</p>
+        <div class="actions"><a class="btn" href="#quote">See Hexfold at my patio</a><a class="btn btn-line" href="#price">What it costs</a></div>
       </div>
       <figure class="dim-frame draw hero-video">
         <span class="dim v" aria-hidden="true"><span>Panels up to 10 ft tall</span></span>
@@ -99,7 +99,7 @@ const product = {
       </div>
       <div class="stack-lg">
         <figure style="margin:0 auto;max-width:300px;width:100%"><Image src={handleMesh} alt="Hexfold handles and the folded honeycomb aluminum mesh, close up" widths={[300, 460]} sizes="300px" loading="lazy" style="aspect-ratio:460/544;width:100%;object-fit:cover;border:2px solid var(--yellow)" /></figure>
-        <p class="muted">Honeycomb aluminum, about 115 holes per square inch. It keeps out mosquitoes, insects, mice and snakes, and resists tearing where nylon fails.</p>
+        <p class="muted">Honeycomb aluminum, about 115 holes per square inch. Metal mesh, fitted to your openings to help keep bugs and small pests outside.</p>
       </div>
     </div>
   </section>
@@ -126,6 +126,21 @@ const product = {
       <h2 class="h2">Hexfold <span class="y">questions</span></h2>
       <Faq items={[FAQ.screens[0], FAQ.screens[3], FAQ.screens[1], FAQ.general[0], FAQ.general[1], FAQ.general[3]]} />
     </div>
+  </section>
+
+  <section class="band on-paper" aria-labelledby="outage-title">
+    <div class="wrap hx3">
+      <div><h2 id="outage-title" class="h3">The power can go out. You can still open your screens.</h2><p>Open and close Hexfold with the handle. Its manual folding mechanism has no motor programming to restore when household power returns.</p></div>
+      <div><h2 class="h3">Metal mesh. Reinforced at the core.</h2><p>Hexfold combines honeycomb aluminum mesh with metal reinforcement inside the frame. We bring samples so you can compare the mesh and frame construction before choosing.</p></div>
+      <div><h2 class="h3">A top-supported folding wall.</h2><p>The panel weight rides on the top track as the wall folds to the side. At your site visit, we check the opening and show where the panels will stack.</p></div>
+    </div>
+    <style>
+      .hx3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; }
+      .hx3 > div { border-top: 3px solid var(--yellow); padding-top: 14px; min-width: 0; }
+      .hx3 .h3 { font-size: 1.35rem; }
+      .hx3 p { color: var(--paper-2); margin-top: 8px; }
+      @media (max-width: 820px) { .hx3 { grid-template-columns: minmax(0, 1fr); } }
+    </style>
   </section>
 
   <RelatedLinks match="fold" title="Hexfold on real Houston homes" />

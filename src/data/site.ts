@@ -108,7 +108,7 @@ export const PRODUCTS: Product[] = [
     family: 'screen',
     kind: '304 stainless steel screens',
     blurb:
-      'Our answer to nylon. Stainless steel mesh in a heat-welded frame that resists tearing and keeps out mosquitoes, mice and snakes.',
+      'Our answer to nylon. Stainless steel mesh in a metal-reinforced, heat-welded frame, fitted to help keep bugs and small pests outside.',
     msrp: 24,
     href: '/screens/',
     specs: [
@@ -235,20 +235,28 @@ export const FAQ: Record<string, QA[]> = {
       a: 'Hexfold is our retractable patio screen. Honeycomb aluminum mesh with about 115 holes per square inch folds on our track, so you can open the patio to the view or close it against mosquitoes. It opens and closes by hand, so there is no motor to fail and no wiring.',
     },
     {
-      q: 'Will metal patio screens keep out snakes and mice?',
-      a: 'Yes. Fixed Screen uses 304 stainless steel mesh and Hexfold uses honeycomb aluminum mesh. Both keep out mosquitoes, insects, mice and snakes, and every piece is CNC-cut to your openings for a tight fit.',
+      q: 'Will metal patio screens help with snakes and mice?',
+      a: 'They are built to help. Fixed Screen uses 304 stainless steel mesh and Hexfold uses honeycomb aluminum mesh, CNC-cut to your openings. The fit around the screen matters as much as the mesh, so at the site visit we check bottom edges, doors and any pet opening. We do not promise a pest-free patio.',
     },
     {
-      q: 'How long do metal screens last compared to nylon?',
-      a: 'Nylon and fiberglass screening typically needs rescreening every 5 to 10 years (HomeGuide). Our metal mesh resists tearing where nylon fails, and the frame carries a lifetime warranty.',
+      q: 'Are your screens metal or fabric?',
+      a: 'Metal. Hexfold uses honeycomb aluminum mesh and Fixed Screen uses 304 stainless steel mesh. The frames are metal-reinforced at the core and carry a lifetime warranty, with 3 years on parts. Ask to see both mesh samples at your site visit.',
+    },
+    {
+      q: 'Do AE folding screens work when the power goes out?',
+      a: 'Yes. Hexfold opens and closes by hand with its handle, so it does not need household electricity. Its manual folding mechanism has no motor program to reset when power returns. Use it within its operating limits: about 40 mph while open or moving.',
+    },
+    {
+      q: 'Do Hexfold screens need maintenance?',
+      a: 'Some. Manual operation removes the motor and controls, not the moving parts: the wheels and track still need simple care. Ask for the current care guide at your site visit.',
     },
     {
       q: 'Is Hexfold cheaper than motorized screens?',
-      a: 'Motorized roll-down screens run about $40 to $45 per sq ft of opening in Houston. Hexfold starts at $28 per sq ft installed, with the look and feel of a high-end retractable and no motor to maintain.',
+      a: 'Motorized roll-down screens run about $40 to $45 per sq ft of opening in Houston. Hexfold starts at $28 per sq ft installed, with no motor or wiring.',
     },
     {
-      q: 'Do you make a pet-proof screen?',
-      a: 'Fixed Screen is our answer for homes with dogs and cats. The mesh is 304 stainless steel in a heat-welded frame, and it resists tearing where nylon and fiberglass screens fail. We can also build a pet door right into a panel so your dog can come and go.',
+      q: 'Can I add a doggy door?',
+      a: 'Yes. A doggy door is an add-on for a compatible screen panel. We help you pick the size and spot at the site visit. A pet opening is also a way in for other animals, so we plan its closure with you.',
     },
   ],
   general: [
@@ -299,7 +307,7 @@ export const PRODUCT_MENU = [
   { group: 'Screen it', items: [
     { href: '/hexfold/', label: 'Hexfold', note: 'Folding metal screens' },
     { href: '/screens/', label: 'Fixed Screen', note: 'Stainless steel mesh' },
-    { href: '/pet-proof-patio-screens/', label: 'Pet-proof screens', note: 'For dogs and cats' },
+    { href: '/pet-proof-patio-screens/', label: 'Screens for pets', note: 'Doggy door add-on' },
     { href: '/garage-screens/', label: 'Garage screens', note: 'One to three bays' },
   ] },
 ];

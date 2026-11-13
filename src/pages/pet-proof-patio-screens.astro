@@ -1,6 +1,6 @@
 ---
-// Pet-proof patio screens: built from the Fixed Screen content. Honest wording: the mesh resists
-// tearing where nylon fails; nothing is indestructible, and the warranty excludes accidents and intentional damage.
+// Patio screens for homes with pets (URL keeps the search phrase). Brand guide v1.1: no pet-proof or comparative
+// durability claims; the doggy door is an add-on and any pet opening needs a closure plan.
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
@@ -12,33 +12,33 @@ import doorsOpen from '../assets/photos/fixed-screen-doors-open.jpg';
 import doorFrame from '../assets/photos/fixed-screen-door-frame.jpg';
 
 const fx = byId('fixed');
-const crumbs = [{ name: 'Screens', href: '/screens/' }, { name: 'Pet-proof patio screens', href: '/pet-proof-patio-screens/' }];
+const crumbs = [{ name: 'Screens', href: '/screens/' }, { name: 'Screens for homes with pets', href: '/pet-proof-patio-screens/' }];
 const faq: QA[] = [
-  { q: 'What is the best screen for dogs and cats?', a: `For homes with pets we recommend Fixed Screen: 304 stainless steel mesh in a heat-welded frame. It resists tearing where nylon and fiberglass screens fail, and it starts at $${fx.msrp} per sq ft of opening, installed.` },
-  { q: 'Can you add a pet door?', a: 'Yes. We can build a pet door right into a Fixed Screen panel so your dog can come and go. The panel is still CNC-cut to your opening and carries the same lifetime frame warranty and 3 years on parts.' },
-  { q: 'Is any screen completely pet-proof?', a: 'No screen is indestructible. What we promise is metal mesh that resists tearing where fabric screens fail, a lifetime warranty on the frame and 3 years on all parts. The warranty excludes accidents and intentional damage.' },
-  { q: 'How much do pet-proof patio screens cost?', a: `Fixed Screen starts at $${fx.msrp} per sq ft of opening, installed. A small patio with ${SIZES[0].low} to ${SIZES[0].high} sq ft of openings runs ${range(fx.msrp, SIZES[0].low, SIZES[0].high)}. Your exact price comes with your quote.` },
+  { q: 'What screen do you suggest for homes with dogs and cats?', a: `Most pet owners choose Fixed Screen: 304 stainless steel mesh in a metal-reinforced, heat-welded frame, from $${fx.msrp} per sq ft of opening installed. A doggy door can be added to a compatible panel.` },
+  { q: 'Can you add a doggy door?', a: 'Yes, as an add-on to a compatible screen panel. We help you choose the size and spot at the site visit. Any pet opening is also a way in for other animals, so we plan its closure with you.' },
+  { q: 'Is any screen completely pet-proof?', a: 'No. We do not sell any screen as pet-proof. What we offer is metal mesh instead of fabric, a lifetime warranty on the frame and 3 years on all parts. The warranty excludes accidents and intentional damage.' },
+  { q: 'How much do screens for pet owners cost?', a: `Fixed Screen starts at $${fx.msrp} per sq ft of opening, installed. A small patio with ${SIZES[0].low} to ${SIZES[0].high} sq ft of openings runs ${range(fx.msrp, SIZES[0].low, SIZES[0].high)}. Your exact price comes with your quote.` },
 ];
 const product = {
   '@context': 'https://schema.org', '@type': 'Product',
-  name: 'AE Fixed Screen: pet-proof patio screens', category: 'Patio screens',
-  description: 'Fixed patio screens with 304 stainless steel mesh in heat-welded frames, with an optional built-in pet door. Built and installed in Houston by AE Factory Sales.',
+  name: 'AE Fixed Screen with doggy door add-on', category: 'Patio screens',
+  description: 'Fixed patio screens with 304 stainless steel mesh in metal-reinforced, heat-welded frames, with an optional doggy door add-on. Built and installed in Houston by AE Factory Sales.',
   brand: { '@type': 'Brand', name: 'AE Factory Sales' }, material: '304 stainless steel mesh',
   image: new URL(doorsOpen.src, SITE.url).href, url: `${SITE.url}/pet-proof-patio-screens/`,
   offers: { '@type': 'Offer', priceCurrency: 'USD', price: fx.msrp, availability: 'https://schema.org/InStock', seller: { '@id': `${SITE.url}/#business` }, description: 'Installed price per square foot of opening' },
 };
 ---
 <Base
-  title="Pet-Proof Patio Screens in Houston | AE Factory Sales"
-  description={`Pet-proof patio screens for Houston homes: 304 stainless steel mesh in heat-welded frames, optional built-in pet door, from $${fx.msrp} per sq ft of opening installed.`}
+  title="Patio Screens for Dogs and Cats in Houston | AE"
+  description={`Patio screens for Houston homes with dogs and cats: 304 stainless steel mesh, a doggy door add-on, from $${fx.msrp} per sq ft of opening installed.`}
   crumbs={crumbs}
   schema={[product]}
 >
   <PageHero crumbs={crumbs}>
     <div class="stack-lg" style="max-width:52em">
-      <h1 class="display">Pet-proof <span class="y">patio screens</span></h1>
-      <p class="sub">Claws and paws are what finish off most nylon screens. Fixed Screen swaps the fabric for 304 stainless steel mesh in a heat-welded frame, so it resists tearing where nylon and fiberglass fail.</p>
-      <p class="lede"><strong style="color:var(--ink)">Short answer:</strong> stainless steel mesh, a built-in pet door if you want one, from ${fx.msrp} per sq ft of opening, installed.</p>
+      <h1 class="display">Patio screens <span class="y">for dogs and cats</span></h1>
+      <p class="sub">Fixed Screen swaps fabric for 304 stainless steel mesh in a metal-reinforced, heat-welded frame. Add a doggy door so your dog has a dedicated way through.</p>
+      <p class="lede"><strong style="color:var(--ink)">Short answer:</strong> stainless steel mesh, a doggy door add-on if you want one, from ${fx.msrp} per sq ft of opening, installed.</p>
       <div class="actions"><a class="btn" href="#quote">Get my screen quote</a><a class="btn btn-line" href="/screens/">All about Fixed Screen</a></div>
     </div>
   </PageHero>
@@ -46,11 +46,11 @@ const product = {
   <section class="band on-paper">
     <div class="wrap split" style="align-items:center">
       <div class="stack-lg">
-        <h2 class="h2">Why it holds up <span class="y">to pets</span></h2>
+        <h2 class="h2">Built for life <span class="y">with pets</span></h2>
         <div class="pp">
-          <div><h3>Stainless steel mesh</h3><p>304 stainless steel instead of fabric. It resists tearing where nylon fails.</p></div>
-          <div><h3>A frame with no screws</h3><p>Heat welded, with an aluminum core, and CNC-cut to your opening so the panel fits without gaps.</p></div>
-          <div><h3>A pet door built in</h3><p>We can build a pet door right into a panel, so your dog can come and go without you getting up.</p></div>
+          <div><h3>Stainless steel mesh</h3><p>304 stainless steel instead of fabric. See it beside a soft-mesh sample at your site visit.</p></div>
+          <div><h3>A metal-reinforced frame</h3><p>Heat welded around an aluminum core, with no screws, and CNC-cut to your opening.</p></div>
+          <div><h3>A door of its own</h3><p>Add a doggy door to a compatible panel. We help you choose the size and location, and plan its closure, since any pet opening is also a way in.</p></div>
         </div>
       </div>
       <figure class="pp-fig">
@@ -68,9 +68,9 @@ const product = {
       </figure>
       <div class="stack">
         <h2 class="h2">Straight <span class="y">talk</span></h2>
-        <p class="lede">"Pet-proof" is what people search for, and no screen is indestructible.</p>
-        <p>What we can promise is metal mesh that resists tearing where fabric screens fail, a lifetime warranty on the frame and 3 years on all parts. The warranty excludes accidents and intentional damage.</p>
-        <p>Nylon screens typically need rescreening every 5 to 10 years (source: HomeGuide). <a href="/screens/#vs-nylon">Stainless vs nylon, side by side</a>.</p>
+        <p class="lede">No screen is indestructible, and we do not sell anything as pet-proof.</p>
+        <p>What we can promise is metal mesh instead of fabric, a lifetime warranty on the frame and 3 years on all parts. The warranty excludes accidents and intentional damage.</p>
+        <p><a href="/screens/#vs-nylon">Compare the mesh, side by side</a>.</p>
       </div>
     </div>
   </section>
@@ -88,9 +88,9 @@ const product = {
     <div class="wrap split" style="align-items:start">
       <div class="stack">
         <h2 class="h2">Get your <span class="y">screen quote</span></h2>
-        <p class="lede">Tell us about your openings and your pets, and a rep will call you with a quote.</p>
+        <p class="lede">Tell us about your openings and your pets, and a rep will reply within 1 business day with a quote.</p>
       </div>
-      <QuoteForm id="pet-quote" kind="screens" source="Pet-proof screens page" />
+      <QuoteForm id="pet-quote" kind="screens" source="Screens for pets page" />
     </div>
   </section>
 </Base>
