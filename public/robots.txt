@@ -3,7 +3,6 @@
 User-agent: *
 Allow: /
 Disallow: /thank-you/
-Disallow: /dealers/thanks/
 Disallow: /reviews/thanks/
 
 User-agent: GPTBot

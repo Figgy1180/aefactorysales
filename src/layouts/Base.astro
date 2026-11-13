@@ -30,7 +30,7 @@ const OG_PHOTOS: Record<string, string> = {
   '/how-we-build/': 'photos/factory-angle', '/learn/': 'photos/hexfold-handle-mesh', '/compare/': 'projects/p14/3-long-side-open',
   '/faq/': 'projects/p6/2-outside-closed', '/free-quote/': 'projects/p34/5-inside-seating', '/service-area/': 'projects/p6/4-wide',
   '/every-season/': 'photos/hexfold-patio-open', '/guides/': 'photos/gabled-opening-screens', '/reviews/': 'photos/screened-patio-room-corner',
-  '/dealers/': 'photos/fixed-screen-frame-colors', '/guides/folding-vs-motorized-patio-screens/': 'photos/hexfold-handle',
+  '/guides/folding-vs-motorized-patio-screens/': 'photos/hexfold-handle',
   '/guides/polycarbonate-vs-glass-patio-enclosure-cost/': 'photos/brick-home-screened-patio',
 };
 const ogFiles = import.meta.glob('../assets/{photos,projects}/**/*.jpg', { eager: true }) as Record<string, { default: ImageMetadata }>;
@@ -208,7 +208,6 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
               <li><a href="/how-we-build/">Our factory</a></li>
               <li><a href="/reviews/">Leave a review</a></li>
               <li><a href={SITE.googleProfileUrl} rel="noopener">Find us on Google</a></li>
-              <li><a href="/dealers/">Become a dealer</a></li>
               <li><a href={SITE.factorySite} rel="noopener">Factory site</a></li>
               <li><a href="/privacy/">Privacy</a></li>
             </ul>

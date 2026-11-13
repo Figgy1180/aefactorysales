@@ -262,7 +262,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'How long does installation take?',
-      a: 'Within a month of your order. We measure at the free site visit, build and test your whole job at our Houston factory, then our own crew installs it, usually in 1 to 2 days.',
+      a: 'Within a month of your order. We measure at the free site visit, build and test your whole job at our Houston factory, then our own crew installs it, usually in 1 day.',
     },
     {
       q: 'What does the warranty cover?',
