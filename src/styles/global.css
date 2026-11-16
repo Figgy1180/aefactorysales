@@ -7,6 +7,7 @@
 @import '@fontsource-variable/archivo/wdth-italic.css';
 @import '@fontsource/ibm-plex-mono/latin-500.css';
 @import '@fontsource/ibm-plex-mono/latin-600.css';
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
 
 :root {
   /* color */
@@ -380,3 +381,93 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
 .tbl thead th.num { font-family: var(--mono); font-size: 0.74rem !important; font-weight: 600; font-stretch: 100%; }
+
+/* AE Atelier refresh — presentation layer only.
+   The existing page URLs, content, structured data, forms, and reveal slider stay intact. */
+:root {
+  --honey: #f8f5ed;
+  --honey-2: #eeede4;
+  --honey-3: #e1e3d8;
+  --yellow: #b68b41;
+  --yellow-hi: #d2a558;
+  --cream: #fffdf7;
+  --cream-2: #f3eee4;
+  --ink: #253b34;
+  --ink-2: #58665d;
+  --paper-ink: #253b34;
+  --paper-2: #59685e;
+  --paper-line: #dbd7ca;
+  --line: rgba(45, 72, 59, .18);
+  --grid: rgba(45, 72, 59, .045);
+  --font: 'DM Sans', Arial, sans-serif;
+  --step-5: clamp(3.2rem, 6.4vw, 6rem);
+  --step-4: clamp(2.3rem, 4.5vw, 4rem);
+  --max: 1240px;
+  --sec: clamp(64px, 8vw, 108px);
+  color-scheme: light;
+}
+body { letter-spacing: -.012em; }
+h1, h2, h3, h4 { font-family: 'Manrope', var(--font); }
+.display, .h2, .h3, .prose h2, .prose h3 {
+  font-stretch: normal; font-weight: 600; text-transform: none;
+  letter-spacing: -.05em; line-height: 1.08;
+}
+.display { font-weight: 600; line-height: 1.02; }
+.display .y, .h2 .y { color: #b68b41; }
+.h3 { letter-spacing: -.035em; }
+.sub { border-left: 0; padding-left: 0; font-style: normal; line-height: 1.6; }
+.btn { border-radius: 999px; font-size: .94rem; font-weight: 700; text-transform: none; letter-spacing: 0; }
+.btn:not(.btn-line) { background: #294d42; border-color: #294d42; color: #fffef8; }
+.btn:not(.btn-line):hover { background: #38685a; border-color: #38685a; color: white; }
+.btn-line { border-color: #6c8375; color: #294d42; }
+.btn-line:hover { background: #e7ebe3; color: #294d42; border-color: #294d42; }
+.on-paper .btn-line { border-color: #6c8375; color: #294d42; }
+.top, .menu nav { background: #24483e; border-bottom: 1px solid rgba(255,255,255,.13); }
+body::before { background: #24483e; }
+.brand, .nav a, .top-phone, .menu nav a { color: #fffdf4; }
+.brand small { color: #d7dfd7; border-color: #ba9a60; }
+.brand img { filter: none; }
+.nav a:hover, .nav a[aria-current="page"] { color: #ead4a7; }
+.top .btn:not(.btn-line) { background: #e3bf79; color: #203b33; border-color: #e3bf79; }
+.menu summary { color: #fffdf4; border-color: rgba(255,255,255,.35); }
+.menu nav a.btn { color: #24483e; }
+.season-bar { background: #eee3c9; }
+.hero {
+  overflow: hidden;
+  background-color: #f8f5ed;
+  background-image: url('/brand/honeycomb-pattern.svg'), radial-gradient(ellipse at 85% 16%, #f6eacc 0%, transparent 58%);
+  background-size: 144px 124px, cover;
+  background-position: center top, center;
+}
+.on-paper {
+  background-image: url('/brand/honeycomb-pattern.svg');
+  background-size: 144px 124px;
+}
+.hero .hero-frame, .prod, .path, .book-card { border: 1px solid rgba(159, 126, 69, .16); }
+.hero .hero-frame { border-radius: 10px; overflow: hidden; }
+.hero .hero-frame .dim.h { display: none; }
+.hero .h-body .micro { color: #5c6a5e; }
+.hero .proof dt { color: #32584b; }
+.hero .display .y { color: #a47a3c; }
+.hero .sub { max-width: 34em; }
+.hero .proof { border-color: var(--line); }
+.hero .hero-frame { box-shadow: 0 28px 65px rgba(27,55,45,.16); }
+.hero .hero-frame .dim.h span, .dim.h span { background: #f8f5ed; }
+.hero .hint { color: #637267; }
+.dim-frame { border: 1px solid #c9b78d; }
+.dim { color: #a78956; }
+.prod, .path, .book-card { border-radius: 14px; overflow: hidden; box-shadow: 0 16px 45px rgba(38, 61, 49, .065); }
+.prod { border-top: 0; }
+.prod h3, .price-line b, .specs dt { color: #315549; }
+.field input, .field select, .field textarea { border: 1px solid #cdd4c9; border-radius: 8px; background: #fffdf8; }
+.foot { background: #1f3931; color: #eef3eb; }
+.foot a, .foot address, .foot .small { color: #d7e1d8; }
+.foot h2 { color: #dfbd80; }
+.foot-cta { background: #d7ba84; color: #243d33; }
+.foot-cta .btn:not(.btn-line) { background: #24483e; color: white; border-color: #24483e; }
+.callbar { background: #24483e; }
+@media (max-width: 640px) {
+  .callbar a { color: white; }
+  .callbar button, .callbar a + a { background: #d7ba84; color: #243d33; }
+  .display { font-size: clamp(2.8rem, 11vw, 4.2rem); }
+}
