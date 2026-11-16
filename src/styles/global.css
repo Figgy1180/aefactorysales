@@ -24,6 +24,8 @@
   --paper-line: #C9B49A;
   --line: rgba(242, 194, 48, 0.4);
   --grid: rgba(242, 194, 48, 0.07);
+  /* Honeycomb background tile (pointy-top hexagons, thin yellow lines). Replaces the square blueprint grid. */
+  --honeycomb: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='27.713' height='48' viewBox='0 0 27.713 48'%3E%3Cpath d='M13.856 0L27.713 8V24L13.856 32L0 24V8ZM13.856 32V48' fill='none' stroke='%23F2C230' stroke-opacity='.11' stroke-width='1'/%3E%3C/svg%3E");
 
   /* type */
   --font: 'Archivo Variable', 'Archivo', 'Arial Narrow', Arial, sans-serif;
@@ -102,10 +104,8 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font); text-wrap: balance; line-h
 .on-paper { background: var(--cream); color: var(--paper-ink); }
 .raised { background: var(--honey-2); }
 .blueprint {
-  background-image:
-    linear-gradient(var(--grid) 1px, transparent 1px),
-    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size: 28px 28px;
+  background-image: var(--honeycomb);
+  background-size: 34.64px 60px;
 }
 .stack { display: grid; gap: 18px; align-content: start; }
 .stack-lg { display: grid; gap: 28px; align-content: start; }
