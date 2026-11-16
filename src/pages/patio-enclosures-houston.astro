@@ -13,7 +13,7 @@ const order = ['fixed', 'hexfold', 'clearfixed', 'clearfold', 'hybrid'].map(byId
 const lo = Math.min(...order.map((p) => p.msrp)), hi = Math.max(...order.map((p) => p.msrp));
 const faq: QA[] = [
   { q: 'What is a patio enclosure?', a: `A patio enclosure closes in the open sides of a covered patio with screens, panels or both. AE Factory Sales builds 5 systems for existing roofed patios, from $${lo} to $${hi} per sq ft of opening, installed. Panels can be up to 10 ft tall.` },
-  FAQ.cost[0], FAQ.cost[2], FAQ.room[0], FAQ.general[2], FAQ.general[3], FAQ.general[1], FAQ.general[6],
+  FAQ.cost[0], FAQ.cost[1], FAQ.cost[2], FAQ.room[0], FAQ.general[2], FAQ.general[3], FAQ.general[1], FAQ.general[6],
 ];
 const service = {
   '@context': 'https://schema.org', '@type': 'Service',

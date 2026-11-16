@@ -149,20 +149,6 @@ export const range = (msrp: number, low: number, high: number) => `${money(msrp 
 
 // Example patio used for every comparison: 16 × 14 ft, two open sides, 8 ft tall
 // = 240 sq ft of openings, 224 sq ft of floor.
-export const EXAMPLE = {
-  label: '16 × 14 ft covered patio, two open sides, 8 ft tall',
-  openings: 240,
-  floor: 224,
-  rows: [
-    { name: '4-season glass sunroom', low: 45000, high: 90000, ours: false },
-    { name: '3-season sunroom', low: 18000, high: 52000, ours: false },
-    { name: 'Motorized roll-down screens', low: 9600, high: 10800, ours: false },
-    { name: 'AE Clearfixed to Clearfold', low: 7400, high: 9600, ours: true },
-    { name: 'AE Fixed Screen to Hexfold', low: 5800, high: 6700, ours: true },
-  ],
-  footnote:
-    'Example patio: 16 × 14 ft, two open sides, 8 ft tall (240 sq ft of openings, 224 sq ft of floor). Sunroom ranges from the HomeGuide cost guide (Oct 2026), per floor sq ft applied to 224 sq ft. Motorized screens at $40 to $45 per sq ft of opening, Houston market pricing. AE ranges use our lowest installed prices on 240 sq ft of openings.',
-};
 
 export const CITIES = [
   'Houston', 'Katy', 'Sugar Land', 'Cypress', 'The Woodlands', 'Pearland', 'Spring',
@@ -188,11 +174,34 @@ export const FACTS = {
 
 export type QA = { q: string; a: string };
 
+export const EXAMPLE = {
+  label: '16 × 14 ft covered patio, two open sides, 8 ft tall',
+  openings: 240,
+  floor: 224,
+  rows: [
+    { name: '4-season glass sunroom', low: 45000, high: 90000, ours: false },
+    { name: '3-season sunroom', low: 18000, high: 52000, ours: false },
+    { name: 'Motorized roll-down screens', low: 9600, high: 10800, ours: false },
+    { name: 'AE Clearfixed to Clearfold', low: 7400, high: 9600, ours: true },
+    { name: 'AE Fixed Screen to Hexfold', low: 5800, high: 6700, ours: true },
+  ],
+  footnote:
+    'Example patio: 16 × 14 ft, two open sides, 8 ft tall (240 sq ft of openings, 224 sq ft of floor). Sunroom ranges from the HomeGuide cost guide (Oct 2026), per floor sq ft applied to 224 sq ft. Motorized screens at $40 to $45 per sq ft of opening, Houston market pricing. AE ranges use our lowest installed prices on 240 sq ft of openings.',
+};
+
 export const FAQ: Record<string, QA[]> = {
   cost: [
     {
       q: 'How much does a patio enclosure cost in Houston?',
       a: 'Our installed prices start at $24 per sq ft for Fixed Screen, $28 for Hexfold, $31 for Clearfixed, $40 for Clearfold and $56 for the Hybrid, measured by the open wall area we fill. A 16 × 14 ft covered patio with two open sides runs about $5,800 to $6,700 in metal screens, or $7,400 to $9,600 as a polycarbonate 3-season room. Your exact price comes from a free site visit.',
+    },
+    {
+      q: 'How much does it cost to enclose a patio in Houston?',
+      a: `For a typical ${EXAMPLE.label} (${EXAMPLE.openings} sq ft of openings), metal screens run about $5,800 to $6,700 installed and a polycarbonate 3-season room about $7,400 to $9,600. The Hybrid, with panels and mesh in one system, is about $${(Math.round(EXAMPLE.openings * 56 / 100) * 100).toLocaleString()}. Your exact price comes after we measure.`,
+    },
+    {
+      q: 'What does a patio enclosure cost per square foot?',
+      a: 'From $24 to $56 per square foot of opening, installed: Fixed Screen $24, Hexfold $28, Clearfixed $31, Clearfold $40 and Hybrid $56. That is per square foot of the open wall we fill, not floor area, so compare whole-project totals.',
     },
     {
       q: 'Why do you price by the square foot of opening?',
@@ -307,7 +316,7 @@ export const PRODUCT_MENU = [
   { group: 'Screen it', items: [
     { href: '/hexfold/', label: 'Hexfold', note: 'Folding metal screens' },
     { href: '/screens/', label: 'Fixed Screen', note: 'Stainless steel mesh' },
-    { href: '/pet-proof-patio-screens/', label: 'Screens for pets', note: 'Doggy door add-on' },
+    { href: '/pet-resistant-patio-screens/', label: 'Pet-resistant screens', note: 'Doggy door add-on' },
     { href: '/garage-screens/', label: 'Garage screens', note: 'One to three bays' },
   ] },
 ];

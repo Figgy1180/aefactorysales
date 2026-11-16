@@ -1,6 +1,6 @@
 ---
-// Patio screens for homes with pets (URL keeps the search phrase). Brand guide v1.1: no pet-proof or comparative
-// durability claims; the doggy door is an add-on and any pet opening needs a closure plan.
+// Pet-resistant patio screens. "Pet-resistant" is the phrase Houston competitors rank with (Nov 16 search).
+// Brand guide v1.1: no pet-proof or comparative durability claims; the doggy door is an add-on with a closure plan.
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
@@ -12,31 +12,31 @@ import doorsOpen from '../assets/photos/fixed-screen-doors-open.jpg';
 import doorFrame from '../assets/photos/fixed-screen-door-frame.jpg';
 
 const fx = byId('fixed');
-const crumbs = [{ name: 'Screens', href: '/screens/' }, { name: 'Screens for homes with pets', href: '/pet-proof-patio-screens/' }];
+const crumbs = [{ name: 'Screens', href: '/screens/' }, { name: 'Pet-resistant patio screens', href: '/pet-resistant-patio-screens/' }];
 const faq: QA[] = [
   { q: 'What screen do you suggest for homes with dogs and cats?', a: `Most pet owners choose Fixed Screen: 304 stainless steel mesh in a metal-reinforced, heat-welded frame, from $${fx.msrp} per sq ft of opening installed. A doggy door can be added to a compatible panel.` },
   { q: 'Can you add a doggy door?', a: 'Yes, as an add-on to a compatible screen panel. We help you choose the size and spot at the site visit. Any pet opening is also a way in for other animals, so we plan its closure with you.' },
-  { q: 'Is any screen completely pet-proof?', a: 'No. We do not sell any screen as pet-proof. What we offer is metal mesh instead of fabric, a lifetime warranty on the frame and 3 years on all parts. The warranty excludes accidents and intentional damage.' },
-  { q: 'How much do screens for pet owners cost?', a: `Fixed Screen starts at $${fx.msrp} per sq ft of opening, installed. A small patio with ${SIZES[0].low} to ${SIZES[0].high} sq ft of openings runs ${range(fx.msrp, SIZES[0].low, SIZES[0].high)}. Your exact price comes with your quote.` },
+  { q: 'What does pet-resistant mean?', a: 'It means metal mesh instead of fabric, not pet-proof. We do not sell any screen as pet-proof. What we offer is metal mesh instead of fabric, a lifetime warranty on the frame and 3 years on all parts. The warranty excludes accidents and intentional damage.' },
+  { q: 'How much do pet-resistant patio screens cost?', a: `Fixed Screen starts at $${fx.msrp} per sq ft of opening, installed. A small patio with ${SIZES[0].low} to ${SIZES[0].high} sq ft of openings runs ${range(fx.msrp, SIZES[0].low, SIZES[0].high)}. Your exact price comes with your quote.` },
 ];
 const product = {
   '@context': 'https://schema.org', '@type': 'Product',
-  name: 'AE Fixed Screen with doggy door add-on', category: 'Patio screens',
+  name: 'AE Fixed Screen: pet-resistant patio screens', category: 'Patio screens',
   description: 'Fixed patio screens with 304 stainless steel mesh in metal-reinforced, heat-welded frames, with an optional doggy door add-on. Built and installed in Houston by AE Factory Sales.',
   brand: { '@type': 'Brand', name: 'AE Factory Sales' }, material: '304 stainless steel mesh',
-  image: new URL(doorsOpen.src, SITE.url).href, url: `${SITE.url}/pet-proof-patio-screens/`,
+  image: new URL(doorsOpen.src, SITE.url).href, url: `${SITE.url}/pet-resistant-patio-screens/`,
   offers: { '@type': 'Offer', priceCurrency: 'USD', price: fx.msrp, availability: 'https://schema.org/InStock', seller: { '@id': `${SITE.url}/#business` }, description: 'Installed price per square foot of opening' },
 };
 ---
 <Base
-  title="Patio Screens for Dogs and Cats in Houston | AE"
-  description={`Patio screens for Houston homes with dogs and cats: 304 stainless steel mesh, a doggy door add-on, from $${fx.msrp} per sq ft of opening installed.`}
+  title="Pet-Resistant Patio Screens in Houston | AE Factory Sales"
+  description={`Pet-resistant patio screens for Houston homes with dogs and cats: 304 stainless steel mesh, a doggy door add-on, from $${fx.msrp} per sq ft of opening installed.`}
   crumbs={crumbs}
   schema={[product]}
 >
   <PageHero crumbs={crumbs}>
     <div class="stack-lg" style="max-width:52em">
-      <h1 class="display">Patio screens <span class="y">for dogs and cats</span></h1>
+      <h1 class="display">Pet-resistant <span class="y">patio screens</span></h1>
       <p class="sub">Fixed Screen swaps fabric for 304 stainless steel mesh in a metal-reinforced, heat-welded frame. Add a doggy door so your dog has a dedicated way through.</p>
       <p class="lede"><strong style="color:var(--ink)">Short answer:</strong> stainless steel mesh, a doggy door add-on if you want one, from ${fx.msrp} per sq ft of opening, installed.</p>
       <div class="actions"><a class="btn" href="#quote">Get my screen quote</a><a class="btn btn-line" href="/screens/">All about Fixed Screen</a></div>
@@ -90,7 +90,7 @@ const product = {
         <h2 class="h2">Get your <span class="y">screen quote</span></h2>
         <p class="lede">Tell us about your openings and your pets, and a rep will reply within 1 business day with a quote.</p>
       </div>
-      <QuoteForm id="pet-quote" kind="screens" source="Screens for pets page" />
+      <QuoteForm id="pet-quote" kind="screens" source="Pet-resistant screens page" />
     </div>
   </section>
 </Base>
