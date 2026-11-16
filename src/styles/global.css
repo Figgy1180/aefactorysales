@@ -432,7 +432,22 @@ body::before { background: #24483e; }
 .menu summary { color: #fffdf4; border-color: rgba(255,255,255,.35); }
 .menu nav a.btn { color: #24483e; }
 .season-bar { background: #eee3c9; }
-.hero { overflow: hidden; background-color: #f8f5ed; }
+.hero {
+  overflow: hidden;
+  background-color: #f8f5ed;
+  background-image: url('/brand/honeycomb-pattern.svg'), radial-gradient(ellipse at 85% 16%, #f6eacc 0%, transparent 58%);
+  background-size: 144px 124px, cover;
+  background-position: center top, center;
+}
+.on-paper {
+  background-image: url('/brand/honeycomb-pattern.svg');
+  background-size: 144px 124px;
+}
+.hero .hero-frame, .prod, .path, .book-card { border: 1px solid rgba(159, 126, 69, .16); }
+.hero .hero-frame { border-radius: 10px; overflow: hidden; }
+.hero .hero-frame .dim.h { display: none; }
+.hero .h-body .micro { color: #5c6a5e; }
+.hero .proof dt { color: #32584b; }
 .hero .display .y { color: #a47a3c; }
 .hero .sub { max-width: 34em; }
 .hero .proof { border-color: var(--line); }
