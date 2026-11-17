@@ -25,6 +25,7 @@
   --line: rgba(242, 194, 48, 0.4);
   --grid: rgba(242, 194, 48, 0.07);
   /* Honeycomb background tile (pointy-top hexagons, thin yellow lines). Replaces the square blueprint grid. */
+  --honeycomb-lg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='27.713' height='48' viewBox='0 0 27.713 48'%3E%3Cpath d='M13.856 0L27.713 8V24L13.856 32L0 24V8ZM13.856 32V48' fill='none' stroke='%23F2C230' stroke-opacity='.5' stroke-width='.6'/%3E%3C/svg%3E");
   --honeycomb: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='27.713' height='48' viewBox='0 0 27.713 48'%3E%3Cpath d='M13.856 0L27.713 8V24L13.856 32L0 24V8ZM13.856 32V48' fill='none' stroke='%23F2C230' stroke-opacity='.11' stroke-width='1'/%3E%3C/svg%3E");
 
   /* type */
@@ -414,3 +415,12 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
 .tbl thead th.num { font-family: var(--mono); font-size: 0.74rem !important; font-weight: 600; font-stretch: 100%; }
+
+/* Beehive accent: a larger honeycomb that fades in from one corner of a band. Decorative only. */
+.hive { position: relative; isolation: isolate; }
+.hive::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .32;
+  background-image: var(--honeycomb-lg); background-size: 83px 144px;
+  -webkit-mask-image: radial-gradient(ellipse 55% 75% at 100% 0%, #000 0%, transparent 72%);
+  mask-image: radial-gradient(ellipse 55% 75% at 100% 0%, #000 0%, transparent 72%); }
+.hive-left::before { -webkit-mask-image: radial-gradient(ellipse 55% 75% at 0% 100%, #000 0%, transparent 72%); mask-image: radial-gradient(ellipse 55% 75% at 0% 100%, #000 0%, transparent 72%); }
+.on-paper.hive::before { opacity: .14; filter: brightness(.35); }

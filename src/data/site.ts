@@ -330,6 +330,7 @@ export const PRODUCT_MENU = [
 export const NAV = [
   { href: '/pricing/', label: 'Pricing' },
   { href: '/projects/', label: 'Projects' },
+  { href: '/patio-visualizer/', label: 'Visualizer' },
   { href: '/why-ae/', label: 'Why AE' },
   { href: '/learn/', label: 'Learn' },
 ];
