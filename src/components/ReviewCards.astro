@@ -1,0 +1,29 @@
+---
+// Real customer reviews (src/data/reviews.ts). No star markup or review schema on purpose:
+// reviews a business shows about itself are not eligible for Google review stars.
+import { REVIEWS, type Review } from '../data/reviews';
+import { PROJECTS } from '../data/projects';
+interface Props { items?: Review[]; tone?: 'dark' | 'paper' }
+const { items = REVIEWS, tone = 'dark' } = Astro.props;
+const proj = (id?: string) => PROJECTS.find((p) => p.id === id);
+---
+<ul class:list={['rvc', tone]}>
+  {items.map((r) => { const p = proj(r.project); return (
+    <li>
+      <blockquote><p>{r.text}</p></blockquote>
+      <p class="rvc-who"><strong>{r.name}, {r.city}</strong>{p && <> · <a href={`/projects/${p.slug}/`}>{p.title}</a></>}</p>
+      <p class="rvc-src">{r.source}</p>
+    </li>
+  ); })}
+</ul>
+<style>
+  .rvc { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 22px; }
+  .rvc li { border-left: 4px solid var(--yellow); padding: 6px 0 6px 20px; display: grid; gap: 10px; align-content: start; }
+  .rvc blockquote { margin: 0; }
+  .rvc blockquote p { font-size: 1.18rem; line-height: 1.5; }
+  .rvc blockquote p::before { content: "\201C"; } .rvc blockquote p::after { content: "\201D"; }
+  .rvc-who { font-size: var(--step--1); }
+  .rvc-src { font-family: var(--mono); font-size: .74rem; letter-spacing: .04em; opacity: .75; }
+  .rvc.dark blockquote p { color: var(--ink); } .rvc.dark .rvc-who { color: var(--ink-2); } .rvc.dark a { color: var(--yellow); }
+  .rvc.paper blockquote p { color: var(--paper-ink); } .rvc.paper .rvc-who { color: var(--paper-2); }
+</style>

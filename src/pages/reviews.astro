@@ -4,11 +4,12 @@ import PageHero from '../components/PageHero.astro';
 import { SITE } from '../data/site';
 import { PROJECTS } from '../data/projects';
 import { REVIEWS } from '../data/reviews';
+import ReviewCards from '../components/ReviewCards.astro';
 const crumbs = [{ name: 'Reviews', href: '/reviews/' }];
 ---
 <Base
-  title="Reviews: Tell Us How We Did | AE Factory Sales"
-  description="Had a patio enclosure or screens installed by AE? Leave a quick review. It helps your Houston neighbors and helps us build better."
+  title="Customer Reviews | AE Factory Sales, Houston"
+  description="What Houston homeowners say about their AE patio enclosures and screens, and a quick form to leave your own review."
   crumbs={crumbs}
 >
   <PageHero crumbs={crumbs}>
@@ -25,7 +26,7 @@ const crumbs = [{ name: 'Reviews', href: '/reviews/' }];
     <section class="band on-paper">
       <div class="wrap">
         <h2 class="h2" style="margin-bottom:28px">What customers <span class="y">say</span></h2>
-        <ul class="rv">{REVIEWS.map((r) => <li><blockquote>{r.text}</blockquote><p><strong>{r.name}</strong>, {r.city}</p><p class="fine">{r.source}</p></li>)}</ul>
+        <ReviewCards tone="paper" />
       </div>
     </section>
   )}

@@ -13,6 +13,8 @@ import heroClosed from '../assets/hero/p14-closed-aligned.jpg';
 import heroOpen from '../assets/hero/p14-open-aligned.jpg';
 import { PRODUCTS, SIZES, FAQ, FACTS, CITIES, SITE, byId, range, FINANCING, WARRANTY, CITY_PAGES, type QA } from '../data/site';
 import BookVisitForm from '../components/BookVisitForm.astro';
+import ReviewCards from '../components/ReviewCards.astro';
+import { REVIEWS } from '../data/reviews';
 import meshImg from '../assets/photos/fixed-screen-frame-colors.jpg';
 import handleImg from '../assets/photos/hexfold-handle.jpg';
 import cncImg from '../assets/photos/factory-cnc.jpg';
@@ -136,16 +138,12 @@ const videoLd = {
     </div>
   </section>
 
-  {SHOW_PH && (
+  {REVIEWS.length > 0 && (
   <section class="band raised" aria-labelledby="proof-title">
     <div class="wrap stack-lg">
       <h2 id="proof-title" class="h2">What Houston homeowners <span class="y">say</span></h2>
-      <div class="ph-grid">
-        <div class="ph">Placeholder: verified customer review (their words, first name + last initial, city, system). Add only with permission.</div>
-        <div class="ph">Placeholder: verified customer review. Copy from Google with the customer&#39;s OK.</div>
-        <div class="ph">Placeholder: verified customer review, ideally a 3-season room owner.</div>
-      </div>
-      <div class="ph">Placeholder: installs counter, e.g. "[N] Houston patios since 2022" (a real count from your records).</div>
+      <ReviewCards />
+      <p class="fine">Had us build yours? <a href="/reviews/">Tell us how we did</a>.</p>
     </div>
   </section>
   )}
