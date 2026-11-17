@@ -53,8 +53,8 @@ const business = {
   email: SITE.email,
   foundingDate: SITE.founded,
   priceRange: '$$',
-  // No opening hours here on purpose: the showroom is by appointment only and not always staffed,
-  // so search results should not show "Open 24 hours" to walk-in visitors.
+  // Showroom hours (by appointment only; the copy everywhere says to call first).
+  openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'], opens: '09:00', closes: '17:00' }],
   contactPoint: [{ '@type': 'ContactPoint', telephone: SITE.phoneE164, contactType: 'sales', areaServed: 'US-TX', availableLanguage: ['English'] }],
   description:
     'Patio enclosures, polycarbonate 3-season rooms and metal patio screens built in our Houston factory and installed by our own crew within a month.',

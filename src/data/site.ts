@@ -17,7 +17,7 @@ export const SITE = {
   email: 'info@aefactorysales.com',
   factorySite: 'https://aecustomize.com',
   founded: '2022',
-  hours: 'Showroom by appointment only, so call first to book. Appointments available 24 hours.',
+  hours: 'Showroom open 9 am to 5 pm, 7 days a week, by appointment only. Call first to book.',
   // Paste the short review link from Google Business Profile (Home > Ask for reviews), e.g. https://g.page/r/XXXX/review
   googleReviewUrl: '',
   // Public Google Business Profile (verified, listed as "AE Factory Sales", Patio enclosure supplier).
@@ -215,6 +215,10 @@ export const FAQ: Record<string, QA[]> = {
       q: 'Do you offer financing?',
       a: FINANCING,
     },
+    {
+      q: 'How do deposit and payment work?',
+      a: 'Every system is custom built for your patio, so we ask for a 50% deposit when you place the order. The other 50% is due before installation, once we show you your order is finished.',
+    },
   ],
   room: [
     {
@@ -265,7 +269,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Can I add a doggy door?',
-      a: 'Yes. A doggy door is an add-on for a compatible screen panel. We help you pick the size and spot at the site visit. A pet opening is also a way in for other animals, so we plan its closure with you.',
+      a: 'Yes. A doggy door is a $200 add-on for a compatible screen panel, in 3 sizes. We help you pick the size and spot at the site visit. A pet opening is also a way in for other animals, so we plan its closure with you.',
     },
   ],
   general: [
@@ -299,7 +303,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Can I see it in person?',
-      a: 'Yes, by appointment only. Someone is not always on site, so call (713) 791-8073 to book a time first; appointments are available 24 hours a day. The showroom is at 2609 William Tell Street, Houston, TX 77093. You can also book a free site visit and we will bring samples to your home.',
+      a: 'Yes, by appointment only. It is open 9 am to 5 pm, 7 days a week, but someone is not always on the floor, so call (713) 791-8073 to book a time first. The showroom is at 2609 William Tell Street, Houston, TX 77093. You can also book a free site visit and we will bring samples to your home.',
     },
   ],
 };
@@ -316,7 +320,7 @@ export const PRODUCT_MENU = [
   { group: 'Screen it', items: [
     { href: '/hexfold/', label: 'Hexfold', note: 'Folding metal screens' },
     { href: '/screens/', label: 'Fixed Screen', note: 'Stainless steel mesh' },
-    { href: '/pet-resistant-patio-screens/', label: 'Pet-resistant screens', note: 'Doggy door add-on' },
+    { href: '/pet-resistant-patio-screens/', label: 'Pet-resistant screens', note: 'Doggy door add-on, $200' },
     { href: '/garage-screens/', label: 'Garage screens', note: 'One to three bays' },
   ] },
 ];
