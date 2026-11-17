@@ -304,7 +304,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Can I see it in person?',
-      a: 'Yes, by appointment only. Showroom hours are 9 am to 5 pm, 7 days a week. Call (713) 791-8073 to book a time first, so someone is there to walk you through every system. The showroom is at 2609 William Tell Street, Houston, TX 77093. You can also book a free site visit and we will bring samples to your home.',
+      a: 'Yes, by appointment only. Showroom hours are 9 am to 5 pm, 7 days a week. Call (713) 791-8073 to book a time first, so someone is there to walk you through every system. The showroom is at 2609 William Tell Street, Houston, TX 77093, with customer parking on site. You can also book a free site visit and we will bring samples to your home.',
     },
   ],
 };
