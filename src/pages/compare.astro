@@ -7,9 +7,9 @@ import { SITE, EXAMPLE } from '../data/site';
 const crumbs = [{ name: 'Compare', href: '/compare/' }];
 type Row = { name: string; ours?: boolean; cost: string; bugs: string; weather: string; opens: string; parts: string; ongoing: string; href?: string };
 const rows: Row[] = [
-  { name: 'AE Fixed Screen', ours: true, href: '/screens/', cost: '$5,800', bugs: 'Yes: 304 stainless steel mesh', weather: 'No', opens: 'No, stays in place', parts: 'None', ongoing: 'Lifetime frame warranty' },
-  { name: 'AE Hexfold', ours: true, href: '/hexfold/', cost: '$6,700', bugs: 'Yes: honeycomb aluminum mesh', weather: 'No', opens: 'Yes, folds by hand', parts: 'Wheels and track, no motor', ongoing: 'Lifetime frame warranty' },
-  { name: 'AE 3-season room', ours: true, href: '/three-season-rooms/', cost: '$7,400 to $9,600', bugs: 'Yes', weather: 'Yes: tinted polycarbonate', opens: 'Clearfold and Hybrid fold open', parts: 'No motor', ongoing: 'Lifetime frame warranty' },
+  { name: 'AE Fixed Screen', ours: true, href: '/patio-screens/fixed-screen/', cost: '$5,800', bugs: 'Yes: 304 stainless steel mesh', weather: 'No', opens: 'No, stays in place', parts: 'None', ongoing: 'Lifetime frame warranty' },
+  { name: 'AE Hexfold', ours: true, href: '/patio-screens/hexfold/', cost: '$6,700', bugs: 'Yes: honeycomb aluminum mesh', weather: 'No', opens: 'Yes, folds by hand', parts: 'Wheels and track, no motor', ongoing: 'Lifetime frame warranty' },
+  { name: 'AE 3-season room', ours: true, href: '/patio-enclosures/three-season-rooms/', cost: '$7,400 to $9,600', bugs: 'Yes', weather: 'Yes: tinted polycarbonate', opens: 'Clearfold and Hybrid fold open', parts: 'No motor', ongoing: 'Lifetime frame warranty' },
   { name: 'Nylon or fiberglass screen', cost: '$2,200 to $5,600', bugs: 'Insects; varies by mesh', weather: 'No', opens: 'Usually no', parts: 'None', ongoing: 'Rescreening over time (HomeGuide: every 5 to 10 years)' },
   { name: 'Motorized roll-down screens', cost: '$9,600 to $10,800', bugs: 'Insects; varies by mesh', weather: 'Varies by product', opens: 'Yes, by motor', parts: 'Motor, wiring, remote', ongoing: 'Motor and electronics to maintain' },
   { name: '3-season sunroom', cost: '$18,000 to $52,000', bugs: 'Yes', weather: 'Yes', opens: 'Depends on windows', parts: 'Windows and doors', ongoing: 'Varies' },
@@ -27,7 +27,7 @@ const vs = [
     lead: 'Nylon, polyester and fiberglass screen costs less up front. Compare the mesh material, how it opens, the frame and the care separately.',
     rows: [['Mesh', '304 stainless steel (Fixed Screen) or honeycomb aluminum (Hexfold)', 'Nylon or fiberglass fabric'], ['Pets', 'Doggy door add-on, $200, S/M/L', 'Varies by product'], ['Upkeep', 'Lifetime frame warranty, 3 years on parts', 'Rescreen every 5 to 10 years at $2 to $4 per sq ft'], ['Example patio', '$5,800 to $6,700', '$2,200 to $5,600, or $2,700 to $6,600 with one rescreen']],
     pick: 'Choose soft mesh if the lowest price today matters most. Choose metal mesh if you want metal instead of fabric and a lifetime frame warranty.',
-    link: ['/screens/', 'Stainless steel screens'],
+    link: ['/patio-screens/fixed-screen/', 'Stainless steel screens'],
   },
   {
     id: 'motorized', t: 'Hexfold vs motorized roll-down screens',

@@ -63,7 +63,7 @@ export const PRODUCTS: Product[] = [
     blurb:
       'A wall of tinted panels that turns a covered patio into a 3-season room. Can be cut into arches and angles to match your roofline.',
     msrp: 31,
-    href: '/clearfixed/',
+    href: '/patio-enclosures/clearfixed/',
     specs: [
       ['Panel', '4 mm polycarbonate, Midnight Smoke or Storm Blue'],
       ['Frame', 'Heat-welded PVC-fiber blend, aluminum core, ceramic coating'],
@@ -79,7 +79,7 @@ export const PRODUCTS: Product[] = [
     blurb:
       'Polycarbonate panels that fold open on our track. Close them for a 3-season room, fold them away for an open patio.',
     msrp: 40,
-    href: '/clearfold/',
+    href: '/patio-enclosures/clearfold/',
     specs: [
       ['Panel', 'Polycarbonate sunshade panel'],
       ['Hardware', 'High-end handle, ramp water stop included'],
@@ -95,7 +95,7 @@ export const PRODUCTS: Product[] = [
     blurb:
       'Folds out of sight when you want the view and pulls closed when the mosquitoes come out. The look of a high-end retractable screen, with no motor to fail.',
     msrp: 28,
-    href: '/hexfold/',
+    href: '/patio-screens/hexfold/',
     specs: [
       ['Mesh', 'Honeycomb aluminum, about 115 holes per sq in'],
       ['Frame', 'Heat-welded PVC-fiber blend, aluminum core, ceramic coating; stainless steel wheels'],
@@ -111,7 +111,7 @@ export const PRODUCTS: Product[] = [
     blurb:
       'Our answer to nylon. Stainless steel mesh in a metal-reinforced, heat-welded frame, fitted to help keep bugs and small pests outside.',
     msrp: 24,
-    href: '/screens/',
+    href: '/patio-screens/fixed-screen/',
     specs: [
       ['Mesh', '304 stainless steel'],
       ['Frame', 'Heat-welded PVC-fiber blend, aluminum core, ceramic coating'],
@@ -127,7 +127,7 @@ export const PRODUCTS: Product[] = [
     blurb:
       'Our top shelf. Polycarbonate panels and honeycomb aluminum mesh in one folding system: half 3-season room, half screened patio.',
     msrp: 56,
-    href: '/hybrid/',
+    href: '/patio-enclosures/hybrid/',
     specs: [
       ['Panel', 'Polycarbonate sunshade panel and honeycomb aluminum mesh'],
       ['Hardware', 'High-end handle, ramp water stop included'],
@@ -312,17 +312,18 @@ export const FAQ: Record<string, QA[]> = {
 // Products menu in the header: every product page, grouped the way homeowners shop.
 export const PRODUCT_MENU = [
   { group: 'Enclose it', items: [
-    { href: '/patio-enclosures-houston/', label: 'Patio enclosures', note: 'Overview, all systems' },
-    { href: '/three-season-rooms/', label: '3-season rooms', note: 'Polycarbonate panels' },
-    { href: '/clearfixed/', label: 'Clearfixed', note: 'Fixed panels' },
-    { href: '/clearfold/', label: 'Clearfold', note: 'Folding panels' },
-    { href: '/hybrid/', label: 'Hybrid', note: 'Panels and mesh in one' },
+    { href: '/patio-enclosures/', label: 'Patio enclosures', note: 'Overview, all systems' },
+    { href: '/patio-enclosures/three-season-rooms/', label: '3-season rooms', note: 'Polycarbonate panels' },
+    { href: '/patio-enclosures/clearfixed/', label: 'Clearfixed', note: 'Fixed panels' },
+    { href: '/patio-enclosures/clearfold/', label: 'Clearfold', note: 'Folding panels' },
+    { href: '/patio-enclosures/hybrid/', label: 'Hybrid', note: 'Panels and mesh in one' },
   ] },
   { group: 'Screen it', items: [
-    { href: '/hexfold/', label: 'Hexfold', note: 'Folding metal screens' },
-    { href: '/screens/', label: 'Fixed Screen', note: 'Stainless steel mesh' },
-    { href: '/pet-resistant-patio-screens/', label: 'Pet-resistant screens', note: 'Doggy door add-on, $200' },
-    { href: '/garage-screens/', label: 'Garage screens', note: 'One to three bays' },
+    { href: '/patio-screens/', label: 'Patio screens', note: 'Overview, both screens' },
+    { href: '/patio-screens/hexfold/', label: 'Hexfold', note: 'Folding metal screens' },
+    { href: '/patio-screens/fixed-screen/', label: 'Fixed Screen', note: 'Stainless steel mesh' },
+    { href: '/patio-screens/pet-resistant/', label: 'Pet-resistant screens', note: 'Doggy door add-on, $200' },
+    { href: '/patio-screens/garage/', label: 'Garage screens', note: 'One to three bays' },
   ] },
 ];
 

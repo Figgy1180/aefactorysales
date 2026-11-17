@@ -1,20 +1,20 @@
 ---
 import { Image } from 'astro:assets';
-import Base from '../layouts/Base.astro';
-import PageHero from '../components/PageHero.astro';
-import Faq from '../components/Faq.astro';
-import QuoteForm from '../components/QuoteForm.astro';
-import RelatedLinks from '../components/RelatedLinks.astro';
-import { FAQ, SITE, byId, SIZES, range } from '../data/site';
-import doorsOpen from '../assets/photos/fixed-screen-doors-open.jpg';
-import doorsClosed from '../assets/photos/fixed-screen-doors-closed.jpg';
-import colors from '../assets/photos/fixed-screen-frame-colors.jpg';
-import roomCorner from '../assets/photos/screened-patio-room-corner.jpg';
-import doorWhite from '../assets/photos/fixed-screen-doors-white.jpg';
-import doorFrame from '../assets/photos/fixed-screen-door-frame.jpg';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Faq from '../../components/Faq.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import { FAQ, SITE, byId, SIZES, range } from '../../data/site';
+import doorsOpen from '../../assets/photos/fixed-screen-doors-open.jpg';
+import doorsClosed from '../../assets/photos/fixed-screen-doors-closed.jpg';
+import colors from '../../assets/photos/fixed-screen-frame-colors.jpg';
+import roomCorner from '../../assets/photos/screened-patio-room-corner.jpg';
+import doorWhite from '../../assets/photos/fixed-screen-doors-white.jpg';
+import doorFrame from '../../assets/photos/fixed-screen-door-frame.jpg';
 
 const fx = byId('fixed');
-const crumbs = [{ name: 'Stainless steel screens', href: '/screens/' }];
+const crumbs = [{ name: 'Patio screens', href: '/patio-screens/' }, { name: 'Fixed Screen', href: '/patio-screens/fixed-screen/' }];
 const product = {
   '@context': 'https://schema.org',
   '@type': 'Product',
@@ -103,7 +103,7 @@ const product = {
         <div><h3>A door of its own</h3><p>The doggy door is an add-on. Ask how its closure affects unwanted animal access, since any pet opening is also a way in.</p></div>
       </div>
       <p class="pets-note"><b>Straight talk:</b> no screen is indestructible, and we do not sell anything as pet-proof. What we can promise is metal mesh instead of fabric, a lifetime warranty on the frame and 3 years on parts. The warranty excludes accidents and intentional damage.</p>
-      <div class="actions"><a class="btn" href="#quote">Get my price</a><a class="btn btn-line" href="/pet-resistant-patio-screens/">Pet-resistant screens</a></div>
+      <div class="actions"><a class="btn" href="#quote">Get my price</a><a class="btn btn-line" href="/patio-screens/pet-resistant/">Pet-resistant screens</a></div>
     </div>
   </section>
 
@@ -123,7 +123,7 @@ const product = {
     <div class="wrap stack-lg">
       <div class="sec-head" style="margin-bottom:0">
         <h2 class="h2">Where <span class="y">it goes</span></h2>
-        <p class="lede">Full patio walls, French doors, front doors and garage openings. Want the screen to disappear when you're not using it? Look at <a href="/hexfold/">Hexfold</a>.</p>
+        <p class="lede">Full patio walls, French doors, front doors and garage openings. Want the screen to disappear when you're not using it? Look at <a href="/patio-screens/hexfold/">Hexfold</a>.</p>
       </div>
       <div class="gallery">
         <figure><Image src={roomCorner} alt="Patio enclosed with fixed metal mesh screens" widths={[360, 700]} sizes="(max-width: 640px) 50vw, 380px" loading="lazy" /><figcaption>Patio walls</figcaption></figure>

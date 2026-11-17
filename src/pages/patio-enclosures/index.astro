@@ -1,14 +1,14 @@
 ---
 // Main page for the phrase "patio enclosures Houston": what it is, the systems, prices for the three
 // patio sizes, real projects, FAQ and the quote form. Every number comes from src/data/site.ts.
-import Base from '../layouts/Base.astro';
-import PageHero from '../components/PageHero.astro';
-import ProjectMosaic from '../components/ProjectMosaic.astro';
-import Faq from '../components/Faq.astro';
-import QuoteForm from '../components/QuoteForm.astro';
-import { SIZES, FAQ, SITE, CITIES, CITY_PAGES, range, byId, type QA } from '../data/site';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import ProjectMosaic from '../../components/ProjectMosaic.astro';
+import Faq from '../../components/Faq.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import { SIZES, FAQ, SITE, CITIES, CITY_PAGES, range, byId, type QA } from '../../data/site';
 
-const crumbs = [{ name: 'Patio enclosures in Houston', href: '/patio-enclosures-houston/' }];
+const crumbs = [{ name: 'Patio enclosures', href: '/patio-enclosures/' }];
 const order = ['fixed', 'hexfold', 'clearfixed', 'clearfold', 'hybrid'].map(byId);
 const lo = Math.min(...order.map((p) => p.msrp)), hi = Math.max(...order.map((p) => p.msrp));
 const faq: QA[] = [
@@ -20,7 +20,7 @@ const service = {
   name: 'Patio enclosures in Houston', serviceType: 'Patio enclosure design, fabrication and installation',
   provider: { '@id': `${SITE.url}/#business` },
   areaServed: CITIES.map((c) => ({ '@type': 'City', name: `${c}, TX` })),
-  url: `${SITE.url}/patio-enclosures-houston/`,
+  url: `${SITE.url}/patio-enclosures/`,
   offers: { '@type': 'AggregateOffer', priceCurrency: 'USD', lowPrice: lo, highPrice: hi, description: 'Installed price per square foot of opening' },
 };
 ---
@@ -46,9 +46,9 @@ const service = {
         <p class="lede">You already have the roof. An enclosure fills the openings between your posts, so the patio works in more weather and more months of the year.</p>
       </div>
       <div class="pe-3">
-        <div><h3>Screens</h3><p>Metal mesh keeps the breeze and stops mosquitoes, mice and snakes. Fixed Screen uses 304 stainless steel; Hexfold uses honeycomb aluminum and folds to the side.</p><a href="/screens/">Screens</a> · <a href="/hexfold/">Hexfold</a></div>
-        <div><h3>Polycarbonate panels</h3><p>Tinted polycarbonate panels block wind and rain and make a 3-season room. Clearfixed stays in place; Clearfold folds open on a track.</p><a href="/three-season-rooms/">3-season rooms</a></div>
-        <div><h3>Both</h3><p>Hybrid puts panels and Hexfold mesh in one folding system, or we mix systems opening by opening around your patio.</p><a href="/hybrid/">Hybrid</a></div>
+        <div><h3>Screens</h3><p>Metal mesh keeps the breeze and keeps out mosquitoes and other bugs. Fixed Screen uses 304 stainless steel; Hexfold uses honeycomb aluminum and folds to the side.</p><a href="/patio-screens/">Patio screens</a> · <a href="/patio-screens/fixed-screen/">Fixed Screen</a> · <a href="/patio-screens/hexfold/">Hexfold</a></div>
+        <div><h3>Polycarbonate panels</h3><p>Tinted polycarbonate panels block wind and rain and make a 3-season room. Clearfixed stays in place; Clearfold folds open on a track.</p><a href="/patio-enclosures/three-season-rooms/">3-season rooms</a></div>
+        <div><h3>Both</h3><p>Hybrid puts panels and Hexfold mesh in one folding system, or we mix systems opening by opening around your patio.</p><a href="/patio-enclosures/hybrid/">Hybrid</a></div>
       </div>
       <p class="fine">Built for existing roofed patios. A 3-season room is not air-conditioned.</p>
     </div>

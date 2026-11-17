@@ -19,10 +19,16 @@ Key facts (as of November 2026):
 ## Pages
 - [Home](https://aefactorysales.com/): overview, price picker, all five systems
 - [Pricing](https://aefactorysales.com/pricing/): installed prices for every system and patio size, compared with sunrooms and motorized screens
-- [Polycarbonate 3-season rooms](https://aefactorysales.com/three-season-rooms/): Clearfixed, Clearfold, Hybrid vs glass sunrooms
-- [Hexfold retractable screens](https://aefactorysales.com/hexfold/)
-- [Stainless steel screens](https://aefactorysales.com/screens/): Fixed Screen vs nylon
-- [Garage screens](https://aefactorysales.com/garage-screens/)
+- [Patio enclosures](https://aefactorysales.com/patio-enclosures/): overview of every system, with prices
+  - [Polycarbonate 3-season rooms](https://aefactorysales.com/patio-enclosures/three-season-rooms/): Clearfixed, Clearfold, Hybrid vs glass sunrooms
+  - [Clearfixed](https://aefactorysales.com/patio-enclosures/clearfixed/): fixed tinted polycarbonate panels, from $31/sq ft
+  - [Clearfold](https://aefactorysales.com/patio-enclosures/clearfold/): folding tinted polycarbonate panels, from $40/sq ft
+  - [Hybrid](https://aefactorysales.com/patio-enclosures/hybrid/): folding panels plus mesh in one system, from $56/sq ft
+- [Patio screens](https://aefactorysales.com/patio-screens/): overview of metal patio screens
+  - [Hexfold folding screens](https://aefactorysales.com/patio-screens/hexfold/): hand-operated, no motor, from $28/sq ft
+  - [Fixed Screen](https://aefactorysales.com/patio-screens/fixed-screen/): 304 stainless steel mesh vs nylon, from $24/sq ft
+  - [Pet-resistant screens](https://aefactorysales.com/patio-screens/pet-resistant/): stainless mesh with a $200 doggy door add-on
+  - [Garage screens](https://aefactorysales.com/patio-screens/garage/)
 - [How we build](https://aefactorysales.com/how-we-build/): factory process
 - [Why AE](https://aefactorysales.com/why-ae/): local Houston manufacturer and installer, warranty from the maker
 - [Winter patio enclosures](https://aefactorysales.com/winter/): tinted polycarbonate panels that block wind and rain on Houston covered patios through the cool months; honest notes on what it does and doesn't do

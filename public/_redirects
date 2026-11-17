@@ -1,10 +1,8 @@
 # Old page names from earlier drafts -> current pages
 /home /  301
 /home.html /  301
-/patio-enclosures /screens/ 301
-/patio-enclosures/ /screens/ 301
-/retractable-patio-screens /hexfold/ 301
-/retractable-patio-screens/ /hexfold/ 301
+/retractable-patio-screens /patio-screens/hexfold/ 301
+/retractable-patio-screens/ /patio-screens/hexfold/ 301
 /patio-enclosure-cost /pricing/ 301
 /patio-enclosure-cost/ /pricing/ 301
 /our-work /  301
@@ -18,5 +16,25 @@
 /dealers/thanks / 301
 /dealers/thanks/ / 301
 
-/pet-proof-patio-screens /pet-resistant-patio-screens/ 301
-/pet-proof-patio-screens/ /pet-resistant-patio-screens/ 301
+/pet-proof-patio-screens /patio-screens/pet-resistant/ 301
+/pet-proof-patio-screens/ /patio-screens/pet-resistant/ 301
+
+# Nov 2026: product pages moved under /patio-enclosures/ and /patio-screens/
+/patio-enclosures-houston /patio-enclosures/ 301
+/patio-enclosures-houston/ /patio-enclosures/ 301
+/three-season-rooms /patio-enclosures/three-season-rooms/ 301
+/three-season-rooms/ /patio-enclosures/three-season-rooms/ 301
+/clearfixed /patio-enclosures/clearfixed/ 301
+/clearfixed/ /patio-enclosures/clearfixed/ 301
+/clearfold /patio-enclosures/clearfold/ 301
+/clearfold/ /patio-enclosures/clearfold/ 301
+/hybrid /patio-enclosures/hybrid/ 301
+/hybrid/ /patio-enclosures/hybrid/ 301
+/hexfold /patio-screens/hexfold/ 301
+/hexfold/ /patio-screens/hexfold/ 301
+/screens /patio-screens/fixed-screen/ 301
+/screens/ /patio-screens/fixed-screen/ 301
+/pet-resistant-patio-screens /patio-screens/pet-resistant/ 301
+/pet-resistant-patio-screens/ /patio-screens/pet-resistant/ 301
+/garage-screens /patio-screens/garage/ 301
+/garage-screens/ /patio-screens/garage/ 301

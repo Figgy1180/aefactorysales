@@ -6,7 +6,7 @@ answer: "Motorized roll-down screens run about $40 to $45 per sq ft of opening i
 published: "2026-11-05"
 updated: "2026-11-05"
 related:
-  - { label: Hexfold retractable screens, href: /hexfold/ }
+  - { label: Hexfold retractable screens, href: /patio-screens/hexfold/ }
   - { label: Patio enclosure pricing, href: /pricing/ }
 ---
 

@@ -23,9 +23,9 @@ const path = Astro.url.pathname;
 const canonical = new URL(path, SITE.url).href;
 // Every page gets its own share image: a real photo, cropped to 1200 x 630.
 const OG_PHOTOS: Record<string, string> = {
-  '/': 'projects/p34/2-front-closed', '/three-season-rooms/': 'photos/factory-pc', '/clearfixed/': 'photos/clearfixed-polycarbonate-panels',
-  '/clearfold/': 'photos/showroom-polycarbonate-smoke', '/hybrid/': 'photos/showroom-room-interior', '/winter/': 'photos/clearfixed-polycarbonate-panels',
-  '/hexfold/': 'photos/hexfold-patio-closed', '/screens/': 'photos/fixed-screen-doors-closed', '/patio-enclosures-houston/': 'projects/p36/4-inside-open', '/pet-resistant-patio-screens/': 'photos/fixed-screen-doors-open', '/garage-screens/': 'projects/p4/3-right-bays',
+  '/': 'projects/p34/2-front-closed', '/patio-enclosures/three-season-rooms/': 'photos/factory-pc', '/patio-enclosures/clearfixed/': 'photos/clearfixed-polycarbonate-panels',
+  '/patio-enclosures/clearfold/': 'photos/showroom-polycarbonate-smoke', '/patio-enclosures/hybrid/': 'photos/showroom-room-interior', '/winter/': 'photos/clearfixed-polycarbonate-panels',
+  '/patio-screens/hexfold/': 'photos/hexfold-patio-closed', '/patio-screens/fixed-screen/': 'photos/fixed-screen-doors-closed', '/patio-enclosures/': 'projects/p36/4-inside-open', '/patio-screens/pet-resistant/': 'photos/fixed-screen-doors-open', '/patio-screens/garage/': 'projects/p4/3-right-bays',
   '/pricing/': 'projects/p35/2-long-side', '/projects/': 'projects/p36/2-outside-open', '/why-ae/': 'photos/factory-cnc',
   '/how-we-build/': 'photos/factory-angle', '/learn/': 'photos/hexfold-handle-mesh', '/compare/': 'projects/p14/3-long-side-open',
   '/faq/': 'projects/p6/2-outside-closed', '/free-quote/': 'projects/p34/5-inside-seating', '/service-area/': 'projects/p6/4-wide',
@@ -193,12 +193,12 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
           <div>
             <h2>Systems</h2>
             <ul>
-              <li><a href="/patio-enclosures-houston/">Patio enclosures in Houston</a></li>
-              <li><a href="/three-season-rooms/">3-season rooms</a></li>
-              <li><a href="/hexfold/">Hexfold retractable screens</a></li>
-              <li><a href="/screens/">Stainless steel screens</a></li>
-              <li><a href="/garage-screens/">Garage screens</a></li>
-              <li><a href="/pet-resistant-patio-screens/">Pet-resistant patio screens</a></li>
+              <li><a href="/patio-enclosures/">Patio enclosures in Houston</a></li>
+              <li><a href="/patio-enclosures/three-season-rooms/">3-season rooms</a></li>
+              <li><a href="/patio-screens/hexfold/">Hexfold retractable screens</a></li>
+              <li><a href="/patio-screens/fixed-screen/">Stainless steel screens</a></li>
+              <li><a href="/patio-screens/garage/">Garage screens</a></li>
+              <li><a href="/patio-screens/pet-resistant/">Pet-resistant patio screens</a></li>
             </ul>
           </div>
           <div>

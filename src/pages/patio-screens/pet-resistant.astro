@@ -2,17 +2,17 @@
 // Pet-resistant patio screens. "Pet-resistant" is the phrase Houston competitors rank with (Nov 16 search).
 // Brand guide v1.1: no pet-proof or comparative durability claims; the doggy door is an add-on with a closure plan.
 import { Image } from 'astro:assets';
-import Base from '../layouts/Base.astro';
-import PageHero from '../components/PageHero.astro';
-import Faq from '../components/Faq.astro';
-import QuoteForm from '../components/QuoteForm.astro';
-import RelatedLinks from '../components/RelatedLinks.astro';
-import { SITE, SIZES, byId, range, type QA } from '../data/site';
-import doorsOpen from '../assets/photos/fixed-screen-doors-open.jpg';
-import doorFrame from '../assets/photos/fixed-screen-door-frame.jpg';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Faq from '../../components/Faq.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import { SITE, SIZES, byId, range, type QA } from '../../data/site';
+import doorsOpen from '../../assets/photos/fixed-screen-doors-open.jpg';
+import doorFrame from '../../assets/photos/fixed-screen-door-frame.jpg';
 
 const fx = byId('fixed');
-const crumbs = [{ name: 'Screens', href: '/screens/' }, { name: 'Pet-resistant patio screens', href: '/pet-resistant-patio-screens/' }];
+const crumbs = [{ name: 'Patio screens', href: '/patio-screens/' }, { name: 'Pet-resistant patio screens', href: '/patio-screens/pet-resistant/' }];
 const faq: QA[] = [
   { q: 'What screen do you suggest for homes with dogs and cats?', a: `Most pet owners choose Fixed Screen: 304 stainless steel mesh in a metal-reinforced, heat-welded frame, from $${fx.msrp} per sq ft of opening installed. A doggy door can be added to a compatible panel.` },
   { q: 'Can you add a doggy door?', a: 'Yes, as a $200 add-on to a compatible screen panel, in small, medium or large. We help you choose the size and spot at the site visit. Any pet opening is also a way in for other animals, so we plan its closure with you.' },
@@ -24,7 +24,7 @@ const product = {
   name: 'AE Fixed Screen: pet-resistant patio screens', category: 'Patio screens',
   description: 'Fixed patio screens with 304 stainless steel mesh in metal-reinforced, heat-welded frames, with an optional doggy door add-on. Built and installed in Houston by AE Factory Sales.',
   brand: { '@type': 'Brand', name: 'AE Factory Sales' }, material: '304 stainless steel mesh',
-  image: new URL(doorsOpen.src, SITE.url).href, url: `${SITE.url}/pet-resistant-patio-screens/`,
+  image: new URL(doorsOpen.src, SITE.url).href, url: `${SITE.url}/patio-screens/pet-resistant/`,
   offers: { '@type': 'Offer', priceCurrency: 'USD', price: fx.msrp, availability: 'https://schema.org/InStock', seller: { '@id': `${SITE.url}/#business` }, description: 'Installed price per square foot of opening' },
 };
 ---
@@ -39,7 +39,7 @@ const product = {
       <h1 class="display">Pet-resistant <span class="y">patio screens</span></h1>
       <p class="sub">Fixed Screen swaps fabric for 304 stainless steel mesh in a metal-reinforced, heat-welded frame. Add a doggy door so your dog has a dedicated way through.</p>
       <p class="lede"><strong style="color:var(--ink)">Short answer:</strong> stainless steel mesh, a doggy door add-on if you want one, from ${fx.msrp} per sq ft of opening, installed.</p>
-      <div class="actions"><a class="btn" href="#quote">Get my screen quote</a><a class="btn btn-line" href="/screens/">All about Fixed Screen</a></div>
+      <div class="actions"><a class="btn" href="#quote">Get my screen quote</a><a class="btn btn-line" href="/patio-screens/fixed-screen/">All about Fixed Screen</a></div>
     </div>
   </PageHero>
 
@@ -70,7 +70,7 @@ const product = {
         <h2 class="h2">Straight <span class="y">talk</span></h2>
         <p class="lede">No screen is indestructible, and we do not sell anything as pet-proof.</p>
         <p>What we can promise is metal mesh instead of fabric, a lifetime warranty on the frame and 3 years on all parts. The warranty excludes accidents and intentional damage.</p>
-        <p><a href="/screens/#vs-nylon">Compare the mesh, side by side</a>.</p>
+        <p><a href="/patio-screens/fixed-screen/#vs-nylon">Compare the mesh, side by side</a>.</p>
       </div>
     </div>
   </section>

@@ -1,19 +1,19 @@
 ---
 import { Image } from 'astro:assets';
-import Base from '../layouts/Base.astro';
-import RelatedLinks from '../components/RelatedLinks.astro';
-import PageHero from '../components/PageHero.astro';
-import Faq from '../components/Faq.astro';
-import QuoteForm from '../components/QuoteForm.astro';
-import { FAQ, FACTS, SITE, byId, SIZES, range } from '../data/site';
-import handle from '../assets/photos/gabled-opening-screens.jpg';
-import handleMesh from '../assets/photos/hexfold-mesh-crop.jpg';
-import open from '../assets/photos/hexfold-patio-open.jpg';
-import closed from '../assets/photos/hexfold-patio-closed.jpg';
-import corner from '../assets/photos/brick-home-screened-patio.jpg';
+import Base from '../../layouts/Base.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import PageHero from '../../components/PageHero.astro';
+import Faq from '../../components/Faq.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import { FAQ, FACTS, SITE, byId, SIZES, range } from '../../data/site';
+import handle from '../../assets/photos/gabled-opening-screens.jpg';
+import handleMesh from '../../assets/photos/hexfold-mesh-crop.jpg';
+import open from '../../assets/photos/hexfold-patio-open.jpg';
+import closed from '../../assets/photos/hexfold-patio-closed.jpg';
+import corner from '../../assets/photos/brick-home-screened-patio.jpg';
 
 const hx = byId('hexfold');
-const crumbs = [{ name: 'Hexfold', href: '/hexfold/' }];
+const crumbs = [{ name: 'Patio screens', href: '/patio-screens/' }, { name: 'Hexfold', href: '/patio-screens/hexfold/' }];
 const product = {
   '@context': 'https://schema.org',
   '@type': 'Product',

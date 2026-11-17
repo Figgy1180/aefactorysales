@@ -1,0 +1,121 @@
+---
+// Parent page for metal patio screens: the two screen systems, the screen add-ons (pets, garages),
+// prices for the three patio sizes, real projects, FAQ and the screens quote form.
+// Every number comes from src/data/site.ts.
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import ProjectMosaic from '../../components/ProjectMosaic.astro';
+import Faq from '../../components/Faq.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import { SIZES, FAQ, SITE, CITIES, range, byId, type QA } from '../../data/site';
+
+const crumbs = [{ name: 'Patio screens', href: '/patio-screens/' }];
+const fx = byId('fixed'), hx = byId('hexfold');
+const order = [fx, hx];
+const faq: QA[] = [
+  { q: 'What patio screens does AE Factory Sales make?', a: `Two screen systems, both with metal mesh: Fixed Screen in 304 stainless steel from $${fx.msrp} per sq ft of opening, and Hexfold folding screens in honeycomb aluminum from $${hx.msrp}, installed. Both are built in our Houston factory and installed by our own crew within a month of your order.` },
+  FAQ.screens[2], FAQ.screens[0], FAQ.screens[3], FAQ.screens[5], FAQ.screens[4], FAQ.screens[6],
+];
+const service = {
+  '@context': 'https://schema.org', '@type': 'Service',
+  name: 'Metal patio screens in Houston', serviceType: 'Patio screen fabrication and installation',
+  provider: { '@id': `${SITE.url}/#business` },
+  areaServed: CITIES.map((c) => ({ '@type': 'City', name: `${c}, TX` })),
+  url: `${SITE.url}/patio-screens/`,
+  offers: { '@type': 'AggregateOffer', priceCurrency: 'USD', lowPrice: fx.msrp, highPrice: hx.msrp, description: 'Installed price per square foot of opening' },
+};
+const cards = [
+  { t: 'Hexfold', h: '/patio-screens/hexfold/', d: `Folding screens with honeycomb aluminum mesh. Fold them to the side for an open patio, close them when the bugs come out. Opens by hand, no motor. From $${hx.msrp} per sq ft.` },
+  { t: 'Fixed Screen', h: '/patio-screens/fixed-screen/', d: `Stationary panels with 304 stainless steel mesh in a metal-reinforced, heat-welded frame. For patios, French doors and front doors. From $${fx.msrp} per sq ft.` },
+  { t: 'Pet-resistant screens', h: '/patio-screens/pet-resistant/', d: 'Stainless steel mesh for homes with dogs and cats, with an optional doggy door for $200 in small, medium or large.' },
+  { t: 'Garage screens', h: '/patio-screens/garage/', d: 'Folding or fixed screens across one to three garage bays, so the garage door can stay open without the bugs.' },
+];
+---
+<Base
+  title="Metal Patio Screens in Houston: Hexfold and Fixed Screen | AE"
+  description={`Metal patio screens in Houston: Fixed Screen stainless steel from $${fx.msrp} and Hexfold folding screens from $${hx.msrp} per sq ft of opening, installed by our own crew.`}
+  crumbs={crumbs}
+  schema={[service]}
+>
+  <PageHero crumbs={crumbs}>
+    <div class="stack-lg" style="max-width:54em">
+      <h1 class="display">Metal patio screens <span class="y">in Houston</span></h1>
+      <p class="sub">Most patio screens are nylon or fiberglass fabric. Ours use metal mesh in a metal-reinforced, heat-welded frame, built in our Houston factory and installed by our own crew.</p>
+      <p class="lede"><strong style="color:var(--ink)">Short answer:</strong> Fixed Screen in 304 stainless steel from ${fx.msrp}, or Hexfold folding screens in honeycomb aluminum from ${hx.msrp} per sq ft of opening, installed. Hexfold opens by hand, so it works in a power outage.</p>
+      <div class="actions"><a class="btn" href="#quote">Have a rep call me about a quote</a><a class="btn btn-line" href="#prices">See prices by patio size</a></div>
+    </div>
+  </PageHero>
+
+  <section class="band on-paper" aria-labelledby="ps-choose">
+    <div class="wrap stack-lg">
+      <div class="sec-head" style="margin-bottom:0">
+        <h2 id="ps-choose" class="h2">Choose your <span class="y">screen</span></h2>
+        <p class="lede">Fixed where you want a permanent screen, folding where you want the opening back. We often mix both around one patio.</p>
+      </div>
+      <div class="ps-4">
+        {cards.map((c) => <div><h3><a href={c.h}>{c.t}</a></h3><p>{c.d}</p><a href={c.h}>See {c.t}</a></div>)}
+      </div>
+      <p class="fine">Want screens and weather panels in one system? See the <a href="/patio-enclosures/hybrid/">Hybrid</a>, or all <a href="/patio-enclosures/">patio enclosures</a>.</p>
+    </div>
+  </section>
+
+  <section class="band" id="prices" aria-labelledby="ps-price">
+    <div class="wrap stack-lg">
+      <div class="sec-head" style="margin-bottom:0">
+        <h2 id="ps-price" class="h2">Prices for three <span class="y">patio sizes</span></h2>
+        <p class="lede">Installed totals for typical Houston covered patios. Your exact quote comes after we measure.</p>
+      </div>
+      <div class="table-wrap">
+        <table class="tbl tnum">
+          <thead><tr><th scope="col">Screen</th>{SIZES.map((s) => <th scope="col" class="num">{s.name}<br />{s.low} to {s.high} sq ft of opening</th>)}</tr></thead>
+          <tbody>
+            {order.map((p) => (<tr><th scope="row"><a href={p.href} style="color:inherit">{p.name}</a></th>{SIZES.map((s) => <td class="num">{range(p.msrp, s.low, s.high)}</td>)}</tr>))}
+          </tbody>
+        </table>
+      </div>
+      <dl class="ps-sizes">{SIZES.map((s) => <div><dt>{s.name}</dt><dd>{s.eg}</dd></div>)}</dl>
+      <p class="fine">Totals are the per sq ft price times the opening area, rounded to the nearest $100. Source: AE Factory Sales price list, November 2026. <a href="/pricing/">Full pricing page</a> · <a href="/compare/">Compare with nylon and motorized screens</a>.</p>
+    </div>
+  </section>
+
+  <section class="band on-paper" aria-labelledby="ps-proj">
+    <div class="wrap stack-lg">
+      <div class="sec-head" style="margin-bottom:0">
+        <h2 id="ps-proj" class="h2">Screens on real <span class="y">Houston patios</span></h2>
+        <p class="lede">Finished jobs by our own crew. Tap any photo for the full project.</p>
+      </div>
+      <ProjectMosaic />
+    </div>
+  </section>
+
+  <section class="band raised" aria-labelledby="ps-faq">
+    <div class="wrap stack-lg" style="max-width:900px">
+      <h2 id="ps-faq" class="h2">Patio screen <span class="y">questions</span></h2>
+      <Faq items={faq} />
+    </div>
+  </section>
+
+  <section class="band" id="quote">
+    <div class="wrap split" style="align-items:start">
+      <div class="stack">
+        <h2 class="h2">Get your <span class="y">screen quote</span></h2>
+        <p class="lede">Tell us about your openings and a rep will call you to go over options and set a time to measure. Your written quote is emailed within a day.</p>
+        <p>Or call <a href={SITE.phoneHref}>{SITE.phone}</a> to book a showroom appointment at {SITE.street}, {SITE.city}, {SITE.region} {SITE.zip}.</p>
+      </div>
+      <div><QuoteForm id="ps-quote" kind="screens" source="Patio screens page" /></div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .ps-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+  .ps-4 > div { border-top: 3px solid var(--yellow); padding-top: 14px; min-width: 0; }
+  .ps-4 h3 { font-weight: 800; font-stretch: 78%; font-size: 1.4rem; text-transform: uppercase; }
+  .ps-4 h3 a { color: inherit; text-decoration: none; }
+  .ps-4 p { color: var(--paper-2); margin: 6px 0 10px; }
+  .ps-sizes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 0; }
+  .ps-sizes dt { font-weight: 800; text-transform: uppercase; font-stretch: 80%; }
+  .ps-sizes dd { margin: 0; color: var(--ink-2); }
+  @media (max-width: 1000px) { .ps-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 760px) { .ps-4, .ps-sizes { grid-template-columns: minmax(0, 1fr); } }
+</style>

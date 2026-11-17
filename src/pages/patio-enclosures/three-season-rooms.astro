@@ -1,19 +1,19 @@
 ---
 import { Image } from 'astro:assets';
-import Base from '../layouts/Base.astro';
-import RelatedLinks from '../components/RelatedLinks.astro';
-import PageHero from '../components/PageHero.astro';
-import ProductCard from '../components/ProductCard.astro';
-import CompareBars from '../components/CompareBars.astro';
-import Faq from '../components/Faq.astro';
-import QuoteForm from '../components/QuoteForm.astro';
-import { FAQ, FACTS, SITE, byId, SIZES, range } from '../data/site';
-import clearfixed from '../assets/photos/clearfixed-polycarbonate-panels.jpg';
-import smoke from '../assets/photos/showroom-polycarbonate-smoke.jpg';
-import interior from '../assets/photos/showroom-room-interior.jpg';
-import rack from '../assets/photos/factory-pc.jpg';
+import Base from '../../layouts/Base.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import PageHero from '../../components/PageHero.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import CompareBars from '../../components/CompareBars.astro';
+import Faq from '../../components/Faq.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import { FAQ, FACTS, SITE, byId, SIZES, range } from '../../data/site';
+import clearfixed from '../../assets/photos/clearfixed-polycarbonate-panels.jpg';
+import smoke from '../../assets/photos/showroom-polycarbonate-smoke.jpg';
+import interior from '../../assets/photos/showroom-room-interior.jpg';
+import rack from '../../assets/photos/factory-pc.jpg';
 
-const crumbs = [{ name: '3-season rooms', href: '/three-season-rooms/' }];
+const crumbs = [{ name: 'Patio enclosures', href: '/patio-enclosures/' }, { name: '3-season rooms', href: '/patio-enclosures/three-season-rooms/' }];
 const service = {
   '@context': 'https://schema.org',
   '@type': 'Service',
@@ -114,7 +114,7 @@ const cf = byId('clearfixed'), cfo = byId('clearfold');
         <div class="stack">
           <h2 class="h3">What a 3-season room is, and isn't</h2>
           <p class="muted">It is shaded, sheltered and ventilated through screen doors and doors that open on both sides. It is not air-conditioned. On the hottest August afternoons it feels close to the outdoor temperature, just out of the sun, wind and rain. Spring, fall and most of winter are when it shines.</p>
-          <p class="muted">Want the breeze on the hottest days? Put polycarbonate on the sunny or windy side and <a href="/hexfold/">Hexfold</a> screens facing the yard, or choose the Hybrid.</p>
+          <p class="muted">Want the breeze on the hottest days? Put polycarbonate on the sunny or windy side and <a href="/patio-screens/hexfold/">Hexfold</a> screens facing the yard, or choose the Hybrid.</p>
         </div>
       </div>
     </div>

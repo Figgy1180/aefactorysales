@@ -18,7 +18,7 @@ const { id, title, description, h1, img, alt, caption, points, faq } = Astro.pro
 const p = byId(id);
 const trio = ['clearfixed', 'clearfold', 'hybrid'].map(byId);
 const moves = { clearfixed: 'Stays in place', clearfold: 'Folds open on our track', hybrid: 'Folds open on our track' } as Record<string, string>;
-const crumbs = [{ name: '3-season rooms', href: '/three-season-rooms/' }, { name: p.name, href: p.href }];
+const crumbs = [{ name: 'Patio enclosures', href: '/patio-enclosures/' }, { name: p.name, href: p.href }];
 const product = {
   '@context': 'https://schema.org', '@type': 'Product',
   name: `${p.name}: ${p.kind.toLowerCase()}`,
@@ -101,7 +101,7 @@ const product = {
           </tbody>
         </table>
       </div>
-      <p class="muted">Want screens instead of panels on some openings? Look at <a href="/hexfold/">Hexfold</a> folding screens or <a href="/screens/">Fixed Screen</a> in stainless steel. We mix systems opening by opening. See the whole family on the <a href="/three-season-rooms/">3-season rooms page</a>.</p>
+      <p class="muted">Want screens instead of panels on some openings? Look at <a href="/patio-screens/hexfold/">Hexfold</a> folding screens or <a href="/patio-screens/fixed-screen/">Fixed Screen</a> in stainless steel. We mix systems opening by opening. See the whole family on the <a href="/patio-enclosures/three-season-rooms/">3-season rooms page</a>.</p>
     </div>
   </section>
 

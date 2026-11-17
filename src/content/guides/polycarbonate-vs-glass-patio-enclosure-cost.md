@@ -6,7 +6,7 @@ answer: "On a 16 × 14 ft covered patio with two open sides, a polycarbonate 3-s
 published: "2026-11-05"
 updated: "2026-11-05"
 related:
-  - { label: Polycarbonate 3-season rooms, href: /three-season-rooms/ }
+  - { label: Polycarbonate 3-season rooms, href: /patio-enclosures/three-season-rooms/ }
   - { label: Patio enclosure pricing, href: /pricing/ }
 ---
 

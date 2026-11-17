@@ -1,17 +1,17 @@
 ---
 import { Image } from 'astro:assets';
-import Base from '../layouts/Base.astro';
-import RelatedLinks from '../components/RelatedLinks.astro';
-import PageHero from '../components/PageHero.astro';
-import Faq from '../components/Faq.astro';
-import QuoteForm from '../components/QuoteForm.astro';
-import { SITE, byId, money, type QA } from '../data/site';
-import gable from '../assets/projects/p4/1-front.jpg';
-import bays from '../assets/projects/p4/3-right-bays.jpg';
+import Base from '../../layouts/Base.astro';
+import RelatedLinks from '../../components/RelatedLinks.astro';
+import PageHero from '../../components/PageHero.astro';
+import Faq from '../../components/Faq.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import { SITE, byId, money, type QA } from '../../data/site';
+import gable from '../../assets/projects/p4/1-front.jpg';
+import bays from '../../assets/projects/p4/3-right-bays.jpg';
 
 const hx = byId('hexfold'), fx = byId('fixed');
 const garage = 16 * 7; // standard double garage door opening, sq ft
-const crumbs = [{ name: 'Garage screens', href: '/garage-screens/' }];
+const crumbs = [{ name: 'Patio screens', href: '/patio-screens/' }, { name: 'Garage screens', href: '/patio-screens/garage/' }];
 const faq: QA[] = [
   { q: 'Can I still use the garage door opening?', a: 'With Hexfold, yes. The panels fold to the side to clear the opening. A full steel bottom track is available, and is standard on openings over 16.5 ft wide. We go over vehicle traffic and track options at the site visit.' },
   { q: 'Will it help keep snakes out of the garage?', a: 'It is built to help. Hexfold uses honeycomb aluminum mesh and Fixed Screen uses 304 stainless steel, CNC-cut to the opening. The bottom edge and track matter as much as the mesh, so we check them at the site visit. We do not promise a snake-proof garage.' },
@@ -73,7 +73,7 @@ const service = {
     </div>
   </section>
 
-  <RelatedLinks match="fold" title="More AE projects" skip="/garage-screens/" />
+  <RelatedLinks match="fold" title="More AE projects" skip="/patio-screens/garage/" />
 
   <section class="band raised" id="quote">
     <div class="wrap split" style="align-items:start">
