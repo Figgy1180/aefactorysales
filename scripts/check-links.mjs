@@ -1,7 +1,7 @@
 // Checks every internal link, image and asset resolves, every page has one h1, title, description, canonical, and valid JSON-LD.
 import fs from 'node:fs'; import path from 'node:path';
 const dir = process.argv[2] || 'dist';
-const files = []; (function walk(d){ for (const f of fs.readdirSync(d)) { const p = path.join(d, f); fs.statSync(p).isDirectory() ? walk(p) : p.endsWith('.html') && files.push(p); } })(dir);
+const files = []; (function walk(d){ for (const f of fs.readdirSync(d)) { const p = path.join(d, f); fs.statSync(p).isDirectory() ? walk(p) : p.endsWith('.html') && !/google[0-9a-f]+\.html$/.test(p) && files.push(p); } })(dir);
 const exists = (u) => { u = decodeURIComponent(u.split('#')[0].split('?')[0]); if (!u || u === '/') return fs.existsSync(path.join(dir, 'index.html'));
   const p = path.join(dir, u); return fs.existsSync(p) && (fs.statSync(p).isFile() || fs.existsSync(path.join(p, 'index.html'))); };
 let bad = 0, links = 0, ld = 0; const titles = new Map(), descs = new Map();
