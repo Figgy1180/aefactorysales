@@ -34,10 +34,10 @@ const service = {
       <div class="stack-lg">
         <h1 class="display">Open the garage. <span class="y">Keep the bugs out.</span></h1>
         <p class="sub">Use your garage as a workshop, gym or hangout with the door up and the mosquitoes, mice and snakes out. The same Hexfold and Fixed Screen systems we build for patios.</p>
-        <div class="actions"><a class="btn" href="/free-quote/">Get my price</a><a class="btn btn-line" href={SITE.phoneHref}>{SITE.phone}</a></div>
+        <div class="actions"><a class="btn" href="#quote">Get my garage quote</a><a class="btn btn-line" href={SITE.phoneHref}>{SITE.phone}</a></div>
       </div>
       <figure class="dim-frame draw" style="margin:30px 30px 0 0">
-        <span class="dim h" aria-hidden="true"><span>Up to 20 ft wide (Hexfold, meeting in the middle)</span></span>
+        <span class="dim h" aria-hidden="true"><span>Up to 20 ft wide (Hexfold, meeting in the middle), 10 ft tall</span></span>
         <span class="dim v" aria-hidden="true"><span>Up to 10 ft tall</span></span>
         <Image src={gable} alt="Three-car garage in Katy, TX with AE folding screen doors across all three bays" widths={[420, 800]} sizes="(max-width: 820px) 100vw, 520px" loading="eager" style="aspect-ratio:4/5" />
       </figure>
@@ -82,7 +82,7 @@ const service = {
         <p class="lede">Tell us about your garage and a rep will call you with a quote.</p>
         <p><a href="/projects/katy-three-car-garage-screens/">See the Katy three-car garage project</a></p>
       </div>
-      <QuoteForm id="garage-visit" kind="screens" source="Garage screens page" />
+      <QuoteForm id="garage-visit" kind="screens" garage source="Garage screens page" />
     </div>
   </section>
 </Base>

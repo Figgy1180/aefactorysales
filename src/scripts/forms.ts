@@ -39,7 +39,12 @@ captureSource();
         // Short forms (Call me back) confirm in place instead of leaving the page.
         form.hidden = true;
         const done = form.parentElement?.querySelector<HTMLElement>('.cb-done');
-        if (done) { done.hidden = false; done.querySelector<HTMLElement>('button')?.focus(); }
+        if (done) {
+          done.hidden = false;
+          // The form above it collapses, so bring the confirmation into view (testers missed it on phones).
+          done.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          done.querySelector<HTMLElement>('button')?.focus({ preventScroll: true });
+        }
         form.parentElement?.querySelector<HTMLElement>('.cb-lede')?.setAttribute('hidden', '');
         return;
       }

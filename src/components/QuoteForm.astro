@@ -3,8 +3,8 @@
 // kind="visit" (default): asks for a free site visit, then goes to /thank-you/.
 // kind="screens": screen shoppers fill this in and a rep calls them with a quote. Confirms in place.
 import { SITE } from '../data/site';
-interface Props { id?: string; compact?: boolean; source?: string; kind?: 'visit' | 'screens' }
-const { id = 'visit', compact = false, source = 'Website', kind = 'visit' } = Astro.props;
+interface Props { id?: string; compact?: boolean; source?: string; kind?: 'visit' | 'screens'; garage?: boolean }
+const { id = 'visit', compact = false, source = 'Website', kind = 'visit', garage = false } = Astro.props;
 const scr = kind === 'screens';
 ---
 {!scr && <p class="fast">In a hurry? <button type="button" class="linkbtn" data-cb-open>Book with just your name and phone</button></p>}
@@ -29,7 +29,7 @@ const scr = kind === 'screens';
               <option>Not sure which screen</option>
               <option>Hexfold retractable screens</option>
               <option>Fixed stainless steel screens</option>
-              <option>Garage screen</option>
+              <option selected={garage}>Garage screen</option>
               <option>Screen door</option>
             </>
           ) : (
@@ -44,14 +44,26 @@ const scr = kind === 'screens';
           )}
         </select>
       </div>
-      <div class="field"><label for={`${id}-size`}>Patio size</label>
-        <select id={`${id}-size`} name="patio_size">
-          <option>Not sure</option>
-          <option>Small (about 12 × 10 ft)</option>
-          <option>Medium (about 20 × 12 ft, two open sides)</option>
-          <option>Large (about 22 × 14 ft, three open sides, or bigger)</option>
-        </select>
-      </div>
+      {garage ? (
+        <div class="field"><label for={`${id}-size`}>Garage door</label>
+          <select id={`${id}-size`} name="patio_size">
+            <option>Not sure</option>
+            <option>Single door (about 8 or 9 ft wide)</option>
+            <option>Double door (about 16 ft wide)</option>
+            <option>Two or three separate doors</option>
+            <option>Wider than 16 ft</option>
+          </select>
+        </div>
+      ) : (
+        <div class="field"><label for={`${id}-size`}>Patio size</label>
+          <select id={`${id}-size`} name="patio_size">
+            <option>Not sure</option>
+            <option>Small (about 12 × 10 ft)</option>
+            <option>Medium (about 20 × 12 ft, two open sides)</option>
+            <option>Large (about 22 × 14 ft, three open sides, or bigger)</option>
+          </select>
+        </div>
+      )}
     </>
   )}
   <div class="field"><label for={`${id}-time`}>Best time to call</label>

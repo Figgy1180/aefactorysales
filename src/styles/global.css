@@ -235,6 +235,14 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* simple tables */
 .table-wrap { overflow-x: auto; }
+/* Phones: wide price tables scroll sideways; say so, and keep header text readable. */
+@media (max-width: 760px) {
+  .table-wrap { position: relative; }
+  .table-wrap::before { content: "Swipe to see all sizes \2192"; display: block; font-family: var(--mono); font-size: .78rem; letter-spacing: .06em; color: var(--yellow); margin-bottom: 6px; }
+  .on-paper .table-wrap::before { color: var(--paper-ink); }
+  .table-wrap th { font-size: .9rem; }
+}
+.on-paper .book-card .cb-done a:not(.btn), .cb-done a:not(.btn) { color: var(--yellow); }
 .tbl { width: 100%; min-width: 560px; border-collapse: collapse; }
 .tbl th, .tbl td { text-align: left; vertical-align: top; padding: 12px 14px 12px 0; border-top: 1px solid var(--line); font-size: 0.98rem; }
 .tbl thead th { font-family: var(--mono); font-size: 0.74rem; font-weight: 600; letter-spacing: 0.06em; color: var(--ink-2); border-top: 0; }

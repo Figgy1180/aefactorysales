@@ -154,9 +154,15 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
       </div>
       <div class="stack">
         <h2 class="h3">What happens next</h2>
-        <ol class="next">
+        <ol class="next next-visit">
           <li>We reply within 1 business day to set a time.</li>
           <li>A free site visit: we measure every opening and bring samples.</li>
+          <li>Your written quote is emailed within a day of the visit.</li>
+          <li>Sign off, and our crew installs within a month.</li>
+        </ol>
+        <ol class="next next-screens" hidden>
+          <li>A rep replies within 1 business day to talk through your screens.</li>
+          <li>We measure on site so the price is exact.</li>
           <li>Your written quote is emailed within a day of the visit.</li>
           <li>Sign off, and our crew installs within a month.</li>
         </ol>
@@ -280,6 +286,8 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
     $('#q-tint').textContent = tint;
     $('.quiz-visit').hidden = !tinted;
     $('.quiz-screens').hidden = tinted;
+    document.querySelector<HTMLElement>('.next-visit')!.hidden = !tinted;
+    document.querySelector<HTMLElement>('.next-screens')!.hidden = tinted;
     const est = root.querySelector<HTMLInputElement>(`${tinted ? '#quiz-visit' : '#quiz-screens'} input[name="estimate"]`);
     if (est) est.value = `${p.name}${tinted ? ` (${tint})` : ''}, ${$('#q-size').textContent}: ${$('#q-total').textContent}`;
   }
