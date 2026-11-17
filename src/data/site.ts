@@ -269,7 +269,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Can I add a doggy door?',
-      a: 'Yes. A doggy door is a $200 add-on for a compatible screen panel, in 3 sizes. We help you pick the size and spot at the site visit. A pet opening is also a way in for other animals, so we plan its closure with you.',
+      a: 'Yes. A doggy door is a $200 add-on for a compatible screen panel, in small, medium or large. We help you pick the size and spot at the site visit. A pet opening is also a way in for other animals, so we plan its closure with you.',
     },
   ],
   general: [
