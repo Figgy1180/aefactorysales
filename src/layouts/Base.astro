@@ -158,6 +158,11 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
           </details>
         </div>
       </div>
+      {HOLIDAY && (
+        <div class="lights" aria-hidden="true">
+          {Array.from({ length: 60 }, (_, i) => <i style={`--d:${(i * 0.37) % 2.4}s`} />)}
+        </div>
+      )}
     </header>
 
     <main id="main">
