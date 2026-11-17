@@ -17,7 +17,7 @@ export const SITE = {
   email: 'info@aefactorysales.com',
   factorySite: 'https://aecustomize.com',
   founded: '2022',
-  hours: 'Open 24/7 by appointment',
+  hours: 'Showroom by appointment only, so call first to book. Appointments available 24 hours.',
   // Paste the short review link from Google Business Profile (Home > Ask for reviews), e.g. https://g.page/r/XXXX/review
   googleReviewUrl: '',
   // YouTube link for the fold-away video (paste the Shorts or watch URL). Empty hides the link.
@@ -280,7 +280,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Can I see it in person?',
-      a: 'Yes. We are open 24/7 by appointment. Visit the showroom at 2609 William Tell Street, Houston, TX 77093, or book a free site visit and we will bring samples to your home.',
+      a: 'Yes, by appointment only. Someone is not always on site, so call (713) 791-8073 to book a time first; appointments are available 24 hours a day. The showroom is at 2609 William Tell Street, Houston, TX 77093. You can also book a free site visit and we will bring samples to your home.',
     },
   ],
 };

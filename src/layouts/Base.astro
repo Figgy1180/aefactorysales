@@ -53,12 +53,7 @@ const business = {
   email: SITE.email,
   foundingDate: SITE.founded,
   priceRange: '$$',
-  openingHoursSpecification: [{
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-    opens: '00:00',
-    closes: '23:59',
-  }],
+  // No opening hours here on purpose: the showroom is by appointment only and not always staffed.
   contactPoint: [{ '@type': 'ContactPoint', telephone: SITE.phoneE164, contactType: 'sales', areaServed: 'US-TX', availableLanguage: ['English'] }],
   description:
     'Patio enclosures, polycarbonate 3-season rooms and metal patio screens built in our Houston factory and installed by our own crew within a month.',
