@@ -244,5 +244,6 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && d.open) { d.removeAttribute('open'); d.querySelector('summary').focus(); } });
   });
 </script>
+<script is:inline>(function(){var t=document.querySelector('.top');if(!t)return;var on=function(){t.classList.toggle('scrolled',window.scrollY>40)};on();window.addEventListener('scroll',on,{passive:true});})();</script>
 </body>
 </html>

@@ -87,9 +87,9 @@ const videoLd = {
       <div class="dimline" aria-hidden="true"><i></i><span>About 20 ft, one opening · Houston</span><i></i></div>
       <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Custom made for your covered patio</p>
       <h1 id="hero-title" class="display">Premium patio enclosures <span class="y">built in Houston</span></h1>
-      <p class="sub">Metal screens, polycarbonate panels or both. Folding systems open by hand, even in a power outage.</p>
+      <p class="sub">Keep the mosquitoes out and the breeze in, or shut out wind and rain. Folding systems open by hand, even in a power outage.</p>
       <div class="actions">
-        <a class="btn btn-big" href="#book" data-cb-open>Book my free site visit</a>
+        <a class="btn btn-big" href="#book-form" data-cb-open>Book my free site visit</a>
         <a class="btn btn-line" href="/patio-visualizer/">See it on my patio</a>
       </div>
       <ul class="badges">
@@ -118,7 +118,7 @@ const videoLd = {
           </a></li>
         ))}
       </ul>
-      <p class="fine">Product renders made from our system designs. See every system on real patios on the <a href="/projects/">projects page</a>.</p>
+      <p class="fine">Product renders made from our system designs. See finished jobs on the <a href="/projects/">projects page</a>.</p>
     </div>
   </section>
 
@@ -148,7 +148,7 @@ const videoLd = {
         </ol>
         <p class="offer-cost">What the visit costs you: <b>nothing.</b></p>
       </div>
-      <div class="book-card">
+      <div class="book-card" id="book-form">
         <p class="book-k" data-bv-title data-screens="Get your screen quote">Book your free visit</p>
         <BookVisitForm id="home-book" />
       </div>
@@ -469,6 +469,16 @@ const videoLd = {
   .viz-shot :global(img) { width: 100%; height: auto; display: block; }
   .viz-shot figcaption { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 10px; font-family: var(--mono); font-size: .75rem; color: var(--ink-2); }
   @media (max-width: 820px) { .viz-grid { grid-template-columns: minmax(0, 1fr); } }
+
+  /* Phones in portrait: show the whole landscape photo on top, text on the honey ground below */
+  @media (max-width: 820px) and (orientation: portrait) {
+    .hero { display: block; min-height: 0; }
+    .hero :global(.hero-bg) { position: relative; inset: auto; height: auto; aspect-ratio: 4 / 3; object-position: center; z-index: 0; }
+    .hero::after { inset: 0 0 auto 0; height: calc(100vw * .75 + 2px); background: linear-gradient(180deg, rgba(42,37,34,.35) 0%, rgba(42,37,34,0) 40%, rgba(42,37,34,.85) 88%, var(--honey) 100%); z-index: 0; }
+    .hero-in { padding-top: 0; margin-top: -54px; }
+    .book-card { scroll-margin-top: 90px; }
+  }
+  #book-form { scroll-margin-top: 110px; }
 </style>
 
 <script is:inline>

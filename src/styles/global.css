@@ -149,6 +149,8 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font); text-wrap: balance; line-h
 .lights i:nth-child(4n+3) { background: #4fd36b; box-shadow: 0 0 8px 2px rgba(79, 211, 107, .7); }
 .lights i:nth-child(4n+4) { background: #fff6dd; box-shadow: 0 0 8px 2px rgba(255, 246, 221, .7); }
 .lights i:nth-child(n+31) { display: none; }
+.lights { transition: opacity .3s; }
+.top.scrolled .lights { opacity: 0; }
 @media (min-width: 700px) { .lights i:nth-child(n+31) { display: block; } }
 @keyframes twinkle { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
 @media (prefers-reduced-motion: reduce) { .lights i { animation: none; } }
