@@ -33,7 +33,7 @@ export const SITE = {
 
 export const WARRANTY = 'Lifetime on the frame, 3 years on parts';
 export const WARRANTY_FULL =
-  'Lifetime on the frame and 3 years on all parts, installed and maintained by the manufacturer. Excludes accidents, intentional damage and acts of God.';
+  'Lifetime on the frame for the original owner, for as long as you own the home (not transferable to a new owner), and 3 years on all parts. Installed and maintained by the manufacturer. Covers normal wear and tear. Excludes accidents, intentional damage and acts of God.';
 export const FRAME = {
   short: 'Heat-welded PVC-fiber blend, aluminum core, ceramic coating',
   long: 'Every AE frame is heat welded, with no screws: a PVC and fiber blend with an aluminum rod inside for strength and a scratch-resistant ceramic coating outside.',
@@ -284,7 +284,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'How long does installation take?',
-      a: 'Within a month of your order. We measure at the free site visit, build and test your whole job at our Houston factory, then our own crew installs it, usually in 1 day.',
+      a: 'Within a month of your order, after HOA approval if your HOA requires it. We measure at the free site visit, build and test your whole job at our Houston factory, then our own crew installs it, usually in 1 day. We never use subcontractors.',
     },
     {
       q: 'What does the warranty cover?',
