@@ -57,7 +57,7 @@ const business = {
   openingHoursSpecification: [{ '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'], opens: '09:00', closes: '17:00' }],
   contactPoint: [{ '@type': 'ContactPoint', telephone: SITE.phoneE164, contactType: 'sales', areaServed: 'US-TX', availableLanguage: ['English'] }],
   description:
-    'Patio enclosures, polycarbonate 3-season rooms and metal patio screens built in our Houston factory and installed by our own crew within a month.',
+    'Patio enclosures, polycarbonate 3-season rooms and metal patio screens built in our Houston factory and installed by our own crew within a month. Showroom by appointment, 9 am to 5 pm daily.',
   address: {
     '@type': 'PostalAddress',
     streetAddress: SITE.street,
@@ -223,7 +223,7 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
         </div>
         <p class="small">
           Serving Houston and the greater Houston area. Warranty: lifetime on the frame, 3 years on parts, installed and maintained by the manufacturer (excludes accidents, intentional damage and acts of God).
-          © {new Date().getFullYear()} {SITE.name}.
+          Prices and details updated {SITE.updated}. © {new Date().getFullYear()} {SITE.name}.
         </p>
       </div>
     </footer>

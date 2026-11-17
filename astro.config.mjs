@@ -11,6 +11,7 @@ export default defineConfig({
   outDir: preview ? './dist-preview' : './dist',
   integrations: [
     sitemap({
+      lastmod: new Date(),
       filter: (page) => !/\/(thank-you|dealers\/thanks|reviews\/thanks|404)\/?$/.test(page),
     }),
   ],

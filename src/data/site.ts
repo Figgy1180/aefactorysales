@@ -17,6 +17,7 @@ export const SITE = {
   email: 'info@aefactorysales.com',
   factorySite: 'https://aecustomize.com',
   founded: '2022',
+  updated: 'November 2026',
   hours: 'Showroom open 9 am to 5 pm, 7 days a week, by appointment only. Call first to book.',
   // Paste the short review link from Google Business Profile (Home > Ask for reviews), e.g. https://g.page/r/XXXX/review
   googleReviewUrl: '',
@@ -257,7 +258,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Do AE folding screens work when the power goes out?',
-      a: 'Yes. Hexfold opens and closes by hand with its handle, so it does not need household electricity. Its manual folding mechanism has no motor program to reset when power returns. Use it within its operating limits: about 40 mph while open or moving.',
+      a: 'Yes. Hexfold opens and closes by hand with its handle, so it does not need household electricity. Clearfold and the Hybrid fold by hand too, so none of our folding systems needs power. Use it within its operating limits: about 40 mph while open or moving.',
     },
     {
       q: 'Do Hexfold screens need maintenance?',
@@ -303,7 +304,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Can I see it in person?',
-      a: 'Yes, by appointment only. It is open 9 am to 5 pm, 7 days a week, but someone is not always on the floor, so call (713) 791-8073 to book a time first. The showroom is at 2609 William Tell Street, Houston, TX 77093. You can also book a free site visit and we will bring samples to your home.',
+      a: 'Yes, by appointment only. Showroom hours are 9 am to 5 pm, 7 days a week. Call (713) 791-8073 to book a time first, so someone is there to walk you through every system. The showroom is at 2609 William Tell Street, Houston, TX 77093. You can also book a free site visit and we will bring samples to your home.',
     },
   ],
 };
