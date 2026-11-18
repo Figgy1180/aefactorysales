@@ -94,7 +94,7 @@ const ld = [
       <section id="systems" class="topic">
         <h2 class="h3">The five systems</h2>
         <p class="lede">Two families: metal screens for breeze without bugs, and tinted polycarbonate for shelter from wind and rain. Mix them opening by opening.</p>
-        <div class="table-wrap"><table class="tbl">
+        <div class="table-wrap" tabindex="0" role="region" aria-label="The five systems (table 1)"><table class="tbl">
           <thead><tr><th scope="col">System</th><th scope="col">What it is</th><th scope="col">Mesh or panel</th><th scope="col">Operation</th><th scope="col" class="num">From, installed</th></tr></thead>
           <tbody>{order.map((p) => <tr><th scope="row"><a href={p.href}>{p.name}</a></th><td>{p.kind}</td><td>{p.specs[0][1]}</td><td>{['fixed', 'clearfixed'].includes(p.id) ? 'Fixed' : 'Folds by hand'}</td><td class="num">${p.msrp}/sq ft</td></tr>)}</tbody>
         </table></div>
@@ -102,7 +102,7 @@ const ld = [
 
       <section id="sizes" class="topic">
         <h2 class="h3">Sizes and limits</h2>
-        <div class="table-wrap"><table class="tbl">
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Sizes and limits (table 2)"><table class="tbl">
           <thead><tr><th scope="col">System</th><th scope="col">Largest opening</th><th scope="col">Smallest</th><th scope="col">Arches and gables</th></tr></thead>
           <tbody>{sizeLimits.map(([a, b, c, d]) => <tr><th scope="row">{a}</th><td>{b}</td><td>{c}</td><td>{d}</td></tr>)}</tbody>
         </table></div>
@@ -125,7 +125,7 @@ const ld = [
 
       <section id="options" class="topic">
         <h2 class="h3">Options and add-ons</h2>
-        <div class="table-wrap"><table class="tbl">
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Options and add-ons (table 3)"><table class="tbl">
           <thead><tr><th scope="col">Option</th><th scope="col">What it does</th><th scope="col">Available on</th></tr></thead>
           <tbody>{options.map(([a, b, c]) => <tr><th scope="row">{a}</th><td>{b}</td><td>{c}</td></tr>)}</tbody>
         </table></div>
@@ -151,7 +151,7 @@ const ld = [
       <section id="pricing" class="topic">
         <h2 class="h3">How pricing works</h2>
         <p>We price by the square foot of opening: the open wall area we fill in, not your floor. Two open sides on a 16 × 14 ft patio at 8 ft tall is about 240 sq ft.</p>
-        <div class="table-wrap"><table class="tbl tnum">
+        <div class="table-wrap" tabindex="0" role="region" aria-label="How pricing works (table 4)"><table class="tbl tnum">
           <thead><tr><th scope="col">Patio</th>{order.map((p) => <th scope="col" class="num">{p.name}</th>)}</tr></thead>
           <tbody>{SIZES.map((s) => <tr><th scope="row">{s.name}<br /><span class="muted" style="font-weight:400;font-size:.85rem">{s.low} to {s.high} sq ft</span></th>{order.map((p) => <td class="num" style="font-size:.95rem !important">{range(p.msrp, s.low, s.high)}</td>)}</tr>)}</tbody>
         </table></div>

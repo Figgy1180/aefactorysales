@@ -65,7 +65,7 @@ const cards = [
         <h2 id="ps-price" class="h2">Prices for three <span class="y">patio sizes</span></h2>
         <p class="lede">Installed totals for typical Houston covered patios. Your exact quote comes after we measure.</p>
       </div>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable table">
         <table class="tbl tnum">
           <thead><tr><th scope="col">Screen</th>{SIZES.map((s) => <th scope="col" class="num">{s.name}<br />{s.low} to {s.high} sq ft of opening</th>)}</tr></thead>
           <tbody>

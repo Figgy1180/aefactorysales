@@ -117,13 +117,13 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
   <body data-default-src={Astro.props.defaultSrc}>
     <a class="skip" href="#main">Skip to content</a>
     {HOLIDAY && (
-      <div class="season-bar">
+      <aside class="season-bar" aria-label="Seasonal note">
         <p class="wrap"><span aria-hidden="true">&#10052;</span> <b>Hosting for the holidays?</b> Polycarbonate panels block the north wind and rain, so your patio stays usable all season. <a href="/winter/">See winter rooms</a></p>
-      </div>
+      </aside>
     )}
     <header class="top">
       <div class="wrap">
-        <a class="brand" href="/" aria-label="AE Factory Sales home">
+        <a class="brand" href="/">
           <img src={LOGO} alt="" width="104" height={LOGO_H} />
           <span><b>AE Factory Sales</b><small>{SITE.tagline}</small></span>
         </a>
@@ -223,6 +223,8 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
               <li><a href={SITE.googleProfileUrl} rel="noopener">Find us on Google</a></li>
               <li><a href={SITE.factorySite} rel="noopener">Factory site</a></li>
               <li><a href="/privacy/">Privacy</a></li>
+              <li><a href="/terms/">Terms</a></li>
+              <li><a href="/accessibility/">Accessibility</a></li>
             </ul>
           </div>
         </div>
@@ -232,7 +234,7 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
         </p>
       </div>
     </footer>
-    <div class="callbar"><a href={SITE.phoneHref}>Call us</a><button type="button" data-cb-open aria-haspopup="dialog">Book free visit</button></div>
+    <nav class="callbar" aria-label="Quick contact"><a href={SITE.phoneHref}>Call us</a><button type="button" data-cb-open aria-haspopup="dialog">Book free visit</button></nav>
     <CallMeBack />
     <script>
     import { captureSource } from '../scripts/source';

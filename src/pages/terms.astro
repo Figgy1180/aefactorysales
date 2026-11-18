@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE } from '../data/site';
+const crumbs = [{ name: 'Website terms', href: '/terms/' }];
+---
+<Base title="Website Terms | AE Factory Sales" description="Terms for using the AE Factory Sales website: prices, visualizer, renders and links." crumbs={crumbs}>
+  <PageHero crumbs={crumbs}><h1 class="display">Website <span class="y">terms</span></h1></PageHero>
+  <section class="band">
+    <div class="wrap prose">
+      <p>Last updated November 18, 2026.</p>
+      <p>By using aefactorysales.com you agree to these terms. They cover the website only. Your project is governed by the written quote and agreement you sign with us.</p>
+      <h2>Prices and quotes</h2>
+      <p>Prices on this site are starting prices per square foot of opening, installed, and are a guide. Your price is set in the written quote we email after a free site visit. A web estimate or visualizer total is not an offer or a contract.</p>
+      <h2>Visualizer and renders</h2>
+      <p>The patio visualizer and product renders are illustrations to help you picture a system. Colors, sizes, panel counts and layouts are approximate. Your final design is confirmed at the site visit.</p>
+      <h2>Warranty</h2>
+      <p>Warranty terms are summarized on this site and set out in full in your agreement: lifetime on the frame for the original owner while they own the home (not transferable), and 3 years on parts, installed and maintained by the manufacturer. It covers normal wear and tear and excludes accidents, intentional damage and acts of God.</p>
+      <h2>Photos and content</h2>
+      <p>Photos, renders, text and logos on this site belong to AE Factory Sales or are used with permission. Please don't copy them for commercial use without asking.</p>
+      <h2>Reviews</h2>
+      <p>Reviews shown on this site come from real customers and appear as they wrote them.</p>
+      <h2>Links</h2>
+      <p>Links to other websites, such as Google or a lender, are for convenience. We are not responsible for their content or policies.</p>
+      <h2>Website availability</h2>
+      <p>We work to keep this site accurate and available, but it is provided as is, and details can change. If anything on the site conflicts with your written quote or agreement, the quote and agreement control.</p>
+      <h2>Texas law</h2>
+      <p>These terms are governed by the laws of the State of Texas.</p>
+      <h2>Contact</h2>
+      <p>Questions? {SITE.email} · {SITE.phone}</p>
+    </div>
+  </section>
+</Base>

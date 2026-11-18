@@ -80,7 +80,7 @@ const ld = {
         <h2 id="table-title" class="h2">At <span class="y">a glance</span></h2>
         <p class="lede">Example patio: {EXAMPLE.label} (about {EXAMPLE.openings} sq ft of openings, {EXAMPLE.floor} sq ft of floor).</p>
       </div>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="At a glance (table 1)">
         <table class="tbl matrix">
           <thead><tr><th scope="col">Option</th><th scope="col">Example patio</th><th scope="col">Bugs, mice, snakes</th><th scope="col">Wind and rain</th><th scope="col">Opens up</th><th scope="col">Moving parts</th><th scope="col">Ongoing</th></tr></thead>
           <tbody>
@@ -110,7 +110,7 @@ const ld = {
           <h2 id={`${v.id}-t`} class="h2">{v.t}</h2>
           <p class="lede">{v.lead}</p>
         </div>
-        <div class="table-wrap">
+        <div class="table-wrap" tabindex="0" role="region" aria-label={`${v.t} (table)`}>
           <table class="tbl">
             <thead><tr><th scope="col"><span class="sr-only">Feature</span></th><th scope="col">AE</th><th scope="col">The alternative</th></tr></thead>
             <tbody>{v.rows.map(([k, a, b]) => <tr><th scope="row">{k}</th><td class="ours">{a}</td><td>{b}</td></tr>)}</tbody>

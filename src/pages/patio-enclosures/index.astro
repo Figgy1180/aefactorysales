@@ -57,7 +57,7 @@ const service = {
   <section class="band" aria-labelledby="sys-title">
     <div class="wrap stack-lg">
       <h2 id="sys-title" class="h2">The {order.length} <span class="y">systems</span></h2>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="The systems (table 1)">
         <table class="tbl tnum">
           <thead><tr><th scope="col">System</th><th scope="col">What it is</th><th scope="col">Opens?</th><th scope="col" class="num">From, per sq ft installed</th></tr></thead>
           <tbody>
@@ -77,7 +77,7 @@ const service = {
         <h2 id="price-title" class="h2">Prices for three <span class="y">patio sizes</span></h2>
         <p class="lede">Installed totals for typical Houston covered patios. Your exact quote comes after we measure.</p>
       </div>
-      <div class="table-wrap">
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Prices for three patio sizes (table 2)">
         <table class="tbl tnum">
           <thead><tr><th scope="col">System</th>{SIZES.map((s) => <th scope="col" class="num">{s.name}<br />{s.low} to {s.high} sq ft of opening</th>)}</tr></thead>
           <tbody>

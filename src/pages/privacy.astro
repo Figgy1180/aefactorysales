@@ -2,23 +2,39 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import { SITE } from '../data/site';
-const crumbs = [{ name: 'Privacy', href: '/privacy/' }];
+const crumbs = [{ name: 'Privacy policy', href: '/privacy/' }];
 ---
-<Base title="Privacy Policy | AE Factory Sales" description="How AE Factory Sales uses the information you send through this website." crumbs={crumbs}>
+<Base title="Privacy Policy | AE Factory Sales" description="How AE Factory Sales collects, uses and protects the information you send through this website." crumbs={crumbs}>
   <PageHero crumbs={crumbs}><h1 class="display">Privacy <span class="y">policy</span></h1></PageHero>
   <section class="band">
     <div class="wrap prose">
-      <p>Last updated November 5, 2026.</p>
+      <p>Last updated November 18, 2026.</p>
       <h2>What we collect</h2>
-      <p>When you request a site visit or a quote, we collect what you type into the form: your name, phone, email, ZIP code, project details and any notes. Forms are delivered to us by email through Web3Forms.</p>
+      <p>When you request a site visit, a callback or a quote, or leave a review, we collect what you type into the form: your name, phone, email, ZIP code, project details and any notes. We also note which page or flyer the request came from so we know what is working.</p>
+      <h2>What we don't collect</h2>
+      <ul>
+        <li>No advertising or tracking cookies. We use Cloudflare Web Analytics, which counts visits without cookies and without identifying you.</li>
+        <li>Photos you use in the <a href="/patio-visualizer/">patio visualizer</a> stay on your device. They are never uploaded or saved.</li>
+        <li>We never ask for card numbers, bank details or passwords on this website.</li>
+      </ul>
       <h2>How we use it</h2>
-      <p>Only to contact you about your project or application, schedule a visit and prepare your quote. We do not sell or rent your information.</p>
+      <p>Only to contact you about your request: to call, text or email you, schedule a visit and prepare your quote. We do not sell, rent or trade your information, and we do not use it for unrelated marketing.</p>
+      <h2>Who helps us</h2>
+      <p>Forms are delivered to our inbox by Web3Forms. The website is hosted by Cloudflare, which keeps standard security logs (such as IP addresses) to protect the site from attacks. They process data for us under their own privacy terms.</p>
+      <h2>Calls and texts</h2>
+      <p>When you send a form, you agree we may call or text the number you gave about your request. Message and data rates may apply. Reply STOP to any text or tell us on the phone and we will stop.</p>
+      <h2>How long we keep it</h2>
+      <p>We keep project requests as long as needed to serve you and stand behind your warranty, then delete what we no longer need.</p>
+      <h2>Your choices</h2>
+      <p>You can ask us to see, correct or delete your information at any time: email {SITE.email} or call {SITE.phone}. We reply within 45 days, usually much sooner.</p>
       <h2>Financing</h2>
       <p>If you choose to apply for financing, you apply directly with a third-party lender under their own privacy policy. AE is not a lender.</p>
-      <h2>Your choices</h2>
-      <p>Ask us to update or delete your information at any time: {SITE.email} or {SITE.phone}.</p>
+      <h2>Children</h2>
+      <p>This website is for adults planning home projects. We do not knowingly collect information from children under 13.</p>
+      <h2>Changes</h2>
+      <p>If we change this policy, we update the date at the top of this page.</p>
       <h2>Contact</h2>
-      <p>{SITE.name}, {SITE.street}, {SITE.city}, {SITE.region} {SITE.zip}.</p>
+      <p>{SITE.name}, {SITE.street}, {SITE.city}, {SITE.region} {SITE.zip}. {SITE.email} · {SITE.phone}</p>
     </div>
   </section>
 </Base>
