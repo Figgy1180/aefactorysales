@@ -54,6 +54,14 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
         </div>
       </fieldset>
 
+      <fieldset id="tintField" hidden>
+        <legend>Panel tint</legend>
+        <div class="seg" id="tintSeg">
+          <button type="button" data-tint="gray" aria-pressed="true">Smokey Gray</button>
+          <button type="button" data-tint="blue" aria-pressed="false">Industrial Blue</button>
+        </div>
+      </fieldset>
+
       <fieldset>
         <legend>Position</legend>
         <div class="seg" id="openSeg">
@@ -67,7 +75,7 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
         <div class="row">
           <span class="label" style="margin:0" id="openingLabel">Opening 1 of 1</span>
         </div>
-        <div class="row">
+        <div class="row" id="panRow">
           <div class="stepper" aria-label="Panels in this opening">
             <button type="button" id="panMinus" aria-label="Fewer panels">−</button>
             <output id="panOut" aria-live="polite">4</output>
@@ -158,8 +166,8 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
     { id: 'clearfold', name: 'Clearfold', rate: 40, kind: 'smoke', folds: true },
     { id: 'hybrid', name: 'Hybrid', rate: 56, kind: 'hybrid', folds: true },
   ];
-  const FRAME = { gray: [0.36, 0.37, 0.39], white: [0.95, 0.94, 0.91] };
-  const state = { sys: 'hexfold', frame: 'gray', open: false, before: false, sel: 0, openings: [] };
+  const FRAME = { gray: [0.10, 0.105, 0.115], white: [0.95, 0.94, 0.91] };
+  const state = { sys: 'hexfold', frame: 'gray', tint: 'gray', open: false, before: false, sel: 0, openings: [] };
 
   const photo = document.getElementById('photo');
   const canvas = document.getElementById('gl');
@@ -169,13 +177,13 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
   const $ = (id) => document.getElementById(id);
 
   // ---------- WebGL ----------
-  const gl = canvas.getContext('webgl', { premultipliedAlpha: false, preserveDrawingBuffer: true });
+  const gl = canvas.getContext('webgl', { premultipliedAlpha: true, preserveDrawingBuffer: true });
   if (!gl) { $('status').textContent = 'This browser cannot draw the preview (WebGL is off).'; }
   const vs = `attribute vec2 p; void main(){ gl_Position = vec4(p,0.,1.); }`;
   const fs = `
   precision highp float;
   uniform mat3 uHinv; uniform vec2 uRes; uniform vec2 uSize; uniform float uPanels;
-  uniform float uKind; uniform float uOpen; uniform vec3 uFrame;
+  uniform float uSys; uniform float uOpen; uniform vec3 uFrame; uniform float uWft; uniform float uTint;
   float hexMesh(vec2 g){
     vec2 r = vec2(1.0, 1.732);
     vec2 h = r*0.5;
@@ -185,47 +193,102 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
     float d = max(q.x*0.866 + q.y*0.5, q.y);
     return smoothstep(0.36, 0.46, d);
   }
-  void main(){
+  // pleated honeycomb mesh (Hexfold): fine vertical pleats, no posts
+  vec4 pleated(vec2 uv, float period){
+    float p = fract(uv.x * uSize.x / period);
+    float shade = 0.5 + 0.5 * cos(p * 6.2831);
+    float wire = hexMesh(uv * uSize / 2.2);
+    float a = mix(0.60, 0.78, wire) + 0.10 * shade;
+    vec3 c = vec3(0.05, 0.052, 0.056) + 0.05 * (1.0 - shade);
+    if (p < 0.07) { a = 0.9; c = vec3(0.03); }
+    return vec4(c, a);
+  }
+  vec4 flatMesh(vec2 uv){
+    float wire = hexMesh(uv * uSize / 1.8);
+    return vec4(vec3(0.06, 0.063, 0.068), mix(0.56, 0.76, wire));
+  }
+  vec4 poly(vec2 uv){
+    float sheen = smoothstep(0.0, 0.5, 1.0 - abs((uv.x*0.6 + uv.y*0.8) - 0.55) * 3.0) * 0.10;
+    vec3 tint = uTint > 0.5 ? vec3(0.10, 0.30, 0.52) : vec3(0.17, 0.18, 0.19);
+    return vec4(tint + sheen, uTint > 0.5 ? 0.62 : 0.70);
+  }
+  vec4 frameCol(float y){ return vec4(uFrame * (0.88 + 0.12 * y), 1.0); }
+  vec4 handle(vec2 uv){
+    if (uv.y > 0.44 && uv.y < 0.56) return vec4(0.78, 0.77, 0.74, 1.0);
+    return frameCol(uv.y);
+  }
+  vec4 shadeIt(){
     vec2 px = vec2(gl_FragCoord.x, uRes.y - gl_FragCoord.y);
     vec3 q = uHinv * vec3(px, 1.0);
     vec2 uv = q.xy / q.z;
     if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) discard;
-    float fpx = max(3.0, uSize.y * 0.018);
+    float fpx = max(3.0, uSize.y * 0.016);
     vec2 t = vec2(fpx) / uSize;
-    // outer frame (track on top and bottom, jambs on the sides)
-    bool frame = uv.y < t.y*1.2 || uv.y > 1.0 - t.y*1.4 || uv.x < t.x || uv.x > 1.0 - t.x;
+    if (uv.y < t.y*1.2 || uv.y > 1.0 - t.y*1.4 || uv.x < t.x || uv.x > 1.0 - t.x) { return frameCol(uv.y); }
+    float innerW = uSize.x * (1.0 - 2.0 * t.x);
+    float ix = (uv.x - t.x) / (1.0 - 2.0 * t.x);
+    float st = fpx * 0.55 / innerW;               // slim stile, in inner units
+    float ftPx = uSize.x / max(uWft, 1.0);        // pixels per foot
     float n = max(uPanels, 1.0);
-    float x = uv.x;
-    float stackW = clamp(0.05 * n, 0.08, 0.32);
+    float stack = fpx * 3.2 / innerW;             // width of a folded stack
+    // Hexfold: one pull up to 10 ft, two pulls meeting in the middle above that
+    if (uSys < 0.5) {
+      bool two = uWft > 10.25;
+      if (uOpen > 0.5) {
+        bool inS = two ? (ix < stack || ix > 1.0 - stack) : (ix > 1.0 - stack);
+        if (!inS) discard;
+        if ((two && (abs(ix - stack) < st*0.9)) || abs(ix - (1.0 - stack)) < st*0.9) { return frameCol(uv.y); }
+        return pleated(uv, max(2.0, fpx * 0.45));
+      }
+      if (two && abs(ix - 0.5) < st * 1.6) { return handle(uv); }
+      if (!two && ix < st * 1.6) { return handle(uv); }
+      return pleated(uv, max(3.0, ftPx / 6.0));
+    }
+    // Fixed Screen and Clearfixed: framed fixed panels
+    if (uSys < 2.5) {
+      float lx = fract(ix * n);
+      if ((lx < st * n || lx > 1.0 - st * n) && ix > st && ix < 1.0 - st) { return frameCol(uv.y); }
+      return uSys < 1.5 ? flatMesh(uv) : poly(uv);
+    }
+    // Clearfold: framed folding panels, up to 5 ft per pull, meeting in the middle above that
+    if (uSys < 3.5) {
+      bool two = uWft > 5.25 && n > 1.5;
+      if (uOpen > 0.5) {
+        float sw = stack * (two ? n * 0.5 : n) * 0.45;
+        bool inS = two ? (ix < sw || ix > 1.0 - sw) : (ix > 1.0 - sw);
+        if (!inS) discard;
+        float lx = fract(ix * uSize.x / (fpx * 1.4));
+        if (lx < 0.38) { return frameCol(uv.y); }
+        return poly(uv);
+      }
+      if (two && abs(ix - 0.5) < st * 1.3) { return handle(uv); }
+      float lx = fract(ix * n);
+      if (lx < st * n || lx > 1.0 - st * n) { return frameCol(uv.y); }
+      return poly(uv);
+    }
+    // Hybrid: folding polycarbonate panels on one side, pleated honeycomb mesh on the other
+    float np = max(1.0, floor(n * 0.5));
     if (uOpen > 0.5) {
-      if (frame) { gl_FragColor = vec4(uFrame, 1.0); return; }
-      if (x < 1.0 - stackW) discard;            // the opening is clear
-      x = (x - (1.0 - stackW)) / stackW;         // panels folded into a stack
-      n = n * 3.0;
+      float sw = stack * np * 0.45;
+      if (ix < sw) {
+        float lx = fract(ix * uSize.x / (fpx * 1.4));
+        return lx < 0.38 ? frameCol(uv.y) : poly(uv);
+      }
+      if (ix > 1.0 - stack) {
+        if (abs(ix - (1.0 - stack)) < st*0.9) { return frameCol(uv.y); }
+        return pleated(uv, max(2.0, fpx * 0.45));
+      }
+      discard;
     }
-    if (frame) { gl_FragColor = vec4(uFrame * (0.9 + 0.1*uv.y), 1.0); return; }
-    float lx = fract(x * n);
-    float idx = floor(x * n);
-    float stile = (fpx * 0.55) / (uSize.x / n * (uOpen > 0.5 ? stackW : 1.0));
-    if (lx < stile || lx > 1.0 - stile) { gl_FragColor = vec4(uFrame * 0.95, 1.0); return; }
-    // which material in this panel
-    float kind = uKind;
-    if (kind > 1.5) kind = mod(idx, 2.0) < 0.5 ? 1.0 : 0.0;   // hybrid: alternate
-    float pleat = 0.5 + 0.5 * cos(lx * 6.2831);
-    vec4 col;
-    if (kind < 0.5) {
-      // metal mesh: fine honeycomb, darkens the view behind it
-      vec2 g = uv * uSize / 2.2;
-      float wire = hexMesh(g);
-      float a = mix(0.42, 0.70, wire) + 0.08 * pleat;
-      col = vec4(vec3(0.07, 0.075, 0.08), a);
-    } else {
-      // tinted polycarbonate (Midnight Smoke look) with a soft sheen
-      float sheen = smoothstep(0.0, 0.5, 1.0 - abs((uv.x*0.6 + uv.y*0.8) - 0.55) * 3.0) * 0.10;
-      col = vec4(vec3(0.07, 0.075, 0.09) + sheen + 0.04 * pleat, 0.66);
+    if (abs(ix - 0.5) < st * 1.6) { return handle(uv); }
+    if (ix < 0.5) {
+      float lx = fract(ix * 2.0 * np);
+      if (lx < st * 2.0 * np || lx > 1.0 - st * 2.0 * np) { return frameCol(uv.y); }
+      return poly(uv);
     }
-    gl_FragColor = col;
-  }`;
+    return pleated(uv, max(3.0, ftPx / 6.0));
+  }
+  void main(){ vec4 c = shadeIt(); gl_FragColor = vec4(c.rgb * c.a, c.a); }`;
   let prog, loc = {};
   function sh(type, src) { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; }
   if (gl) {
@@ -235,8 +298,8 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
     const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
     const pl = gl.getAttribLocation(prog, 'p'); gl.enableVertexAttribArray(pl); gl.vertexAttribPointer(pl, 2, gl.FLOAT, false, 0, 0);
-    ['uHinv', 'uRes', 'uSize', 'uPanels', 'uKind', 'uOpen', 'uFrame'].forEach((k) => (loc[k] = gl.getUniformLocation(prog, k)));
-    gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    ['uHinv', 'uRes', 'uSize', 'uPanels', 'uSys', 'uOpen', 'uFrame', 'uWft', 'uTint'].forEach((k) => (loc[k] = gl.getUniformLocation(prog, k)));
+    gl.enable(gl.BLEND); gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
   }
 
   // square -> quad homography (p0 TL, p1 TR, p2 BR, p3 BL)
@@ -263,7 +326,7 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
     const sys = SYSTEMS.find((s) => s.id === state.sys);
-    const kind = sys.kind === 'mesh' ? 0 : sys.kind === 'smoke' ? 1 : 2;
+    const sysIdx = { hexfold: 0, fixed: 1, clearfixed: 2, clearfold: 3, hybrid: 4 }[sys.id];
     for (const o of state.openings) {
       const Hi = inv3(homography(o.pts)); if (!Hi) continue;
       gl.uniformMatrix3fv(loc.uHinv, false, [Hi[0], Hi[3], Hi[6], Hi[1], Hi[4], Hi[7], Hi[2], Hi[5], Hi[8]]);
@@ -272,7 +335,9 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
       const h = (dist(o.pts[0], o.pts[3]) + dist(o.pts[1], o.pts[2])) / 2;
       gl.uniform2f(loc.uSize, Math.max(w, 1), Math.max(h, 1));
       gl.uniform1f(loc.uPanels, o.panels);
-      gl.uniform1f(loc.uKind, kind);
+      gl.uniform1f(loc.uSys, sysIdx);
+      gl.uniform1f(loc.uWft, o.w || 10);
+      gl.uniform1f(loc.uTint, state.tint === 'blue' ? 1 : 0);
       gl.uniform1f(loc.uOpen, state.open && sys.folds ? 1 : 0);
       gl.uniform3fv(loc.uFrame, FRAME[state.frame]);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
@@ -331,13 +396,14 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
   function setPressed(seg, attr, val) { seg.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset[attr] === String(val)))); }
   sysSeg.addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; state.sys = b.dataset.sys; refresh(); });
   $('frameSeg').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; state.frame = b.dataset.frame; refresh(); });
+  $('tintSeg').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; state.tint = b.dataset.tint; refresh(); });
   $('openSeg').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b || b.disabled) return; state.open = b.dataset.open === '1'; refresh(); });
   $('beforeBtn').addEventListener('click', () => { state.before = !state.before; canvas.style.opacity = state.before ? '0' : '1'; $('beforeBtn').setAttribute('aria-pressed', String(state.before)); $('beforeBtn').textContent = state.before ? 'Show with screens' : 'Show before'; });
   $('panMinus').addEventListener('click', () => { const o = state.openings[state.sel]; if (o) { o.panels = Math.max(1, o.panels - 1); syncPanel(); render(); } });
   $('panPlus').addEventListener('click', () => { const o = state.openings[state.sel]; if (o) { o.panels = Math.min(16, o.panels + 1); syncPanel(); render(); } });
   $('addBtn').addEventListener('click', () => { state.openings.push(defaultOpening(state.openings.length)); state.sel = state.openings.length - 1; syncPanel(); render(); drawUI(); });
   $('delBtn').addEventListener('click', () => { if (state.openings.length <= 1) return; state.openings.splice(state.sel, 1); state.sel = Math.max(0, state.sel - 1); syncPanel(); render(); drawUI(); });
-  ['wIn', 'hIn'].forEach((id) => $(id).addEventListener('input', () => { const o = state.openings[state.sel]; if (o) { o.w = parseFloat($('wIn').value) || 0; o.h = parseFloat($('hIn').value) || 0; } price(); }));
+  ['wIn', 'hIn'].forEach((id) => $(id).addEventListener('input', () => { const o = state.openings[state.sel]; if (o) { o.w = parseFloat($('wIn').value) || 0; o.h = parseFloat($('hIn').value) || 0; } price(); render(); }));
 
   function price() {
     const sys = SYSTEMS.find((s) => s.id === state.sys);
@@ -363,6 +429,9 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
     $('openSeg').querySelector('[data-open="1"]').disabled = !sys.folds;
     if (!sys.folds) state.open = false;
     setPressed($('openSeg'), 'open', state.open ? 1 : 0);
+    setPressed($('tintSeg'), 'tint', state.tint);
+    $('tintField').hidden = !['clearfixed', 'clearfold', 'hybrid'].includes(sys.id);
+    $('panRow').hidden = sys.id === 'hexfold';
     price(); render();
   }
   function defaultOpening(i) {

@@ -21,7 +21,7 @@ const options = [
   ['Arches and angles', 'Panels cut to your roofline on a dedicated angle saw', 'Fixed Screen, Clearfixed'],
   ['Extra posts or framing', 'Added where an opening needs support', 'All systems'],
   ['Frame color', 'Night Gray or Bright White', 'All systems'],
-  ['Polycarbonate tint', 'Midnight Smoke (black) or Storm Blue', 'Clearfixed, Clearfold, Hybrid'],
+  ['Polycarbonate tint', 'Smokey Gray or Industrial Blue', 'Clearfixed, Clearfold, Hybrid'],
 ];
 const glossary = [
   ['Opening', 'One open side of your patio, measured width × height. We price by the total square feet of openings we fill.'],
@@ -38,10 +38,10 @@ const glossary = [
   ['304 stainless steel', 'A corrosion-resistant steel used for Fixed Screen mesh.'],
   ['Honeycomb aluminum mesh', 'The folding mesh used on Hexfold and the Hybrid, about 115 holes per square inch.'],
   ['Polycarbonate', 'A tough, lightweight clear material that flexes instead of shattering. Used for Clearfixed, Clearfold and the Hybrid.'],
-  ['VLT', 'Visible light transmission: how much daylight passes through. Midnight Smoke tested at 48%.'],
-  ['SHGC', 'Solar heat gain coefficient: how much of the sun’s heat passes through, from 0 to 1. Midnight Smoke tested at 0.45.'],
+  ['VLT', 'Visible light transmission: how much daylight passes through. Smokey Gray tested at 48%.'],
+  ['SHGC', 'Solar heat gain coefficient: how much of the sun’s heat passes through, from 0 to 1. Smokey Gray tested at 0.45.'],
   ['3-season room', 'An enclosed, ventilated room without air conditioning, comfortable most of the year in Houston.'],
-  ['Midnight Smoke / Storm Blue', 'The two factory tints for our polycarbonate panels: black, like sunglasses, and blue.'],
+  ['Smokey Gray / Industrial Blue', 'The two factory tints for our polycarbonate panels: Smokey Gray, like sunglasses, and Industrial Blue.'],
   ['Night Gray / Bright White', 'The two frame colors.'],
 ];
 const sections = [
@@ -115,7 +115,7 @@ const ld = [
           <div><dt>Frames</dt><dd>{FRAME.long} Colors: {FRAME.colors.join(' or ')}.</dd></div>
           <div><dt>Fixed Screen mesh</dt><dd>304 stainless steel mesh, used on Fixed Screen only.</dd></div>
           <div><dt>Hexfold and Hybrid mesh</dt><dd>Honeycomb aluminum, about 115 holes per square inch.</dd></div>
-          <div><dt>Polycarbonate</dt><dd>4 mm panels on Clearfixed; polycarbonate sunshade panels on Clearfold and the Hybrid. Factory tinted Midnight Smoke or Storm Blue. Much lighter than glass and far more impact resistant (general polycarbonate properties, Palram Industries).</dd></div>
+          <div><dt>Polycarbonate</dt><dd>4 mm panels on Clearfixed; polycarbonate sunshade panels on Clearfold and the Hybrid. Factory tinted Smokey Gray or Industrial Blue. Much lighter than glass and far more impact resistant (general polycarbonate properties, Palram Industries).</dd></div>
           <div><dt>Track</dt><dd>Folding panels hang from the top track. The bottom track is steel-sleeved aluminum as standard under 16.5 ft wide, full steel above that. It sweeps clear of debris instead of jamming.</dd></div>
           <div><dt>Wheels and hardware</dt><dd>Stainless steel wheels on Hexfold, double wheels and guards on every folding panel. Handles and locks are routed into the frame, not screwed on. Some small parts, like end caps, are nylon.</dd></div>
           <div><dt>Complete kit</dt><dd>Every system ships with trim, wall stripping and hardware. The U-shaped wall trim levels and seals the frame as it is set.</dd></div>
@@ -136,8 +136,8 @@ const ld = [
         <h2 class="h3">Tested numbers</h2>
         <table class="facts">
           <tbody>
-            <tr><th scope="row">Visible light transmission</th><td>{FACTS.vlt} (Midnight Smoke)</td></tr>
-            <tr><th scope="row">Solar heat gain coefficient</th><td>{FACTS.shgc} (Midnight Smoke)</td></tr>
+            <tr><th scope="row">Visible light transmission</th><td>{FACTS.vlt} (Smokey Gray)</td></tr>
+            <tr><th scope="row">Solar heat gain coefficient</th><td>{FACTS.shgc} (Smokey Gray)</td></tr>
             <tr><th scope="row">Fixed polycarbonate panels, wind</th><td>Rated to {FACTS.fixedWind}</td></tr>
             <tr><th scope="row">Folding systems, operating wind</th><td>{FACTS.foldWind}</td></tr>
             <tr><th scope="row">Folding systems, retracted and secured</th><td>{FACTS.foldStowed}</td></tr>
@@ -145,7 +145,7 @@ const ld = [
             <tr><th scope="row">Product generation</th><td>Fourth generation, tested in Houston for four years</td></tr>
           </tbody>
         </table>
-        <p class="fine">Light and heat values measured on Midnight Smoke panels from manufacturer test data. Wind values are everyday durability ratings, not a hurricane rating.</p>
+        <p class="fine">Light and heat values measured on Smokey Gray panels from manufacturer test data. Wind values are everyday durability ratings, not a hurricane rating.</p>
       </section>
 
       <section id="pricing" class="topic">

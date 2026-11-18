@@ -30,7 +30,7 @@ Sunroom figures are from the HomeGuide cost guide (Oct 2026), applied to 224 sq 
 
 **It flexes instead of shattering.** Polycarbonate is far more impact resistant than ordinary glass, so a stray ball or a falling branch does not leave broken glass on the patio. This is an everyday durability point, not a hurricane rating.
 
-**Tint you can see through.** Our Midnight Smoke panels tested at 48% visible light transmission and a 0.45 solar heat gain coefficient. They cut glare like sunglasses, and you still see the yard.
+**Tint you can see through.** Our Smokey Gray panels tested at 48% visible light transmission and a 0.45 solar heat gain coefficient. They cut glare like sunglasses, and you still see the yard.
 
 **It installs faster.** Every AE panel is CNC-cut to your openings, test-assembled in our Houston factory and installed by our own crew within a month of your order.
 

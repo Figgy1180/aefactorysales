@@ -65,7 +65,7 @@ export const PRODUCTS: Product[] = [
     msrp: 31,
     href: '/patio-enclosures/clearfixed/',
     specs: [
-      ['Panel', '4 mm polycarbonate, Midnight Smoke or Storm Blue'],
+      ['Panel', '4 mm polycarbonate, Smokey Gray or Industrial Blue'],
       ['Frame', 'Heat-welded PVC-fiber blend, aluminum core, ceramic coating'],
       ['Panel size', 'Up to 3.5 × 10 ft each, arches available'],
       ['Wind', 'Fixed panels rated to 100 mph'],
@@ -236,7 +236,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'How much light and heat comes through the panels?',
-      a: 'Midnight Smoke panels tested at 48% visible light transmission and a 0.45 solar heat gain coefficient. That means they cut glare like sunglasses while you still see the yard. These values were measured on Midnight Smoke panels.',
+      a: 'Smokey Gray panels tested at 48% visible light transmission and a 0.45 solar heat gain coefficient. That means they cut glare like sunglasses while you still see the yard. These values were measured on Smokey Gray panels.',
     },
     {
       q: 'How do I clean polycarbonate?',
@@ -292,7 +292,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'What are the frames made of, and what colors come standard?',
-      a: 'Every frame is heat welded with no screws: a PVC and fiber blend with an aluminum rod inside and a scratch-resistant ceramic coating outside. Frames come in Night Gray or Bright White. Polycarbonate panels come in Midnight Smoke or Storm Blue. Frames carry a lifetime warranty and all parts carry 3 years.',
+      a: 'Every frame is heat welded with no screws: a PVC and fiber blend with an aluminum rod inside and a scratch-resistant ceramic coating outside. Frames come in Night Gray or Bright White. Polycarbonate panels come in Smokey Gray or Industrial Blue. Frames carry a lifetime warranty and all parts carry 3 years.',
     },
     {
       q: 'Do you work with HOAs?',
