@@ -155,7 +155,7 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
 .viz .steps li { color: var(--ink-2); display: flex; gap: 10px; align-items: flex-start; padding-top: 12px; }
 .viz .steps li::before { flex: none; width: 28px; height: 28px; font-size: .95rem; }
 @media (max-width: 900px) { .viz .grid { grid-template-columns: minmax(0, 1fr); } .viz .steps { display: none; } .viz .stage-box { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 66px); z-index: 5; } .viz .sub { font-size: 1rem; } }
-.callbar { display: none !important; }
+.callbar, .cb-fab { display: none !important; }
 .viz .total { font-family: var(--mono); font-size: 13px; color: var(--ink); margin-top: 6px; }
 @media (prefers-reduced-motion: reduce) { .viz .stage canvas { transition: none; } }
 </style>
@@ -345,7 +345,9 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
     gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT);
     const sys = SYSTEMS.find((s) => s.id === state.sys);
     const sysIdx = { hexfold: 0, fixed: 1, clearfixed: 2, clearfold: 3, hybrid: 4 }[sys.id];
+    let crossed = false;
     for (const o of state.openings) {
+      if (!convex(o.pts)) { crossed = true; continue; }
       const Hi = inv3(homography(o.pts)); if (!Hi) continue;
       gl.uniformMatrix3fv(loc.uHinv, false, [Hi[0], Hi[3], Hi[6], Hi[1], Hi[4], Hi[7], Hi[2], Hi[5], Hi[8]]);
       gl.uniform2f(loc.uRes, canvas.width, canvas.height);
@@ -360,6 +362,20 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
       gl.uniform3fv(loc.uFrame, FRAME[state.frame]);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     }
+    const st = $('status');
+    if (crossed) { st.dataset.prev = st.dataset.prev || st.textContent; st.textContent = 'Two corners are crossed. Drag them back so the outline makes a box.'; }
+    else if (st.dataset.prev) { st.textContent = st.dataset.prev; delete st.dataset.prev; }
+  }
+  // true when the four corners make a box shape (no crossed or folded corners)
+  function convex(p) {
+    let sign = 0;
+    for (let i = 0; i < 4; i++) {
+      const a = p[i], b = p[(i + 1) % 4], c = p[(i + 2) % 4];
+      const z = (b[0] - a[0]) * (c[1] - b[1]) - (b[1] - a[1]) * (c[0] - b[0]);
+      if (Math.abs(z) < 1e-6) return false;
+      if (sign === 0) sign = Math.sign(z); else if (Math.sign(z) !== sign) return false;
+    }
+    return true;
   }
 
   // ---------- handles and outlines ----------
@@ -474,13 +490,23 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
     }
     state.sel = 0; syncPanel(); refresh(); drawUI();
   }
+  // keep the whole photo on screen (desktop): limit the stage width by the window height
+  function fitStage() {
+    if (!photo.naturalWidth) return;
+    const narrow = window.matchMedia('(max-width: 900px)').matches;
+    stage.style.maxWidth = narrow ? '' : Math.max(320, (window.innerHeight - 170) * (photo.naturalWidth / photo.naturalHeight)) + 'px';
+    stage.style.marginInline = narrow ? '' : 'auto';
+  }
+  window.addEventListener('resize', fitStage);
+  photo.addEventListener('load', fitStage);
+  if (photo.complete) fitStage();
   photo.addEventListener('load', setup);
   if (photo.complete && photo.naturalWidth) setup();
   $('file').addEventListener('change', (e) => {
     const f = e.target.files && e.target.files[0]; if (!f) return;
     if (!f.type.startsWith('image/')) { $('status').textContent = 'That file is not a photo. Try a JPG or PNG.'; return; }
     sample = false; photo.src = URL.createObjectURL(f);
-    $('status').textContent = 'Your photo. Drag the yellow corners onto an opening.';
+    delete $('status').dataset.prev; $('status').textContent = 'Your photo. Drag the yellow corners onto an opening.';
   });
 })();
 
