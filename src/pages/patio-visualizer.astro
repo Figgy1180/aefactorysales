@@ -510,7 +510,7 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
     canvas.width = Math.round(photo.naturalWidth * s); canvas.height = Math.round(photo.naturalHeight * s);
     if (sample) {
       const k = canvas.width / 874;
-      state.openings = [{ pts: [[338, 197], [545, 152], [545, 520], [338, 462]].map(([x, y]) => [x * k, y * k]), panels: 4, w: 14, h: 8 }];
+      state.openings = [{ pts: [[332, 195], [545, 152], [545, 520], [332, 462]].map(([x, y]) => [x * k, y * k]), panels: 4, w: 14, h: 8 }];
     } else {
       state.openings = [defaultOpening(0)];
     }
