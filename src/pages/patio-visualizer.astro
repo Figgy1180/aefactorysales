@@ -229,6 +229,21 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
     return vec4(tint + sheen, uTint > 0.5 ? 0.62 : 0.70);
   }
   vec3 frameRGB(float y){ return uFrame * (0.88 + 0.12 * y); }
+  // folding polycarbonate: small fan folds, alternate faces catch the light, a slim frame line at each fold
+  vec4 polyFolds(vec2 uv, float period){
+    float t = uv.x * uSize.x / period;
+    float scr = period / max(fwidth(uv.x * uSize.x), 1e-4);
+    float k = smoothstep(1.6, 3.6, scr);
+    float p = fract(t);
+    float face = mod(floor(t), 2.0);
+    float ramp = face < 0.5 ? p : 1.0 - p;          // each face brightens toward the fold it leans into
+    vec4 c = poly(uv);
+    c.rgb += (face < 0.5 ? 0.05 : -0.025) * k + 0.04 * ramp * k;
+    float aa = fwidth(t);
+    float lw = max(0.05, 0.7 * aa);
+    float edgeL = (1.0 - smoothstep(lw, lw + aa, p)) + (1.0 - smoothstep(lw, lw + aa, 1.0 - p));
+    return mix(c, vec4(frameRGB(uv.y), 1.0), clamp(edgeL, 0.0, 1.0) * k);
+  }
   // straight-alpha "over"
   vec4 over(vec4 top, vec4 bot){ float a = top.a + bot.a * (1.0 - top.a); vec3 c = (top.rgb * top.a + bot.rgb * bot.a * (1.0 - top.a)) / max(a, 1e-4); return vec4(c, a); }
   void main(){
@@ -270,31 +285,29 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
       base = uSys < 1.5 ? meshA(uv, 1.8, 0.56, 0.76) : poly(uv);
       fr = bars(ix, n, st, aa);
     } else if (uSys < 3.5) {     // Clearfold: equal leaves, up to 5 ft per pull, meeting in the middle above that
-      bool two = uWft > 5.25 && n > 1.5;
+      bool two = uWft > 5.25;
       if (uOpen > 0.5) {
-        float sw = stack * (two ? n * 0.5 : n) * 0.45;
+        float sw = stack * 1.6;
         float inS = two ? max(1.0 - smoothstep(sw - aa, sw + aa, ix), smoothstep(1.0 - sw - aa, 1.0 - sw + aa, ix)) : smoothstep(1.0 - sw - aa, 1.0 - sw + aa, ix);
-        float lines = bars(ix, innerW / (fpx * 1.4), fpx * 0.27 / innerW, aa);
-        base = poly(uv); base.a *= inS; fr = lines * inS;
+        base = polyFolds(uv, max(2.0, fpx * 0.6)); base.a *= inS;
+        fr = (two ? max(bar(ix, sw, st, aa), bar(ix, 1.0 - sw, st, aa)) : bar(ix, 1.0 - sw, st, aa));
       } else {
-        base = poly(uv);
-        fr = bars(ix, n, st, aa);
+        base = polyFolds(uv, max(3.0, ftPx * 0.67));    // folds about 8 in wide
         if (two) { float hb = bar(ix, 0.5, st * 1.3, aa); fr = max(fr, hb); hd = hb * (1.0 - smoothstep(0.06 - aay, 0.06 + aay, abs(uv.y - 0.5))) * bar(ix, 0.5, st * 0.6, aa); }
       }
     } else {                     // Hybrid: equal polycarbonate leaves on one side, pleated mesh on the other
-      float np = max(1.0, floor(n * 0.5));
-      if (uOpen > 0.5) {
-        float sw = stack * np * 0.45;
+            if (uOpen > 0.5) {
+        float sw = stack * 1.6;
         float inL = 1.0 - smoothstep(sw - aa, sw + aa, ix);
         float inR = smoothstep(1.0 - stack - aa, 1.0 - stack + aa, ix);
-        vec4 pl = poly(uv); pl.a *= inL;
+        vec4 pl = polyFolds(uv, max(2.0, fpx * 0.6)); pl.a *= inL;
         vec4 ms = pleated(uv, stackP); ms.a *= inR;
         base = over(pl, ms);
-        fr = max(bars(ix, innerW / (fpx * 1.4), fpx * 0.27 / innerW, aa) * inL, bar(ix, 1.0 - stack, st, aa));
+        fr = max(bar(ix, sw, st, aa), bar(ix, 1.0 - stack, st, aa));
       } else {
         float left = 1.0 - smoothstep(0.5 - aa, 0.5 + aa, ix);
-        base = mix(pleated(uv, pleatP), poly(uv), left);
-        fr = max(bars(ix * 2.0, np, st * 2.0, aa * 2.0) * left, bar(ix, 0.5, st * 1.6, aa));
+        base = mix(pleated(uv, pleatP), polyFolds(uv, max(3.0, ftPx * 0.67)), left);
+        fr = bar(ix, 0.5, st * 1.6, aa);
         hd = bar(ix, 0.5, st * 0.8, aa) * (1.0 - smoothstep(0.06 - aay, 0.06 + aay, abs(uv.y - 0.5)));
       }
     }
@@ -466,7 +479,7 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
     setPressed($('openSeg'), 'open', state.open ? 1 : 0);
     setPressed($('tintSeg'), 'tint', state.tint);
     $('tintField').hidden = !['clearfixed', 'clearfold', 'hybrid'].includes(sys.id);
-    $('panRow').hidden = sys.id === 'hexfold';
+    $('panRow').hidden = !['fixed', 'clearfixed'].includes(sys.id);
     price(); render();
   }
   function defaultOpening(i) {
@@ -484,7 +497,7 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
     canvas.width = Math.round(photo.naturalWidth * s); canvas.height = Math.round(photo.naturalHeight * s);
     if (sample) {
       const k = canvas.width / 874;
-      state.openings = [{ pts: [[360, 205], [545, 152], [545, 520], [360, 428]].map(([x, y]) => [x * k, y * k]), panels: 4, w: 14, h: 8 }];
+      state.openings = [{ pts: [[338, 197], [545, 152], [545, 520], [338, 462]].map(([x, y]) => [x * k, y * k]), panels: 4, w: 14, h: 8 }];
     } else {
       state.openings = [defaultOpening(0)];
     }
