@@ -22,6 +22,10 @@ captureSource();
     btn.disabled = true;
     const data = new FormData(form);
     data.append('access_key', key);
+    // Put the person's name and ZIP in the subject so Gmail keeps each customer in their own conversation
+    // (identical subjects made Gmail group different customers together).
+    const who = [String(data.get('name') || '').trim(), String(data.get('zip') || '').trim()].filter(Boolean).join(', ').slice(0, 80);
+    if (who) data.set('subject', `${data.get('subject') || 'New request from aefactorysales.com'}: ${who}`);
     // Tag the lead with its campaign so info@ can see which door hanger or ad brought it in.
     const src = sourceLabel();
     if (src) {
