@@ -1,0 +1,19 @@
+{
+  // Cloudflare Worker for aefactorysales.com.
+  // Static pages come from dist/ (built by `npm run build`); worker/index.js only handles /api/find-opening.
+  "name": "aefactorysales",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    "html_handling": "force-trailing-slash"
+  },
+  // Per-visitor limit for the photo reader: 6 photos a minute.
+  "ratelimits": [
+    { "name": "FIND_LIMIT", "namespace_id": "4801", "simple": { "limit": 6, "period": 60 } }
+  ],
+  "observability": { "enabled": true }
+  // Secret (set in the Cloudflare dashboard, never in this file): ANTHROPIC_API_KEY
+}
