@@ -44,7 +44,7 @@ If you want push-button convenience, already have power at every opening, or nee
 
 If you would rather not service a motor, run wiring or keep track of a remote, a folding screen does the same job with fewer parts. Hexfold also pairs with fixed panels cut to the angle, so a gabled or arched opening can be fully enclosed.
 
-> Want to see both side by side? The showroom at 2609 William Tell Street has Hexfold working next to our other systems. Visits are by appointment, so call (713) 791-8073 to book a time.
+> Want to see both side by side? The showroom at 2609 William Tell St has Hexfold working next to our other systems. Visits are by appointment, so call (713) 791-8073 to book a time.
 
 ## The short version
 

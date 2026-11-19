@@ -68,6 +68,7 @@ const business = {
   },
   areaServed: CITIES.map((c) => ({ '@type': 'City', name: `${c}, TX` })),
   sameAs: [SITE.googleProfileUrl, 'https://www.youtube.com/@AEFactorySales', SITE.youtubeFold, SITE.factorySite],
+  geo: { '@type': 'GeoCoordinates', latitude: SITE.geo.lat, longitude: SITE.geo.lng },
   hasMap: SITE.googleProfileUrl,
   knowsAbout: ['Patio enclosures', 'Retractable patio screens', 'Polycarbonate 3-season rooms', 'Stainless steel screens', 'Garage screens'],
 };
@@ -108,6 +109,8 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
     <meta name="theme-color" content="#2A2522" />
     <meta name="geo.region" content="US-TX" />
     <meta name="geo.placename" content="Houston" />
+    <meta name="geo.position" content={`${SITE.geo.lat};${SITE.geo.lng}`} />
+    <meta name="ICBM" content={`${SITE.geo.lat}, ${SITE.geo.lng}`} />
     <link rel="preload" href={archivoUrl} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href={FAVICON} type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png" />

@@ -6,7 +6,9 @@ export const SITE = {
   name: 'AE Factory Sales',
   url: 'https://aefactorysales.com',
   tagline: 'Patio enclosures & screens',
-  street: '2609 William Tell Street',
+  street: '2609 William Tell St',
+  // Pin of the Google Business Profile (place ChIJ510x1Bq3QIYRFXxveDPO0GE), Nov 19, 2026
+  geo: { lat: 29.876415, lng: -95.344997 },
   streetShort: '2609 William Tell St',
   city: 'Houston',
   region: 'TX',
@@ -304,7 +306,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Can I see it in person?',
-      a: 'Yes, by appointment only. Showroom hours are 9 am to 5 pm, 7 days a week. Call (713) 791-8073 to book a time first, so someone is there to walk you through every system. The showroom is at 2609 William Tell Street, Houston, TX 77093, with customer parking on site. You can also book a free site visit and we will bring samples to your home.',
+      a: 'Yes, by appointment only. Showroom hours are 9 am to 5 pm, 7 days a week. Call (713) 791-8073 to book a time first, so someone is there to walk you through every system. The showroom is at 2609 William Tell St, Houston, TX 77093, with customer parking on site. You can also book a free site visit and we will bring samples to your home.',
     },
   ],
 };
