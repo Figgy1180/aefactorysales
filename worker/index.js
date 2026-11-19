@@ -55,6 +55,7 @@ const json = (data, status = 200) => new Response(JSON.stringify(data), {
 });
 
 async function findOpening(request, env) {
+  if (request.method === 'GET') return json({ enabled: !!env.ANTHROPIC_API_KEY });
   if (request.method !== 'POST') return json({ error: 'Use POST.' }, 405);
   // Only the AE site may call this.
   const origin = request.headers.get('origin') || '';

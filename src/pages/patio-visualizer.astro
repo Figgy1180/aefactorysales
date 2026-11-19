@@ -12,10 +12,10 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
   <section class="band hive" style="padding-top:24px">
 <div class="wrap viz">
   <h1 class="display">See our screens <span class="y">on your patio</span></h1>
-  <p class="sub">Upload a photo of your covered patio, we'll find the opening and size it, and you can try every AE system and frame color.</p>
+  <p class="sub">Upload a photo of your covered patio, line the yellow corners up with an opening, and try every AE system and frame color.</p>
   <ol class="steps">
     <li>Upload a photo, or try it on the sample patio below.</li>
-    <li>We find the opening and its size for you. Drag the yellow corners to fine-tune.</li>
+    <li id="stepCorners">Drag the four yellow corners to the corners of one opening.</li>
     <li>Pick a system and frame color. Add more openings if you have them.</li>
   </ol>
 
@@ -39,7 +39,7 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
     <div class="panel">
       <div class="row">
         <label class="file-btn">Upload my patio photo<input type="file" id="file" accept="image/*"></label>
-        <p class="fine upload-note">Our AI reads your photo to find the opening and estimate its size. The photo is not saved. <a href="/privacy/">Privacy</a></p>
+        <p class="fine upload-note" id="aiNote" hidden>Our AI reads your photo to find the opening and estimate its size. The photo is not saved. <a href="/privacy/">Privacy</a></p>
       </div>
       <p class="note">Your photo stays on this device. Nothing is uploaded or saved.</p>
 
@@ -496,7 +496,13 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
   }
 
   // ---------- photo loading ----------
-  let sample = true, pendingFind = false, findSeq = 0;
+  let sample = true, pendingFind = false, findSeq = 0, aiOn = false;
+  // Photo reading switches itself on only when the Worker has its Claude key.
+  fetch('/api/find-opening/', { cache: 'no-store' }).then((r) => r.ok ? r.json() : null).then((j) => {
+    if (!j || !j.enabled) return;
+    aiOn = true; $('aiNote').hidden = false;
+    $('stepCorners').textContent = 'We find the opening and its size for you. Drag the yellow corners to fine-tune.';
+  }).catch(() => {});
   function setup() {
     // draw at the screen's real sharpness (up to 2200 px), even when the photo is smaller
     const want = Math.max(photo.naturalWidth, Math.min(2200, (stage.clientWidth || 800) * (window.devicePixelRatio || 1)));
@@ -526,8 +532,8 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
   $('file').addEventListener('change', (e) => {
     const f = e.target.files && e.target.files[0]; if (!f) return;
     if (!f.type.startsWith('image/')) { $('status').textContent = 'That file is not a photo. Try a JPG or PNG.'; return; }
-    sample = false; pendingFind = true; photo.src = URL.createObjectURL(f);
-    delete $('status').dataset.prev; $('status').textContent = 'Your photo. Looking for the opening…';
+    sample = false; pendingFind = aiOn; photo.src = URL.createObjectURL(f);
+    delete $('status').dataset.prev; $('status').textContent = aiOn ? 'Your photo. Looking for the opening…' : 'Your photo. Drag the yellow corners onto an opening.';
   });
 
   // Ask the AE photo reader (Claude, via our Cloudflare Worker) to find the opening and estimate its size.
