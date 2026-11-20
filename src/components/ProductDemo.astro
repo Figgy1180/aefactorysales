@@ -1,0 +1,185 @@
+---
+// Operation diagram for each AE system. Schematic, not to scale.
+// Moving leaves share the track: a layer stops at the edge of the other layer's stack, so handles never pass each other.
+// Scaling a layer compresses its fold lines, which is how a fan-folding or pleated stack behaves.
+type Sys = 'fixed' | 'hexfold' | 'clearfixed' | 'clearfold' | 'hybrid';
+interface Props { sys: Sys; title?: string }
+const { sys, title } = Astro.props;
+
+const X0 = 40, X1 = 600, W = X1 - X0, S = 34; // opening left/right, width, stack width
+type Layer = { id: string; mat: 'mesh' | 'pleat' | 'pc' | 'steel'; side: 'l' | 'r'; max: number };
+type State = { key: string; label: string; ext: Record<string, number>; say: string };
+
+const cfg: Record<Sys, { layers: Layer[]; states: State[]; modes?: { key: string; label: string; layers: Layer[] }[]; fixed?: 'frame' | 'tint' }> = {
+  hybrid: {
+    layers: [
+      { id: 'mesh', mat: 'mesh', side: 'l', max: W - S },
+      { id: 'pc', mat: 'pc', side: 'r', max: W - S },
+    ],
+    states: [
+      { key: 'mesh', label: 'Mesh closed', ext: { mesh: 1, pc: 0 }, say: 'Mesh closed: the honeycomb aluminum mesh runs across the opening up to the folded panels, so you get the breeze with bugs outside.' },
+      { key: 'pc', label: 'Panels closed', ext: { mesh: 0, pc: 1 }, say: 'Panels closed: the polycarbonate runs across the opening up to the folded mesh, to block wind and rain.' },
+      { key: 'open', label: 'Both open', ext: { mesh: 0, pc: 0 }, say: 'Both open: each layer folds back to its own end, leaving the opening clear for access.' },
+    ],
+  },
+  hexfold: {
+    layers: [{ id: 'a', mat: 'pleat', side: 'l', max: W }],
+    modes: [
+      { key: 'one', label: 'One pull', layers: [{ id: 'a', mat: 'pleat', side: 'l', max: W }] },
+      { key: 'two', label: 'Meets in the middle', layers: [{ id: 'a', mat: 'pleat', side: 'l', max: W / 2 }, { id: 'b', mat: 'pleat', side: 'r', max: W / 2 }] },
+    ],
+    states: [
+      { key: 'closed', label: 'Closed', ext: { a: 1, b: 1 }, say: 'Closed: the pleated honeycomb aluminum mesh covers the opening, with no posts in the way.' },
+      { key: 'half', label: 'Half open', ext: { a: .5, b: .5 }, say: 'Half open: stop the mesh anywhere along the track.' },
+      { key: 'open', label: 'Open', ext: { a: 0, b: 0 }, say: 'Open: the mesh pleats up into a slim stack at the end, out of the way.' },
+    ],
+  },
+  clearfold: {
+    layers: [{ id: 'a', mat: 'pc', side: 'l', max: W }],
+    modes: [
+      { key: 'one', label: 'One pull', layers: [{ id: 'a', mat: 'pc', side: 'l', max: W }] },
+      { key: 'two', label: 'Meets in the middle', layers: [{ id: 'a', mat: 'pc', side: 'l', max: W / 2 }, { id: 'b', mat: 'pc', side: 'r', max: W / 2 }] },
+    ],
+    states: [
+      { key: 'closed', label: 'Closed', ext: { a: 1, b: 1 }, say: 'Closed: equal-width polycarbonate leaves cover the opening to block wind and rain.' },
+      { key: 'half', label: 'Half open', ext: { a: .5, b: .5 }, say: 'Half open: let some air in and keep the rest sheltered.' },
+      { key: 'open', label: 'Open', ext: { a: 0, b: 0 }, say: 'Open: the leaves fold like a fan into a stack at the end, by hand.' },
+    ],
+  },
+  fixed: {
+    layers: [], fixed: 'frame',
+    states: [
+      { key: 'gray', label: 'Night Gray frame', ext: {}, say: 'Fixed Screen in a Night Gray frame: 304 stainless steel mesh that stays in place.' },
+      { key: 'white', label: 'Bright White frame', ext: {}, say: 'Fixed Screen in a Bright White frame: the same stainless steel mesh, matched to lighter trim.' },
+    ],
+  },
+  clearfixed: {
+    layers: [], fixed: 'tint',
+    states: [
+      { key: 'smoke', label: 'Smokey Gray', ext: {}, say: 'Clearfixed in Smokey Gray: fixed polycarbonate panels that cut glare and block wind and rain.' },
+      { key: 'blue', label: 'Industrial Blue', ext: {}, say: 'Clearfixed in Industrial Blue: the same fixed panels in the blue tint.' },
+    ],
+  },
+};
+const c = cfg[sys];
+const layers = c.modes ? c.modes[0].layers : c.layers;
+const first = c.states[0];
+const tf = (l: Layer, f: number) => { const len = S + f * (l.max - S); return { len, scale: len / W, hx: l.side === 'l' ? X0 + len - 8 : X1 - len + 2 }; };
+const data = JSON.stringify({ X0, X1, W, S, states: c.states, modes: c.modes ?? null });
+const fills: Record<string, string> = { mesh: 'url(#pd-mesh)', pleat: 'url(#pd-pleat)', pc: '#4A4F55', steel: 'url(#pd-steel)' };
+const name = { fixed: 'Fixed Screen', hexfold: 'Hexfold', clearfixed: 'Clearfixed', clearfold: 'Clearfold', hybrid: 'Hybrid' }[sys];
+const uid = `pd-${sys}`;
+---
+<figure class="pd" data-pd data-cfg={data} data-state={first.key} data-mode={c.modes ? c.modes[0].key : undefined}>
+  {title && <p class="pd-t">{title}</p>}
+  {c.modes && (
+    <div class="pd-ctrl" role="group" aria-label={`${name} layout`}>
+      {c.modes.map((m, i) => <button type="button" data-m={m.key} aria-pressed={String(i === 0)}>{m.label}</button>)}
+    </div>
+  )}
+  <div class="pd-ctrl" role="group" aria-label={`Show ${name} in this position`}>
+    {c.states.map((s, i) => <button type="button" data-s={s.key} aria-pressed={String(i === 0)}>{s.label}</button>)}
+  </div>
+  <svg viewBox="0 0 640 340" role="img" aria-labelledby={`${uid}-t ${uid}-d`}>
+    <title id={`${uid}-t`}>{name} diagram</title>
+    <desc id={`${uid}-d`}>A patio opening with a top track and a bottom guide, showing how {name} {c.fixed ? 'panels sit in the opening' : 'moves along the track'}.</desc>
+    <defs>
+      <pattern id="pd-mesh" width="7" height="8" patternUnits="userSpaceOnUse"><rect width="7" height="8" fill="#2B2A28" opacity=".6" /><path d="M3.5 0L7 2v4L3.5 8 0 6V2z" fill="none" stroke="#D9D2C7" stroke-width=".6" opacity=".75" /></pattern>
+      <pattern id="pd-pleat" width="12" height="10" patternUnits="userSpaceOnUse"><rect width="12" height="10" fill="#2B2A28" opacity=".55" /><rect width="6" height="10" fill="#000" opacity=".25" /><path d="M0 0v10M6 0v10" stroke="#D9D2C7" stroke-width=".5" opacity=".6" /></pattern>
+      <pattern id="pd-steel" width="5" height="5" patternUnits="userSpaceOnUse"><rect width="5" height="5" fill="#2B2A28" opacity=".5" /><path d="M0 0h5M0 0v5" stroke="#CFC8BC" stroke-width=".5" opacity=".7" /></pattern>
+      <pattern id="pd-fold" width="18" height="10" patternUnits="userSpaceOnUse"><rect width="9" height="10" fill="#000" opacity=".22" /><rect x="8.4" width="1.2" height="10" fill="#fff" opacity=".35" /></pattern>
+      <pattern id="pd-hex" width="27.7" height="48" patternUnits="userSpaceOnUse" patternTransform="scale(.7)"><path d="M13.86 0L27.7 8V24L13.86 32 0 24V8ZM13.86 32V48" fill="none" stroke="#F2C230" stroke-opacity=".18" /></pattern>
+    </defs>
+    <rect x="40" y="30" width="560" height="270" fill="#9FB7A6" />
+    <rect x="40" y="200" width="560" height="100" fill="#7E9C76" />
+    <path d="M40 200 Q 200 170 330 190 T 600 180" fill="none" stroke="#6E8E66" stroke-width="2" />
+    <rect x="20" y="10" width="600" height="20" fill="#3B3430" /><rect x="20" y="10" width="600" height="20" fill="url(#pd-hex)" />
+    <rect x="20" y="10" width="20" height="300" fill="#3B3430" />
+    <rect x="600" y="10" width="20" height="300" fill="#3B3430" />
+    <rect x="0" y="300" width="640" height="40" fill="#CFC8BC" />
+    <rect x="40" y="30" width="560" height="9" fill="#1F1B18" />
+    <rect x="40" y="292" width="560" height="6" fill="#1F1B18" />
+
+    {c.fixed === 'frame' && (
+      <g class="pd-fixed">
+        {[0, 1, 2].map((i) => <rect x={40 + i * 186.7} y="39" width="186.7" height="253" fill="url(#pd-steel)" />)}
+        <g class="pd-frame" fill="none" stroke-width="7">{[0, 1, 2].map((i) => <rect x={43.5 + i * 186.7} y="42.5" width="179.7" height="246" />)}</g>
+      </g>
+    )}
+    {c.fixed === 'tint' && (
+      <g class="pd-fixed">
+        <g class="pd-tint">{[0, 1, 2].map((i) => <rect x={40 + i * 186.7} y="39" width="186.7" height="253" />)}</g>
+        <g fill="none" stroke="#1F1B18" stroke-width="7">{[0, 1, 2].map((i) => <rect x={43.5 + i * 186.7} y="42.5" width="179.7" height="246" />)}</g>
+        <path d="M70 60l60 -0 -90 120z" fill="#fff" opacity=".07" />
+      </g>
+    )}
+    {(c.modes ? c.modes.flatMap((m) => m.layers.map((l) => ({ ...l, mode: m.key }))) : layers.map((l) => ({ ...l, mode: '' }))).map((l) => {
+      const t = tf(l, first.ext[l.id] ?? 0);
+      const hidden = c.modes ? l.mode !== c.modes[0].key : false;
+      return (
+        <g data-layer={l.id} data-mode-of={l.mode || undefined} data-side={l.side} data-max={l.max} style={hidden ? 'display:none' : undefined}>
+          <g class="pd-layer" style={`transform-origin:${l.side === 'l' ? X0 : X1}px 0;transform:scaleX(${t.scale})`}>
+            <rect x="40" y="39" width="560" height="253" fill={fills[l.mat]} opacity={l.mat === 'pc' ? .62 : 1} />
+            <rect x="40" y="39" width="560" height="253" fill="url(#pd-fold)" opacity={l.mat === 'pc' ? .7 : l.mat === 'mesh' ? .45 : .2} />
+          </g>
+          <g class="pd-handle" style={`transform:translateX(${t.hx - (l.side === 'l' ? X1 - 8 : X0 + 2)}px)`}><rect x={l.side === 'l' ? X1 - 8 : X0 + 2} y="140" width="6" height="52" rx="2" fill="#F2C230" /></g>
+        </g>
+      );
+    })}
+    <text x="320" y="24" text-anchor="middle" class="pd-lbl">{c.fixed ? 'Welded frame, set in the opening' : 'Top track carries the weight'}</text>
+    <text x="320" y="327" text-anchor="middle" class="pd-lbl pd-lbl-dark">{c.fixed ? 'Sealed to the slab' : 'Bottom guide keeps every leaf in line'}</text>
+  </svg>
+  <figcaption>
+    <p class="pd-say" aria-live="polite">{first.say}</p>
+    <p class="concept">Schematic, not to scale.{c.fixed ? '' : ' Stack size depends on the opening and configuration.'}</p>
+  </figcaption>
+</figure>
+
+<style>
+  .pd { margin: 0; display: grid; gap: 12px; max-width: 640px; }
+  .pd-t { font-family: var(--font-head); font-weight: 700; font-size: 1.1rem; }
+  .pd-ctrl { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pd-ctrl button { min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1.5px solid var(--line); background: transparent; color: var(--ink); font: inherit; font-weight: 600; cursor: pointer; }
+  .pd-ctrl button[aria-pressed="true"] { background: var(--yellow); border-color: var(--yellow); color: var(--honey); }
+  .pd-ctrl button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+  .pd svg { width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: var(--shadow); background: #CFC8BC; }
+  .pd-lbl { font: 600 13px var(--font); fill: #F2C230; }
+  .pd-lbl-dark { fill: #2A2522; }
+  .pd-say { color: var(--ink-2); min-height: 3.2em; }
+  .pd-layer, .pd-handle { transform-box: view-box; transition: transform .7s cubic-bezier(.3,.7,.2,1); }
+  .pd-frame { stroke: #2E2A27; transition: stroke .4s; }
+  [data-state="white"] .pd-frame { stroke: #F4F2EE; }
+  .pd-tint rect { fill: #3A3D40; opacity: .72; transition: fill .4s; }
+  [data-state="blue"] .pd-tint rect { fill: #2F5F8F; }
+  @media (prefers-reduced-motion: reduce) { .pd-layer, .pd-handle, .pd-frame, .pd-tint rect { transition: none; } }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-pd]').forEach((fig) => {
+    const C = JSON.parse(fig.dataset.cfg!);
+    const say = fig.querySelector('.pd-say')!;
+    const paint = () => {
+      const st = C.states.find((s: any) => s.key === fig.dataset.state);
+      fig.querySelectorAll<SVGGElement>('[data-layer]').forEach((g) => {
+        if (g.dataset.modeOf && g.dataset.modeOf !== fig.dataset.mode) { g.style.display = 'none'; return; }
+        g.style.display = '';
+        const max = Number(g.dataset.max), left = g.dataset.side === 'l';
+        const len = C.S + (st.ext[g.dataset.layer!] ?? 0) * (max - C.S);
+        (g.querySelector('.pd-layer') as SVGGElement).style.transform = `scaleX(${len / C.W})`;
+        const hx = left ? C.X0 + len - 8 : C.X1 - len + 2;
+        (g.querySelector('.pd-handle') as SVGGElement).style.transform = `translateX(${hx - (left ? C.X1 - 8 : C.X0 + 2)}px)`;
+      });
+      say.textContent = st.say;
+    };
+    fig.querySelectorAll<HTMLButtonElement>('[data-s]').forEach((b) => b.addEventListener('click', () => {
+      fig.dataset.state = b.dataset.s!;
+      fig.querySelectorAll('[data-s]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      paint();
+    }));
+    fig.querySelectorAll<HTMLButtonElement>('[data-m]').forEach((b) => b.addEventListener('click', () => {
+      fig.dataset.mode = b.dataset.m!;
+      fig.querySelectorAll('[data-m]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      paint();
+    }));
+  });
+</script>

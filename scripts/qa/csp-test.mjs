@@ -12,7 +12,7 @@ for(const u of pages){const p=await ctx.newPage(); const v=[]; p.on('console',m=
  const resp=await p.goto('http://localhost:4720'+u); const hasCsp=!!resp.headers()['content-security-policy'];
  await p.evaluate(async()=>{for(let y=0;y<document.body.scrollHeight;y+=700){scrollTo(0,y);await new Promise(r=>setTimeout(r,30));}});
  if(u==='/patio-visualizer/'){ await p.setInputFiles('#file',new URL('../../public/visualizer/sample-patio.jpg', import.meta.url).pathname); await p.waitForTimeout(800); const w=await p.evaluate(()=>document.getElementById('gl').width); if(w<100)v.push('upload failed'); }
- if(u==='/'){ await p.locator('[data-cb-open]:visible').first().click({timeout:3000}).catch(e=>v.push('click '+e.message.slice(0,80))); await p.waitForTimeout(300); const open=await p.evaluate(()=>document.getElementById('callback')?.open); if(!open)v.push('callback dialog did not open'); }
+ if(u==='/'){ const bad=await p.evaluate(()=>[...document.querySelectorAll('a.btn')].filter(a=>/design visit|free visit/i.test(a.textContent)&&!a.getAttribute('href').includes('free-quote')).length); if(bad)v.push(bad+' visit buttons do not go to the questionnaire'); }
  if(!hasCsp)v.push('no CSP header'); if(v.length)bad.push(u+': '+[...new Set(v)].join(' | ')); await p.close();}
 // check the form endpoint is allowed by CSP (without sending)
 const p=await ctx.newPage(); await p.goto('http://localhost:4720/free-quote/');

@@ -7,6 +7,7 @@ import PageHero from './PageHero.astro';
 import Faq from './Faq.astro';
 import QuoteForm from './QuoteForm.astro';
 import RelatedLinks from './RelatedLinks.astro';
+import DemoSection from './DemoSection.astro';
 import { FAQ, FACTS, SITE, SIZES, WARRANTY, byId, range, type QA } from '../data/site';
 interface Props {
   id: 'clearfixed' | 'clearfold' | 'hybrid';
@@ -18,6 +19,11 @@ const { id, title, description, h1, img, alt, caption, points, faq } = Astro.pro
 const p = byId(id);
 const trio = ['clearfixed', 'clearfold', 'hybrid'].map(byId);
 const moves = { clearfixed: 'Stays in place', clearfold: 'Folds open on our track', hybrid: 'Folds open on our track' } as Record<string, string>;
+const how: Record<string, { lede: string; points: string[] }> = {
+  clearfixed: { lede: 'Tinted polycarbonate panels sit in a welded frame in the opening. Nothing moves, so there is nothing to open, close or adjust.', points: ['Smokey Gray or Industrial Blue tint', 'Cut into arches and angles to fill gables', `Fixed panels rated to ${FACTS.fixedWind} in factory testing`] },
+  clearfold: { lede: 'Equal-width polycarbonate leaves hang from the top track and fold like a fan into a stack at the end, by hand.', points: ['Opens by hand, even in a power outage', 'Up to 5 ft per pull, 10 ft meeting in the middle', 'Handle on the moving edge; a bottom guide keeps every leaf in line'] },
+  hybrid: { lede: 'A polycarbonate layer and a honeycomb aluminum mesh layer share the same opening. Each can cover all of it, and each folds back to its own end.', points: ['Run the mesh with the panels folded away', 'Close the panels with the mesh folded away', 'Fold both back for access; your design visit sets which openings fold'] },
+};
 const crumbs = [{ name: 'Patio enclosures', href: '/patio-enclosures/' }, { name: p.name, href: p.href }];
 const product = {
   '@context': 'https://schema.org', '@type': 'Product',
@@ -38,7 +44,7 @@ const product = {
       <div class="stack-lg">
         <h1 class="display">{h1[0]} <span class="y">{h1[1]}</span></h1>
         <p class="sub">{p.blurb}</p>
-        <div class="actions"><a class="btn" href="#quote">Book my free site visit</a><a class="btn btn-line" href="#price">What it costs</a></div>
+        <div class="actions"><a class="btn" href="/free-quote/">Request a free design visit</a><a class="btn btn-line" href="#price">What it costs</a></div>
       </div>
       <figure class="dim-frame draw" style="margin:30px 30px 0 0">
         <span class="dim h" aria-hidden="true"><span>{p.name}</span></span>
@@ -47,6 +53,8 @@ const product = {
       </figure>
     </div>
   </PageHero>
+
+  <DemoSection sys={id} name={p.name} lede={how[id].lede} points={how[id].points} />
 
   <section class="band on-paper">
     <div class="wrap stack-lg">

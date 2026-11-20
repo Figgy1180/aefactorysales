@@ -6,25 +6,48 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Faq from '../components/Faq.astro';
 import ProjectMosaic from '../components/ProjectMosaic.astro';
-import HybridDemo from '../components/HybridDemo.astro';
-import BookVisitForm from '../components/BookVisitForm.astro';
 import ReviewCards from '../components/ReviewCards.astro';
 import { REVIEWS } from '../data/reviews';
+import { GUIDES } from '../data/guides';
 import { PRODUCTS, SIZES, FAQ, FACTS, SITE, byId, range, FINANCING, type QA } from '../data/site';
 
 import heroImg from '../assets/projects/p34/5-inside-seating.jpg';
 import roomShowroom from '../assets/photos/showroom-polycarbonate-smoke.jpg';
 import rClearfixed from '../assets/renders/clearfixed.png';
-import screensReal from '../assets/photos/hexfold-patio-closed.jpg';
+import rClearfold from '../assets/renders/clearfold.png';
+import rHybrid from '../assets/renders/hybrid.png';
+import clearfixedPhoto from '../assets/photos/clearfixed-polycarbonate-panels.jpg';
+import hexClosed from '../assets/photos/hexfold-patio-closed.jpg';
+import hexOpen from '../assets/photos/hexfold-patio-open.jpg';
+import fixedDoors from '../assets/photos/fixed-screen-doors-closed.jpg';
 import fixedColors from '../assets/photos/fixed-screen-frame-colors.jpg';
+import vizShot from '../assets/renders/visualizer-sample.jpg';
 import cnc from '../assets/photos/factory-cnc.jpg';
 import angle from '../assets/photos/factory-angle.jpg';
 import pcRack from '../assets/photos/factory-pc-smoke.jpg';
 import showroomIn from '../assets/photos/showroom-room-interior.jpg';
 
 const uses = ['Cooking', 'Entertaining', 'Relaxing', 'Poolside', 'Family and pet time'];
-const room = ['clearfixed', 'clearfold', 'hybrid'].map(byId);
-const screens = ['hexfold', 'fixed'].map(byId);
+// Five systems, two photos each. The second photo links to that system's "Is it right for my patio?" guide.
+type Pic = { src: any; alt: string; cap: string };
+const cards: { id: string; a: Pic; b: Pic; sell: string }[] = [
+  { id: 'clearfixed', sell: 'A fixed wall of tinted panels for wind, rain and cooler days. Cut to arches for gables.',
+    a: { src: rClearfixed, alt: 'Concept visualization of Clearfixed tinted polycarbonate panels', cap: 'Concept visualization' },
+    b: { src: clearfixedPhoto, alt: 'Clearfixed polycarbonate panels', cap: 'Clearfixed panels' } },
+  { id: 'clearfold', sell: 'A 3-season room on cool days, an open patio on nice ones. Folds by hand.',
+    a: { src: roomShowroom, alt: 'Folding Smokey Gray polycarbonate panels in the AE showroom', cap: 'In our Houston showroom' },
+    b: { src: rClearfold, alt: 'Concept visualization of Clearfold folding polycarbonate panels', cap: 'Concept visualization' } },
+  { id: 'hybrid', sell: 'Mesh and panels on the same opening, each covering all of it. Our most flexible system.',
+    a: { src: showroomIn, alt: 'A room combining polycarbonate panels and metal mesh in the AE showroom', cap: 'In our Houston showroom' },
+    b: { src: rHybrid, alt: 'Concept visualization of the Hybrid system', cap: 'Concept visualization' } },
+  { id: 'hexfold', sell: 'Pleated honeycomb aluminum mesh that folds away. Up to 20 ft wide with no posts.',
+    a: { src: hexClosed, alt: 'Brick Houston patio closed in with Hexfold folding screens', cap: 'Real installation, closed' },
+    b: { src: hexOpen, alt: 'The same patio with the Hexfold screens folded open', cap: 'Real installation, open' } },
+  { id: 'fixed', sell: 'Stainless steel mesh that stays in place, at our lowest starting price.',
+    a: { src: fixedDoors, alt: 'Fixed Screen panels with screen doors on a Houston patio', cap: 'Real installation' },
+    b: { src: fixedColors, alt: 'Fixed Screen panels in Night Gray and Bright White frames', cap: 'Frame colors' } },
+];
+const guideOf = (id: string) => GUIDES.find((g) => g.sys === id)!;
 const order = ['clearfixed', 'clearfold', 'hybrid', 'hexfold', 'fixed'];
 const defSys = byId('clearfixed');
 const pickerData = JSON.stringify({ products: PRODUCTS.map(({ id, name, msrp }) => ({ id, name, msrp })), sizes: SIZES });
@@ -62,7 +85,7 @@ const visitFaq: QA[] = [
   description="Custom polycarbonate 3-season rooms and metal patio screens for existing covered patios. Precision-prepared in Houston, installed by our own crew."
 >
   <!-- 1. Experience and offer -->
-  <section class="h-hero" aria-labelledby="hero-title">
+  <section class="h-hero hive-dark" aria-labelledby="hero-title">
     <div class="wrap h-grid">
       <div class="h-copy">
         <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Houston patio enclosures and screens</p>
@@ -70,10 +93,10 @@ const visitFaq: QA[] = [
         <p class="sub">Custom polycarbonate enclosures and metal screens for existing covered patios. Precision-prepared in Houston, professionally installed, with local support.</p>
         <ul class="uses" aria-label="What people use their enclosed patio for">{uses.map((u) => <li>{u}</li>)}</ul>
         <div class="actions">
-          <a class="btn btn-big" href="#book-form" data-cb-open>Request a free design visit</a>
+          <a class="btn btn-big" href="/free-quote/">Request a free design visit</a>
           <a class="btn btn-line" href="#systems">Explore systems</a>
         </div>
-        <p class="micro">We call to confirm a time that suits you. Or <a href="#prices">price your patio</a>, or <a href="/showroom/">visit the showroom</a>.</p>
+        <p class="micro">We call to confirm a time that suits you. Rather talk? Call <a href={SITE.phoneHref}>{SITE.phone}</a>, or <a href="/showroom/">visit the showroom</a>.</p>
       </div>
       <figure class="h-photo">
         <Image src={heroImg} widths={[640, 960, 1400]} sizes="(max-width: 900px) 100vw, 640px" alt="Seating area inside a Houston patio enclosed by AE metal screens" loading="eager" fetchpriority="high" />
@@ -82,21 +105,20 @@ const visitFaq: QA[] = [
     </div>
   </section>
 
-  <!-- 2. Operation -->
-  <section class="band on-white" aria-labelledby="demo-title">
-    <div class="wrap demo-grid">
+  <!-- 2. See it on your patio -->
+  <section class="band raised hive-dark viz-band" aria-labelledby="viz-title">
+    <div class="wrap viz-grid">
       <div class="stack-lg">
-        <p class="kicker dark"><span class="hexdot" aria-hidden="true"></span>How the Hybrid works</p>
-        <h2 id="demo-title" class="h2">Screen, room or wide open. Same opening.</h2>
-        <p class="lede">The Hybrid puts a metal mesh layer and a polycarbonate layer on the same opening, and each can cover all of it. Run the mesh with the panels folded away, close the panels with the mesh folded away, or fold both back for access.</p>
-        <ul class="ticks dark">
-          <li>Closely spaced leaves fold like a fan, tracked top and bottom</li>
-          <li>Handles sit on the moving edge, and everything opens by hand, even in a power outage</li>
-          <li>The design visit decides which openings fold and which stay fixed for your ventilation</li>
-        </ul>
-        <div class="actions"><a class="btn btn-line" href="/patio-enclosures/hybrid/">See the Hybrid</a></div>
+        <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Patio visualizer</p>
+        <h2 id="viz-title" class="h2">See it on <span class="y">your patio</span></h2>
+        <p class="lede">Upload a photo, drag four corners onto an opening, and switch between all five systems and both frame colors. Your photo stays on your phone.</p>
+        <div class="actions"><a class="btn" href="/patio-visualizer/">Try it with my photo</a></div>
+        <p class="micro">Want to see how each one opens? <a href="/patio-enclosures/hybrid/#how-hybrid">Hybrid</a> · <a href="/patio-screens/hexfold/#how-hexfold">Hexfold</a> · <a href="/patio-enclosures/clearfold/#how-clearfold">Clearfold</a> · <a href="/patio-enclosures/clearfixed/#how-clearfixed">Clearfixed</a> · <a href="/patio-screens/fixed-screen/#how-fixed">Fixed Screen</a></p>
       </div>
-      <div class="demo-card"><HybridDemo /></div>
+      <figure class="viz-shot">
+        <Image src={vizShot} widths={[480, 900, 1400]} sizes="(max-width: 820px) 100vw, 640px" alt="Visualizer preview: Hexfold screens meeting in the middle, drawn onto a photo of a brick patio" loading="lazy" />
+        <figcaption><span>Sample: brick patio, Richmond</span><span>Hexfold · Night Gray</span></figcaption>
+      </figure>
     </div>
   </section>
 
@@ -108,50 +130,47 @@ const visitFaq: QA[] = [
         <h2 id="paths-title" class="h2">A 3-season room, metal screens, or both</h2>
         <p class="lede">Every system uses the same welded, metal-reinforced frame in Night Gray or Bright White. Prices are {TAX}.</p>
       </div>
-      <div class="paths">
-        <article class="path path-room">
-          <div class="path-media two">
-            <figure><Image src={roomShowroom} widths={[480, 800]} sizes="(max-width: 900px) 50vw, 330px" alt="Folding Smokey Gray polycarbonate panels in the AE showroom" loading="lazy" /><figcaption>In our Houston showroom</figcaption></figure>
-            <figure><Image src={rClearfixed} widths={[480, 800]} sizes="(max-width: 900px) 50vw, 330px" alt="Concept visualization of Clearfixed tinted polycarbonate panels" loading="lazy" /><figcaption>Concept visualization</figcaption></figure>
-          </div>
-          <div class="path-body">
-            <p class="path-k">Three-season room</p>
-            <h3 class="h3">Polycarbonate panels for wind, rain and cooler days</h3>
-            <p>Lightweight polycarbonate in Smokey Gray or Industrial Blue, fixed or folding by hand. Close the patio for cooler, wetter weather and open it back up when the breeze is right.</p>
-            <ul class="sys">{room.map((p) => <li><a href={p.href}><b>{p.name}</b><span>{p.kind}</span><em>from ${p.msrp}</em></a></li>)}</ul>
-            <table class="facts">
-              <caption>Panel facts</caption>
-              <tbody>
-                <tr><th scope="row">Visible light</th><td>{FACTS.vlt} transmission*</td></tr>
-                <tr><th scope="row">Solar heat gain</th><td>{FACTS.shgc} SHGC*</td></tr>
-                <tr><th scope="row">Wind</th><td>Fixed panels rated to {FACTS.fixedWind}. Folding panels operate to {FACTS.foldWind}; retract and secure for {FACTS.foldStowed}.</td></tr>
-              </tbody>
-            </table>
-            <p class="fine">*Panel test on Smokey Gray. Panel values, not a full installed-system rating.</p>
-          </div>
-        </article>
-        <article class="path">
-          <div class="path-media two">
-            <figure><Image src={screensReal} widths={[480, 800]} sizes="(max-width: 900px) 50vw, 330px" alt="Brick Houston patio closed in with Hexfold folding screens" loading="lazy" /><figcaption>Real installation, Hexfold</figcaption></figure>
-            <figure><Image src={fixedColors} widths={[480, 800]} sizes="(max-width: 900px) 50vw, 330px" alt="Fixed Screen panels with 304 stainless steel mesh in Night Gray and Bright White frames" loading="lazy" /><figcaption>Fixed Screen frame colors</figcaption></figure>
-          </div>
-          <div class="path-body">
-            <p class="path-k">Metal screens</p>
-            <h3 class="h3">Keep the breeze, keep bugs outside</h3>
-            <p>Our established screen family: metal mesh instead of nylon or fiberglass, in welded frames that fold by hand or stay fixed.</p>
-            <ul class="sys">{screens.map((p) => <li><a href={p.href}><b>{p.name}</b><span>{p.kind}</span><em>from ${p.msrp}</em></a></li>)}</ul>
-            <table class="facts">
-              <caption>Screen facts</caption>
-              <tbody>
-                <tr><th scope="row">Mesh</th><td>Hexfold: honeycomb aluminum, {FACTS.mesh}. Fixed Screen: 304 stainless steel.</td></tr>
-                <tr><th scope="row">Wind</th><td>Hexfold operates to {FACTS.foldWind}; retract and secure for {FACTS.foldStowed}.</td></tr>
-                <tr><th scope="row">Opening</th><td>Hexfold up to 10 ft per pull, 20 ft meeting in the middle.</td></tr>
-              </tbody>
-            </table>
-            <p class="fine">Not sure yet? <a href="/patio-visualizer/">Try the systems on a photo of your patio</a>.</p>
-          </div>
-        </article>
+      <h3 class="fam"><span class="hexdot" aria-hidden="true"></span>Three-season rooms</h3>
+      <div class="cards cards-3">
+        {cards.slice(0, 3).map((c) => { const p = byId(c.id); const g = guideOf(c.id); return (
+          <article class="card">
+            <div class="pics">
+              <figure><Image src={c.a.src} alt={c.a.alt} widths={[400, 700]} sizes="(max-width: 700px) 50vw, 200px" loading="lazy" /><figcaption>{c.a.cap}</figcaption></figure>
+              <a class="why" href={`/guides/${g.slug}/`}>
+                <Image src={c.b.src} alt={c.b.alt} widths={[400, 700]} sizes="(max-width: 700px) 50vw, 200px" loading="lazy" />
+                <span class="why-tag"><span class="hexdot" aria-hidden="true"></span>{g.q}</span>
+              </a>
+            </div>
+            <div class="card-body">
+              <h4><a href={p.href}>{p.name}</a> <em>from ${p.msrp}</em></h4>
+              <p class="kind">{p.kind}</p>
+              <p>{c.sell}</p>
+              <p class="cap2">{c.b.cap}</p>
+            </div>
+          </article>
+        ); })}
       </div>
+      <h3 class="fam"><span class="hexdot" aria-hidden="true"></span>Metal screens</h3>
+      <div class="cards cards-2">
+        {cards.slice(3).map((c) => { const p = byId(c.id); const g = guideOf(c.id); return (
+          <article class="card">
+            <div class="pics">
+              <figure><Image src={c.a.src} alt={c.a.alt} widths={[400, 700]} sizes="(max-width: 700px) 50vw, 300px" loading="lazy" /><figcaption>{c.a.cap}</figcaption></figure>
+              <a class="why" href={`/guides/${g.slug}/`}>
+                <Image src={c.b.src} alt={c.b.alt} widths={[400, 700]} sizes="(max-width: 700px) 50vw, 300px" loading="lazy" />
+                <span class="why-tag"><span class="hexdot" aria-hidden="true"></span>{g.q}</span>
+              </a>
+            </div>
+            <div class="card-body">
+              <h4><a href={p.href}>{p.name}</a> <em>from ${p.msrp}</em></h4>
+              <p class="kind">{p.kind}</p>
+              <p>{c.sell}</p>
+              <p class="cap2">{c.b.cap}</p>
+            </div>
+          </article>
+        ); })}
+      </div>
+      <p class="fine" style="margin-top:18px">Polycarbonate panel facts: {FACTS.vlt} visible light and {FACTS.shgc} SHGC (Smokey Gray panel test, not a full installed-system rating). Fixed panels rated to {FACTS.fixedWind}; folding systems operate to {FACTS.foldWind}, retract and secure for {FACTS.foldStowed}. Not sure yet? <a href="/patio-visualizer/">Try them on your patio photo</a>.</p>
     </div>
   </section>
 
@@ -225,7 +244,7 @@ const visitFaq: QA[] = [
           </ul>
           <p class="fine">{EXTRAS} Locks, pet doors and low-profile access ramps are examples.</p>
           <p class="fine">{LENDERS}</p>
-          <a class="btn" href="#book" data-cb-open>Get my exact price</a>
+          <a class="btn" href="/free-quote/">Get my exact price</a>
         </div>
       </div>
     </div>
@@ -256,22 +275,56 @@ const visitFaq: QA[] = [
   </section>
 
   <!-- 9. FAQ and visit request -->
-  <section class="band" id="book" aria-labelledby="book-title">
+  <section class="band hive-dark" id="book" aria-labelledby="book-title">
     <div class="wrap book-grid">
       <div class="stack-lg">
-        <h2 id="book-title" class="h2">Request your free design visit</h2>
-        <p class="lede">Leave your name and number. We call to confirm a time, then measure, design and quote at your home.</p>
+        <h2 id="book-title" class="h2">Questions before your visit</h2>
         <Faq items={visitFaq} />
       </div>
-      <div class="book-card" id="book-form">
-        <p class="book-k" data-bv-title data-screens="Get your screen quote">Request a free visit</p>
-        <BookVisitForm id="home-book" />
+      <div class="book-card">
+        <span class="hex-num" aria-hidden="true">1</span>
+        <p class="book-k">Request your free design visit</p>
+        <p class="lede">Answer four quick questions for a starting price, tell us where your patio is, and we call to confirm a time. About two minutes.</p>
+        <a class="btn btn-big" href="/free-quote/">Start my free design visit</a>
+        <p class="micro">Rather talk? Call <a href={SITE.phoneHref}>{SITE.phone}</a>, 9 am to 5 pm, 7 days a week.</p>
       </div>
     </div>
   </section>
 </Base>
 
 <style>
+  .viz-band { border-block: 1px solid rgba(242, 194, 48, .35); }
+  .viz-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 56px); align-items: center; }
+  .viz-shot { margin: 0; border: 1.5px solid var(--yellow); border-radius: 12px; padding: 10px; background: var(--honey); box-shadow: var(--shadow); }
+  .viz-shot :global(img) { width: 100%; height: auto; display: block; border-radius: 6px; }
+  .viz-shot figcaption { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 10px; font-family: var(--mono); font-size: .75rem; color: var(--ink-2); }
+  .micro a { color: var(--yellow); }
+  .fam { display: flex; align-items: center; gap: 10px; font-size: 1.15rem; font-weight: 700; margin: 8px 0 14px; }
+  .cards { display: grid; gap: 20px; margin-bottom: 30px; }
+  .cards-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cards-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .card { background: var(--honey-2); border: 1px solid rgba(251, 245, 236, .08); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; min-width: 0; }
+  .pics { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--honey); }
+  .pics figure { margin: 0; position: relative; min-width: 0; }
+  .pics :global(img) { width: 100%; aspect-ratio: 4 / 3.4; object-fit: cover; display: block; }
+  .pics figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 18px 8px 6px; font-family: var(--mono); font-size: .66rem; color: #fff; background: linear-gradient(transparent, rgba(0,0,0,.65)); }
+  .why { position: relative; display: block; min-width: 0; text-decoration: none; }
+  .why::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 35%, rgba(22, 18, 15, .88)); transition: background .2s; }
+  .why:hover::after, .why:focus-visible::after { background: linear-gradient(transparent 10%, rgba(22, 18, 15, .92)); }
+  .why-tag { position: absolute; left: 10px; right: 10px; bottom: 9px; z-index: 1; display: flex; gap: 7px; align-items: flex-start; color: #fff; font-family: var(--font-head); font-weight: 700; font-size: .86rem; line-height: 1.2; }
+  .why-tag .hexdot { margin-top: 2px; }
+  .why:focus-visible { outline: 3px solid var(--yellow); outline-offset: -3px; }
+  .card-body { padding: 18px 20px 20px; display: grid; gap: 6px; align-content: start; }
+  .card-body h4 { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.02em; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .card-body h4 a { color: var(--ink); text-decoration: none; }
+  .card-body h4 a:hover { color: var(--yellow); }
+  .card-body h4 em { font-style: normal; font-family: var(--mono); font-size: .85rem; color: var(--yellow); font-weight: 600; }
+  .card-body .kind { color: var(--ink-2); font-size: .9rem; }
+  .card-body p:not(.kind):not(.cap2) { color: var(--ink); font-size: .97rem; }
+  .cap2 { display: none; }
+  @media (max-width: 1000px) { .cards-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .cards-3, .cards-2 { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 820px) { .viz-grid { grid-template-columns: minmax(0, 1fr); } }
   .h-hero { padding-block: clamp(36px, 6vw, 80px) clamp(48px, 7vw, 96px); }
   .h-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
   .h-copy { display: grid; gap: 22px; }
@@ -358,9 +411,9 @@ const visitFaq: QA[] = [
   .book-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 56px); align-items: start; }
   .book-card { background: var(--honey-2); color: var(--ink); padding: 26px; border-radius: 12px; border: 1px solid rgba(251, 245, 236, .08); border-top: 3px solid var(--yellow); box-shadow: var(--shadow); }
   .book-k { font-family: var(--font-head); font-weight: 800; font-size: 1.5rem; letter-spacing: -0.02em; margin-bottom: 14px; }
-  .book-card :global(a) { color: var(--yellow); }
+  .book-card { display: grid; gap: 14px; align-content: start; }
+  .book-card .micro a { color: var(--yellow); }
   .book-card :global(.fine) { color: var(--ink-2); }
-  #book-form { scroll-margin-top: 110px; }
 
   @media (max-width: 1060px) { .proc { grid-template-columns: repeat(3, minmax(0, 1fr)); } .build { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 900px) {

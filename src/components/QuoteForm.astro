@@ -7,19 +7,21 @@ interface Props { id?: string; compact?: boolean; source?: string; kind?: 'visit
 const { id = 'visit', compact = false, source = 'Website', kind = 'visit', garage = false } = Astro.props;
 const scr = kind === 'screens';
 ---
-{!scr && <p class="fast">In a hurry? <button type="button" class="linkbtn" data-cb-open>Book with just your name and phone</button></p>}
+<p class="fast">Prefer to talk? Call <a href={SITE.phoneHref}>{SITE.phone}</a>, 9 am to 5 pm, 7 days a week.</p>
 <div class="qf-wrap">
-<form class="form quote-form" id={id} data-key={SITE.formKey} data-next={scr ? undefined : '/thank-you/'} data-inline={scr ? '1' : undefined} data-invalid={scr ? 'Please add your name, a phone number and your ZIP code.' : undefined} novalidate>
+<form class="form quote-form" id={id} data-key={SITE.formKey} data-next={scr ? undefined : '/thank-you/'} data-inline={scr ? '1' : undefined} data-invalid="Please add your name, phone, street address and a 5-digit ZIP code, and check the box agreeing that we may contact you about this request." novalidate>
   <input type="hidden" name="subject" value={scr ? 'SCREEN QUOTE request from aefactorysales.com' : 'New site visit request from aefactorysales.com'} />
   <input type="hidden" name="request" value={scr ? 'Screens: rep to call with a quote' : 'Site visit'} />
   <input type="hidden" name="from_name" value="AE website" />
   <input type="hidden" name="lead_source" value={source} />
   <input type="hidden" name="estimate" value="" />
   <label class="hp" aria-hidden="true">Leave this empty <input type="checkbox" name="botcheck" tabindex="-1" /></label>
-  <div class="field"><label for={`${id}-name`}>Name</label><input id={`${id}-name`} name="name" autocomplete="name" required /></div>
-  <div class="field"><label for={`${id}-phone`}>Phone</label><input id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" required /></div>
-  <div class="field"><label for={`${id}-email`}>Email</label><input id={`${id}-email`} name="email" type="email" autocomplete="email" /></div>
-  <div class="field"><label for={`${id}-zip`}>ZIP code</label><input id={`${id}-zip`} name="zip" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" required /></div>
+  <div class="field"><label for={`${id}-name`}>Name</label><input id={`${id}-name`} name="name" autocomplete="name" maxlength="80" required /></div>
+  <div class="field"><label for={`${id}-phone`}>Phone</label><input id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" maxlength="20" pattern="[0-9()+.\- ]{10,20}" required /></div>
+  <div class="field"><label for={`${id}-email`}>Email (optional)</label><input id={`${id}-email`} name="email" type="email" autocomplete="email" maxlength="120" /></div>
+  <div class="field full"><label for={`${id}-street`}>Street address of the project</label><input id={`${id}-street`} name="street" autocomplete="street-address" maxlength="120" required /></div>
+  <div class="field"><label for={`${id}-city`}>City</label><input id={`${id}-city`} name="city" autocomplete="address-level2" maxlength="60" /></div>
+  <div class="field"><label for={`${id}-zip`}>ZIP code</label><input id={`${id}-zip`} name="zip" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" maxlength="5" required /></div>
   {!compact && (
     <>
       <div class="field"><label for={`${id}-project`}>What are you thinking about?</label>
@@ -72,12 +74,18 @@ const scr = kind === 'screens';
   <div class="field"><label for={`${id}-hoa`}>HOA?</label>
     <select id={`${id}-hoa`} name="hoa"><option>Not sure</option><option>Yes</option><option>No</option></select>
   </div>
-  <div class="field full"><label for={`${id}-notes`}>Anything we should know? (optional)</label><textarea id={`${id}-notes`} name="message"></textarea></div>
+  <div class="field full"><label for={`${id}-notes`}>Anything we should know? (optional)</label><textarea id={`${id}-notes`} name="message" maxlength="1500"></textarea></div>
+  <fieldset class="consent">
+    <legend class="sr-only">Contact permission</legend>
+    <label><input type="checkbox" name="consent_contact" value="Yes" required /> <span><b>Required:</b> I agree AE Factory Sales may call, text or email me at the number and email above about this request. Message and data rates may apply. Reply STOP to stop texts.</span></label>
+    <label><input type="checkbox" name="consent_marketing" value="Yes" /> <span><b>Optional:</b> Also send me occasional offers and news from AE Factory Sales by email or text. Not required to buy anything; unsubscribe any time.</span></label>
+  </fieldset>
+  <input type="hidden" name="consent_text" value="Contact: I agree AE Factory Sales may call, text or email me at the number and email above about this request. Message and data rates may apply. Reply STOP to stop texts. | Marketing (only if checked): Also send me occasional offers and news from AE Factory Sales by email or text. Not required to buy anything; unsubscribe any time." />
   <div class="form-foot">
     <button class="btn" type="submit">{scr ? 'Have a rep call me about a quote' : 'Request my site visit'}</button>
     <small>{scr ? <>A rep calls you to go over your screens and give you a quote. Have photos? Text them to {SITE.phone}.</> : <>We call you back to set a time. No pressure, no obligation. Have photos? Text them to {SITE.phone}.</>}</small>
   </div>
-  <p class="fine qf-priv">By sending this, you agree AE Factory Sales may call, text or email you about your request. Message and data rates may apply. We never sell your information. <a href="/privacy/">Privacy</a></p>
+  <p class="fine qf-priv">We never sell your information, and your address is only used for your project. <a href="/privacy/">Privacy</a></p>
   <p class="form-note" role="status" hidden></p>
 </form>
 {scr && (

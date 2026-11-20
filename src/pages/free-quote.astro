@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import CornerArt from '../components/CornerArt.astro';
 import QuoteForm from '../components/QuoteForm.astro';
 import { PRODUCTS, SIZES, SITE, FINANCING, WARRANTY } from '../data/site';
 import clearfixed from '../assets/photos/clearfixed-polycarbonate-panels.jpg';
@@ -34,17 +33,17 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
 };
 ---
 <Base
-  title="Price My Patio | Free Site Visit | AE Factory Sales"
+  title="Request a Free Design Visit | Price My Patio | AE Factory Sales"
   description="Price your Houston patio enclosure in 4 steps, then book a free site visit. Polycarbonate 3-season rooms and premium metal screens, installed within a month."
   crumbs={[{ name: 'Free quote', href: '/free-quote/' }]}
 >
-  <section class="band blueprint quiz-band" id="quiz" data-json={data}>
-    <CornerArt />
+  <section class="band quiz-band hive-dark" id="quiz" data-json={data}>
     <div class="wrap">
       <div class="quiz-head">
         <div class="stack">
-          <h1 class="h2">Price <span class="y">your patio</span></h1>
-          <p class="muted">Free estimate, about a minute. Then book a free site visit for your exact number.</p>
+          <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Free design visit</p>
+          <h1 class="h2">Price your patio, then <span class="y">book your visit</span></h1>
+          <p class="muted">Four quick questions for a starting estimate, then tell us where the patio is. We call to confirm a time.</p>
         </div>
         <ol class="progress" aria-label="Steps">
           <li data-step="1" class="now">Size</li><li data-step="2">Room or screens</li><li data-step="3">System</li><li data-step="4">Your price</li>
@@ -55,7 +54,7 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
         <div>
           <h2 class="q">How big is your patio?</h2>
           <p class="hint">Pick the closest match. Yellow lines are the open sides we'd fill in; squares are posts.</p>
-          <p class="fast">In a hurry? <button type="button" class="linkbtn" data-cb-open>Skip the questions and book your free visit</button></p>
+          <p class="fast">Prefer to talk? Call <a href={SITE.phoneHref}>{SITE.phone}</a>, 9 am to 5 pm, 7 days a week.</p>
           <div class="opts">
             {SIZES.map((s) => (
               <button type="button" class="opt" data-size={s.id} aria-pressed="false">
@@ -130,7 +129,7 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
           </div>
           <div class="stack">
             <div class="quiz-visit">
-              <h2 class="q">Book your free site visit</h2>
+              <h2 class="q">Request your free design visit</h2>
               <QuoteForm id="quiz-visit" compact source="Price quiz" />
             </div>
             <div class="quiz-screens" hidden>
@@ -175,24 +174,24 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
   .quiz-band { overflow: hidden; }
   .quiz-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 18px 32px; }
   .progress { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; flex: 1 1 420px; max-width: 620px; counter-reset: s; }
-  .progress li { counter-increment: s; border-top: 4px solid var(--line); padding-top: 8px; font-family: var(--mono); font-size: 0.74rem; font-weight: 600; color: var(--ink-2); }
+  .progress li { counter-increment: s; border-top: 3px solid var(--line); border-radius: 2px; padding-top: 8px; font-family: var(--mono); font-size: 0.74rem; font-weight: 600; color: var(--ink-2); }
   .progress li::before { content: counter(s) " · "; }
   .progress li.done { border-color: var(--yellow); color: var(--ink); }
   .progress li.now { border-color: var(--yellow); color: var(--yellow); }
   .panel { margin-top: 34px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 290px); gap: 40px; align-items: start; }
   .panel > * { min-width: 0; }
-  .q { font-weight: 800; font-stretch: 70%; font-size: clamp(2rem, 4.4vw, 2.9rem); line-height: 1; text-transform: uppercase; }
+  .q { font-family: var(--font-head); font-weight: 800; letter-spacing: -0.025em; font-size: clamp(1.7rem, 3.4vw, 2.4rem); line-height: 1.1; }
   .hint { margin-top: 10px; color: var(--ink-2); }
-  .aside { border: 2px solid var(--line); padding: 18px 20px; display: grid; gap: 8px; }
-  .aside h3 { font-weight: 800; font-stretch: 80%; font-size: 1.05rem; text-transform: uppercase; color: var(--yellow); }
+  .aside { border: 1px solid var(--line); border-radius: 10px; background: rgba(251, 245, 236, .03); padding: 18px 20px; display: grid; gap: 8px; }
+  .aside h3 { font-weight: 700; font-size: 1.05rem; color: var(--yellow); }
   .aside p { font-size: 0.95rem; color: var(--ink-2); }
   .aside b { color: var(--ink); }
   .opts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 24px; }
-  .opt { display: flex; flex-direction: column; gap: 6px; text-align: left; padding: 16px; background: var(--honey); color: var(--ink); border: 2px solid var(--line); font: inherit; cursor: pointer; min-height: 44px; }
+  .opt { display: flex; flex-direction: column; gap: 6px; text-align: left; padding: 16px; background: var(--honey-2); color: var(--ink); border: 1.5px solid var(--line); border-radius: 10px; font: inherit; cursor: pointer; min-height: 44px; transition: border-color .15s, box-shadow .15s; }
   .opt:hover { border-color: var(--yellow); }
   .opt[aria-pressed="true"] { border-color: var(--yellow); background: rgba(242, 194, 48, 0.12); box-shadow: inset 0 0 0 2px var(--yellow); }
   .opt :global(.plan) { width: 100%; height: auto; color: var(--ink-2); margin-bottom: 4px; }
-  .opt .t { font-weight: 800; font-stretch: 78%; font-size: 1.5rem; line-height: 1.05; text-transform: uppercase; }
+  .opt .t { font-family: var(--font-head); font-weight: 700; font-size: 1.25rem; line-height: 1.15; letter-spacing: -0.015em; }
   .opt .s { font-size: 0.9rem; color: var(--ink-2); line-height: 1.35; }
   .opt .p { font-family: var(--mono); font-size: 0.78rem; font-weight: 600; color: var(--yellow); margin-top: auto; padding-top: 6px; }
   .nav-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 26px; }
@@ -205,15 +204,15 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
   .est { font-family: var(--mono); font-size: 0.8rem; font-weight: 600; color: var(--ink) !important; }
   .pick { width: 100%; margin-top: 4px; }
   .pick[aria-pressed="true"] { background: var(--yellow); color: var(--honey); }
-  .tint-pick { margin-top: 22px; border: 2px solid var(--line); padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 10px 26px; }
+  .tint-pick { margin-top: 22px; border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 10px 26px; }
   .tint-pick legend { padding: 0 6px; font-weight: 700; }
   .tint-pick label { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; cursor: pointer; }
   .tint-pick i { width: 22px; height: 22px; border: 2px solid var(--yellow); display: inline-block; }
   .tint-pick input { accent-color: var(--yellow); width: 18px; height: 18px; }
   .result { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 32px; align-items: start; grid-column: 1 / -1; }
   .panel[data-panel="4"] { grid-template-columns: minmax(0, 1fr); }
-  .sumcard { padding: 24px 26px; border-left: 8px solid var(--yellow); display: grid; gap: 12px; }
-  .sumcard .big { font-weight: 800; font-stretch: 70%; font-size: clamp(2.5rem, 6vw, 3.6rem); line-height: 1; }
+  .sumcard { padding: 24px 26px; border-radius: 12px; border-left: 6px solid var(--yellow); box-shadow: var(--shadow); display: grid; gap: 12px; }
+  .sumcard .big { font-family: var(--font-head); font-weight: 800; letter-spacing: -0.03em; font-size: clamp(2.2rem, 5vw, 3.2rem); line-height: 1; }
   .sumcard dl { margin: 0; }
   .sumcard dl div { display: grid; grid-template-columns: 90px 1fr; gap: 10px; padding: 7px 0; border-top: 1px solid var(--paper-line); }
   .sumcard dt { font-weight: 700; color: var(--paper-2); }
@@ -302,3 +301,7 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
     else if (t.dataset.back) go(Number(t.dataset.back));
   });
 </script>
+<style>
+  .quiz-visit, .quiz-screens { background: var(--honey-2); border: 1px solid rgba(251, 245, 236, .08); border-top: 3px solid var(--yellow); border-radius: 12px; padding: 24px; box-shadow: var(--shadow); display: grid; gap: 14px; }
+  .opt:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
+</style>

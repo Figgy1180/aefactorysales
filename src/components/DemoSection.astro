@@ -1,0 +1,26 @@
+---
+// "How it works" band on each product page: the operation diagram plus the plain-language explanation.
+import ProductDemo from './ProductDemo.astro';
+import { GUIDES } from '../data/guides';
+type Sys = 'fixed' | 'hexfold' | 'clearfixed' | 'clearfold' | 'hybrid';
+interface Props { sys: Sys; name: string; lede: string; points: string[] }
+const { sys, name, lede, points } = Astro.props;
+const g = GUIDES.find((x) => x.sys === sys);
+---
+<section class="band on-white hive-corner" aria-labelledby={`how-${sys}`}>
+  <div class="wrap demo-sec">
+    <div class="stack-lg">
+      <p class="kicker dark"><span class="hexdot" aria-hidden="true"></span>Product knowledge</p>
+      <h2 id={`how-${sys}`} class="h2">How {name} works</h2>
+      <p class="lede">{lede}</p>
+      <ul class="hexlist">{points.map((p) => <li>{p}</li>)}</ul>
+      {g && <p><a class="btn btn-line" href={`/guides/${g.slug}/`}>{g.q}</a></p>}
+    </div>
+    <div class="demo-card"><ProductDemo sys={sys} /></div>
+  </div>
+</section>
+<style>
+  .demo-sec { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+  .demo-card { background: var(--honey); border-radius: 12px; padding: clamp(14px, 2vw, 22px); box-shadow: var(--shadow); max-width: 560px; justify-self: end; width: 100%; }
+  @media (max-width: 900px) { .demo-sec { grid-template-columns: minmax(0, 1fr); } .demo-card { justify-self: stretch; max-width: none; } }
+</style>

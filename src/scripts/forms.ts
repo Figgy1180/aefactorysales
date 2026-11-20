@@ -22,6 +22,16 @@ captureSource();
     btn.disabled = true;
     const data = new FormData(form);
     data.append('access_key', key);
+    // Clean every text value (trim, collapse whitespace, cap length) before it leaves the browser.
+    for (const [k, v] of Array.from(data.entries())) {
+      if (typeof v === 'string' && k !== 'access_key') data.set(k, v.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '').replace(/[ \t]+/g, ' ').trim().slice(0, 1500));
+    }
+    // Consent record: what they agreed to and when. Unchecked boxes are not sent by the browser, so record "No".
+    if (form.querySelector('[name="consent_contact"]')) {
+      data.set('consent_marketing', data.get('consent_marketing') ? 'Yes' : 'No');
+      data.set('consent_time', new Date().toISOString());
+      data.set('consent_page', location.href.split('?')[0]);
+    }
     // Put the person's name and ZIP in the subject so Gmail keeps each customer in their own conversation
     // (identical subjects made Gmail group different customers together).
     const who = [String(data.get('name') || '').trim(), String(data.get('zip') || '').trim()].filter(Boolean).join(', ').slice(0, 80);

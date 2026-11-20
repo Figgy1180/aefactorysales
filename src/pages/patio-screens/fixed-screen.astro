@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import Faq from '../../components/Faq.astro';
 import QuoteForm from '../../components/QuoteForm.astro';
+import DemoSection from '../../components/DemoSection.astro';
 import RelatedLinks from '../../components/RelatedLinks.astro';
 import { FAQ, SITE, byId, SIZES, range } from '../../data/site';
 import doorsOpen from '../../assets/photos/fixed-screen-doors-open.jpg';
@@ -49,6 +50,8 @@ const product = {
       </div>
     </div>
   </PageHero>
+
+  <DemoSection sys="fixed" name="Fixed Screen" lede={"Stainless steel mesh panels sit in a heat-welded, metal-reinforced frame and stay in place all year."} points={["304 stainless steel mesh, not nylon or fiberglass", "Night Gray or Bright White frame", "Doggy door available, quoted for your project"]} />
 
   <section class="band on-paper" id="vs-nylon">
     <div class="wrap stack-lg">

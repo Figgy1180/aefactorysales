@@ -5,6 +5,7 @@ import RelatedLinks from '../../components/RelatedLinks.astro';
 import PageHero from '../../components/PageHero.astro';
 import Faq from '../../components/Faq.astro';
 import QuoteForm from '../../components/QuoteForm.astro';
+import DemoSection from '../../components/DemoSection.astro';
 import { FAQ, FACTS, SITE, byId, SIZES, range } from '../../data/site';
 import handle from '../../assets/photos/gabled-opening-screens.jpg';
 import handleMesh from '../../assets/photos/hexfold-mesh-crop.jpg';
@@ -51,6 +52,8 @@ const product = {
       </figure>
     </div>
   </PageHero>
+
+  <DemoSection sys="hexfold" name="Hexfold" lede={"Pleated honeycomb aluminum mesh rides on the top track and folds into a slim stack at the end. No posts, no motor."} points={["Up to 10 ft per pull, or 20 ft with two pulls meeting in the middle", "Stop it anywhere along the track", "Operates to about 40 mph; retract and secure for 100+ mph"]} />
 
   <section class="band">
     <div class="wrap split">

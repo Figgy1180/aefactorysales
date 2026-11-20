@@ -449,3 +449,42 @@ b, strong { font-stretch: 100%; }
 .on-white :focus-visible { outline-color: var(--paper-ink); }
 /* Leftover all-caps labels in shared components */
 .cap b, .bv-pick span, .cb-fab, .cb-fab span, .tile .cap b { text-transform: none !important; font-stretch: 100% !important; letter-spacing: 0 !important; font-family: var(--font-head); }
+
+/* Hive theme (Nov refresh): hexagon geometry as a quiet, consistent brand layer */
+.kicker { margin: 0; display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-weight: 600; font-size: .78rem; text-transform: uppercase; color: var(--yellow); }
+.kicker.dark { color: var(--paper-2); }
+.hexdot { width: 11px; height: 13px; flex: none; background: var(--yellow); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+.hexlist { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.hexlist li { position: relative; padding-left: 26px; }
+.hexlist li::before { content: ""; position: absolute; left: 2px; top: .38em; width: 12px; height: 14px; background: var(--yellow); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+.on-white .hexlist li::before, .on-paper .hexlist li::before { background: #C9A227; }
+/* faint honeycomb, cropped into a corner so it never turns into wallpaper */
+.hive-corner, .hive-light, .hive-dark { position: relative; isolation: isolate; }
+.hive-corner::before, .hive-light::before, .hive-dark::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='27.713' height='48' viewBox='0 0 27.713 48'%3E%3Cpath d='M13.856 0L27.713 8V24L13.856 32L0 24V8ZM13.856 32V48' fill='none' stroke='%23B8901A' stroke-opacity='.42' stroke-width='.7'/%3E%3C/svg%3E");
+  background-size: 55px 96px; opacity: .55;
+  -webkit-mask-image: radial-gradient(ellipse 45% 75% at 100% 0%, #000 0%, transparent 72%); mask-image: radial-gradient(ellipse 45% 75% at 100% 0%, #000 0%, transparent 72%); }
+.hive-dark::before { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='27.713' height='48' viewBox='0 0 27.713 48'%3E%3Cpath d='M13.856 0L27.713 8V24L13.856 32L0 24V8ZM13.856 32V48' fill='none' stroke='%23F2C230' stroke-opacity='.16' stroke-width='.8'/%3E%3C/svg%3E"); opacity: 1;
+  -webkit-mask-image: radial-gradient(ellipse 55% 80% at 0% 100%, #000 0%, transparent 75%); mask-image: radial-gradient(ellipse 55% 80% at 0% 100%, #000 0%, transparent 75%); }
+.hex-num { display: inline-grid; place-items: center; width: 40px; height: 46px; background: var(--yellow); color: var(--honey); font-family: var(--font-head); font-weight: 800; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
+
+/* Floating "Book free visit" link (desktop); phones use the call bar */
+.cb-fab { position: fixed; right: 22px; bottom: 22px; z-index: 45; display: inline-flex; align-items: center; gap: 10px; padding: 13px 20px; border-radius: 999px; background: var(--yellow); color: var(--honey); font-weight: 700; text-decoration: none; box-shadow: 0 8px 24px rgba(0,0,0,.32); transition: transform .15s; }
+.cb-fab .hexdot { background: var(--honey); }
+.cb-fab:hover { transform: translateY(-2px); color: var(--honey); }
+.cb-fab:focus-visible { outline: 3px solid var(--cream); outline-offset: 3px; }
+@media (max-width: 1060px) { .cb-fab { display: none; } }
+/* Consent checkboxes on request forms */
+.consent { grid-column: 1 / -1; display: grid; gap: 10px; }
+.consent label { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; align-items: start; font-size: .92rem; line-height: 1.45; color: var(--ink-2); cursor: pointer; }
+.consent input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--yellow); }
+.consent b { color: var(--ink); font-weight: 600; }
+.on-paper .consent label, .on-white .consent label { color: var(--paper-2); }
+.on-paper .consent b, .on-white .consent b { color: var(--paper-ink); }
+.on-paper .consent input, .on-white .consent input { accent-color: var(--paper-ink); color-scheme: light; }
+/* dark cards sitting inside light bands keep the dark-theme consent colors */
+.on-paper .ca-card .consent label, .on-white .ca-card .consent label { color: var(--ink-2); }
+.on-paper .ca-card .consent b, .on-white .ca-card .consent b { color: var(--ink); }
+.on-paper .ca-card .consent input, .on-white .ca-card .consent input { accent-color: var(--yellow); color-scheme: dark; }
+.on-paper .ca-card .form-foot small, .on-paper .ca-card .fine, .on-paper .ca-card .fast, .on-paper .ca-card label { color: var(--ink-2); }
+.on-paper .ca-card a:not(.btn) { color: var(--yellow); }

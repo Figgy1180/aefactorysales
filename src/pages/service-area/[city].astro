@@ -3,7 +3,7 @@
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
-import BookVisitForm from '../../components/BookVisitForm.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
 import { PROJECTS, photos, altFor, fit } from '../../data/projects';
 import { PRODUCTS, SITE, INSTALL, WARRANTY } from '../../data/site';
 
@@ -92,7 +92,7 @@ const service = {
         <p class="lede">We come to your home, measure every opening, and bring samples. Your written quote is emailed within a day of the visit.</p>
         <p class="muted" style="color:var(--paper-2)">Also serving {others.map((o, i) => <>{i ? ' and ' : ''}<a href={`/service-area/${o.slug}/`} style="color:var(--paper-ink)">{o.label}</a></>)}, and the rest of <a href="/service-area/" style="color:var(--paper-ink)">greater Houston</a>.</p>
       </div>
-      <div class="ca-card"><BookVisitForm id={`${a.slug}-book`} version={`city-${a.slug}`} /></div>
+      <div class="ca-card"><QuoteForm id={`${a.slug}-book`} source={`City page: ${a.name}`} compact /></div>
     </div>
   </section>
 </Base>
