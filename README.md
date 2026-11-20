@@ -35,3 +35,25 @@ Every push to GitHub redeploys automatically.
 ## Before launch: confirm
 
 See `LAUNCH-CHECKLIST.md`.
+
+## Customer journeys and page audits
+
+The quality workflow runs on pull requests targeting `gpt` or `main`, and on pushes to those branches. It never deploys the website. GitHub stores HTML reports, failure screenshots and traces for 14 days; Lighthouse reports are not uploaded to a public report server.
+
+```bash
+npm ci
+npx playwright install --with-deps chromium
+npm run test:journeys
+npm run audit:lighthouse
+npx playwright show-report
+```
+
+Playwright runs seven journeys on desktop Chromium and emulated Pixel 7: navigation, estimator arithmetic, quiz-to-form handoff, dialog focus/Escape, required fields, successful booking with campaign attribution, and rejected booking with retry. All external requests are blocked; the success/failure tests mock Web3Forms. Only synthetic contact details are used. Tests assert the build uses a dummy form key before attempting any valid submission. Failure traces can contain these synthetic details.
+
+Both commands build with a dummy form key. **Do not deploy that `dist/` output.** Run `npm run build` again for a production artifact. Production key management and delivery are separate from these tests.
+
+Lighthouse runs three mobile lab audits each for the homepage, Clearfold and price quiz. Missing title/description and unsuccessful HTTP status fail the job. Performance below 80, or accessibility/best-practices/SEO below 90, are warnings while we establish a baseline. Review the reports before changing thresholds. These scores do not establish Google rankings, AI visibility, accessibility compliance or real-user Core Web Vitals.
+
+This suite does not verify actual email/CRM delivery, call connections, Safari/Firefox, real-device rendering or lead quality. Existing `dataLayer` hooks are tested; GA4/Clarity integration is not added here. Next measurement work: connect the correct Clarity project and consent configuration, then verify qualified-lead outcomes in Jasmine CRM. Keep contact details out of analytics events.
+
+For efficient handoffs, record the tested commit, exact commands/results, report locations, unresolved failures and whether changes are local, proposed, merged or deployed. Reuse the last evidence and rerun only the checks affected by a change. Review quality trends after changes and turn confirmed customer friction into a focused regression test.
