@@ -5,3 +5,9 @@ dist-preview/
 .env
 .DS_Store
 *.log
+
+# Local quality reports (may contain mock form traces)
+playwright-report/
+test-results/
+.lighthouseci/
+lighthouse-report/
