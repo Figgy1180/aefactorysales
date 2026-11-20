@@ -17,9 +17,10 @@ const cfg: Record<Sys, { layers: Layer[]; states: State[]; modes?: { key: string
       { id: 'pc', mat: 'pc', side: 'r', max: W - S },
     ],
     states: [
-      { key: 'mesh', label: 'Mesh closed', ext: { mesh: 1, pc: 0 }, say: 'Mesh closed: the honeycomb aluminum mesh runs across the opening up to the folded panels, so you get the breeze with bugs outside.' },
-      { key: 'pc', label: 'Panels closed', ext: { mesh: 0, pc: 1 }, say: 'Panels closed: the polycarbonate runs across the opening up to the folded mesh, to block wind and rain.' },
-      { key: 'open', label: 'Both open', ext: { mesh: 0, pc: 0 }, say: 'Both open: each layer folds back to its own end, leaving the opening clear for access.' },
+      { key: 'pc', label: 'Panels closed', ext: { mesh: 0, pc: 1 }, say: 'Panels closed: the polycarbonate layer covers the opening to block wind and rain. The mesh waits folded at the other end.' },
+      { key: 'mesh', label: 'Mesh closed', ext: { mesh: 1, pc: 0 }, say: 'Mesh closed: the honeycomb aluminum mesh covers the opening, so you get the breeze with bugs outside. The panels wait folded at the other end.' },
+      { key: 'part', label: 'Part way', ext: { mesh: 0, pc: .5 }, say: 'Part way: stop either layer anywhere along the track. Here the panels cover half the opening.' },
+      { key: 'open', label: 'Both open', ext: { mesh: 0, pc: 0 }, say: 'Both open: each layer folds back toward its own end, leaving an open passage.' },
     ],
   },
   hexfold: {

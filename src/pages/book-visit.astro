@@ -1,0 +1,44 @@
+---
+import Base from '../layouts/Base.astro';
+import BookForm from '../components/BookForm.astro';
+import { SITE } from '../data/site';
+const steps = [
+  ['We call to set a time', 'Usually within one business day. Showroom and site visits run 9 to 5, 7 days a week.'],
+  ['We measure every opening', 'A professional from AE measures, checks posts, slopes and gables, and talks through how you use the patio.'],
+  ['We design the layout with you', 'Fixed, folding or Hybrid opening by opening, plus frame color, tint and mesh samples in hand.'],
+  ['You get a written quote', 'Usually on site that day, then emailed so you can review it. No obligation.'],
+];
+---
+<Base
+  title="Book a Free Design Visit | Houston Patio Enclosures | AE Factory Sales"
+  description="Book a free design visit from AE Factory Sales. We measure your Houston patio, design the layout with you and give you a written quote."
+  crumbs={[{ name: 'Book free design visit', href: '/book-visit/' }]}
+>
+  <section class="band bv-band hive-dark">
+    <div class="wrap bv-grid">
+      <div class="stack-lg bv-copy">
+        <div class="stack">
+          <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Free, no obligation</p>
+          <h1 class="h2">Book your free <span class="y">design visit</span></h1>
+          <p class="lede">Tell us who you are and where the patio is. Sizes and photos are optional; we measure everything at the visit.</p>
+        </div>
+        <ol class="bv-steps">
+          {steps.map(([t, d]) => <li><h2 class="h3">{t}</h2><p class="muted">{d}</p></li>)}
+        </ol>
+        <p class="muted">Just want a ballpark first? <a href="/free-quote/">Get my estimate now</a> takes four quick questions.</p>
+      </div>
+      <div class="bv-card">
+        <BookForm id="book" source="Book free design visit page" />
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .bv-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
+  .bv-steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 18px; counter-reset: s; }
+  .bv-steps li { counter-increment: s; display: grid; grid-template-columns: 40px minmax(0, 1fr); column-gap: 14px; }
+  .bv-steps li::before { content: counter(s); grid-row: span 2; width: 36px; height: 40px; display: grid; place-items: center; font-family: var(--font-head); font-weight: 800; color: #1a1a1a; background: var(--yellow); clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); }
+  .bv-steps h2 { font-size: 1.05rem; }
+  .bv-card { background: var(--raised, rgba(255,255,255,.04)); border: 1px solid var(--line); border-radius: calc(var(--radius) * 1.5); padding: clamp(18px, 3vw, 32px); box-shadow: var(--shadow); min-width: 0; }
+  @media (max-width: 900px) { .bv-grid { grid-template-columns: minmax(0, 1fr); } .bv-steps { display: none; } }
+</style>

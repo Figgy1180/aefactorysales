@@ -30,6 +30,8 @@ export const SITE = {
   // Web3Forms access key. Free at web3forms.com, tied to info@aefactorysales.com.
   // Leave empty and the forms run in preview mode (nothing is sent).
   // Web3Forms access keys are public by design (they only allow sending to the inbox they were created for).
+  // Photo uploads on the design-visit form need Web3Forms Pro (file attachments). Turn on once the plan supports it.
+  photoUploads: false,
   formKey: import.meta.env.PUBLIC_PREVIEW ? '' : import.meta.env.PUBLIC_WEB3FORMS_KEY || '7fdb1023-5888-4467-b512-4679a328c925', // all forms (quotes, reviews, dealers) deliver to info@aefactorysales.com
 } as const;
 

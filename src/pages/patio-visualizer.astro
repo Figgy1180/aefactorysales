@@ -104,7 +104,7 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
         </div>
       </fieldset>
 
-      <a class="btn primary" href="/free-quote/" style="text-align:center;text-decoration:none">Book my free site visit</a>
+      <a class="btn primary" href="/book-visit/" style="text-align:center;text-decoration:none">Book my free design visit</a>
       <p class="note">This is a preview, not a rendering of your exact job. We measure every opening at the free site visit and email a written quote within a day.</p>
     </div>
   </div>
@@ -302,7 +302,7 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
         base = polyFolds(uv, max(3.0, ftPx * 0.67));    // folds about 8 in wide
         if (two) { float hb = bar(ix, 0.5, st * 1.3, aa); fr = max(fr, hb); hd = hb * (1.0 - smoothstep(0.06 - aay, 0.06 + aay, abs(uv.y - 0.5))) * bar(ix, 0.5, st * 0.6, aa); }
       }
-    } else {                     // Hybrid: equal polycarbonate leaves on one side, pleated mesh on the other
+    } else {                     // Hybrid: two full layers on the same opening. Closed view = panels across the opening, mesh folded at the right end.
             if (uOpen > 0.5) {
         float sw = stack * 1.6;
         float inL = 1.0 - smoothstep(sw - aa, sw + aa, ix);
@@ -312,10 +312,13 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
         base = over(pl, ms);
         fr = max(bar(ix, sw, st, aa), bar(ix, 1.0 - stack, st, aa));
       } else {
-        float left = 1.0 - smoothstep(0.5 - aa, 0.5 + aa, ix);
-        base = mix(pleated(uv, pleatP), polyFolds(uv, max(3.0, ftPx * 0.67)), left);
-        fr = bar(ix, 0.5, st * 1.6, aa);
-        hd = bar(ix, 0.5, st * 0.8, aa) * (1.0 - smoothstep(0.06 - aay, 0.06 + aay, abs(uv.y - 0.5)));
+        float e = 1.0 - stack;                                   // panels' leading edge meets the folded mesh
+        float inR = smoothstep(e - aa, e + aa, ix);
+        vec4 pl = polyFolds(uv, max(3.0, ftPx * 0.67)); pl.a *= 1.0 - inR;
+        vec4 ms = pleated(uv, stackP); ms.a *= inR;
+        base = over(pl, ms);
+        fr = bar(ix, e, st * 1.6, aa);
+        hd = bar(ix, e - st * 1.4, st * 0.8, aa) * (1.0 - smoothstep(0.06 - aay, 0.06 + aay, abs(uv.y - 0.5)));
       }
     }
     // outer frame: head and sill tracks, jambs

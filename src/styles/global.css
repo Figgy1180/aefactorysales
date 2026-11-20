@@ -202,6 +202,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .foot-cta b { font-weight: 800; font-stretch: 72%; font-size: clamp(1.7rem, 3.4vw, 2.4rem); text-transform: uppercase; line-height: 1; }
 .foot-cta a.phone { color: var(--honey); font-weight: 800; font-stretch: 78%; font-size: clamp(1.7rem, 3.4vw, 2.4rem); text-decoration: none; }
 .foot-cta .btn { background: var(--honey); color: var(--yellow); border-color: var(--honey); }
+.foot-cta .fc-btns { display: flex; flex-wrap: wrap; gap: 10px; }
+.foot-cta .btn.fc-alt { background: transparent; color: var(--honey); border: 2px solid var(--honey); }
 .foot { padding-block: 48px 40px; border-top: 1px solid var(--line); }
 .foot .cols { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 32px; }
 .foot h2 { font-weight: 800; font-stretch: 80%; font-size: 1.05rem; text-transform: uppercase; color: var(--yellow); margin-bottom: 12px; }
@@ -370,6 +372,8 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 @media (max-width: 1439px) {
   .top-phone { display: none; }
 }
+@media (max-width: 1180px) { .top-est { display: none; } }
+@media (max-width: 560px) { .top-actions > .btn { display: none; } }
 @media (max-width: 1279px) {
   .nav { display: none; }
   .menu { display: block; }
@@ -406,12 +410,13 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   .axis div:nth-child(2) { grid-column: 1 / -1; }
   .foot .cols { grid-template-columns: minmax(0, 1fr); }
   .callbar {
-    display: grid; grid-template-columns: 1fr 1fr; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+    display: grid; grid-template-columns: 0.7fr 1fr 1.25fr; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
     border-top: 2px solid var(--yellow); background: var(--honey);
     padding: 0 env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
   }
   .callbar a, .callbar button { min-height: 58px; border: 0; font-family: inherit; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: 800; font-stretch: 80%; font-size: 1.1rem; text-transform: uppercase; text-decoration: none; color: var(--ink); }
-  .callbar a + a, .callbar button { background: var(--yellow); color: var(--honey); }
+  .callbar a + a { border-left: 1px solid var(--line); font-size: 1rem; }
+  .callbar a:last-child { background: var(--yellow); color: var(--honey); border-left: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
@@ -469,11 +474,6 @@ b, strong { font-stretch: 100%; }
 .hex-num { display: inline-grid; place-items: center; width: 40px; height: 46px; background: var(--yellow); color: var(--honey); font-family: var(--font-head); font-weight: 800; clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
 
 /* Floating "Book free visit" link (desktop); phones use the call bar */
-.cb-fab { position: fixed; right: 22px; bottom: 22px; z-index: 45; display: inline-flex; align-items: center; gap: 10px; padding: 13px 20px; border-radius: 999px; background: var(--yellow); color: var(--honey); font-weight: 700; text-decoration: none; box-shadow: 0 8px 24px rgba(0,0,0,.32); transition: transform .15s; }
-.cb-fab .hexdot { background: var(--honey); }
-.cb-fab:hover { transform: translateY(-2px); color: var(--honey); }
-.cb-fab:focus-visible { outline: 3px solid var(--cream); outline-offset: 3px; }
-@media (max-width: 1060px) { .cb-fab { display: none; } }
 /* Consent checkboxes on request forms */
 .consent { grid-column: 1 / -1; display: grid; gap: 10px; }
 .consent label { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; align-items: start; font-size: .92rem; line-height: 1.45; color: var(--ink-2); cursor: pointer; }
@@ -488,3 +488,6 @@ b, strong { font-stretch: 100%; }
 .on-paper .ca-card .consent input, .on-white .ca-card .consent input { accent-color: var(--yellow); color-scheme: dark; }
 .on-paper .ca-card .form-foot small, .on-paper .ca-card .fine, .on-paper .ca-card .fast, .on-paper .ca-card label { color: var(--ink-2); }
 .on-paper .ca-card a:not(.btn) { color: var(--yellow); }
+
+/* Holiday bar stays secondary on phones: one short line. */
+@media (max-width: 700px) { .season-bar .sb-long { display: none; } }

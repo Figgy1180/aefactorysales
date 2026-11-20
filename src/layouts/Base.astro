@@ -28,7 +28,7 @@ const OG_PHOTOS: Record<string, string> = {
   '/patio-screens/hexfold/': 'photos/hexfold-patio-closed', '/patio-screens/fixed-screen/': 'photos/fixed-screen-doors-closed', '/patio-enclosures/': 'projects/p36/4-inside-open', '/patio-screens/pet-resistant/': 'photos/fixed-screen-doors-open', '/patio-screens/garage/': 'projects/p4/3-right-bays',
   '/pricing/': 'projects/p35/2-long-side', '/projects/': 'projects/p36/2-outside-open', '/why-ae/': 'photos/factory-cnc',
   '/how-we-build/': 'photos/factory-angle', '/showroom/': 'photos/showroom-room-interior', '/learn/': 'photos/hexfold-handle-mesh', '/compare/': 'projects/p14/3-long-side-open',
-  '/faq/': 'projects/p6/2-outside-closed', '/free-quote/': 'projects/p34/5-inside-seating', '/service-area/': 'projects/p6/4-wide',
+  '/faq/': 'projects/p6/2-outside-closed', '/free-quote/': 'projects/p34/5-inside-seating', '/book-visit/': 'projects/p34/5-inside-seating', '/service-area/': 'projects/p6/4-wide',
   '/every-season/': 'photos/hexfold-patio-open', '/guides/': 'photos/gabled-opening-screens', '/reviews/': 'photos/screened-patio-room-corner',
   '/guides/folding-vs-motorized-patio-screens/': 'photos/hexfold-handle',
   '/guides/polycarbonate-vs-glass-patio-enclosure-cost/': 'photos/brick-home-screened-patio',
@@ -122,7 +122,7 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
     <a class="skip" href="#main">Skip to content</a>
     {HOLIDAY && (
       <aside class="season-bar" aria-label="Seasonal note">
-        <p class="wrap"><span aria-hidden="true">&#10052;</span> <b>Hosting for the holidays?</b> Polycarbonate panels block the north wind and rain, so your patio stays usable all season. <a href="/winter/">See winter rooms</a></p>
+        <p class="wrap"><span aria-hidden="true">&#10052;</span> <b>Hosting for the holidays?</b> <span class="sb-long">Polycarbonate panels block the north wind and rain, so your patio stays usable all season.</span> <a href="/winter/">See winter rooms</a></p>
       </aside>
     )}
     <header class="top">
@@ -147,7 +147,8 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
         </nav>
         <div class="top-actions">
           <a class="top-phone" href={SITE.phoneHref}>{SITE.phone}</a>
-          <a class="btn" href="/free-quote/">Book free visit</a>
+          <a class="btn btn-line top-est" href="/free-quote/">Get my estimate now</a>
+          <a class="btn" href="/book-visit/">Book free design visit</a>
           <details class="menu">
             <summary aria-label="Open menu">Menu</summary>
             <nav aria-label="Mobile">
@@ -157,7 +158,8 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
               <a href="/compare/">Compare options</a>
               <a href="/faq/">FAQ</a>
               <a href={SITE.phoneHref}>Call {SITE.phone}</a>
-              <a class="btn" href="/free-quote/">Book free visit</a>
+              <a href="/free-quote/">Get my estimate now</a>
+              <a class="btn" href="/book-visit/">Book free design visit</a>
             </nav>
           </details>
         </div>
@@ -177,7 +179,7 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
       <div class="wrap">
         <b>Free design &amp; estimate</b>
         <a class="phone" href={SITE.phoneHref}>{SITE.phone}</a>
-        <a class="btn" href="/free-quote/">Book my free site visit</a>
+        <span class="fc-btns"><a class="btn fc-alt" href="/free-quote/">Get my estimate now</a><a class="btn" href="/book-visit/">Book free design visit</a></span>
       </div>
     </section>
     <footer class="foot blueprint">
@@ -211,7 +213,8 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
               <li><a href="/pricing/">Pricing</a></li>
               <li><a href="/compare/">Compare options</a></li>
               <li><a href="/learn/">Learn: specs and care</a></li>
-              <li><a href="/free-quote/">Free site visit</a></li>
+              <li><a href="/book-visit/">Book free design visit</a></li>
+              <li><a href="/free-quote/">Get my estimate now</a></li>
               <li><a href="/guides/">Guides</a></li>
               <li><a href="/faq/">FAQ</a></li>
               <li><a href="/service-area/">Service area</a></li>
@@ -239,8 +242,7 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
         </p>
       </div>
     </footer>
-    <nav class="callbar" aria-label="Quick contact"><a href={SITE.phoneHref}>Call us</a><a href="/free-quote/">Book free visit</a></nav>
-    <nav class="fab-nav" aria-label="Book a visit"><a class="cb-fab" href="/free-quote/"><span class="hexdot" aria-hidden="true"></span>Book free visit</a></nav>
+    <nav class="callbar" aria-label="Quick contact"><a href={SITE.phoneHref}>Call</a><a href="/free-quote/">Get estimate</a><a href="/book-visit/">Book design visit</a></nav>
     <script>
     import { captureSource } from '../scripts/source';
     captureSource();
