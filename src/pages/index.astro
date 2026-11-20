@@ -29,7 +29,7 @@ import angle from '../assets/photos/factory-angle.jpg';
 import pcRack from '../assets/photos/factory-pc-smoke.jpg';
 import showroomIn from '../assets/photos/showroom-room-interior.jpg';
 
-const proof = ['Custom fit to your measured openings', 'Prepared in our Houston factory', 'Installed by our own crew', 'Most installs take one day on site'];
+const proof = ['Custom fit to your measured openings', 'Prepared in our Houston factory', 'Installed within a month of your order', 'Most installs take one day on site'];
 
 type Pic = { src: any; alt: string; cap: string };
 type Card = { id: string; a: Pic; b: Pic; sell: string };
@@ -64,11 +64,11 @@ const EXTRAS = 'Accessories and other options, such as locks, pet doors and opti
 const LENDERS = 'Financing is available through HFS Financial and Acorn Finance, subject to lender terms and approval. AE is not a lender.';
 
 const why = [
-  { f: 'Purpose-made components', b: 'Frames, tracks, panels and mesh are developed to work together, so you get one coordinated enclosure system instead of parts from different suppliers.' },
+  { f: 'Purpose-made components', b: 'Frames, tracks, panels and mesh are made to our specifications and engineered to work together, so you get one coordinated enclosure system.' },
   { f: 'CNC preparation to your openings', b: 'Parts are cut to the openings we measured, which gives a precise fit, including arches, angles and patios with several openings.' },
   { f: 'Heat-welded frame corners', b: 'Welded corners give clean lines and durable joints.' },
   { f: 'Complete factory test assembly', b: 'Your whole order is assembled and checked in our factory before it is packed for delivery.' },
-  { f: 'Labeled, prepared components', b: 'Every piece is numbered for its opening, so installation is efficient. Most jobs take one day on site.' },
+  { f: 'Labeled, prepared components', b: 'Every piece is numbered for its opening, so we can install within a month of your order and most jobs take one day on site.' },
   { f: 'Easy manual folding', b: 'Folding systems open and close by hand: no motors, no wiring, and they still work in a power outage.' },
   { f: 'Durable metal mesh', b: 'Stainless steel or honeycomb aluminum mesh is a strong choice for pet owners and anyone tired of fabric screens that tear or sag.' },
   { f: 'Houston factory and local support', b: 'We build, install and support from the same Houston address, so you know who is accountable after the sale.' },
@@ -92,15 +92,15 @@ const compare = {
 
 const process = [
   { t: 'Design visit', d: 'A professional visits, measures every opening and designs the layout with you.' },
-  { t: 'Your quote', d: 'Usually delivered on site that day, then emailed so you can review it.' },
-  { t: '50% deposit', d: 'Your cleared deposit starts production. The lead time is confirmed when you order.' },
+  { t: 'Your quote', d: 'We go over it with you on site, then email it within 24 hours.' },
+  { t: '50% deposit', d: 'Your cleared deposit starts production in our Houston factory.' },
   { t: 'Proof of your order', d: 'We show you the completed order before it leaves the factory.' },
   { t: 'Remaining 50%', d: 'The balance is due before installation.' },
-  { t: 'Installation', d: 'Our own crew installs. Most jobs take one day on site.' },
+  { t: 'Installation', d: 'Within a month of your order, by our own crew. Most jobs take one day on site.' },
 ];
 
 const visitFaq: QA[] = [
-  { q: 'Is the design visit really free?', a: 'Yes. We come to your home, measure every opening, design the layout with you and give you a written quote, usually on site that day and then by email. There is no cost and no obligation.' },
+  { q: 'Is the design visit really free?', a: 'Yes. We come to your home, measure every opening, design the layout with you and go over your quote on site, then email it within 24 hours. There is no cost and no obligation.' },
   { q: 'Do I have to decide at the visit?', a: 'No. Take your quote and decide on your own time.' },
   { q: 'What will it cost?', a: `Starting prices run $24 to $56 ${TAX}, depending on the system. ${EXTRAS} ${LENDERS}` },
   { q: 'Is a three-season room air-conditioned?', a: 'No. It is a three-season enclosure for an existing covered patio, not an insulated or air-conditioned room. It shelters you from wind, rain and glare, and on the hottest summer afternoons it stays close to the outdoor temperature. We plan ventilation with you at the design visit.' },
@@ -127,12 +127,12 @@ const visitFaq: QA[] = [
       </div>
       <div class="h-media">
         <figure class="h-concept">
-          <Image src={heroConcept} widths={[560, 900, 1220]} sizes="(max-width: 900px) 100vw, 620px" alt="Concept visualization: Clearfixed Smokey Gray polycarbonate panels filling the opening of a covered brick patio" loading="eager" fetchpriority="high" />
-          <figcaption><b>Concept visualization</b> Clearfixed, Smokey Gray, on a sample patio</figcaption>
+          <Image src={heroReal} widths={[640, 960, 1400]} sizes="(max-width: 900px) 100vw, 620px" alt="Seating area inside a Houston patio enclosed by AE metal screens" loading="eager" fetchpriority="high" />
+          <figcaption>Real AE installation in Houston, metal screens</figcaption>
         </figure>
         <figure class="h-real">
-          <Image src={heroReal} widths={[240, 420]} sizes="200px" alt="Seating area inside a Houston patio enclosed by AE metal screens" loading="eager" />
-          <figcaption>Real AE install: metal screens</figcaption>
+          <Image src={heroConcept} widths={[240, 420]} sizes="200px" alt="Concept visualization: Clearfixed Smokey Gray polycarbonate panels on a covered brick patio" loading="eager" />
+          <figcaption><b>Concept</b> Polycarbonate room, Smokey Gray</figcaption>
         </figure>
       </div>
     </div>
@@ -343,7 +343,7 @@ const visitFaq: QA[] = [
       <div class="sec-head">
         <p class="kicker"><span class="hexdot" aria-hidden="true"></span>From measurement to installation</p>
         <h2 id="process-title" class="h2">How your project runs</h2>
-        <p class="lede">Two different clocks: the fabrication lead time after your deposit, and the time our crew spends at your home, which is usually one day.</p>
+        <p class="lede">We install within a month of your order (after HOA approval, if your HOA needs it). Once we arrive, most jobs take one day on site.</p>
       </div>
       <ol class="proc">{process.map((s) => <li><h3>{s.t}</h3><p>{s.d}</p></li>)}</ol>
     </div>
@@ -514,7 +514,7 @@ const visitFaq: QA[] = [
   .h-concept { margin: 0; }
   .h-concept :global(img) { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; box-shadow: var(--shadow); display: block; }
   .h-concept figcaption { margin-top: 8px; font-family: var(--mono); font-size: .74rem; color: var(--ink-2); }
-  .h-concept figcaption b { display: inline-block; margin-right: 6px; padding: 2px 8px; border-radius: 999px; background: var(--yellow); color: var(--honey); font-weight: 700; }
+  .h-real figcaption b { display: inline-block; margin-right: 4px; padding: 1px 6px; border-radius: 999px; background: var(--yellow); color: var(--honey); font-weight: 700; }
   .h-real { position: absolute; left: -18px; bottom: 0; width: clamp(130px, 32%, 200px); margin: 0; background: var(--honey); padding: 6px; border-radius: 10px; box-shadow: 0 10px 28px rgba(0,0,0,.4); }
   .h-real :global(img) { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 6px; display: block; }
   .h-real figcaption { font-family: var(--mono); font-size: .66rem; color: var(--ink-2); padding: 5px 2px 1px; line-height: 1.3; }

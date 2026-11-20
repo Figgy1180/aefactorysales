@@ -4,7 +4,7 @@
 import { SITE } from '../data/site';
 interface Props { id?: string; source?: string }
 const { id = 'book', source = 'Book free design visit' } = Astro.props;
-const photos = SITE.photoUploads || !!import.meta.env.PUBLIC_PREVIEW; // preview shows the field; forms send nothing there
+const photos = SITE.photoUploads; // off: customers text photos to the office number instead
 ---
 <form class="form quote-form book-form" id={id} data-key={SITE.formKey} data-next="/thank-you/" enctype="multipart/form-data" data-invalid="Please add your name, phone, street address and a 5-digit ZIP code so we can reach you." novalidate>
   <input type="hidden" name="subject" value="Design visit request" />

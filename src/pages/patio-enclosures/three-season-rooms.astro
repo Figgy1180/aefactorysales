@@ -4,7 +4,6 @@ import Base from '../../layouts/Base.astro';
 import RelatedLinks from '../../components/RelatedLinks.astro';
 import PageHero from '../../components/PageHero.astro';
 import ProductCard from '../../components/ProductCard.astro';
-import CompareBars from '../../components/CompareBars.astro';
 import Faq from '../../components/Faq.astro';
 import QuoteForm from '../../components/QuoteForm.astro';
 import { FAQ, FACTS, SITE, byId, SIZES, range } from '../../data/site';
@@ -35,16 +34,16 @@ const cf = byId('clearfixed'), cfo = byId('clearfold');
 ---
 <Base
   title="Polycarbonate 3-Season Rooms in Houston | AE Factory Sales"
-  description="Turn your covered patio into a 3-season room with tinted polycarbonate panels for a fraction of a glass sunroom. Built in Houston. From $31 per sq ft."
+  description="Polycarbonate 3-season rooms for covered patios in Houston. Fixed and folding tinted panels, built in our Houston factory, installed within a month. From $31 per sq ft of opening."
   crumbs={crumbs}
   schema={[service]}
 >
   <PageHero crumbs={crumbs}>
     <div class="split">
       <div class="stack-lg">
-        <h1 class="display">A 3-season room <span class="y">for a fraction of glass</span></h1>
-        <p class="sub">Tinted polycarbonate panels in a heat-welded frame, with screen doors and doors that open on both sides so air moves through. Built for existing roofed patios.</p>
-        <div class="actions"><a class="btn" href="/free-quote/">Get my price</a><a class="btn btn-line" href="#vs-glass">Compare to glass</a></div>
+        <h1 class="display">Polycarbonate 3-season rooms <span class="y">for your covered patio</span></h1>
+        <p class="sub">A three-season room closes in the open sides of the patio you already have. Fixed and folding tinted polycarbonate panels in a heat-welded, metal-reinforced frame, with folding or screen sections where you want air. Installed within a month of your order.</p>
+        <div class="actions"><a class="btn" href="/book-visit/">Book free design visit</a><a class="btn btn-line" href="/free-quote/">Get my estimate now</a></div>
       </div>
       <figure class="dim-frame draw" style="margin:30px 30px 0 0">
         <span class="dim h" aria-hidden="true"><span>Panels up to 3.5 ft wide</span></span>
@@ -57,24 +56,23 @@ const cf = byId('clearfixed'), cfo = byId('clearfold');
   <section class="band on-paper" id="vs-glass">
     <div class="wrap stack-lg">
       <div class="sec-head" style="margin-bottom:0">
-        <h2 class="h2">Same room, <span class="y">a different bill</span></h2>
-        <p class="lede">Glass sunrooms are priced like a home addition. A polycarbonate enclosure uses the patio roof you already have.</p>
+        <h2 class="h2">Enclosing a patio <span class="y">vs adding a sunroom</span></h2>
+        <p class="lede">These are different projects. An AE room fills in the open sides of a covered patio you already have, using its roof, slab and posts. A sunroom addition builds a new room, usually with its own foundation, roof and walls, and a 4-season room adds heating and cooling. Compare what is included before comparing prices.</p>
       </div>
       <div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable table">
         <table class="tbl">
-          <thead><tr><th scope="col"><span class="sr-only">Feature</span></th><th scope="col">AE 3-season room</th><th scope="col">3-season sunroom</th><th scope="col">4-season glass sunroom</th></tr></thead>
+          <thead><tr><th scope="col">Feature</th><th scope="col">AE 3-season room (retrofit)</th><th scope="col">3-season sunroom addition</th><th scope="col">4-season glass sunroom addition</th></tr></thead>
           <tbody>
-            <tr><th scope="row">16 × 14 ft patio, two open sides</th><td class="ours">$7,400 to $9,600</td><td>$18,000 to $52,000</td><td>$45,000 to $90,000</td></tr>
-            <tr><th scope="row">If something hits it</th><td class="ours">Polycarbonate flexes instead of shattering</td><td colspan="2">Glass can crack or shatter</td></tr>
-            <tr><th scope="row">Weight</th><td class="ours">Much lighter than glass at comparable thickness, which makes folding panels practical</td><td colspan="2">Heavy; may need extra structure</td></tr>
-            <tr><th scope="row">Order to install</th><td class="ours">Within a month, CNC-cut to fit the first time</td><td colspan="2">Often a multi-week construction project</td></tr>
+            <tr><th scope="row">What gets built</th><td class="ours">Panels and doors in the open sides of your existing covered patio</td><td>A new room: foundation or deck, roof, walls and windows</td><td>A new conditioned room, usually with heating and cooling</td></tr>
+            <tr><th scope="row">Climate control</th><td class="ours">None; sheltered and ventilated, not insulated</td><td>Usually none</td><td>Heated and cooled</td></tr>
+            <tr><th scope="row">Typical cost for a 16 × 14 ft space</th><td class="ours">$7,400 to $9,600 (two open sides)</td><td>$18,000 to $52,000</td><td>$45,000 to $90,000</td></tr>
+            <tr><th scope="row">Panel material</th><td class="ours">Polycarbonate: lighter and more impact resistant than ordinary glass, but scratches more easily</td><td colspan="2">Glass, often tempered or laminated: clearer and more scratch resistant, and heavier</td></tr>
+                        <tr><th scope="row">Order to install</th><td class="ours">Within a month of your order; most installs take one day on site</td><td colspan="2">Varies by builder; a construction project with its own schedule</td></tr>
             <tr><th scope="row">Opens up</th><td class="ours">Clearfold and Hybrid fold to the side</td><td colspan="2">Depends on how many windows open</td></tr>
-            <tr><th scope="row">Scratches</th><td class="ours">Needs gentle cleaning: soft cloth, mild soap</td><td colspan="2">Glass resists scratching better</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="fine">Sunroom ranges from the HomeGuide cost guide (Oct 2026) on 224 sq ft of floor. AE range uses Clearfixed (${cf.msrp}) to Clearfold (${cfo.msrp}) per sq ft on 240 sq ft of openings. Weight and impact resistance are general properties of polycarbonate (Palram Industries), not test results for a complete enclosure.</p>
-      <CompareBars />
+      <p class="fine">Sunroom ranges from the HomeGuide cost guide (Oct 2026) on 224 sq ft of floor, and include construction work an AE room does not. AE range uses Clearfixed (${cf.msrp}) to Clearfold (${cfo.msrp}) per sq ft of opening on 240 sq ft of openings, installed, before sales tax. Looking at other retrofit options, like glass panel systems or motorized shades on an existing patio? See <a href="/compare/">compare options</a>. Weight and impact resistance are general properties of polycarbonate (Palram Industries), not test results for a complete enclosure.</p>
     </div>
   </section>
 
@@ -103,13 +101,13 @@ const cf = byId('clearfixed'), cfo = byId('clearfold');
             <tbody>
               <tr><th scope="row">Visible light</th><td>{FACTS.vlt} transmission*</td></tr>
               <tr><th scope="row">Solar heat gain</th><td>{FACTS.shgc} SHGC*</td></tr>
-              <tr><th scope="row">Fixed panel wind rating</th><td>Up to {FACTS.fixedWind}</td></tr>
-              <tr><th scope="row">Folding panels</th><td>Operate to {FACTS.foldWind}; retract and secure for {FACTS.foldStowed}</td></tr>
+              <tr><th scope="row">Fixed panels, wind</th><td>{FACTS.fixedWind} in factory testing**</td></tr>
+              <tr><th scope="row">Folding panels, wind</th><td>Operated to {FACTS.foldWind}; retracted and secured, {FACTS.foldStowed}, in factory testing**</td></tr>
               <tr><th scope="row">Panel thickness</th><td>4 mm (Clearfixed)</td></tr>
-              <tr><th scope="row">Frame</th><td>Heat welded, no screws. PVC-fiber blend, aluminum core, scratch-resistant ceramic coating. Night Gray or Bright White.</td></tr>
+              <tr><th scope="row">Frame</th><td>Heat-welded corners. PVC-fiber blend, aluminum core, scratch-resistant ceramic coating. Night Gray or Bright White.</td></tr>
             </tbody>
           </table>
-          <p class="fine" style="margin-top:10px">*Tested on Smokey Gray panels.</p>
+          <p class="fine" style="margin-top:10px">*Panel test on Smokey Gray, not a rating of an installed room. **From factory test data; no independent lab report yet. Not a hurricane rating.</p>
         </div>
         <div class="stack">
           <h2 class="h3">What a 3-season room is, and isn't</h2>

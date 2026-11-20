@@ -40,7 +40,7 @@ export const WARRANTY_FULL =
   'Lifetime on the frame for the original owner, for as long as you own the home (not transferable to a new owner), and 3 years on all parts. Installed and maintained by the manufacturer. Covers normal wear and tear. Excludes accidents, intentional damage and acts of God.';
 export const FRAME = {
   short: 'Heat-welded PVC-fiber blend, aluminum core, ceramic coating',
-  long: 'Every AE frame is heat welded, with no screws: a PVC and fiber blend with an aluminum rod inside for strength and a scratch-resistant ceramic coating outside.',
+  long: 'Every AE frame has heat-welded corners: a PVC and fiber blend with an aluminum rod inside for strength and a scratch-resistant ceramic coating outside.',
   colors: ['Night Gray', 'Bright White'],
 };
 export const INSTALL = 'Within a month of your order, by our own crew';
@@ -135,7 +135,7 @@ export const PRODUCTS: Product[] = [
     specs: [
       ['Panel', 'Polycarbonate sunshade panel and honeycomb aluminum mesh'],
       ['Hardware', 'High-end handle; ramp water stop quoted for your project'],
-      ['Opening', 'Up to 5 ft per pull, 8 ft meeting in the middle'],
+      ['Opening', 'Up to 5 ft per pull, 10 ft meeting in the middle'],
     ],
   },
 ];
@@ -296,7 +296,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'What are the frames made of, and what colors come standard?',
-      a: 'Every frame is heat welded with no screws: a PVC and fiber blend with an aluminum rod inside and a scratch-resistant ceramic coating outside. Frames come in Night Gray or Bright White. Polycarbonate panels come in Smokey Gray or Industrial Blue. Frames carry a lifetime warranty and all parts carry 3 years.',
+      a: 'Every frame has heat-welded corners: a PVC and fiber blend with an aluminum rod inside and a scratch-resistant ceramic coating outside. Frames come in Night Gray or Bright White. Polycarbonate panels come in Smokey Gray or Industrial Blue. Frames carry a lifetime warranty and all parts carry 3 years.',
     },
     {
       q: 'Do you work with HOAs?',
