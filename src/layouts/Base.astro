@@ -5,7 +5,8 @@ import { getImage } from 'astro:assets';
 import { HOLIDAY, LOGO, FAVICON, LOGO_H } from '../data/season';
 import CallMeBack from '../components/CallMeBack.astro';
 import type { ImageMetadata } from 'astro';
-import archivoUrl from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
+import interUrl from '@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url';
+import manropeUrl from '@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url';
 
 interface Props {
   /** Campaign code stored for visitors who arrive without ?src (e.g. typed the hanger address). */
@@ -111,7 +112,8 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
     <meta name="geo.placename" content="Houston" />
     <meta name="geo.position" content={`${SITE.geo.lat};${SITE.geo.lng}`} />
     <meta name="ICBM" content={`${SITE.geo.lat}, ${SITE.geo.lng}`} />
-    <link rel="preload" href={archivoUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={interUrl} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={manropeUrl} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href={FAVICON} type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />

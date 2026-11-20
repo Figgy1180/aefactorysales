@@ -16,4 +16,6 @@ export default defineConfig({
     }),
   ],
   image: { responsiveStyles: false },
+  // Never inline assets as data: URIs; the security policy only allows fonts from our own domain.
+  vite: { build: { assetsInlineLimit: 0 } },
 });

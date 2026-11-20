@@ -1,205 +1,202 @@
 ---
+// Homepage, Nov 2026 refresh (preview). Section order follows the approved brief:
+// 1 PC-led experience and offer, 2 operation demo, 3 room and screen pathways, 4 factory proof,
+// 5 real installations, 6 pricing and financing, 7 process, 8 showroom, 9 FAQ and visit request.
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
-import ProductCard from '../components/ProductCard.astro';
-import CompareBars from '../components/CompareBars.astro';
-import Why from '../components/Why.astro';
 import Faq from '../components/Faq.astro';
 import ProjectMosaic from '../components/ProjectMosaic.astro';
-// Aligned pair: the closed photo is warped to match the open photo, so the posts and beam line up under the slider.
-import heroBg from '../assets/projects/p35/1-wide.jpg';
-import rFixed from '../assets/renders/fixed.png';
-import rHexfold from '../assets/renders/hexfold.png';
-import rClearfixed from '../assets/renders/clearfixed.png';
-import rClearfold from '../assets/renders/clearfold.png';
-import rHybrid from '../assets/renders/hybrid.png';
-import vizShot from '../assets/renders/visualizer-sample.jpg';
-import { PRODUCTS, SIZES, FAQ, FACTS, CITIES, SITE, byId, range, FINANCING, WARRANTY, CITY_PAGES, type QA } from '../data/site';
+import HybridDemo from '../components/HybridDemo.astro';
 import BookVisitForm from '../components/BookVisitForm.astro';
 import ReviewCards from '../components/ReviewCards.astro';
 import { REVIEWS } from '../data/reviews';
-import meshImg from '../assets/photos/fixed-screen-frame-colors.jpg';
-import handleImg from '../assets/photos/hexfold-handle.jpg';
-import cncImg from '../assets/photos/factory-cnc.jpg';
-import { HOLIDAY } from '../data/season';
+import { PRODUCTS, SIZES, FAQ, FACTS, SITE, byId, range, FINANCING, type QA } from '../data/site';
 
-import open from '../assets/photos/hexfold-patio-open.jpg';
-import clearfixed from '../assets/photos/clearfixed-polycarbonate-panels.jpg';
-import showroom from '../assets/photos/showroom-room-interior.jpg';
-import handle from '../assets/photos/hexfold-patio-closed.jpg';
+import heroImg from '../assets/projects/p34/5-inside-seating.jpg';
+import roomShowroom from '../assets/photos/showroom-polycarbonate-smoke.jpg';
+import rClearfixed from '../assets/renders/clearfixed.png';
+import screensReal from '../assets/photos/hexfold-patio-closed.jpg';
 import fixedColors from '../assets/photos/fixed-screen-frame-colors.jpg';
-import showroomSmoke from '../assets/photos/showroom-polycarbonate-smoke.jpg';
 import cnc from '../assets/photos/factory-cnc.jpg';
 import angle from '../assets/photos/factory-angle.jpg';
 import pcRack from '../assets/photos/factory-pc-smoke.jpg';
-import installed from '../assets/projects/p14/2-long-side-closed.jpg';
+import showroomIn from '../assets/photos/showroom-room-interior.jpg';
 
-// Proof placeholders render ONLY in preview builds, so an empty review slot can never ship live.
-const SHOW_PH = !!import.meta.env.PUBLIC_PREVIEW;
-const cardImg: Record<string, { img: any; alt: string; note?: string }> = {
-  clearfixed: { img: clearfixed, alt: 'Clearfixed tinted polycarbonate panels on an AE patio enclosure' },
-  clearfold: { img: showroomSmoke, alt: 'Folding polycarbonate panels in the AE showroom' },
-  hexfold: { img: handle, alt: 'Brick Houston patio closed in with Hexfold folding screens' },
-  fixed: { img: fixedColors, alt: 'Two Fixed Screen panels with 304 stainless steel mesh in Night Gray and Bright White frames' },
-  hybrid: { img: showroom, alt: 'AE showroom room combining polycarbonate panels and metal mesh' },
-};
+const uses = ['Cooking', 'Entertaining', 'Relaxing', 'Poolside', 'Family and pet time'];
+const room = ['clearfixed', 'clearfold', 'hybrid'].map(byId);
+const screens = ['hexfold', 'fixed'].map(byId);
 const order = ['clearfixed', 'clearfold', 'hybrid', 'hexfold', 'fixed'];
-const five = [
-  { id: 'fixed', img: rFixed, tag: 'Screen · fixed', alt: 'Render of Fixed Screen panels with stainless steel mesh in a Night Gray frame' },
-  { id: 'hexfold', img: rHexfold, tag: 'Screen · folding', alt: 'Render of Hexfold folding screens with evenly spaced leaves' },
-  { id: 'clearfixed', img: rClearfixed, tag: 'Panel · fixed', alt: 'Render of Clearfixed tinted polycarbonate panels' },
-  { id: 'clearfold', img: rClearfold, tag: 'Panel · folding', alt: 'Render of Clearfold folding tinted polycarbonate panels' },
-  { id: 'hybrid', img: rHybrid, tag: 'Screen + panel', alt: 'Render of the Hybrid system with mesh and tinted panel leaves' },
-].map((f) => ({ ...f, p: byId(f.id) }));
-// Visit-first FAQ: the questions people ask right before booking.
+const defSys = byId('clearfixed');
+const pickerData = JSON.stringify({ products: PRODUCTS.map(({ id, name, msrp }) => ({ id, name, msrp })), sizes: SIZES });
+const TAX = 'per sq ft of opening, installed, before sales tax';
+const EXTRAS = 'Accessories and other options are extra and are quoted for your project.';
+const LENDERS = 'Financing is available through HFS Financial and Acorn Finance. Subject to credit approval; third-party lenders, AE is not a lender.';
+
+const build = [
+  { t: 'Your measurements become your parts', d: 'Each opening measured at your home becomes a set of parts labeled for your project.' },
+  { t: 'CNC cutting', d: 'Length and angle saws cut frames to your sizes, including shaped sections for gables.', img: cnc, alt: 'CNC dual-head saw cutting frame profiles in the AE factory' },
+  { t: 'Welded frames', d: 'Frame corners are heat welded instead of screwed, with handles and locks routed into the frame.', img: angle, alt: 'Angle saw used for shaped frame sections' },
+  { t: 'Panels and wheels assembled', d: 'Mesh and polycarbonate are cut in their own areas and fitted with wheels and guards.', img: pcRack, alt: 'Smokey Gray polycarbonate panels racked in the factory' },
+  { t: 'Staged and tested', d: 'The complete order is assembled and tested in our staging area, then taken apart and packed.' },
+  { t: 'Arrives labeled', d: 'Every piece is numbered for its opening, so install day goes smoothly.' },
+];
+
+const process = [
+  { t: 'Free design visit', d: 'We measure every opening, design the layout with you and go over options at your home.' },
+  { t: 'Written quote', d: 'Your quote is emailed within a day of the visit, every item on its own line. Online estimates are preliminary.' },
+  { t: '50% deposit starts production', d: 'Your cleared deposit starts production and the lead time. Need HOA approval? We provide drawings and specs on request.' },
+  { t: 'See your finished order', d: 'We show you the completed order. The remaining 50% is due before installation.' },
+  { t: 'Installed by our crew', d: 'Our own crew installs, never subcontractors. Most jobs take one day on site.' },
+];
+
 const visitFaq: QA[] = [
-  { q: 'Is the site visit really free?', a: 'Yes. We come to your home, measure every opening and email you a written quote within a day, at no cost.' },
-  { q: 'Do I have to decide at the visit?', a: 'No. Your written quote is emailed within a day of the visit, with every item listed, and you decide on your own time.' },
-  { q: 'What will it cost?', a: `Installed prices run $24 to $56 per sq ft of opening, depending on the system. The price picker on this page shows ranges for your patio size. ${FINANCING}` },
-  { q: 'How soon can you install?', a: 'Within a month of your order (after HOA approval, if your HOA requires it), by our own crew. We never use subcontractors.' },
+  { q: 'Is the design visit really free?', a: 'Yes. We come to your home, measure every opening, design the layout with you and email your written quote within a day, at no cost.' },
+  { q: 'Do I have to decide at the visit?', a: 'No. Take your written quote and decide on your own time.' },
+  { q: 'What will it cost?', a: `Starting prices run $24 to $56 ${TAX}, depending on the system. ${EXTRAS} ${LENDERS}` },
+  { q: 'Which should I choose: a 3-season room or screens?', a: 'Polycarbonate panels block wind and rain, so the patio works in cooler and wetter weather. Metal screens keep the breeze and keep bugs outside. The Hybrid puts both on the same opening so you can switch.' },
   FAQ.general[1],
 ];
-const pickerData = JSON.stringify({ products: PRODUCTS.map(({ id, name, msrp }) => ({ id, name, msrp })), sizes: SIZES });
-const hex = byId('hexfold');
-// Holiday season: the homepage leads with 3-season rooms, and the price picker starts on Clearfixed.
-const defSys = HOLIDAY ? byId('clearfixed') : hex;
-const cf = byId('clearfixed');
-const ytId = (SITE.youtubeFold.match(/(?:shorts\/|v=|youtu\.be\/)([\w-]{11})/) || [])[1];
-const videoLd = {
-  '@context': 'https://schema.org', '@type': 'VideoObject',
-  name: 'Hexfold folding patio screens opening by hand',
-  description: 'AE Hexfold aluminum mesh screens folding open by hand on a gabled Houston patio. No motor, no remote.',
-  thumbnailUrl: `${SITE.url}/video/gable-open-poster.jpg`,
-  uploadDate: '2026-11-05', duration: 'PT15S',
-  contentUrl: `${SITE.url}/video/gable-open.mp4`,
-  ...(ytId ? { embedUrl: `https://www.youtube.com/embed/${ytId}`, url: SITE.youtubeFold } : {}),
-};
 ---
 <Base
-  title='Premium Patio Enclosures in Houston | AE Factory Sales'
-  description='Patio enclosures in Houston: polycarbonate 3-season rooms and metal patio screens, built in our own factory and installed by our crew within a month.'
-  schema={[videoLd]}
+  title="Patio Enclosures in Houston | AE Factory Sales"
+  description="Custom polycarbonate 3-season rooms and metal patio screens for existing covered patios. Precision-prepared in Houston, installed by our own crew."
 >
-  <section class:list={['hero', HOLIDAY && 'winter-hero']} aria-labelledby="hero-title">
-    <Image class="hero-bg" src={heroBg} widths={[640, 960, 1280]} sizes="100vw" alt="20 ft patio enclosure on a Houston home, seen from the yard" loading="eager" fetchpriority="high" />
-    {HOLIDAY && <div class="snow" aria-hidden="true"></div>}
-    <div class="wrap hero-in">
-      <div class="dimline" aria-hidden="true"><i></i><span>About 20 ft, one opening · Houston</span><i></i></div>
-      <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Custom made for your covered patio</p>
-      <h1 id="hero-title" class="display">Premium patio enclosures <span class="y">built in Houston</span></h1>
-      <p class="sub">Keep the mosquitoes out and the breeze in, or shut out wind and rain. Folding systems open by hand, even in a power outage.</p>
-      <div class="actions">
-        <a class="btn btn-big" href="#book-form" data-cb-open>Book my free site visit</a>
-        <a class="btn btn-line" href="/patio-visualizer/">See it on my patio</a>
-      </div>
-      <ul class="badges">
-        <li><span class="hexbadge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 12h8M8 12l3-3M8 12l3 3M4 4v16M20 4v16"/></svg></span><div><b>Opens by hand</b><span>No motor, works in a power outage</span></div></li>
-        <li><span class="hexbadge" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></span><div><b>Installed within a month</b><span>Of your order, by our own crew</span></div></li>
-        <li><span class="hexbadge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><div><b>Lifetime frame warranty</b><span>3 years on parts, from the maker</span></div></li>
-      </ul>
-      <p class="micro">From $24 per sq ft of opening, installed. Free site visit, written quote emailed within a day. Or call <a href={SITE.phoneHref}>{SITE.phone}</a>.</p>
-    </div>
-  </section>
-
-  <section class="band hive" aria-labelledby="five-title">
-    <div class="wrap">
-      <div class="sec-head row-head">
-        <div>
-          <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Five systems, one factory</p>
-          <h2 id="five-title" class="h2">Screen it, enclose it <span class="y">or both</span></h2>
+  <!-- 1. Experience and offer -->
+  <section class="h-hero" aria-labelledby="hero-title">
+    <div class="wrap h-grid">
+      <div class="h-copy">
+        <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Houston patio enclosures and screens</p>
+        <h1 id="hero-title" class="display">Make your patio your <span class="y">favorite place to be.</span></h1>
+        <p class="sub">Custom polycarbonate enclosures and metal screens for existing covered patios. Precision-prepared in Houston, professionally installed, with local support.</p>
+        <ul class="uses" aria-label="What people use their enclosed patio for">{uses.map((u) => <li>{u}</li>)}</ul>
+        <div class="actions">
+          <a class="btn btn-big" href="#book-form" data-cb-open>Request a free design visit</a>
+          <a class="btn btn-line" href="#systems">Explore systems</a>
         </div>
-        <p class="lede" style="max-width:40ch">Every system shares the same metal-reinforced, heat-welded frame, in Night Gray or Bright White. Prices per sq ft of opening, installed.</p>
+        <p class="micro">We call to confirm a time that suits you. Or <a href="#prices">price your patio</a>, or <a href="/showroom/">visit the showroom</a>.</p>
       </div>
-      <ul class="five">
-        {five.map((f) => (
-          <li><a href={f.p.href}>
-            <Image src={f.img} widths={[320, 480, 640]} sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 230px" alt={f.alt} loading="lazy" />
-            <span class="five-body"><small>{f.tag}</small><b>{f.p.name}</b><em>from ${f.p.msrp}</em></span>
-          </a></li>
-        ))}
-      </ul>
-      <p class="fine">Product renders made from our system designs. See finished jobs on the <a href="/projects/">projects page</a>.</p>
-    </div>
-  </section>
-
-  <section class="band raised hive hive-left viz-band" aria-labelledby="viz-title">
-    <div class="wrap viz-grid">
-      <div class="stack-lg">
-        <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Patio visualizer</p>
-        <h2 id="viz-title" class="h2">See it on <span class="y">your patio</span></h2>
-        <p class="lede">Upload a photo, drag four corners onto an opening, and switch between all five systems and both frame colors. Your photo stays on your phone.</p>
-        <div class="actions"><a class="btn" href="/patio-visualizer/">Try it with my photo</a></div>
-      </div>
-      <figure class="viz-shot">
-        <Image src={vizShot} widths={[480, 874]} sizes="(max-width: 820px) 100vw, 640px" alt="Visualizer preview: Hexfold screens meeting in the middle, drawn onto a photo of a brick patio" loading="lazy" />
-        <figcaption><span>Sample: brick patio, Richmond</span><span>Hexfold · Night Gray</span></figcaption>
+      <figure class="h-photo">
+        <Image src={heroImg} widths={[640, 960, 1400]} sizes="(max-width: 900px) 100vw, 640px" alt="Seating area inside a Houston patio enclosed by AE metal screens" loading="eager" fetchpriority="high" />
+        <figcaption>Real AE installation in Houston, metal screens</figcaption>
       </figure>
     </div>
   </section>
 
-  <section class="band on-paper offer hive" id="book" aria-labelledby="offer-title">
-    <div class="wrap offer-grid">
+  <!-- 2. Operation -->
+  <section class="band on-white" aria-labelledby="demo-title">
+    <div class="wrap demo-grid">
       <div class="stack-lg">
-        <h2 id="offer-title" class="h2">Your free <span class="y">site visit</span></h2>
-        <ol class="visit-steps">
-          <li><b>Pick a time that suits you</b><span>Leave your name and number, and your ZIP and best time if you like. We call to confirm.</span></li>
-          <li><b>We come to you</b><span>We measure every opening, check your roof, posts and slab, and show you frame colors, mesh and panel samples.</span></li>
-          <li><b>You get a written quote</b><span>Emailed within a day of the visit. System, sizes, options and installation, each on its own line. Decide on your own time.</span></li>
-        </ol>
-        <p class="offer-cost">What the visit costs you: <b>nothing.</b></p>
+        <p class="kicker dark"><span class="hexdot" aria-hidden="true"></span>How the Hybrid works</p>
+        <h2 id="demo-title" class="h2">Screen, room or wide open. Same opening.</h2>
+        <p class="lede">The Hybrid puts a metal mesh layer and a polycarbonate layer on the same opening, and each can cover all of it. Run the mesh with the panels folded away, close the panels with the mesh folded away, or fold both back for access.</p>
+        <ul class="ticks dark">
+          <li>Closely spaced leaves fold like a fan, tracked top and bottom</li>
+          <li>Handles sit on the moving edge, and everything opens by hand, even in a power outage</li>
+          <li>The design visit decides which openings fold and which stay fixed for your ventilation</li>
+        </ul>
+        <div class="actions"><a class="btn btn-line" href="/patio-enclosures/hybrid/">See the Hybrid</a></div>
       </div>
-      <div class="book-card" id="book-form">
-        <p class="book-k" data-bv-title data-screens="Get your screen quote">Book your free visit</p>
-        <BookVisitForm id="home-book" />
+      <div class="demo-card"><HybridDemo /></div>
+    </div>
+  </section>
+
+  <!-- 3. Pathways -->
+  <section class="band" id="systems" aria-labelledby="paths-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Five systems, one frame</p>
+        <h2 id="paths-title" class="h2">A 3-season room, metal screens, or both</h2>
+        <p class="lede">Every system uses the same welded, metal-reinforced frame in Night Gray or Bright White. Prices are {TAX}.</p>
+      </div>
+      <div class="paths">
+        <article class="path path-room">
+          <div class="path-media two">
+            <figure><Image src={roomShowroom} widths={[480, 800]} sizes="(max-width: 900px) 50vw, 330px" alt="Folding Smokey Gray polycarbonate panels in the AE showroom" loading="lazy" /><figcaption>In our Houston showroom</figcaption></figure>
+            <figure><Image src={rClearfixed} widths={[480, 800]} sizes="(max-width: 900px) 50vw, 330px" alt="Concept visualization of Clearfixed tinted polycarbonate panels" loading="lazy" /><figcaption>Concept visualization</figcaption></figure>
+          </div>
+          <div class="path-body">
+            <p class="path-k">Three-season room</p>
+            <h3 class="h3">Polycarbonate panels for wind, rain and cooler days</h3>
+            <p>Lightweight polycarbonate in Smokey Gray or Industrial Blue, fixed or folding by hand. Close the patio for cooler, wetter weather and open it back up when the breeze is right.</p>
+            <ul class="sys">{room.map((p) => <li><a href={p.href}><b>{p.name}</b><span>{p.kind}</span><em>from ${p.msrp}</em></a></li>)}</ul>
+            <table class="facts">
+              <caption>Panel facts</caption>
+              <tbody>
+                <tr><th scope="row">Visible light</th><td>{FACTS.vlt} transmission*</td></tr>
+                <tr><th scope="row">Solar heat gain</th><td>{FACTS.shgc} SHGC*</td></tr>
+                <tr><th scope="row">Wind</th><td>Fixed panels rated to {FACTS.fixedWind}. Folding panels operate to {FACTS.foldWind}; retract and secure for {FACTS.foldStowed}.</td></tr>
+              </tbody>
+            </table>
+            <p class="fine">*Panel test on Smokey Gray. Panel values, not a full installed-system rating.</p>
+          </div>
+        </article>
+        <article class="path">
+          <div class="path-media two">
+            <figure><Image src={screensReal} widths={[480, 800]} sizes="(max-width: 900px) 50vw, 330px" alt="Brick Houston patio closed in with Hexfold folding screens" loading="lazy" /><figcaption>Real installation, Hexfold</figcaption></figure>
+            <figure><Image src={fixedColors} widths={[480, 800]} sizes="(max-width: 900px) 50vw, 330px" alt="Fixed Screen panels with 304 stainless steel mesh in Night Gray and Bright White frames" loading="lazy" /><figcaption>Fixed Screen frame colors</figcaption></figure>
+          </div>
+          <div class="path-body">
+            <p class="path-k">Metal screens</p>
+            <h3 class="h3">Keep the breeze, keep bugs outside</h3>
+            <p>Our established screen family: metal mesh instead of nylon or fiberglass, in welded frames that fold by hand or stay fixed.</p>
+            <ul class="sys">{screens.map((p) => <li><a href={p.href}><b>{p.name}</b><span>{p.kind}</span><em>from ${p.msrp}</em></a></li>)}</ul>
+            <table class="facts">
+              <caption>Screen facts</caption>
+              <tbody>
+                <tr><th scope="row">Mesh</th><td>Hexfold: honeycomb aluminum, {FACTS.mesh}. Fixed Screen: 304 stainless steel.</td></tr>
+                <tr><th scope="row">Wind</th><td>Hexfold operates to {FACTS.foldWind}; retract and secure for {FACTS.foldStowed}.</td></tr>
+                <tr><th scope="row">Opening</th><td>Hexfold up to 10 ft per pull, 20 ft meeting in the middle.</td></tr>
+              </tbody>
+            </table>
+            <p class="fine">Not sure yet? <a href="/patio-visualizer/">Try the systems on a photo of your patio</a>.</p>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
+  <!-- 4. Factory proof -->
+  <section class="band on-white hive-light" aria-labelledby="build-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker dark"><span class="hexdot" aria-hidden="true"></span>Prepared in Houston</p>
+        <h2 id="build-title" class="h2">Made to your measurements, before we arrive</h2>
+        <p class="lede">Parts are cut and assembled for your openings in our factory on William Tell Street, and the full order is tested before it leaves. That is why install day is quick and the fit is right. <a href="/how-we-build/">Tour the factory</a></p>
+      </div>
+      <div class="build-photos">
+        {build.filter((s) => s.img).map((s) => (
+          <figure><Image src={s.img} alt={s.alt!} widths={[360, 640]} sizes="(max-width: 640px) 100vw, 360px" loading="lazy" /><figcaption>{s.t}</figcaption></figure>
+        ))}
+      </div>
+      <ol class="build">
+        {build.map((s) => <li><h3>{s.t}</h3><p>{s.d}</p></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 5. Real installations -->
   <section class="band" aria-labelledby="mosaic-title">
     <div class="wrap">
       <div class="row-head">
-        <h2 id="mosaic-title" class="h2">Real Houston <span class="y">backyards</span></h2>
+        <div class="stack">
+          <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Real Houston backyards</p>
+          <h2 id="mosaic-title" class="h2">Installed by our own crew</h2>
+        </div>
         <a class="btn btn-line" href="/projects/">See all projects</a>
       </div>
       <ProjectMosaic />
-      <p class="after-cta"><a class="btn" href="#book" data-cb-open>See options like these at your patio</a></p>
+      <p class="fine" style="margin-top:12px">Every photo here is a finished AE job. These projects use our metal screen systems.</p>
+      {REVIEWS.length > 0 && <div style="margin-top:40px"><ReviewCards /></div>}
     </div>
   </section>
 
-  {REVIEWS.length > 0 && (
-  <section class="band raised hive hive-left" aria-labelledby="proof-title">
-    <div class="wrap stack-lg">
-      <h2 id="proof-title" class="h2">What Houston homeowners <span class="y">say</span></h2>
-      <ReviewCards />
-      <p class="fine">Had us build yours? <a href="/reviews/">Tell us how we did</a>.</p>
-    </div>
-  </section>
-  )}
-
-  <section class="band raised fold-band" id="fold" aria-labelledby="fold-title">
-    <div class="wrap fold-grid">
-      <figure class="fold-video dim-frame">
-        <video width="540" height="960" data-src="/video/gable-open.mp4" poster="/video/gable-open-poster.jpg" muted loop playsinline controls preload="none" aria-label="Hexfold screens being folded open by hand on a gabled patio"></video>
-        {SITE.youtubeFold && <figcaption><a class="yt" href={SITE.youtubeFold} target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.4-1.6.5-4.8.5-4.8s0-3.2-.5-4.8zM9.7 15.1V8.9l5.8 3.1z"/></svg>Watch on YouTube</a></figcaption>}
-      </figure>
-      <div class="stack-lg">
-        <h2 id="fold-title" class="h2">{HOLIDAY ? <>Ready for spring? <span class="y">Watch it fold away</span></> : <>Watch it <span class="y">fold away</span></>}</h2>
-        <p class="lede">Hexfold panels hang from the top track and glide aside by hand. No motor, no remote, nothing dragging on the ground. Close them in seconds when the mosquitoes come out.</p>
-        <dl class="fold-facts">
-          <div><dt>20 ft</dt><dd>wide, meeting in the middle</dd></div>
-          <div><dt>10 ft</dt><dd>tall per panel</dd></div>
-          <div><dt>$28</dt><dd>per sq ft, installed</dd></div>
-        </dl>
-        <div class="actions"><a class="btn" href="/patio-screens/hexfold/">See Hexfold</a><a class="btn btn-line" href="/free-quote/">Price my patio</a></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="band on-paper hive hive-left" id="prices" aria-labelledby="price-title">
+  <!-- 6. Pricing and financing -->
+  <section class="band on-paper" id="prices" aria-labelledby="price-title">
     <div class="wrap">
       <div class="sec-head">
-        <h2 id="price-title" class="h2">What will my <span class="y">patio cost?</span></h2>
-        <p class="lede">Pick a patio and a system to see a typical installed range. We price the open wall area we fill, not your floor. Your exact number comes from a free site visit.</p>
+        <p class="kicker dark"><span class="hexdot" aria-hidden="true"></span>Pricing</p>
+        <h2 id="price-title" class="h2">What will my patio cost?</h2>
+        <p class="lede">Pick a patio and a system for a typical starting range. We price the open wall area we fill, not your floor. Your exact price comes from the free design visit.</p>
       </div>
       <div class="picker" id="picker" data-json={pickerData}>
         <div class="picker-opts">
@@ -219,281 +216,167 @@ const videoLd = {
         <div class="estimate" aria-live="polite">
           <p class="est-label" id="est-label">{defSys.name}, medium patio</p>
           <p class="est-range tnum" id="est-range">{range(defSys.msrp, 200, 300)}</p>
-          <p id="est-note" class="muted">200 to 300 sq ft of openings at ${defSys.msrp} per sq ft, installed.</p>
+          <p id="est-note" class="muted">200 to 300 sq ft of openings at ${defSys.msrp} {TAX}.</p>
           <ul class="ticks">
-            <li>Design and free site visit</li>
-            <li>CNC fabrication and testing in Houston</li>
-            <li>Installed by our own crew within a month</li>
+            <li>Free design visit and written quote</li>
+            <li>Prepared and tested in our Houston factory</li>
+            <li>Installed by our own crew</li>
             <li>Lifetime frame warranty, 3 years on parts</li>
           </ul>
-          <p class="fine">Arches, extra posts and locks add to the price. {FINANCING}</p>
-          <a class="btn" href="#book" data-cb-open>Get your exact price: book my free visit</a>
-        </div>
-      </div>
-      <div class="band-tight" style="padding-bottom:0"><CompareBars /></div>
-    </div>
-  </section>
-
-
-  <section class="band raised hive" aria-labelledby="why-title">
-    <div class="wrap stack-lg">
-      <div class="sec-head" style="margin-bottom:0">
-        <h2 id="why-title" class="h2">Built on 25 years <span class="y">in windows and doors</span></h2>
-        <p class="lede">Our team brings 25 years from the window and door business, where we learned how frames, tracks and seals hold up in Houston weather. We have built these enclosures here since 2022, they are now in their fourth generation, and patio enclosures are all we make today. <a href="/why-ae/">Why buying from the maker matters</a> · <a href="/compare/">How we compare</a></p>
-      </div>
-      <Why />
-      <div class="split facts-split">
-        <div>
-          <span class="facts-label">The facts</span>
-          <table class="facts">
-            <caption>Hexfold &amp; Fixed Screen</caption>
-            <tbody>
-              <tr><th scope="row">Mesh</th><td>Hexfold: honeycomb aluminum. Fixed Screen: 304 stainless steel.</td></tr>
-              <tr><th scope="row">Mesh density</th><td>{FACTS.mesh} (Hexfold)</td></tr>
-              <tr><th scope="row">Wind</th><td>Hexfold operates in winds up to {FACTS.foldWind}. Retract and secure for {FACTS.foldStowed}.</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div>
-          <table class="facts" style="margin-top:52px">
-            <caption>Polycarbonate panels</caption>
-            <tbody>
-              <tr><th scope="row">Visible light</th><td>{FACTS.vlt} transmission*</td></tr>
-              <tr><th scope="row">Solar heat gain</th><td>{FACTS.shgc} SHGC*</td></tr>
-              <tr><th scope="row">Wind</th><td>Fixed panels rated to {FACTS.fixedWind}</td></tr>
-              <tr><th scope="row">Frames</th><td>Heat welded, no screws. Aluminum core, ceramic coating. Night Gray or Bright White.</td></tr>
-              <tr><th scope="row">Every job</th><td>Installed within a month. Lifetime frame warranty, 3 years on parts.</td></tr>
-            </tbody>
-          </table>
-          <p class="fine" style="margin-top:10px">*Tested on Smokey Gray panels.</p>
+          <p class="fine">{EXTRAS} Locks, pet doors and low-profile access ramps are examples.</p>
+          <p class="fine">{LENDERS}</p>
+          <a class="btn" href="#book" data-cb-open>Get my exact price</a>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- 7. Process -->
+  <section class="band" aria-labelledby="process-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker"><span class="hexdot" aria-hidden="true"></span>From measurement to installation</p>
+        <h2 id="process-title" class="h2">How your project runs</h2>
+      </div>
+      <ol class="proc">{process.map((s) => <li><h3>{s.t}</h3><p>{s.d}</p></li>)}</ol>
+    </div>
+  </section>
 
-  <section class="band" aria-labelledby="faq-title">
-    <div class="wrap split" style="align-items:start">
+  <!-- 8. Showroom -->
+  <section class="band on-white" aria-labelledby="show-title">
+    <div class="wrap split">
+      <figure class="show-photo"><Image src={showroomIn} widths={[480, 900]} sizes="(max-width: 820px) 100vw, 560px" alt="Inside the AE showroom: a room combining polycarbonate panels and metal mesh" loading="lazy" /></figure>
       <div class="stack-lg">
-        <h2 id="faq-title" class="h2">Before you <span class="y">book</span></h2>
-        <p class="lede">Straight answers. More on the <a href="/faq/">full FAQ</a>.</p>
-        <div class="stack">
-          <h3 class="h3">Serving greater Houston</h3>
-          <p class="muted">See the showroom at {SITE.streetShort}, Houston, TX {SITE.zip} by appointment, 9 am to 5 pm, 7 days a week (call first so someone is there to show you around), or book a free site visit at your home.</p>
-          <ul class="cities">{CITIES.map((c) => <li>{CITY_PAGES[c] ? <a href={CITY_PAGES[c]}>{c}</a> : c}</li>)}</ul>
-          <a href="/service-area/">See our service area</a>
-        </div>
+        <p class="kicker dark"><span class="hexdot" aria-hidden="true"></span>Local showroom and support</p>
+        <h2 id="show-title" class="h2">See every system in person</h2>
+        <p class="lede">Our showroom is at {SITE.street}, {SITE.city}, {SITE.region} {SITE.zip}, next to the factory. Open 9 am to 5 pm, 7 days a week, by appointment. Customer parking on site.</p>
+        <div class="actions"><a class="btn" href={SITE.phoneHref}>Call {SITE.phone} to book</a><a class="btn btn-line" href="/showroom/">Address and directions</a></div>
       </div>
-      <Faq items={visitFaq} />
     </div>
-    <div class="wrap" style="margin-top:32px"><a class="btn btn-big" href="#book" data-cb-open>Book my free site visit</a></div>
+  </section>
+
+  <!-- 9. FAQ and visit request -->
+  <section class="band" id="book" aria-labelledby="book-title">
+    <div class="wrap book-grid">
+      <div class="stack-lg">
+        <h2 id="book-title" class="h2">Request your free design visit</h2>
+        <p class="lede">Leave your name and number. We call to confirm a time, then measure, design and quote at your home.</p>
+        <Faq items={visitFaq} />
+      </div>
+      <div class="book-card" id="book-form">
+        <p class="book-k" data-bv-title data-screens="Get your screen quote">Request a free visit</p>
+        <BookVisitForm id="home-book" />
+      </div>
+    </div>
   </section>
 </Base>
 
 <style>
-  .p3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
-  .p3 figure { margin: 0; display: grid; gap: 12px; align-content: start; }
-  .p3 :global(img) { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border: 2px solid var(--yellow); }
-  .p3 :global(.p3-mesh) { object-position: 18% 50%; }
-  .p3 figcaption { color: var(--ink-2); }
-  .p3 figcaption b { display: block; color: var(--ink); font-weight: 800; font-stretch: 80%; font-size: 1.25rem; text-transform: uppercase; margin-bottom: 4px; }
-  .proof3 { padding-block: clamp(40px, 6vw, 72px); }
-  @media (max-width: 820px) { .p3 { grid-template-columns: minmax(0, 1fr); } }
+  .h-hero { padding-block: clamp(36px, 6vw, 80px) clamp(48px, 7vw, 96px); }
+  .h-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+  .h-copy { display: grid; gap: 22px; }
+  .h-copy .display { max-width: 13ch; }
+  .h-photo { margin: 0; }
+  .h-photo :global(img) { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; box-shadow: var(--shadow); }
+  .h-photo figcaption, .path-media figcaption { margin-top: 8px; font-family: var(--mono); font-size: .74rem; color: var(--ink-2); }
+  .uses { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .uses li { border: 1px solid var(--line); border-radius: 999px; padding: 5px 13px; font-size: .92rem; color: var(--ink); }
+  .btn-big { font-size: 1.06rem; min-height: 54px; padding: 0 26px; }
+  .micro { font-size: var(--step--1); color: var(--ink-2); }
+  .kicker { margin: 0; display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-weight: 600; font-size: .78rem; text-transform: uppercase; color: var(--yellow); }
+  .kicker.dark { color: var(--paper-2); }
+  .hexdot { width: 11px; height: 13px; flex: none; background: var(--yellow); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
 
-  .hero { overflow: hidden; }
-  .hero-grid { display: grid; grid-template-areas: 'title media' 'body media'; grid-template-rows: auto 1fr; row-gap: 26px; grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr); gap: clamp(32px, 5vw, 56px); align-items: center; padding-block: clamp(48px, 7vw, 80px) clamp(56px, 8vw, 88px); }
-  .proof { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 6px 0 0; max-width: 580px; }
-  .proof div { border-left: 2px solid var(--yellow); padding-left: 10px; }
-  .proof dt { font-weight: 800; font-stretch: 75%; font-size: 1.65rem; line-height: 1; }
-  .proof dd { margin: 5px 0 0; font-size: 0.9rem; line-height: 1.3; color: var(--ink-2); }
-  .h-title { grid-area: title; align-self: end; }
-  .h-title .display { font-size: clamp(2.9rem, 5.6vw, 5.2rem); }
-  .h-body { grid-area: body; align-content: start; }
-  .hero-media { grid-area: media; align-self: center; display: grid; gap: 12px; padding-top: 30px; min-width: 0; }
-  .hero-frame { position: relative; }
-  .hero-frame .dim.h span { background: var(--honey); }
-  .hint { font-family: var(--mono); font-size: 0.8rem; font-weight: 600; color: var(--ink-2); }
-  .hint span { color: var(--yellow); font-size: 1.1rem; margin-right: 6px; }
-  .trust { background: var(--yellow); color: var(--honey); }
-  .trust-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; }
-  .trust-row > div { display: flex; align-items: center; gap: 14px; padding-block: 26px; padding-inline: 18px; min-width: 0; }
-  .trust-row > div + div { border-left: 2px solid rgba(42, 37, 34, 0.25); }
-  .trust-row > div:first-child { padding-left: 0; }
-  .trust svg { width: 38px; height: 38px; flex-shrink: 0; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-  .trust b { font-weight: 800; font-stretch: 74%; font-size: clamp(1.1rem, 1.7vw, 1.5rem); line-height: 1.05; text-transform: uppercase; }
-  .fold-grid { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: clamp(32px, 6vw, 80px); align-items: center; }
-  .fold-video { margin: 0; justify-self: center; width: 100%; max-width: 270px; }
-  .fold-video figcaption { padding-top: 12px; text-align: center; }
-  .yt { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: var(--ink); text-decoration: underline; text-decoration-color: var(--yellow); text-underline-offset: 3px; }
-  .yt svg { width: 22px; height: 22px; fill: #FF0000; }
-  .fold-video video { aspect-ratio: 9 / 16; width: 100%; object-fit: cover; }
-  .fold-facts { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; max-width: 520px; }
-  .fold-facts div { border-left: 2px solid var(--yellow); padding-left: 10px; }
-  .fold-facts dt { font-weight: 800; font-stretch: 72%; font-size: 2.4rem; line-height: 1; color: var(--yellow); }
-  .fold-facts dd { margin: 4px 0 0; font-size: 0.9rem; color: var(--ink-2); }
-  @media (max-width: 760px) { .fold-grid { grid-template-columns: minmax(0, 1fr); } .fold-video { max-width: 240px; } }
-  .row-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: clamp(24px, 3vw, 36px); }
-  @media (max-width: 900px) { .trust-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } .trust-row > div:nth-child(3) { border-left: 0; padding-left: 0; } .trust-row > div:nth-child(n+3) { border-top: 2px solid rgba(42, 37, 34, 0.25); } }
-  @media (max-width: 480px) { .trust-row > div { padding-inline: 10px; gap: 10px; } .trust svg { width: 30px; height: 30px; } }
-  .paths { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; }
-  .path { background: var(--honey-2); border-top: 4px solid var(--yellow); display: flex; flex-direction: column; min-width: 0; }
-  .path img { aspect-ratio: 16 / 10; width: 100%; object-fit: cover; }
-  .two-up { margin: 0; position: relative; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: minmax(0, 1fr); gap: 4px; background: var(--honey); aspect-ratio: 16 / 10; overflow: hidden; }
-  .two-up .tag { left: auto; right: 10px; }
-  .two-up img { aspect-ratio: auto; height: 100%; min-width: 0; }
-  .path-body { padding: 24px 26px 28px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
-  .path-body .btn { align-self: flex-start; }
-  .path-body p { color: var(--ink-2); }
-  .ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .demo-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+  .demo-card { background: var(--honey); border-radius: 12px; padding: clamp(16px, 2.4vw, 26px); box-shadow: var(--shadow); }
+  .ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
   .ticks li { position: relative; padding-left: 28px; }
-  .ticks li::before { content: ""; position: absolute; left: 2px; top: 0.35em; width: 14px; height: 8px; border-left: 2.5px solid var(--yellow); border-bottom: 2.5px solid var(--yellow); transform: rotate(-45deg); }
-  .on-paper .ticks li::before { border-color: var(--paper-ink); }
-  .picker { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); gap: clamp(24px, 4vw, 44px); align-items: start; }
+  .ticks li::before { content: ""; position: absolute; left: 2px; top: .4em; width: 14px; height: 8px; border-left: 2.5px solid var(--yellow); border-bottom: 2.5px solid var(--yellow); transform: rotate(-45deg); }
+  .ticks.dark li { color: var(--paper-ink); }
+  .ticks.dark li::before { border-color: #B8901A; }
+
+  .paths { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .path { background: var(--honey-2); border: 1px solid rgba(251, 245, 236, .08); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; box-shadow: var(--shadow); }
+  .path-room { outline: 1.5px solid var(--yellow); outline-offset: -1.5px; }
+  .path-media.two { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--honey); }
+  .path-media figure { margin: 0; min-width: 0; }
+  .path-media :global(img) { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+  .path-media figcaption { margin: 0; padding: 6px 12px 8px; background: var(--honey); }
+  .path-body { padding: 22px 24px 26px; display: grid; gap: 14px; align-content: start; }
+  .path-k { font-family: var(--mono); font-size: .76rem; text-transform: uppercase; letter-spacing: .12em; color: var(--yellow); }
+  .path-body > p:not(.path-k):not(.fine) { color: var(--ink-2); }
+  .sys { list-style: none; margin: 0; padding: 0; display: grid; }
+  .sys a { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 12px; padding: 11px 0; border-top: 1px solid var(--line); text-decoration: none; color: var(--ink); }
+  .sys a:hover b, .sys a:focus-visible b { color: var(--yellow); }
+  .sys b { font-family: var(--font-head); font-weight: 700; font-size: 1.08rem; }
+  .sys span { grid-column: 1; color: var(--ink-2); font-size: .92rem; }
+  .sys em { grid-column: 2; grid-row: 1 / span 2; align-self: center; font-style: normal; font-family: var(--mono); color: var(--yellow); }
+
+  .hive-light { position: relative; isolation: isolate; }
+  .hive-light::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: .5;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='27.713' height='48' viewBox='0 0 27.713 48'%3E%3Cpath d='M13.856 0L27.713 8V24L13.856 32L0 24V8ZM13.856 32V48' fill='none' stroke='%23B8901A' stroke-opacity='.35' stroke-width='.6'/%3E%3C/svg%3E"); background-size: 55px 96px;
+    -webkit-mask-image: radial-gradient(ellipse 40% 70% at 100% 0%, #000 0%, transparent 70%); mask-image: radial-gradient(ellipse 40% 70% at 100% 0%, #000 0%, transparent 70%); }
+  .build { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 24px; counter-reset: b; }
+  .build li { counter-increment: b; display: grid; gap: 8px; align-content: start; padding-top: 14px; border-top: 1px solid var(--paper-line); min-width: 0; }
+  .build-photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 32px; }
+  .build-photos figure { margin: 0; min-width: 0; }
+  .build-photos :global(img) { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 8px; }
+  .build-photos figcaption { margin-top: 8px; font-family: var(--mono); font-size: .74rem; color: var(--paper-2); }
+  .build h3 { font-size: 1.12rem; font-weight: 700; color: var(--paper-ink); }
+  .build h3::before { content: counter(b, decimal-leading-zero) "  "; font-family: var(--mono); font-size: .8rem; color: #8A6D12; }
+  .build p { color: var(--paper-2); font-size: .97rem; }
+
+  .row-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: clamp(24px, 3vw, 36px); }
+
+  .picker { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(24px, 4vw, 44px); align-items: start; }
   .picker-opts { display: grid; gap: 22px; }
   .picker fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 10px; }
-  .picker legend { font-weight: 800; font-stretch: 78%; font-size: 1.25rem; text-transform: uppercase; margin-bottom: 8px; }
-  .opt { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border: 2px solid var(--paper-line); cursor: pointer; }
-  .opt:hover { border-color: var(--paper-ink); }
-  .opt:has(input:checked) { border-color: var(--paper-ink); background: rgba(242, 194, 48, 0.3); }
-  .opt input { margin-top: 4px; accent-color: var(--paper-ink); width: 18px; height: 18px; flex-shrink: 0; }
-  .opt b { font-weight: 800; font-stretch: 80%; font-size: 1.15rem; text-transform: uppercase; }
-  .opt small { display: block; font-size: 0.92rem; color: var(--paper-2); }
-  .opt em { display: block; font-style: normal; font-family: var(--mono); font-size: 0.78rem; font-weight: 600; margin-top: 2px; }
-  .estimate { position: sticky; top: 96px; background: var(--honey); color: var(--ink); padding: 26px 28px; border-left: 8px solid var(--yellow); display: grid; gap: 14px; }
-  .est-label { font-family: var(--mono); font-size: 0.82rem; font-weight: 600; color: var(--yellow); }
-  .est-range { font-weight: 800; font-stretch: 70%; font-size: clamp(2.4rem, 5vw, 3.4rem); line-height: 1; }
+  .picker legend { font-weight: 700; font-size: 1.15rem; margin-bottom: 8px; }
+  .opt { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border: 1.5px solid var(--paper-line); border-radius: 8px; background: #fff; cursor: pointer; }
+  .opt:hover { border-color: var(--paper-2); }
+  .opt:has(input:checked) { border-color: var(--paper-ink); box-shadow: inset 4px 0 0 var(--yellow); }
+  .opt input { color-scheme: light; margin-top: 4px; accent-color: var(--paper-ink); width: 18px; height: 18px; flex-shrink: 0; }
+  .opt b { font-weight: 700; font-size: 1.05rem; }
+  .opt small { display: block; font-size: .92rem; color: var(--paper-2); }
+  .opt em { display: block; font-style: normal; font-family: var(--mono); font-size: .78rem; font-weight: 600; margin-top: 2px; }
+  .estimate { position: sticky; top: 96px; background: var(--honey); color: var(--ink); padding: 26px 28px; border-radius: 12px; box-shadow: var(--shadow); display: grid; gap: 14px; }
+  .est-label { font-family: var(--mono); font-size: .82rem; font-weight: 600; color: var(--yellow); }
+  .est-range { font-family: var(--font-head); font-weight: 800; letter-spacing: -0.03em; font-size: clamp(2.2rem, 4.6vw, 3.1rem); line-height: 1; }
   .estimate .btn { justify-self: start; }
   .on-paper .estimate .muted, .on-paper .estimate .fine { color: var(--ink-2); }
-  .on-paper .estimate .ticks li::before { border-color: var(--yellow); }
-  .facts-split { align-items: start; }
-  .family + .family { margin-top: 48px; }
-  .fam-h { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; padding-bottom: 12px; margin-bottom: 22px; border-bottom: 1px solid var(--line); font-weight: 800; font-stretch: 74%; font-size: 1.75rem; text-transform: uppercase; }
-  .fam-h span { font-family: var(--mono); font-size: 0.78rem; font-weight: 600; text-transform: none; color: var(--ink-2); }
-  .lineup.two { grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); }
-  .factory-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 40px; }
-  .factory-strip figure { margin: 0; min-width: 0; }
-  .factory-strip img { aspect-ratio: 16 / 10; width: 100%; object-fit: cover; border: 2px solid var(--yellow); }
-  .factory-strip figcaption { font-size: 0.88rem; color: var(--ink-2); padding-top: 8px; }
-  .cities { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-  .cities li { border: 1px solid var(--line); padding: 5px 11px; font-size: 0.92rem; }
-  @media (max-width: 900px) {
-    .picker { grid-template-columns: minmax(0, 1fr); }
-    .hero-grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'title' 'media' 'body'; grid-template-rows: auto; }
-    .hero-media { padding-top: 34px; }
-    .estimate { position: static; }
-    .factory-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  }
-  @media (max-width: 760px) { .paths { grid-template-columns: minmax(0, 1fr); } }
-  @media (max-width: 480px) { .proof dt { font-size: 1.3rem; } .proof { gap: 10px; } }
+  .on-paper .estimate a:not(.btn) { color: var(--yellow); }
 
-  /* Conversion revision */
-  .eyebrow { display: block; font-family: var(--mono); font-size: .85rem; font-weight: 600; font-stretch: 100%; line-height: 1.4; letter-spacing: .1em; text-transform: uppercase; color: var(--yellow); margin-bottom: 10px; }
-  .btn-big { font-size: 1.15rem; padding: 18px 26px; }
-  .micro { font-size: var(--step--1); color: var(--ink-2); margin-top: -6px; }
-  .micro a { color: var(--yellow); }
-  .offer-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 48px; align-items: start; }
-  .visit-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; counter-reset: v; }
-  .visit-steps li { counter-increment: v; display: grid; grid-template-columns: 48px minmax(0, 1fr); column-gap: 14px; row-gap: 4px; }
-  .visit-steps li::before { content: counter(v); grid-row: span 2; width: 44px; height: 44px; display: grid; place-items: center; background: var(--yellow); color: var(--paper-ink); font-weight: 900; font-size: 1.3rem; }
-  .visit-steps b { font-size: 1.25rem; font-weight: 800; font-stretch: 80%; text-transform: uppercase; }
-  .visit-steps span { color: var(--paper-2); }
-  .offer-cost { font-size: 1.15rem; }
-  .book-card { background: var(--honey); color: var(--ink); padding: 26px; border-top: 6px solid var(--yellow); }
-  .book-k { font-weight: 900; font-stretch: 72%; font-size: 1.7rem; text-transform: uppercase; margin-bottom: 14px; }
+  .proc { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 22px; counter-reset: p; }
+  .proc li { counter-increment: p; padding-top: 16px; border-top: 2px solid var(--yellow); min-width: 0; display: grid; gap: 8px; align-content: start; }
+  .proc li::before { content: counter(p); font-family: var(--font-head); font-weight: 800; font-size: 1.6rem; color: var(--yellow); line-height: 1; }
+  .proc h3 { font-size: 1.08rem; font-weight: 700; }
+  .proc p { color: var(--ink-2); font-size: .96rem; }
+
+  .show-photo { margin: 0; }
+  .show-photo :global(img) { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 10px; box-shadow: var(--shadow); }
+
+  .book-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 56px); align-items: start; }
+  .book-card { background: var(--honey-2); color: var(--ink); padding: 26px; border-radius: 12px; border: 1px solid rgba(251, 245, 236, .08); border-top: 3px solid var(--yellow); box-shadow: var(--shadow); }
+  .book-k { font-family: var(--font-head); font-weight: 800; font-size: 1.5rem; letter-spacing: -0.02em; margin-bottom: 14px; }
   .book-card :global(a) { color: var(--yellow); }
   .book-card :global(.fine) { color: var(--ink-2); }
-  .after-cta { margin-top: 24px; }
-  .ph { border: 2px dashed var(--yellow); padding: 18px; font-family: var(--mono); font-size: .85rem; color: var(--ink-2); background: rgba(242, 194, 48, .06); }
-  .ph-inline { padding: 10px 12px; }
-  .ph-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-  .ph-grid .ph { min-height: 140px; }
-  @media (max-width: 900px) { .offer-grid, .ph-grid { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
-  /* Holiday season */
-  .winter-hero { position: relative; background-image: radial-gradient(60% 50% at 85% 20%, rgba(165, 31, 31, .28), transparent 70%), radial-gradient(45% 40% at 10% 90%, rgba(46, 74, 43, .35), transparent 70%), var(--honeycomb); background-size: 100% 100%, 100% 100%, 34.64px 60px; background-repeat: no-repeat, no-repeat, repeat; }
-  .winter-photo { margin: 0 auto; border: 3px solid var(--yellow); aspect-ratio: 4 / 5; max-width: 470px; overflow: hidden; background: var(--honey-2); }
-  .winter-photo :global(img) { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block; }
-  .snow { position: absolute; inset: 0; pointer-events: none; z-index: 0; opacity: .8;
-    background-image: radial-gradient(2px 2px at 20px 30px, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 90px 120px, #fff 50%, transparent 51%), radial-gradient(2.5px 2.5px at 160px 60px, #fff 50%, transparent 51%), radial-gradient(1.5px 1.5px at 230px 170px, #fff 50%, transparent 51%), radial-gradient(2px 2px at 290px 20px, #fff 50%, transparent 51%);
-    background-size: 320px 220px; animation: snow 14s linear infinite; }
-  .winter-hero .wrap { position: relative; z-index: 1; }
-  @keyframes snow { from { background-position: 0 0; } to { background-position: 60px 220px; } }
-  @media (prefers-reduced-motion: reduce) { .snow { animation: none; } }
-  .gets { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; }
-  .gets > div { border-top: 2px solid var(--paper-ink); padding-top: 14px; min-width: 0; }
-  .gets h3 { font-weight: 800; font-stretch: 78%; font-size: 1.3rem; text-transform: uppercase; }
-  .gets p { color: var(--paper-2); margin-top: 6px; }
-  .straight { border-left: 6px solid var(--yellow); background: var(--cream-2); padding: 18px 22px; max-width: 820px; color: var(--paper-ink); }
-  @media (max-width: 900px) { .gets { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 520px) { .gets { grid-template-columns: minmax(0, 1fr); } }
-
-  /* v2: full-bleed hero */
-  .hero { position: relative; overflow: hidden; isolation: isolate; min-height: clamp(620px, 88vh, 860px); display: flex; align-items: flex-end; background: var(--honey); }
-  .hero :global(.hero-bg) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 40%; z-index: -2; }
-  .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(42,37,34,.72) 0%, rgba(42,37,34,.18) 34%, rgba(42,37,34,.96) 100%); }
-  .hero-in { width: 100%; padding-block: 120px 48px; display: grid; gap: 22px; position: relative; z-index: 1; }
-  .hero h1 { margin: 0; max-width: 11ch; font-size: clamp(3rem, 7.4vw, 6.75rem); line-height: .9; }
-  .hero h1 .y { display: inline; }
-  .hero .sub { max-width: 42ch; color: var(--ink-2); }
-  .hero .micro { color: var(--ink-2); font-size: var(--step--1); }
-  .kicker { margin: 0; display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-weight: 600; font-size: .8125rem; letter-spacing: .14em; text-transform: uppercase; color: var(--yellow); }
-  .hexdot { width: 12px; height: 14px; flex: none; background: var(--yellow); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
-  .dimline { display: flex; align-items: center; gap: 10px; max-width: 520px; margin-left: auto; font-family: var(--mono); font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; color: var(--yellow); }
-  .dimline i { flex: 1; min-width: 40px; height: 2px; background: var(--yellow); position: relative; }
-  .dimline i:first-child::before, .dimline i:last-child::after { content: ""; position: absolute; top: -6px; width: 2px; height: 14px; background: var(--yellow); }
-  .dimline i:first-child::before { left: 0; } .dimline i:last-child::after { right: 0; }
-  .badges { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
-  .badges li { display: flex; gap: 14px; align-items: center; min-width: 0; }
-  .badges b { display: block; font-weight: 800; font-size: 1.15rem; }
-  .badges span:not(.hexbadge) { color: var(--ink-2); font-size: var(--step--1); }
-  .hexbadge { width: 50px; height: 58px; flex: none; background: var(--yellow); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); display: grid; place-items: center; }
-  .hexbadge svg { width: 22px; height: 22px; fill: none; stroke: var(--honey); stroke-width: 2.2; }
-  @media (max-width: 820px) { .badges { grid-template-columns: minmax(0, 1fr); } .dimline { display: none; } .hero-in { padding-top: 96px; } }
-
-  /* v2: five systems */
-  .five { list-style: none; margin: 0 0 18px; padding: 0; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
-  .five a { display: flex; flex-direction: column; height: 100%; text-decoration: none; color: var(--ink); border: 2px solid var(--line); background: var(--honey-2); transition: border-color .2s, transform .2s; }
-  .five a:hover, .five a:focus-visible { border-color: var(--yellow); transform: translateY(-3px); }
-  .five :global(img) { width: 100%; aspect-ratio: 11 / 12; object-fit: cover; display: block; }
-  .five-body { display: grid; gap: 4px; padding: 14px 16px 16px; border-top: 2px solid var(--yellow); }
-  .five-body small { font-family: var(--mono); font-size: .75rem; color: var(--ink-2); }
-  .five-body b { font-weight: 900; font-stretch: 80%; font-size: 1.35rem; text-transform: uppercase; }
-  .five-body em { font-style: normal; font-family: var(--mono); color: var(--yellow); }
-  @media (max-width: 1100px) { .five { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  @media (max-width: 560px) { .five { gap: 10px; } .five-body { padding: 10px 12px 12px; } .five-body b { font-size: 1.1rem; } }
-  @media (prefers-reduced-motion: reduce) { .five a { transition: none; } .five a:hover { transform: none; } }
-
-  /* v2: visualizer teaser */
-  .viz-band { border-block: 2px solid var(--yellow); }
-  .viz-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 56px); align-items: center; }
-  .viz-shot { margin: 0; border: 2px solid var(--yellow); padding: 10px; background: var(--honey); }
-  .viz-shot :global(img) { width: 100%; height: auto; display: block; }
-  .viz-shot figcaption { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 10px; font-family: var(--mono); font-size: .75rem; color: var(--ink-2); }
-  @media (max-width: 820px) { .viz-grid { grid-template-columns: minmax(0, 1fr); } }
-
-  /* Phones in portrait: show the whole landscape photo on top, text on the honey ground below */
-  @media (max-width: 820px) and (orientation: portrait) {
-    .hero { display: block; min-height: 0; }
-    .hero :global(.hero-bg) { position: relative; inset: auto; height: auto; aspect-ratio: 4 / 3; object-position: center; z-index: 0; }
-    .hero::after { inset: 0 0 auto 0; height: calc(100vw * .75 + 2px); background: linear-gradient(180deg, rgba(42,37,34,.35) 0%, rgba(42,37,34,0) 40%, rgba(42,37,34,.85) 88%, var(--honey) 100%); z-index: 0; }
-    .hero-in { padding-top: 0; margin-top: -54px; }
-    .book-card { scroll-margin-top: 90px; }
-  }
   #book-form { scroll-margin-top: 110px; }
+
+  @media (max-width: 1060px) { .proc { grid-template-columns: repeat(3, minmax(0, 1fr)); } .build { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 900px) {
+    .h-grid, .demo-grid, .paths, .picker, .book-grid { grid-template-columns: minmax(0, 1fr); }
+    .h-photo { order: -1; }
+    .estimate { position: static; }
+  }
+  @media (max-width: 640px) {
+    .proc, .build { grid-template-columns: minmax(0, 1fr); }
+    .build-photos { grid-template-columns: minmax(0, 1fr); }
+    .h-copy .display { font-size: clamp(2.4rem, 11vw, 3rem); }
+    .actions .btn { width: 100%; }
+  }
 </style>
 
 <script is:inline>
-  (function () {
-    var v = document.querySelectorAll('video[data-src]');
-    if (!('IntersectionObserver' in window)) { v.forEach(function (x) { x.src = x.dataset.src; }); return; }
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        var x = e.target; io.unobserve(x); x.src = x.dataset.src;
-        if (!matchMedia('(prefers-reduced-motion: reduce)').matches) { x.autoplay = true; x.play().catch(function () {}); } else { x.controls = true; }
-      });
-    }, { rootMargin: '300px' });
-    v.forEach(function (x) { io.observe(x); });
-  })();
   (function () {
     var el = document.getElementById('picker');
     if (!el) return;
@@ -506,7 +389,7 @@ const videoLd = {
       var p = d.products.find(function (x) { return x.id === pid; });
       document.getElementById('est-label').textContent = p.name + ', ' + s.name.toLowerCase() + ' patio';
       document.getElementById('est-range').textContent = fmt(p.msrp * s.low) + ' to ' + fmt(p.msrp * s.high);
-      document.getElementById('est-note').textContent = s.low + ' to ' + s.high + ' sq ft of openings at $' + p.msrp + ' per sq ft, installed.';
+      document.getElementById('est-note').textContent = s.low + ' to ' + s.high + ' sq ft of openings at $' + p.msrp + ' per sq ft of opening, installed, before sales tax.';
     }
     el.addEventListener('change', update);
   })();

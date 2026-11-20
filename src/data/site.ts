@@ -84,7 +84,7 @@ export const PRODUCTS: Product[] = [
     href: '/patio-enclosures/clearfold/',
     specs: [
       ['Panel', 'Polycarbonate sunshade panel'],
-      ['Hardware', 'High-end handle, ramp water stop included'],
+      ['Hardware', 'High-end handle; ramp water stop quoted for your project'],
       ['Opening', 'Up to 5 ft per pull, 10 ft meeting in the middle'],
       ['Wind', 'Operates to about 40 mph; retract and secure for 100+ mph'],
     ],
@@ -127,12 +127,12 @@ export const PRODUCTS: Product[] = [
     family: 'both',
     kind: 'Polycarbonate and Hexfold mesh in one',
     blurb:
-      'Our top shelf. Polycarbonate panels and honeycomb aluminum mesh in one folding system: half 3-season room, half screened patio.',
+      'Our most flexible system. A polycarbonate layer and a honeycomb aluminum mesh layer on the same opening, and each can cover all of it: run the mesh, close the panels, or fold both back.',
     msrp: 56,
     href: '/patio-enclosures/hybrid/',
     specs: [
       ['Panel', 'Polycarbonate sunshade panel and honeycomb aluminum mesh'],
-      ['Hardware', 'High-end handle, ramp water stop included'],
+      ['Hardware', 'High-end handle; ramp water stop quoted for your project'],
       ['Opening', 'Up to 5 ft per pull, 8 ft meeting in the middle'],
     ],
   },
@@ -272,7 +272,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Can I add a doggy door?',
-      a: 'Yes. A doggy door is a $200 add-on for a compatible screen panel, in small, medium or large. We help you pick the size and spot at the site visit. A pet opening is also a way in for other animals, so we plan its closure with you.',
+      a: 'Yes. A doggy door can be added to a compatible screen panel, in small, medium or large, and is quoted for your project. We help you pick the size and spot at the site visit. A pet opening is also a way in for other animals, so we plan its closure with you.',
     },
   ],
   general: [
@@ -324,7 +324,7 @@ export const PRODUCT_MENU = [
     { href: '/patio-screens/', label: 'Patio screens', note: 'Overview, both screens' },
     { href: '/patio-screens/hexfold/', label: 'Hexfold', note: 'Folding metal screens' },
     { href: '/patio-screens/fixed-screen/', label: 'Fixed Screen', note: 'Stainless steel mesh' },
-    { href: '/patio-screens/pet-resistant/', label: 'Pet-resistant screens', note: 'Doggy door add-on, $200' },
+    { href: '/patio-screens/pet-resistant/', label: 'Pet-resistant screens', note: 'Doggy door add-on available' },
     { href: '/patio-screens/garage/', label: 'Garage screens', note: 'One to three bays' },
   ] },
 ];

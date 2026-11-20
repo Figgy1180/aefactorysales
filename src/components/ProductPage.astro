@@ -65,7 +65,7 @@ const product = {
           <caption>{p.name}</caption>
           <tbody>
             {p.specs.map(([k, v]) => <tr><th scope="row">{k}</th><td>{v}</td></tr>)}
-            <tr><th scope="row">Price</th><td>From ${p.msrp} per sq ft of opening, installed</td></tr>
+            <tr><th scope="row">Price</th><td>From ${p.msrp} per sq ft of opening, installed, before sales tax. Accessories quoted for your project.</td></tr>
             <tr><th scope="row">Typical patio</th><td class="tnum">{SIZES.map((s) => `${s.name} ${range(p.msrp, s.low, s.high)}`).join('; ')}</td></tr>
             <tr><th scope="row">Frame colors</th><td>Night Gray or Bright White</td></tr>
             <tr><th scope="row">Install</th><td>Within a month of your order, by our own crew</td></tr>

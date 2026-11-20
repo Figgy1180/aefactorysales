@@ -3,8 +3,8 @@
    crisp yellow blueprint rules, cream "back of the hanger" bands for prices and facts,
    left-aligned, condensed uppercase headlines with the second line in yellow. */
 
-@import '@fontsource-variable/archivo/wdth.css';
-@import '@fontsource-variable/archivo/wdth-italic.css';
+@import '@fontsource-variable/manrope/wght.css';
+@import '@fontsource-variable/inter/wght.css';
 @import '@fontsource/ibm-plex-mono/latin-500.css';
 @import '@fontsource/ibm-plex-mono/latin-600.css';
 
@@ -15,13 +15,15 @@
   --honey-3: #453D37;      /* hover / input fill */
   --yellow: #F2C230;       /* lines, accents, primary action */
   --yellow-hi: #FFD24A;
-  --cream: #F3E6D3;        /* light bands */
-  --cream-2: #EADAC2;
+  --cream: #F8F6F2;        /* light bands: calm warm white (was #F3E6D3) */
+  --cream-2: #EFEBE4;
   --ink: #FBF5EC;          /* text on honey */
   --ink-2: #E3D2BA;        /* secondary text on honey */
   --paper-ink: #2A2522;    /* text on cream */
-  --paper-2: #5A4E45;      /* secondary text on cream */
-  --paper-line: #C9B49A;
+  --paper-2: #574D45;      /* secondary text on cream */
+  --paper-line: #DDD5C9;
+  --shadow: 0 1px 2px rgba(20, 16, 12, .08), 0 10px 28px rgba(20, 16, 12, .14);
+  --radius: 6px;
   --line: rgba(242, 194, 48, 0.4);
   --grid: rgba(242, 194, 48, 0.07);
   /* Honeycomb background tile (pointy-top hexagons, thin yellow lines). Replaces the square blueprint grid. */
@@ -29,7 +31,8 @@
   --honeycomb: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='27.713' height='48' viewBox='0 0 27.713 48'%3E%3Cpath d='M13.856 0L27.713 8V24L13.856 32L0 24V8ZM13.856 32V48' fill='none' stroke='%23F2C230' stroke-opacity='.11' stroke-width='1'/%3E%3C/svg%3E");
 
   /* type */
-  --font: 'Archivo Variable', 'Archivo', 'Arial Narrow', Arial, sans-serif;
+  --font: 'Inter Variable', Inter, system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  --font-head: 'Manrope Variable', Manrope, 'Inter Variable', system-ui, Arial, sans-serif;
   --mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
   --step--1: 0.875rem;
   --step-0: 1.0625rem;
@@ -56,7 +59,7 @@ body {
   color: var(--ink);
   font-family: var(--font);
   font-size: var(--step-0);
-  line-height: 1.58;
+  line-height: 1.62;
 }
 img, video { max-width: 100%; height: auto; display: block; }
 a { color: var(--yellow); text-underline-offset: 3px; }
@@ -66,26 +69,22 @@ a:hover { color: var(--yellow-hi); }
 :focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; }
 .on-paper :focus-visible { outline-color: var(--paper-ink); }
 p { margin: 0; }
-h1, h2, h3, h4 { margin: 0; font-family: var(--font); text-wrap: balance; line-height: 1; }
+h1, h2, h3, h4 { margin: 0; font-family: var(--font-head); text-wrap: balance; line-height: 1.1; letter-spacing: -0.015em; }
 
-/* the signature headline: condensed, uppercase, second line in yellow */
+/* Headlines: Manrope, sentence case, tight tracking. Yellow is a restrained accent, not a second line. */
 .display {
   font-weight: 800;
-  font-stretch: 66%;
-  font-size: var(--step-5);
-  line-height: 0.9;
-  text-transform: uppercase;
-  letter-spacing: -0.005em;
+  font-size: clamp(2.75rem, 6vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
 }
-.display .y, .h2 .y { display: block; color: var(--yellow); }
-.on-paper .h2 .y { color: var(--paper-ink); text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 0.12em; text-underline-offset: 0.12em; }
-.h2 { font-weight: 800; font-stretch: 70%; font-size: var(--step-4); line-height: 0.95; text-transform: uppercase; }
-.h3 { font-weight: 800; font-stretch: 76%; font-size: var(--step-2); line-height: 1.05; text-transform: uppercase; }
+.display .y, .h2 .y { color: var(--yellow); }
+.on-paper .h2 .y { color: inherit; }
+.h2 { font-weight: 800; font-size: clamp(1.875rem, 3.6vw, 2.75rem); line-height: 1.08; letter-spacing: -0.025em; }
+.h3 { font-weight: 700; font-size: clamp(1.2rem, 1.8vw, 1.4rem); line-height: 1.2; }
 .sub {
-  border-left: 4px solid var(--yellow);
-  padding-left: 14px;
-  font-style: italic;
-  font-size: var(--step-1);
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+  line-height: 1.55;
   color: var(--ink-2);
   max-width: 36em;
 }
@@ -119,13 +118,14 @@ h1, h2, h3, h4 { margin: 0; font-family: var(--font); text-wrap: balance; line-h
 /* buttons */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-  min-height: 52px; padding: 0 24px;
-  font-family: var(--font); font-weight: 800; font-stretch: 80%; font-size: 1.15rem;
-  text-transform: uppercase; letter-spacing: 0.01em; text-decoration: none;
-  border: 2px solid var(--yellow); background: var(--yellow); color: var(--honey);
+  min-height: 50px; padding: 0 22px;
+  font-family: var(--font); font-weight: 650; font-size: 1rem;
+  letter-spacing: 0; text-decoration: none; border-radius: var(--radius);
+  border: 1.5px solid var(--yellow); background: var(--yellow); color: var(--honey);
+  transition: background-color .15s, border-color .15s, box-shadow .15s;
   cursor: pointer;
 }
-.btn:hover { background: var(--yellow-hi); border-color: var(--yellow-hi); color: var(--honey); }
+.btn:hover { background: var(--yellow-hi); border-color: var(--yellow-hi); color: var(--honey); box-shadow: 0 4px 14px rgba(242, 194, 48, .28); }
 .btn-line { background: transparent; color: var(--yellow); }
 .btn-line:hover { background: rgba(242, 194, 48, 0.12); color: var(--yellow); }
 .on-paper .btn-line { color: var(--paper-ink); border-color: var(--paper-ink); }
@@ -236,7 +236,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 
 /* product cards */
 .lineup { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 22px; }
-.prod { background: var(--honey-2); border-top: 4px solid var(--yellow); display: flex; flex-direction: column; min-width: 0; }
+.prod { background: var(--honey-2); border: 1px solid rgba(251, 245, 236, .08); border-top: 3px solid var(--yellow); box-shadow: var(--shadow); display: flex; flex-direction: column; min-width: 0; }
 .prod figure { margin: 0; position: relative; }
 .prod img { aspect-ratio: 16 / 10; width: 100%; object-fit: cover; }
 .prod-body { padding: 22px 24px 26px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
@@ -316,10 +316,10 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 /* photo pair / gallery */
 .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 .pair figure, .gallery figure { margin: 0; min-width: 0; }
-.pair img { aspect-ratio: 4 / 3; width: 100%; object-fit: cover; border: 2px solid var(--yellow); }
+.pair img { aspect-ratio: 4 / 3; width: 100%; object-fit: cover; border: 1px solid var(--line); }
 .pair figcaption, .gallery figcaption { font-family: var(--mono); font-size: 0.76rem; font-weight: 600; padding-top: 8px; color: var(--ink-2); }
 .on-paper .pair figcaption, .on-paper .gallery figcaption { color: var(--paper-2); }
-.on-paper .pair img { border-color: var(--paper-ink); }
+.on-paper .pair img { border-color: var(--paper-line); }
 .gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
 .gallery img { aspect-ratio: 3 / 4; width: 100%; object-fit: cover; }
 
@@ -341,7 +341,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .field label, .field legend { font-weight: 700; font-size: 0.95rem; }
 .field input, .field select, .field textarea {
   width: 100%; min-height: 50px; padding: 10px 12px; font: inherit; font-size: 16px;
-  background: var(--honey); color: var(--ink); border: 2px solid var(--line); border-radius: 0;
+  background: var(--honey); color: var(--ink); border: 1.5px solid var(--line); border-radius: var(--radius);
 }
 .field textarea { min-height: 100px; resize: vertical; }
 .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--yellow); outline: none; }
@@ -426,3 +426,26 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
   mask-image: radial-gradient(ellipse 55% 75% at 100% 0%, #000 0%, transparent 72%); }
 .hive-left::before { -webkit-mask-image: radial-gradient(ellipse 55% 75% at 0% 100%, #000 0%, transparent 72%); mask-image: radial-gradient(ellipse 55% 75% at 0% 100%, #000 0%, transparent 72%); }
 .on-paper.hive::before { opacity: .14; filter: brightness(.35); }
+
+/* 2026-11 refresh: one type system. Condensed all-caps headings retired; small mono labels stay uppercase as accents. */
+h1, h2, h3, h4, legend, .btn, .brand b, .faq summary, .facts caption, .facts-label, .foot h2, .foot-cta b, .callbar a, .callbar button { text-transform: none !important; font-stretch: 100% !important; }
+h1, h2, h3, h4, legend, .facts caption, .foot-cta b, .brand b { font-family: var(--font-head); letter-spacing: -0.015em; }
+b, strong { font-stretch: 100%; }
+:where(.prod, .book-card, .estimate) b { text-transform: none; }
+.foot h2 { font-size: .95rem; letter-spacing: 0; }
+.facts-label { font-size: 1.05rem; padding: 4px 12px; border-radius: 4px; }
+.prod h3 { font-size: clamp(1.6rem, 2.4vw, 2rem); letter-spacing: -0.02em; }
+.price-line b { font-family: var(--font-head); font-size: 1.6rem; }
+.steps li::before { font-family: var(--font-head); }
+.kicker, .eyebrow { letter-spacing: .12em; }
+.concept { font-family: var(--mono); font-size: .72rem; letter-spacing: .04em; color: var(--ink-2); }
+.on-paper .concept { color: var(--paper-2); }
+/* Light band variant: true white, used on the homepage to give the dark brand bands room to breathe */
+.on-white { background: #fff; color: var(--paper-ink); }
+.on-white .lede, .on-white .muted, .on-white .fine { color: var(--paper-2); }
+.on-white a:not(.btn) { color: var(--paper-ink); text-decoration-color: var(--yellow); text-decoration-thickness: 2px; }
+.on-white .btn-line { color: var(--paper-ink); border-color: var(--paper-ink); }
+.on-white .h2 .y { color: inherit; }
+.on-white :focus-visible { outline-color: var(--paper-ink); }
+/* Leftover all-caps labels in shared components */
+.cap b, .bv-pick span, .cb-fab, .cb-fab span, .tile .cap b { text-transform: none !important; font-stretch: 100% !important; letter-spacing: 0 !important; font-family: var(--font-head); }
