@@ -126,8 +126,8 @@ const uid = `pd-${sys}`;
         </g>
       );
     })}
-    <text x="320" y="24" text-anchor="middle" class="pd-lbl">{c.fixed ? 'Welded frame, set in the opening' : 'Top track carries the weight'}</text>
-    <text x="320" y="327" text-anchor="middle" class="pd-lbl pd-lbl-dark">{c.fixed ? 'Sealed to the slab' : 'Bottom guide keeps every leaf in line'}</text>
+    {!c.fixed && <text x="320" y="24" text-anchor="middle" class="pd-lbl">Top track carries the weight</text>}
+    {!c.fixed && <text x="320" y="327" text-anchor="middle" class="pd-lbl pd-lbl-dark">Bottom guide keeps every leaf in line</text>}
   </svg>
   <figcaption>
     <p class="pd-say" aria-live="polite">{first.say}</p>

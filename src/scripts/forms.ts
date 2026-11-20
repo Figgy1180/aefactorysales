@@ -26,9 +26,8 @@ captureSource();
     for (const [k, v] of Array.from(data.entries())) {
       if (typeof v === 'string' && k !== 'access_key') data.set(k, v.replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '').replace(/[ \t]+/g, ' ').trim().slice(0, 1500));
     }
-    // Consent record: what they agreed to and when. Unchecked boxes are not sent by the browser, so record "No".
-    if (form.querySelector('[name="consent_contact"]')) {
-      data.set('consent_marketing', data.get('consent_marketing') ? 'Yes' : 'No');
+    // Consent record: the line shown under the form, and when and where they sent it.
+    if (form.querySelector('[name="consent_text"]')) {
       data.set('consent_time', new Date().toISOString());
       data.set('consent_page', location.href.split('?')[0]);
     }
