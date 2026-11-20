@@ -56,13 +56,13 @@ test('price quiz carries the chosen system and estimate into the inquiry', async
   expect(estimate).toContain((await quiz.locator('#q-total').textContent())!);
 });
 
-test('booking dialog supports keyboard focus and Escape', async ({ page }) => {
+test('booking dialog supports keyboard focus and Escape', async ({ page, isMobile }) => {
   await page.goto('/clearfold/');
-  const opener = page.locator('.top-actions > a[data-cb-open]');
+  const opener = page.locator(isMobile ? '.callbar [data-cb-open]' : '.top-actions > a[data-cb-open]');
   await opener.click();
   const dialog = page.getByRole('dialog');
   await expect(dialog).toBeVisible();
-  await expect(dialog.locator('input[name="name"]')).toBeFocused();
+  await expect(dialog.locator('#cb-form input[name="name"]')).toBeFocused();
   await page.keyboard.press('Escape');
   await expect(dialog).not.toBeVisible();
   await expect(opener).toBeFocused();
