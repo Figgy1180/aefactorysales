@@ -27,7 +27,7 @@ const OG_PHOTOS: Record<string, string> = {
   '/patio-enclosures/clearfold/': 'photos/showroom-polycarbonate-smoke', '/patio-enclosures/hybrid/': 'photos/showroom-room-interior', '/winter/': 'photos/clearfixed-polycarbonate-panels',
   '/patio-screens/hexfold/': 'photos/hexfold-patio-closed', '/patio-screens/fixed-screen/': 'photos/fixed-screen-doors-closed', '/patio-enclosures/': 'projects/p36/4-inside-open', '/patio-screens/pet-resistant/': 'photos/fixed-screen-doors-open', '/patio-screens/garage/': 'projects/p4/3-right-bays',
   '/pricing/': 'projects/p35/2-long-side', '/projects/': 'projects/p36/2-outside-open', '/why-ae/': 'photos/factory-cnc',
-  '/how-we-build/': 'photos/factory-angle', '/learn/': 'photos/hexfold-handle-mesh', '/compare/': 'projects/p14/3-long-side-open',
+  '/how-we-build/': 'photos/factory-angle', '/showroom/': 'photos/showroom-room-interior', '/learn/': 'photos/hexfold-handle-mesh', '/compare/': 'projects/p14/3-long-side-open',
   '/faq/': 'projects/p6/2-outside-closed', '/free-quote/': 'projects/p34/5-inside-seating', '/service-area/': 'projects/p6/4-wide',
   '/every-season/': 'photos/hexfold-patio-open', '/guides/': 'photos/gabled-opening-screens', '/reviews/': 'photos/screened-patio-room-corner',
   '/guides/folding-vs-motorized-patio-screens/': 'photos/hexfold-handle',
@@ -186,7 +186,7 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
             <img class="foot-logo" src={LOGO} alt="AE Factory Sales bee logo" width="120" height={Math.round(LOGO_H * 120 / 104)} />
             <address>
               <strong style="color:var(--ink)">{SITE.name}</strong><br />
-              {SITE.street}<br />
+              <a href="/showroom/">{SITE.street}</a><br />
               {SITE.city}, {SITE.region} {SITE.zip}<br />
               <a href={SITE.phoneHref}>{SITE.phone}</a><br />
               <a href={`mailto:${SITE.email}`}>{SITE.email}</a><br />
@@ -221,6 +221,7 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
             <ul>
               <li><a href="/why-ae/">Why AE</a></li>
               <li><a href="/projects/">Projects</a></li>
+              <li><a href="/showroom/">Showroom: {SITE.street}</a></li>
               <li><a href="/how-we-build/">Our factory</a></li>
               <li><a href="/reviews/">Leave a review</a></li>
               <li><a href={SITE.googleProfileUrl} rel="noopener">Find us on Google</a></li>
