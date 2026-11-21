@@ -28,7 +28,8 @@ import angle from '../assets/photos/factory-angle.jpg';
 import pcRack from '../assets/photos/factory-pc-smoke.jpg';
 import showroomIn from '../assets/photos/showroom-room-interior.jpg';
 
-const proof = ['Custom fit to your measured openings', 'Prepared in our Houston factory', 'Installed within a month of your order', 'Most installs take one day on site'];
+const proof = ['From $24 per sq ft of opening, installed', 'Built in our Houston factory', 'Installed within a month of your order', 'Most installs take one day on site'];
+const topReview = REVIEWS[0];
 
 type Pic = { src: any; alt: string; cap: string };
 type Card = { id: string; a: Pic; b: Pic; sell: string };
@@ -78,16 +79,6 @@ const factoryPics = [
   { img: pcRack, alt: 'Smokey Gray polycarbonate panels racked in the factory', t: 'Polycarbonate cut in its own area' },
 ];
 
-const compare = {
-  cols: ['AE polycarbonate room', 'Glass enclosure', 'Fabric screens', 'Motorized shades'],
-  rows: [
-    ['Material', ['Tinted polycarbonate panels in a metal-reinforced, heat-welded frame', 'Glass panels in a frame; type of glass depends on the system', 'Fiberglass or polyester mesh in a frame', 'Fabric or mesh shade on a motorized roller']],
-    ['How it opens', ['Fixed, or folds by hand along a track; mix both', 'Fixed, sliding or folding, depending on the system', 'Usually fixed, with screen doors', 'Rolls up and down with a motor and remote']],
-    ['Weather and airflow', ['Blocks wind and rain; open folding sections for air', 'Blocks wind and rain; clear views', 'Airflow and bug protection, little weather protection', 'Shade and privacy; wind and rain protection depends on the product']],
-    ['Installation scope', ['Prepared in our factory to your openings; most installs one day on site', 'Varies widely by system and site', 'Usually simple', 'Needs power at each shade, often new wiring']],
-    ['Upkeep', ['Soft cloth, mild soap and water; no motors', 'Glass cleaning and hardware care', 'Mesh can tear or sag and may need rescreening', 'Motors, controls and fabric need care over time']],
-  ] as [string, string[]][],
-};
 
 const process = [
   { t: 'Design visit', d: 'A professional visits, measures every opening and designs the layout with you.' },
@@ -117,7 +108,7 @@ const visitFaq: QA[] = [
       <div class="h-copy">
         <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Houston three-season rooms and screens</p>
         <h1 id="hero-title" class="display">Make your patio your <span class="y">favorite place to be.</span></h1>
-        <p class="sub">Custom polycarbonate panels and durable metal screens for your covered patio. Shelter from wind, rain and glare, airflow when you want it, and hand-folding sections that open in seconds. Prepared to your measurements in our Houston factory.</p>
+        <p class="sub">Custom polycarbonate panels and metal screens for your covered patio, built in our Houston factory and installed within a month.</p>
         <div class="actions">
           <a class="btn btn-big" href="/book-visit/">Book free design visit</a>
           <a class="btn btn-line btn-big" href="/free-quote/">Get my estimate now</a>
@@ -137,6 +128,12 @@ const visitFaq: QA[] = [
     </div>
     <div class="wrap">
       <ul class="proof" aria-label="Why AE">{proof.map((p) => <li><span class="hexdot" aria-hidden="true"></span>{p}</li>)}</ul>
+      {topReview && (
+        <figure class="h-quote">
+          <blockquote>“{topReview.text.split('. ').slice(0, 2).join('. ')}.”</blockquote>
+          <figcaption>{topReview.name}, {topReview.city} · <a href="#reviews">More from our customers</a></figcaption>
+        </figure>
+      )}
     </div>
   </section>
 
@@ -174,12 +171,11 @@ const visitFaq: QA[] = [
         <h2 id="paths-title" class="h2">A three-season room, metal screens, or both</h2>
         <p class="lede">Five systems share one heat-welded, metal-reinforced frame in Night Gray or Bright White, and we mix them opening by opening. Prices are {TAX}.</p>
       </div>
-      <ol class="choice-tabs" aria-label="Choices">
-        {choices.map((c, i) => <li><a href={`#choice-${c.k}`}><span class="hex-n" aria-hidden="true">{i + 1}</span><b>{c.t}</b><span>{c.d}</span></a></li>)}
-      </ol>
       {choices.map((ch) => (
         <div class="choice" id={`choice-${ch.k}`}>
           <h3 class="fam"><span class="hexdot" aria-hidden="true"></span>{ch.t}</h3>
+          <p class="fam-d">{ch.d}</p>
+          {ch.ids.length > 1 && <p class="swipe-hint" aria-hidden="true">Swipe to see both →</p>}
           <div class={`cards ${ch.ids.length === 1 ? 'cards-1' : 'cards-2'}`}>
             {ch.ids.map((id) => { const c = cards[id]; const p = byId(id); const g = guideOf(id); return (
               <article class="card">
@@ -235,16 +231,7 @@ const visitFaq: QA[] = [
         </figure>
       </div>
 
-      <h3 class="h3 cmp-h">How it compares</h3>
-      <p class="muted cmp-lede">Each option has a place. Here is how they differ in general terms; specific products vary.</p>
-      <div class="table-wrap cmp-wrap" tabindex="0" role="region" aria-label="Comparison table, scrollable">
-        <table class="tbl cmp">
-          <thead><tr><th scope="col">Feature</th>{compare.cols.map((c, i) => <th scope="col" class={i === 0 ? 'ours' : undefined}>{c}</th>)}</tr></thead>
-          <tbody>
-            {compare.rows.map(([k, v]) => <tr><th scope="row">{k}</th>{v.map((x, i) => <td class={i === 0 ? 'ours' : undefined}>{x}</td>)}</tr>)}
-          </tbody>
-        </table>
-      </div>
+      <p class="cmp-teaser">Weighing glass panels, fabric screens or motorized shades? <a href="/compare/#retrofit">See how they compare</a>, fairly, side by side.</p>
       <details class="tested">
         <summary>Tested details</summary>
         <ul>
@@ -267,7 +254,7 @@ const visitFaq: QA[] = [
       <ol class="why-grid">
         {why.map((w) => <li><h3>{w.f}</h3><p>{w.b}</p></li>)}
       </ol>
-      <div class="build-photos">
+      <div class="build-photos" tabindex="0" role="region" aria-label="Factory photos">
         {factoryPics.map((s) => (
           <figure><Image src={s.img} alt={s.alt} widths={[360, 640]} sizes="(max-width: 640px) 100vw, 360px" loading="lazy" /><figcaption>{s.t}</figcaption></figure>
         ))}
@@ -287,7 +274,7 @@ const visitFaq: QA[] = [
       </div>
       <ProjectMosaic />
       <p class="fine" style="margin-top:12px">Every photo here is a finished AE job. These projects use our metal screen systems.</p>
-      {REVIEWS.length > 0 && <div style="margin-top:40px"><ReviewCards /></div>}
+      {REVIEWS.length > 0 && <div id="reviews" style="margin-top:40px;scroll-margin-top:90px"><ReviewCards /></div>}
     </div>
   </section>
 
@@ -310,7 +297,7 @@ const visitFaq: QA[] = [
           <fieldset>
             <legend>System</legend>
             {order.map((id) => { const p = byId(id); return (
-              <label class="opt"><input type="radio" name="sys" value={p.id} checked={p.id === defSys.id} /><span><b>{p.name}</b> <small>{p.kind} · ${p.msrp} per sq ft of opening</small></span></label>
+              <label class="opt"><input type="radio" name="sys" value={p.id} checked={p.id === defSys.id} /><span><b>{p.name}</b> <small><span class="k">{p.kind} · </span>${p.msrp} per sq ft of opening</small></span></label>
             ); })}
           </fieldset>
         </div>
@@ -384,7 +371,7 @@ const visitFaq: QA[] = [
   .viz-try a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1.5px solid var(--line); border-radius: 999px; color: var(--ink); text-decoration: none; font-weight: 600; }
   .viz-try a:hover, .viz-try a:focus-visible { border-color: var(--yellow); color: var(--yellow); }
   .viz-shot :global(img) { width: 100%; height: auto; display: block; border-radius: 6px; }
-  .viz-shot figcaption { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 10px; font-family: var(--mono); font-size: .75rem; color: var(--ink-2); }
+  .viz-shot figcaption { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-top: 10px; font-family: var(--mono); font-size: .82rem; color: var(--ink-2); }
   .micro a { color: var(--yellow); }
   .fam { display: flex; align-items: center; gap: 10px; font-size: 1.15rem; font-weight: 700; margin: 8px 0 14px; }
   .cards { display: grid; gap: 20px; margin-bottom: 30px; }
@@ -394,7 +381,7 @@ const visitFaq: QA[] = [
   .pics { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--honey); }
   .pics figure { margin: 0; position: relative; min-width: 0; }
   .pics :global(img) { width: 100%; aspect-ratio: 4 / 3.4; object-fit: cover; display: block; }
-  .pics figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 18px 8px 6px; font-family: var(--mono); font-size: .66rem; color: #fff; background: linear-gradient(transparent, rgba(0,0,0,.65)); }
+  .pics figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 18px 8px 6px; font-family: var(--mono); font-size: .82rem; color: #fff; background: linear-gradient(transparent, rgba(0,0,0,.65)); }
   .why { position: relative; display: block; min-width: 0; text-decoration: none; }
   .why::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 35%, rgba(22, 18, 15, .88)); transition: background .2s; }
   .why:hover::after, .why:focus-visible::after { background: linear-gradient(transparent 10%, rgba(22, 18, 15, .92)); }
@@ -418,12 +405,12 @@ const visitFaq: QA[] = [
   .h-copy .display { max-width: 13ch; }
   .h-photo { margin: 0; }
   .h-photo :global(img) { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 10px; box-shadow: var(--shadow); }
-  .h-photo figcaption, .path-media figcaption { margin-top: 8px; font-family: var(--mono); font-size: .74rem; color: var(--ink-2); }
+  .h-photo figcaption, .path-media figcaption { margin-top: 8px; font-family: var(--mono); font-size: .82rem; color: var(--ink-2); }
   .uses { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
   .uses li { border: 1px solid var(--line); border-radius: 999px; padding: 5px 13px; font-size: .92rem; color: var(--ink); }
   .btn-big { font-size: 1.06rem; min-height: 54px; padding: 0 26px; }
   .micro { font-size: var(--step--1); color: var(--ink-2); }
-  .kicker { margin: 0; display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-weight: 600; font-size: .78rem; text-transform: uppercase; color: var(--yellow); }
+  .kicker { margin: 0; display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-weight: 600; font-size: .82rem; text-transform: uppercase; color: var(--yellow); }
   .kicker.dark { color: var(--paper-2); }
   .hexdot { width: 11px; height: 13px; flex: none; background: var(--yellow); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
 
@@ -443,7 +430,7 @@ const visitFaq: QA[] = [
   .path-media :global(img) { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
   .path-media figcaption { margin: 0; padding: 6px 12px 8px; background: var(--honey); }
   .path-body { padding: 22px 24px 26px; display: grid; gap: 14px; align-content: start; }
-  .path-k { font-family: var(--mono); font-size: .76rem; text-transform: uppercase; letter-spacing: .12em; color: var(--yellow); }
+  .path-k { font-family: var(--mono); font-size: .82rem; text-transform: uppercase; letter-spacing: .12em; color: var(--yellow); }
   .path-body > p:not(.path-k):not(.fine) { color: var(--ink-2); }
   .sys { list-style: none; margin: 0; padding: 0; display: grid; }
   .sys a { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 12px; padding: 11px 0; border-top: 1px solid var(--line); text-decoration: none; color: var(--ink); }
@@ -461,7 +448,7 @@ const visitFaq: QA[] = [
   .build-photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 32px; }
   .build-photos figure { margin: 0; min-width: 0; }
   .build-photos :global(img) { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 8px; }
-  .build-photos figcaption { margin-top: 8px; font-family: var(--mono); font-size: .74rem; color: var(--paper-2); }
+  .build-photos figcaption { margin-top: 8px; font-family: var(--mono); font-size: .82rem; color: var(--paper-2); }
   .build h3 { font-size: 1.12rem; font-weight: 700; color: var(--paper-ink); }
   .build h3::before { content: counter(b, decimal-leading-zero) "  "; font-family: var(--mono); font-size: .8rem; color: #8A6D12; }
   .build p { color: var(--paper-2); font-size: .97rem; }
@@ -478,7 +465,7 @@ const visitFaq: QA[] = [
   .opt input { color-scheme: light; margin-top: 4px; accent-color: var(--paper-ink); width: 18px; height: 18px; flex-shrink: 0; }
   .opt b { font-weight: 700; font-size: 1.05rem; }
   .opt small { display: block; font-size: .92rem; color: var(--paper-2); }
-  .opt em { display: block; font-style: normal; font-family: var(--mono); font-size: .78rem; font-weight: 600; margin-top: 2px; }
+  .opt em { display: block; font-style: normal; font-family: var(--mono); font-size: .82rem; font-weight: 600; margin-top: 2px; }
   .estimate { position: sticky; top: 96px; background: var(--honey); color: var(--ink); padding: 26px 28px; border-radius: 12px; box-shadow: var(--shadow); display: grid; gap: 14px; }
   .est-label { font-family: var(--mono); font-size: .82rem; font-weight: 600; color: var(--yellow); }
   .est-range { font-family: var(--font-head); font-weight: 800; letter-spacing: -0.03em; font-size: clamp(2.2rem, 4.6vw, 3.1rem); line-height: 1; }
@@ -508,11 +495,11 @@ const visitFaq: QA[] = [
   .h-media { position: relative; min-width: 0; padding-bottom: 34px; }
   .h-concept { margin: 0; }
   .h-concept :global(img) { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; box-shadow: var(--shadow); display: block; }
-  .h-concept figcaption { margin-top: 8px; font-family: var(--mono); font-size: .74rem; color: var(--ink-2); }
+  .h-concept figcaption { margin-top: 8px; font-family: var(--mono); font-size: .82rem; color: var(--ink-2); }
   .h-real figcaption b { display: inline-block; margin-right: 4px; padding: 1px 6px; border-radius: 999px; background: var(--yellow); color: var(--honey); font-weight: 700; }
   .h-real { position: absolute; left: -18px; bottom: 0; width: clamp(130px, 32%, 200px); margin: 0; background: var(--honey); padding: 6px; border-radius: 10px; box-shadow: 0 10px 28px rgba(0,0,0,.4); }
   .h-real :global(img) { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 6px; display: block; }
-  .h-real figcaption { font-family: var(--mono); font-size: .66rem; color: var(--ink-2); padding: 5px 2px 1px; line-height: 1.3; }
+  .h-real figcaption { font-family: var(--mono); font-size: .82rem; color: var(--ink-2); padding: 5px 2px 1px; line-height: 1.3; }
   .h-concept figcaption { padding-left: clamp(120px, 30%, 190px); }
   .proof { list-style: none; margin: clamp(28px, 4vw, 44px) 0 0; padding: 16px 0 0; border-top: 1px solid rgba(251, 245, 236, .14); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px 20px; }
   .proof li { display: flex; gap: 10px; align-items: center; font-weight: 600; font-size: .95rem; color: var(--ink); }
@@ -534,9 +521,18 @@ const visitFaq: QA[] = [
   .cards-1 { grid-template-columns: minmax(0, 1fr); }
   .cards-1 .card { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
   .cards-1 .card-body { align-content: center; padding: 24px 28px; }
-  .why-cap { position: absolute; left: 0; top: 0; z-index: 1; padding: 6px 8px; font-family: var(--mono); font-size: .66rem; color: #fff; background: rgba(0,0,0,.55); border-bottom-right-radius: 6px; }
-  .card-body h4 em small { font-size: .72rem; color: var(--ink-2); font-weight: 500; }
-  .card-links a { color: var(--yellow); font-weight: 600; }
+  .why-cap { position: absolute; left: 0; top: 0; z-index: 1; padding: 6px 8px; font-family: var(--mono); font-size: .82rem; color: #fff; background: rgba(0,0,0,.55); border-bottom-right-radius: 6px; }
+  .card-body h4 em small { font-size: .82rem; color: var(--ink-2); font-weight: 500; }
+  .card-links a { color: var(--yellow); font-weight: 600; display: inline-flex; align-items: center; min-height: 44px; }
+  .card-body h4 a { display: inline-flex; align-items: center; min-height: 44px; }
+  .h-copy .micro a { display: inline-block; padding-block: 10px; }
+  .swipe-hint { display: none; font-family: var(--mono); font-size: .82rem; color: var(--yellow); margin: -6px 0 10px; }
+  .fam-d { color: var(--ink-2); margin: -6px 0 16px; max-width: 62ch; }
+  .cmp-teaser { margin-top: 8px; font-weight: 600; color: var(--paper-ink); }
+  .h-quote { margin: 22px 0 0; padding: 16px 20px; border-left: 3px solid var(--yellow); background: rgba(251, 245, 236, .05); border-radius: 0 10px 10px 0; max-width: 62em; }
+  .h-quote blockquote { margin: 0; font-size: 1.05rem; color: var(--ink); }
+  .h-quote figcaption { margin-top: 6px; font-size: .9rem; color: var(--ink-2); }
+  .h-quote a { color: var(--yellow); }
 
   /* room plan */
   .room-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 56px); align-items: center; margin-bottom: clamp(36px, 5vw, 56px); }
@@ -580,8 +576,23 @@ const visitFaq: QA[] = [
     .h-media { padding-bottom: 0; }
     .h-concept figcaption { padding-left: 0; }
     .h-real { position: static; width: auto; margin-top: 12px; display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 10px; align-items: center; }
-    .h-real figcaption { font-size: .74rem; padding: 0; }
-    .proc { grid-template-columns: minmax(0, 1fr); }
+    .h-real figcaption { font-size: .82rem; padding: 0; }
+    .cards-2 { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; padding-bottom: 8px; margin-inline: calc(var(--gutter, 16px) * -1); padding-inline: var(--gutter, 16px); scroll-padding-inline: var(--gutter, 16px); }
+    .cards-2 .card { flex: 0 0 86%; scroll-snap-align: start; }
+    .build-photos { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; }
+    .build-photos figure { flex: 0 0 78%; scroll-snap-align: start; }
+    .swipe-hint { display: block; }
+    .proc { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 14px; }
+    .proc p { font-size: .92rem; }
+    .picker fieldset:first-child { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+    .picker fieldset:first-child legend { grid-column: 1 / -1; }
+    .picker fieldset:first-child .opt { flex-direction: column; gap: 4px; padding: 10px; }
+    .picker fieldset:first-child .opt small { display: none; }
+    .opt { padding: 10px 12px; }
+    .picker fieldset:last-child .opt small .k { display: none; }
+    .pics figcaption { font-size: .7rem; padding: 14px 6px 5px; }
+    .why-cap { font-size: .7rem; }
+    .why-tag { font-size: .8rem; }
   }
 
   @media (max-width: 1060px) { .proc { grid-template-columns: repeat(3, minmax(0, 1fr)); } .build { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
@@ -590,7 +601,7 @@ const visitFaq: QA[] = [
     .estimate { position: static; }
   }
   @media (max-width: 640px) {
-    .proc, .build { grid-template-columns: minmax(0, 1fr); }
+    .build { grid-template-columns: minmax(0, 1fr); }
     .build-photos { grid-template-columns: minmax(0, 1fr); }
     .h-copy .display { font-size: clamp(2.4rem, 11vw, 3rem); }
     .actions .btn { width: 100%; }

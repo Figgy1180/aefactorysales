@@ -88,6 +88,8 @@ const breadcrumb = crumbs.length
 
 const allSchema = [business, ...(breadcrumb ? [breadcrumb] : []), ...schema];
 const isCurrent = (href: string) => path === href || path === href.replace(/\/$/, '') || path === href.replace(/\/$/, '.html');
+const onEstimate = Astro.url.pathname.startsWith('/free-quote');
+const onBooking = Astro.url.pathname.startsWith('/book-visit');
 ---
 <!doctype html>
 <html lang="en-US">
@@ -242,7 +244,7 @@ const isCurrent = (href: string) => path === href || path === href.replace(/\/$/
         </p>
       </div>
     </footer>
-    <nav class="callbar" aria-label="Quick contact"><a href={SITE.phoneHref}>Call</a><a href="/free-quote/">Get estimate</a><a href="/book-visit/">Book design visit</a></nav>
+    <nav class={`callbar${onEstimate || onBooking ? ' two' : ''}`} aria-label="Quick contact"><a href={SITE.phoneHref}>Call</a>{!onEstimate && <a href="/free-quote/">Get estimate</a>}{!onBooking && <a href="/book-visit/">Book design visit</a>}</nav>
     <script>
     import { captureSource } from '../scripts/source';
     captureSource();

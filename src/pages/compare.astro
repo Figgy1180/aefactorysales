@@ -56,6 +56,16 @@ const ld = {
   datePublished: '2026-11-09', dateModified: '2026-11-09', author: { '@id': `${SITE.url}/#business` }, publisher: { '@id': `${SITE.url}/#business` },
   mainEntityOfPage: `${SITE.url}/compare/`,
 };
+const retrofit = {
+  cols: ['AE polycarbonate room', 'Glass enclosure', 'Fabric screens', 'Motorized shades'],
+  rows: [
+    ['Material', ['Tinted polycarbonate panels in a metal-reinforced, heat-welded frame', 'Glass panels in a frame; type of glass depends on the system', 'Fiberglass or polyester mesh in a frame', 'Fabric or mesh shade on a motorized roller']],
+    ['How it opens', ['Fixed, or folds by hand along a track; mix both', 'Fixed, sliding or folding, depending on the system', 'Usually fixed, with screen doors', 'Rolls up and down with a motor and remote']],
+    ['Weather and airflow', ['Blocks wind and rain; open folding sections for air', 'Blocks wind and rain; clear views', 'Airflow and bug protection, little weather protection', 'Shade and privacy; wind and rain protection depends on the product']],
+    ['Installation scope', ['Prepared in our factory to your openings; most installs one day on site', 'Varies widely by system and site', 'Usually simple', 'Needs power at each shade, often new wiring']],
+    ['Upkeep', ['Soft cloth, mild soap and water; no motors', 'Glass cleaning and hardware care', 'Mesh can tear or sag and may need rescreening', 'Motors, controls and fabric need care over time']],
+  ] as [string, string[]][],
+};
 ---
 <Base
   title="Patio Enclosure Options Compared: Houston Costs (2026) | AE"
@@ -73,6 +83,23 @@ const ld = {
       </ul></nav>
     </div>
   </PageHero>
+
+  <section class="band" id="retrofit" aria-labelledby="retrofit-title">
+    <div class="wrap stack-lg">
+      <div class="sec-head" style="margin-bottom:0">
+        <h2 id="retrofit-title" class="h2">Options for an existing covered patio</h2>
+        <p class="lede">Each option has a place. Here is how they differ in general terms; specific products vary.</p>
+      </div>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Retrofit options compared, scrollable">
+        <table class="tbl">
+          <thead><tr><th scope="col">Feature</th>{retrofit.cols.map((c, i) => <th scope="col" class={i === 0 ? 'ours' : undefined}>{c}</th>)}</tr></thead>
+          <tbody>
+            {retrofit.rows.map(([k, v]) => <tr><th scope="row">{k}</th>{v.map((x, i) => <td class={i === 0 ? 'ours' : undefined}>{x}</td>)}</tr>)}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 
   <section class="band on-paper" id="table" aria-labelledby="table-title">
     <div class="wrap stack-lg">

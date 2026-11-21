@@ -5,14 +5,15 @@ import Base from '../layouts/Base.astro';
 const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
 ---
 <Base
-  title="Patio Visualizer: See AE Screens on Your Patio | AE"
+  title="Patio Visualizer: See AE Screens and Panels on Your Patio | AE"
   description="Upload a photo of your covered patio and preview Hexfold, Fixed Screen, Clearfixed, Clearfold and Hybrid in Night Gray or Bright White, with a rough installed price."
   crumbs={crumbs}
 >
   <section class="band hive" style="padding-top:24px">
 <div class="wrap viz">
-  <h1 class="display">See our screens <span class="y">on your patio</span></h1>
-  <p class="sub">Upload a photo of your covered patio, line the yellow corners up with an opening, and try every AE system and frame color.</p>
+  <h1 class="display">See AE systems <span class="y">on your patio</span></h1>
+  <p class="sub">Upload a photo of your covered patio, line the yellow corners up with an opening, and try every AE screen and panel system in both frame colors.</p>
+  <label class="file-btn m-upload" for="file">Upload my patio photo</label>
   <ol class="steps">
     <li>Upload a photo, or try it on the sample patio below.</li>
     <li id="stepCorners">Drag the four yellow corners to the corners of one opening.</li>
@@ -147,6 +148,8 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
 .viz .btn:focus-visible, .viz .seg button:focus-visible, .viz .file-btn:focus-within { outline: 3px solid var(--ink); outline-offset: 2px; }
 .viz .file-btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
 .viz .file-btn input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.viz .m-upload { display: none; }
+@media (max-width: 900px) { .viz .m-upload { display: flex; width: 100%; margin-top: 16px; min-height: 52px; } }
 .viz .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .viz .stepper { display: flex; align-items: center; gap: 0; }
 .viz .stepper button { width: 44px; height: 44px; font: 800 20px var(--font); background: var(--honey-3); color: var(--ink); border: 1px solid var(--line); cursor: pointer; }

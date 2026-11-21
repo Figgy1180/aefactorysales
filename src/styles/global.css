@@ -415,6 +415,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
     padding: 0 env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
   }
   .callbar a, .callbar button { min-height: 58px; border: 0; font-family: inherit; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: 800; font-stretch: 80%; font-size: 1.1rem; text-transform: uppercase; text-decoration: none; color: var(--ink); }
+  .callbar.two { grid-template-columns: 1fr 1.4fr; }
   .callbar a + a { border-left: 1px solid var(--line); font-size: 1rem; }
   .callbar a:last-child { background: var(--yellow); color: var(--honey); border-left: 0; }
 }
@@ -456,7 +457,7 @@ b, strong { font-stretch: 100%; }
 .cap b, .bv-pick span, .cb-fab, .cb-fab span, .tile .cap b { text-transform: none !important; font-stretch: 100% !important; letter-spacing: 0 !important; font-family: var(--font-head); }
 
 /* Hive theme (Nov refresh): hexagon geometry as a quiet, consistent brand layer */
-.kicker { margin: 0; display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-weight: 600; font-size: .78rem; text-transform: uppercase; color: var(--yellow); }
+.kicker { margin: 0; display: flex; align-items: center; gap: 10px; font-family: var(--mono); font-weight: 600; font-size: .84rem; text-transform: uppercase; color: var(--yellow); }
 .kicker.dark { color: var(--paper-2); }
 .hexdot { width: 11px; height: 13px; flex: none; background: var(--yellow); clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%); }
 .hexlist { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
