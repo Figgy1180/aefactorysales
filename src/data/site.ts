@@ -86,7 +86,7 @@ export const PRODUCTS: Product[] = [
     href: '/patio-enclosures/clearfold/',
     specs: [
       ['Panel', 'Polycarbonate sunshade panel, about half the thickness of Clearfixed, UV protected on both sides with a hard coat'],
-      ['Hardware', 'High-end handle; ramp water stop quoted for your project'],
+      ['Hardware', 'High-end handle; water stop included; ramp included when the opening is wide enough, otherwise quoted at the visit'],
       ['Opening', 'Up to 5 ft per pull, 10 ft meeting in the middle'],
       ['Wind', 'Operates to about 40 mph; retract and secure for 100+ mph'],
     ],
@@ -134,7 +134,7 @@ export const PRODUCTS: Product[] = [
     href: '/patio-enclosures/hybrid/',
     specs: [
       ['Panel', 'Polycarbonate sunshade panel and honeycomb aluminum mesh'],
-      ['Hardware', 'High-end handle; ramp water stop quoted for your project'],
+      ['Hardware', 'High-end handle; water stop included; ramp included when the opening is wide enough, otherwise quoted at the visit'],
       ['Opening', 'Up to 5 ft per pull, 10 ft meeting in the middle'],
     ],
   },
@@ -248,7 +248,11 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Does rain get in?',
-      a: 'Light rain, no. Rubber gaskets and our own sealing system close the gaps and keep a seamless look. In heavy, wind-driven rain a small amount can get in, so think of it as a sheltered room, not a watertight one.',
+      a: 'Light rain, no. Rubber gaskets and U-channels custom made for our system close the gaps and keep a seamless look. In heavy, wind-driven rain a small amount can get in, so think of it as a sheltered room, not a watertight one.',
+    },
+    {
+      q: 'Can you replace a single panel?',
+      a: 'Yes. If one panel gets damaged, the factory can replace just that panel. Replacement is quoted for the repair.',
     },
     {
       q: 'Are the panels UV protected?',
