@@ -11,7 +11,7 @@ import { REVIEWS } from '../data/reviews';
 import { GUIDES } from '../data/guides';
 import { PRODUCTS, SIZES, FAQ, FACTS, SITE, WARRANTY, byId, range, type QA } from '../data/site';
 
-import heroConcept from '../assets/renders/clearfixed-concept.jpg';
+import pcDoors from '../assets/projects/p37/3-inside-doors-closed.jpg';
 import heroReal from '../assets/projects/p34/5-inside-seating.jpg';
 import roomShowroom from '../assets/photos/showroom-polycarbonate-smoke.jpg';
 import rClearfixed from '../assets/renders/clearfixed.png';
@@ -41,7 +41,7 @@ const cards: Record<string, Card> = {
     a: { src: roomShowroom, alt: 'Folding Smokey Gray polycarbonate panels in the AE showroom', cap: 'In our Houston showroom' },
     b: { src: rClearfold, alt: 'Concept visualization of Clearfold folding polycarbonate panels', cap: 'Concept visualization' } },
   hybrid: { id: 'hybrid', sell: 'Panels and metal mesh on the same opening. Each can cover all of it, either can stop part way, and both fold back for an open passage.',
-    a: { src: showroomIn, alt: 'A room combining polycarbonate panels and metal mesh in the AE showroom', cap: 'In our Houston showroom' },
+    a: { src: pcDoors, alt: 'Blue-tinted polycarbonate Hybrid doors closed on a Sugar Land patio, installed by AE', cap: 'Real installation, Sugar Land' },
     b: { src: hybridConcept, alt: 'Concept visualization of the Hybrid with the polycarbonate layer closed and the mesh folded at one end', cap: 'Concept visualization: panels closed' } },
   hexfold: { id: 'hexfold', sell: 'Pleated honeycomb aluminum mesh that folds away. Up to 20 ft wide with no posts.',
     a: { src: hexClosed, alt: 'Brick Houston patio closed in with Hexfold folding screens', cap: 'Real installation, closed' },
@@ -121,8 +121,8 @@ const visitFaq: QA[] = [
           <figcaption>Real AE installation in Houston, metal screens</figcaption>
         </figure>
         <figure class="h-real">
-          <Image src={heroConcept} widths={[240, 420]} sizes="200px" alt="Concept visualization: Clearfixed Smokey Gray polycarbonate panels on a covered brick patio" loading="eager" />
-          <figcaption><b>Concept</b> Polycarbonate room, Smokey Gray</figcaption>
+          <Image src={pcDoors} widths={[240, 420]} sizes="200px" alt="Blue-tinted polycarbonate doors closed on a covered patio in Sugar Land, installed by AE" loading="eager" style="object-position:50% 40%" />
+          <figcaption><b>Real</b> Polycarbonate doors, Sugar Land</figcaption>
         </figure>
       </div>
     </div>
@@ -273,7 +273,7 @@ const visitFaq: QA[] = [
         <a class="btn btn-line" href="/projects/">See all projects</a>
       </div>
       <ProjectMosaic />
-      <p class="fine" style="margin-top:12px">Every photo here is a finished AE job. These projects use our metal screen systems.</p>
+      <p class="fine" style="margin-top:12px">Every photo here is a finished AE job. Most use our metal screen systems; the Sugar Land job adds polycarbonate Hybrid doors.</p>
       {REVIEWS.length > 0 && <div id="reviews" style="margin-top:40px;scroll-margin-top:90px"><ReviewCards /></div>}
     </div>
   </section>

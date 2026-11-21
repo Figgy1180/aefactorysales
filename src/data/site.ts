@@ -69,7 +69,7 @@ export const PRODUCTS: Product[] = [
     msrp: 31,
     href: '/patio-enclosures/clearfixed/',
     specs: [
-      ['Panel', '4 mm polycarbonate, Smokey Gray or Industrial Blue'],
+      ['Panel', '4 mm polycarbonate, Smokey Gray or Industrial Blue, UV protected on both sides with a hard coat'],
       ['Frame', 'Heat-welded PVC-fiber blend, aluminum core, ceramic coating'],
       ['Panel size', 'Up to 3.5 × 10 ft each, arches available'],
       ['Wind', 'Fixed panels rated to 100 mph'],
@@ -85,7 +85,7 @@ export const PRODUCTS: Product[] = [
     msrp: 40,
     href: '/patio-enclosures/clearfold/',
     specs: [
-      ['Panel', 'Polycarbonate sunshade panel'],
+      ['Panel', 'Polycarbonate sunshade panel, about half the thickness of Clearfixed, UV protected on both sides with a hard coat'],
       ['Hardware', 'High-end handle; ramp water stop quoted for your project'],
       ['Opening', 'Up to 5 ft per pull, 10 ft meeting in the middle'],
       ['Wind', 'Operates to about 40 mph; retract and secure for 100+ mph'],

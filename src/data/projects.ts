@@ -14,6 +14,21 @@ const fold = 'Aluminum folding screens', fixed = 'Fixed steel mesh';
 
 export const PROJECTS: Project[] = [
   {
+    id: 'p37', slug: 'sugar-land-patio-screens-polycarbonate-doors', title: 'Screens and polycarbonate doors', city: 'Sugar Land', kind: 'Patio',
+    systems: [fold, 'Blue-tinted polycarbonate Hybrid doors'],
+    note: 'A wraparound covered patio closed in with folding aluminum screens on the long sides and a pair of blue-tinted polycarbonate Hybrid doors that open in the middle. Everything opens and closes by hand.',
+    img: '', source: '',
+    captions: {
+      '1-outside-doors': 'Folding screens on the long side, polycarbonate doors at the corner',
+      '2-outside-screens': 'Both screened bays, seen from the pool deck',
+      '3-inside-doors-closed': 'From inside, polycarbonate doors closed',
+      '4-inside-doors-open': 'Same view, doors opened by hand',
+      '5-inside-screens': 'Folding screens closed, seen from inside',
+    },
+    openClosed: ['3-inside-doors-closed', '4-inside-doors-open'],
+    facts: [['Screens', 'Folding aluminum mesh, meeting in the middle'], ['Doors', 'Polycarbonate Hybrid doors, blue tint'], ['Operation', 'By hand, no motors'], ['Built', 'In our Houston factory, installed by our crew']],
+  },
+  {
     id: 'p35', slug: 'houston-20-ft-patio-enclosure', title: '20 ft wide patio enclosure', city: 'Houston', kind: 'Patio',
     systems: [fold, fixed],
     note: 'A covered patio open on two sides. Folding screens meet in the middle across the long side, so the whole wall opens to the yard. Fixed steel mesh closes in the short side.',

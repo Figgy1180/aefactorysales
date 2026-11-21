@@ -56,6 +56,22 @@ const product = {
 
   <DemoSection sys={id} name={p.name} lede={how[id].lede} points={how[id].points} />
 
+  {id === 'hybrid' && (
+    <section class="band" aria-labelledby="real-hybrid">
+      <div class="wrap split">
+        <div class="stack">
+          <h2 id="real-hybrid" class="h2">On a real patio <span class="y">in Sugar Land</span></h2>
+          <p class="lede">Blue-tinted polycarbonate Hybrid doors at the corner of a wraparound patio, with folding screens on the long sides. Opened and closed by hand.</p>
+          <p><a href="/projects/sugar-land-patio-screens-polycarbonate-doors/">See the whole project</a></p>
+        </div>
+        <figure class="dim-frame video-frame">
+          <video width="540" height="960" src="/video/sugar-land-pc-doors.mp4" poster="/video/sugar-land-pc-doors-poster.jpg" muted loop playsinline controls preload="metadata" aria-label="AE crew member opening and closing blue polycarbonate Hybrid doors on a Sugar Land patio"></video>
+          <span class="tag">Real AE install</span>
+        </figure>
+      </div>
+    </section>
+  )}
+
   <section class="band on-paper">
     <div class="wrap stack-lg">
       <h2 class="h2">Why choose <span class="y">{p.name}</span></h2>
@@ -133,6 +149,8 @@ const product = {
   </section>
 </Base>
 <style>
+  .video-frame video { aspect-ratio: 9 / 16; max-height: 560px; width: auto; max-width: 100%; margin-inline: auto; display: block; background: var(--honey); }
+  .video-frame { justify-self: center; }
   .pp-points { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
   .pp-points > div { border-top: 2px solid var(--paper-ink); padding-top: 14px; min-width: 0; }
   .pp-points h3 { font-weight: 800; font-stretch: 78%; font-size: 1.3rem; text-transform: uppercase; }
