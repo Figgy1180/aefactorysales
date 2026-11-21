@@ -71,8 +71,8 @@ export const PRODUCTS: Product[] = [
     specs: [
       ['Panel', '4 mm polycarbonate, Smokey Gray or Industrial Blue, UV protected on both sides with a hard coat'],
       ['Frame', 'Heat-welded PVC-fiber blend, aluminum core, ceramic coating'],
-      ['Panel size', 'Up to 3.5 × 10 ft each, arches available'],
-      ['Wind', 'Fixed panels rated to 100 mph'],
+      ['Panel size', 'Up to 4 × 11.5 ft each, arches available'],
+      ['Wind', 'Factory wind tunnel test: polycarbonate panel withstood 50 mph'],
     ],
   },
   {
@@ -88,7 +88,7 @@ export const PRODUCTS: Product[] = [
       ['Panel', 'Polycarbonate sunshade panel, about half the thickness of Clearfixed, UV protected on both sides with a hard coat'],
       ['Hardware', 'High-end handle; water stop included; ramp included when the opening is wide enough, otherwise quoted at the visit'],
       ['Opening', 'Up to 5 ft per pull, 10 ft meeting in the middle'],
-      ['Wind', 'Operates to about 40 mph; retract and secure for 100+ mph'],
+      ['Storms', 'Fold away and secure before storms; a panel withstood 50 mph in our factory wind tunnel test'],
     ],
   },
   {
@@ -104,7 +104,7 @@ export const PRODUCTS: Product[] = [
       ['Mesh', 'Honeycomb aluminum, about 115 holes per sq in'],
       ['Frame', 'Heat-welded PVC-fiber blend, aluminum core, ceramic coating; stainless steel wheels'],
       ['Opening', 'Up to 10 × 10 ft per pull, 20 ft wide meeting in the middle'],
-      ['Wind', 'Operates to about 40 mph; retract and secure for 100+ mph'],
+      ['Storms', 'Fold away and secure before storms'],
     ],
   },
   {
@@ -119,7 +119,7 @@ export const PRODUCTS: Product[] = [
     specs: [
       ['Mesh', '304 stainless steel'],
       ['Frame', 'Heat-welded PVC-fiber blend, aluminum core, ceramic coating'],
-      ['Panel size', 'Up to 3.5 × 10 ft each, arches available'],
+      ['Panel size', 'Up to 4 × 11.5 ft each, arches available'],
       ['Extras', 'Pet doors available'],
     ],
   },
@@ -135,7 +135,7 @@ export const PRODUCTS: Product[] = [
     specs: [
       ['Panel', 'Polycarbonate sunshade panel and honeycomb aluminum mesh'],
       ['Hardware', 'High-end handle; water stop included; ramp included when the opening is wide enough, otherwise quoted at the visit'],
-      ['Opening', 'Up to 5 ft per pull, 10 ft meeting in the middle'],
+      ['Opening', 'Up to 9.8 ft per side; up to 19.7 ft wide × 11.5 ft tall meeting in the middle'],
     ],
   },
 ];
@@ -171,9 +171,8 @@ export const CITY_PAGES: Record<string, string> = {
 export const FACTS = {
   vlt: '48%',
   shgc: '0.45',
-  fixedWind: '100 mph',
-  foldWind: 'about 40 mph',
-  foldStowed: '100+ mph',
+  wind: '50 mph',
+  windNote: "In our Houston factory's in-house wind tunnel test, a polycarbonate panel withstood 50 mph winds (a strong gale, Beaufort 9).",
   mesh: 'about 115 holes per sq in',
 };
 
@@ -232,7 +231,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Is it air-conditioned?',
-      a: 'No. It is a 3-season room for an existing covered patio: shaded and sheltered, not insulated or air-conditioned. With everything closed on a hot, still afternoon it can feel as warm as outside, so we design folding or screened sections for airflow at the visit. Spring, fall and most of winter are when it shines.',
+      a: 'Not built in. It is a 3-season room for an existing covered patio: shaded and sheltered, not insulated. Adding air conditioning is optional and can help: closed polycarbonate panels help hold cooled air in, so a portable or mini-split unit makes hot days more comfortable. Without AC, we design folding or screened sections for airflow at the visit.',
     },
     {
       q: 'What is the difference between Clearfixed and Clearfold?',
@@ -282,7 +281,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Do AE folding screens work when the power goes out?',
-      a: 'Yes. Hexfold opens and closes by hand with its handle, so it does not need household electricity. Clearfold and the Hybrid fold by hand too, so none of our folding systems needs power. Use it within its operating limits: about 40 mph while open or moving.',
+      a: 'Yes. Hexfold opens and closes by hand with its handle, so it does not need household electricity. Clearfold and the Hybrid fold by hand too, so none of our folding systems needs power. Fold it away and secure it before a storm.',
     },
     {
       q: 'Do Hexfold screens need maintenance?',
@@ -300,11 +299,11 @@ export const FAQ: Record<string, QA[]> = {
   general: [
     {
       q: 'Are patio screens safe in Houston storms?',
-      a: 'Fixed polycarbonate panels are rated to 100 mph. Hexfold and the other folding systems operate in winds up to about 40 mph; retract and secure them before a big storm and they are good for 100+ mph. These are everyday durability ratings, not a hurricane rating.',
+      a: 'In our Houston factory\'s in-house wind tunnel test, a polycarbonate panel withstood 50 mph winds (a strong gale, Beaufort 9). Before a big storm, fold away and secure the folding systems. This is an everyday durability test, not a hurricane rating.',
     },
     {
       q: 'Do I need a roof over my patio?',
-      a: 'Yes. Our enclosures and screens are built for existing roofed patios. Our track mounts to your posts, beams and slab. We can add posts where an opening needs one, running along your existing beams. Panels can be up to 10 ft tall.',
+      a: 'Yes. Our enclosures and screens are built for existing roofed patios. Our track mounts to your posts, beams and slab. We can add posts where an opening needs one, running along your existing beams. Panels can be up to 11.5 ft tall (fixed panels and the Hybrid; 10 ft for Hexfold and Clearfold).',
     },
     {
       q: 'Do I need a city permit?',

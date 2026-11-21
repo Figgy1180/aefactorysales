@@ -28,10 +28,10 @@ related:
 | Feature | Clearfixed |
 |---|---|
 | Panel | 4 mm polycarbonate, Smokey Gray or Industrial Blue |
-| Panel size | Up to 3.5 × 10 ft each, arches available |
+| Panel size | Up to 4 × 11.5 ft each, arches available |
 | Visible light | 48% transmission (Smokey Gray panel test) |
 | Solar heat gain | 0.45 SHGC (Smokey Gray panel test) |
-| Wind | Fixed panels rated to 100 mph |
+| Wind | Panel withstood 50 mph in our factory's wind tunnel test |
 | Price | From $31 per sq ft of opening, installed, before sales tax |
 
 Panel test values are for the panel, not a full installed-system rating. A 3-season room is shaded and sheltered, not air-conditioned.

@@ -27,7 +27,7 @@ Both kinds of screen disappear when you want the view and close when the mosquit
 | Power needed | None | Yes, at each opening |
 | Mesh | Honeycomb aluminum, about 115 holes per sq in | Varies by brand, often fabric-based |
 | Largest opening | 10 × 10 ft per pull, 20 ft wide meeting in the middle | Varies by brand |
-| Wind | Operates to about 40 mph; retract and secure for 100+ mph | Varies by brand |
+| Wind | Fold away and secure before storms | Varies by brand |
 
 ## What it costs on a real patio
 

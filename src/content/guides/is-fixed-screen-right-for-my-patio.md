@@ -29,7 +29,7 @@ related:
 |---|---|
 | Mesh | 304 stainless steel |
 | Frame | Heat-welded PVC-fiber blend, aluminum core, ceramic coating |
-| Panel size | Up to 3.5 × 10 ft each, arches available |
+| Panel size | Up to 4 × 11.5 ft each, arches available |
 | Frame colors | Night Gray or Bright White |
 | Price | From $24 per sq ft of opening, installed, before sales tax |
 | Warranty | Lifetime on the frame for the original owner, 5 years on parts |

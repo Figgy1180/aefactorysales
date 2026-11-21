@@ -42,7 +42,7 @@ Sunroom figures are from the HomeGuide cost guide (Oct 2026), applied to 224 sq 
 
 ## Fixed or folding?
 
-- **Clearfixed** ($31 per sq ft): fixed 4 mm panels, rated to 100 mph, and can be cut into arches and angles.
+- **Clearfixed** ($31 per sq ft): fixed 4 mm panels that can be cut into arches and angles.
 - **Clearfold** ($40 per sq ft): panels fold to the side so the patio can open back up.
 - **Hybrid** ($56 per sq ft): polycarbonate and honeycomb aluminum mesh in one folding system.
 

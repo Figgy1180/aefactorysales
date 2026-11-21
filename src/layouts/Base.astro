@@ -67,7 +67,7 @@ const business = {
     addressCountry: 'US',
   },
   areaServed: CITIES.map((c) => ({ '@type': 'City', name: `${c}, TX` })),
-  sameAs: [SITE.googleProfileUrl, 'https://www.youtube.com/@AEFactorySales', SITE.youtubeFold, SITE.factorySite],
+  sameAs: [SITE.googleProfileUrl, 'https://www.youtube.com/@AEFactorySales', SITE.youtubeFold],
   geo: { '@type': 'GeoCoordinates', latitude: SITE.geo.lat, longitude: SITE.geo.lng },
   hasMap: SITE.googleProfileUrl,
   knowsAbout: ['Patio enclosures', 'Retractable patio screens', 'Polycarbonate 3-season rooms', 'Stainless steel screens', 'Garage screens'],
@@ -231,7 +231,6 @@ const onBooking = Astro.url.pathname.startsWith('/book-visit');
               <li><a href="/how-we-build/">Our factory</a></li>
               <li><a href="/reviews/">Leave a review</a></li>
               <li><a href={SITE.googleProfileUrl} rel="noopener">Find us on Google</a></li>
-              <li><a href={SITE.factorySite} rel="noopener">Factory site</a></li>
               <li><a href="/privacy/">Privacy</a></li>
               <li><a href="/terms/">Terms</a></li>
               <li><a href="/accessibility/">Accessibility</a></li>

@@ -6,17 +6,16 @@ import { SITE, PRODUCTS, SIZES, FAQ, FACTS, FINANCING, WARRANTY_FULL, FRAME, byI
 const crumbs = [{ name: 'Learn', href: '/learn/' }];
 const order = ['fixed', 'hexfold', 'clearfixed', 'clearfold', 'hybrid'].map(byId);
 const sizeLimits = [
-  ['Fixed Screen', 'Up to 3.5 ft wide × 10 ft tall per panel, joined side by side', '1 ft × 1.3 ft', 'Yes, at 1.5 × the base rate'],
-  ['Clearfixed', 'Up to 3.5 ft wide × 10 ft tall per panel, joined side by side', '1 ft × 1.3 ft', 'Yes, at 1.5 × the base rate'],
+  ['Fixed Screen', 'Up to 4 ft wide × 11.5 ft tall per panel, joined side by side', '1 ft × 1.3 ft', 'Yes, at 1.5 × the base rate'],
+  ['Clearfixed', 'Up to 4 ft wide × 11.5 ft tall per panel, joined side by side', '1 ft × 1.3 ft', 'Yes, at 1.5 × the base rate'],
   ['Hexfold', 'Up to 10 ft wide × 10 ft tall per pull; 20 ft wide meeting in the middle', '1 ft × 1.3 ft', 'Pair with fixed panels cut to the shape above'],
   ['Clearfold', 'Up to 5 ft wide × 10 ft tall per pull; 10 ft wide meeting in the middle', '1 ft × 1.3 ft', 'Pair with fixed panels above'],
-  ['Hybrid', 'Up to 5 ft wide × 10 ft tall per pull; 8 ft wide meeting in the middle', '1 ft × 1.3 ft', 'Pair with fixed panels above'],
+  ['Hybrid', 'Up to 9.8 ft wide × 11.5 ft tall per side; 19.7 ft wide meeting in the middle', '1 ft × 1.3 ft', 'Pair with fixed panels above'],
 ];
 const options = [
   ['Locks', 'Keyed cylinder set into the frame rail, functional or dummy', 'Folding systems'],
   ['Handles', 'High-end handle routed into the frame, standard', 'Folding systems'],
   ['Ramp water stop', 'Keeps rain from running in along the bottom track', 'Water stop standard on Clearfold and Hybrid (ramp included when the opening is wide enough); option on Hexfold'],
-  ['Full steel bottom track', 'Upgrade from the steel-sleeved aluminum track; standard on openings over 16.5 ft wide', 'Folding systems'],
   ['Pet door', 'Built into a fixed panel', 'Fixed Screen, Clearfixed'],
   ['Arches and angles', 'Panels cut to your roofline on a dedicated angle saw', 'Fixed Screen, Clearfixed'],
   ['Extra posts or framing', 'Added where an opening needs support', 'All systems'],
@@ -30,7 +29,7 @@ const glossary = [
   ['Fixed panel', 'A panel that stays in place, like a wall of screen or a window.'],
   ['Free-floating panel', 'A folding panel that hangs from the top track, so its weight never drags on the bottom.'],
   ['Top track', 'The track along the top of an opening that carries folding panels.'],
-  ['Bottom track', 'The low guide along the floor. Standard is steel-sleeved aluminum; full steel is the heavy-duty option.'],
+  ['Bottom track', 'The low guide along the floor: a 3/8 in profile machined from solid 304 stainless steel, low enough for wheelchairs, strollers and carts to roll over.'],
   ['Ramp water stop', 'A sloped piece on the bottom track that keeps rain from running in.'],
   ['U and H trim', 'Standard trim profiles that mount to your wall or posts, level the frame and seal the edge.'],
   ['Heat welding', 'Joining frame corners by melting them together at about 350°C, instead of screws.'],
@@ -116,7 +115,7 @@ const ld = [
           <div><dt>Fixed Screen mesh</dt><dd>304 stainless steel mesh, used on Fixed Screen only.</dd></div>
           <div><dt>Hexfold and Hybrid mesh</dt><dd>Honeycomb aluminum, about 115 holes per square inch.</dd></div>
           <div><dt>Polycarbonate</dt><dd>4 mm panels on Clearfixed; lighter sunshade panels, about half that thickness, on Clearfold. UV protection on both sides plus a hard coat against scratches. Factory tinted Smokey Gray or Industrial Blue. Much lighter than glass and far more impact resistant (general polycarbonate properties, Palram Industries).</dd></div>
-          <div><dt>Track</dt><dd>Folding panels hang from the top track. The bottom track is steel-sleeved aluminum as standard under 16.5 ft wide, full steel above that. It sweeps clear of debris instead of jamming.</dd></div>
+          <div><dt>Track</dt><dd>Folding panels hang from the top track. The bottom track is a 3/8 in low-profile bottom track, precision-machined from solid 304 stainless steel, low enough for wheelchairs, strollers and carts to roll over. Panels self-adjust to uneven slabs.</dd></div>
           <div><dt>Wheels and hardware</dt><dd>Stainless steel wheels on Hexfold, double wheels and guards on every folding panel. Handles and locks are routed into the frame, not screwed on. Some small parts, like end caps, are nylon.</dd></div>
           <div><dt>Complete kit</dt><dd>Every system ships with trim, wall stripping and hardware. The U-shaped wall trim levels and seals the frame as it is set.</dd></div>
           <div><dt>Traceable parts</dt><dd>Over 30 manufacturers make parts specifically for AE, and we know the maker of every one.</dd></div>
@@ -138,9 +137,7 @@ const ld = [
           <tbody>
             <tr><th scope="row">Visible light transmission</th><td>{FACTS.vlt} (Smokey Gray)</td></tr>
             <tr><th scope="row">Solar heat gain coefficient</th><td>{FACTS.shgc} (Smokey Gray)</td></tr>
-            <tr><th scope="row">Fixed polycarbonate panels, wind</th><td>Rated to {FACTS.fixedWind}</td></tr>
-            <tr><th scope="row">Folding systems, operating wind</th><td>{FACTS.foldWind}</td></tr>
-            <tr><th scope="row">Folding systems, retracted and secured</th><td>{FACTS.foldStowed}</td></tr>
+            <tr><th scope="row">Wind</th><td>Polycarbonate panel withstood {FACTS.wind} in our factory's in-house wind tunnel test</td></tr>
             <tr><th scope="row">Hexfold mesh density</th><td>{FACTS.mesh}</td></tr>
             <tr><th scope="row">Product generation</th><td>Fifth generation; screen systems tested for four years on Houston job sites and in our factory</td></tr>
           </tbody>
@@ -157,7 +154,7 @@ const ld = [
         </table></div>
         <ul>
           <li>Included: design, site visit, fabrication, factory test assembly, installation by our crew, parts and the warranty.</li>
-          <li>Added when needed: arched or angled fixed panels (1.5 × base rate), extra posts, locks, ramp water stop on Hexfold, full steel track.</li>
+          <li>Added when needed: arched or angled fixed panels (1.5 × base rate), extra posts, locks, ramp water stop on Hexfold.</li>
           <li>Financing: {FINANCING}</li>
         </ul>
         <p><a href="/pricing/">Full pricing page</a> · <a href="/free-quote/">Price my patio in 4 steps</a></p>
@@ -205,7 +202,7 @@ const ld = [
 
       <section id="storms" class="topic">
         <h2 class="h3">Storms and wind</h2>
-        <p>Fixed polycarbonate panels are rated to {FACTS.fixedWind}. Hexfold and the other folding systems operate in winds up to {FACTS.foldWind}; retracted and secured, they are rated for {FACTS.foldStowed}. These are everyday durability ratings, not a hurricane rating, so follow local guidance during a hurricane.</p>
+        <p>{FACTS.windNote}. Fold away and secure folding systems when high winds are forecast. This is an everyday durability test, not a hurricane rating, so follow local guidance during a hurricane.</p>
       </section>
 
       <section id="glossary" class="topic">

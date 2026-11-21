@@ -31,7 +31,7 @@ Keep the long front side as polycarbonate panels, and put the Hybrid on the two 
 |---|---|
 | Layers | Polycarbonate sunshade panel and honeycomb aluminum mesh |
 | How it opens | By hand; each layer stacks at its own end |
-| Opening | Up to 5 ft per pull, 10 ft meeting in the middle |
+| Opening | Up to 9.8 ft per side; up to 19.7 × 11.5 ft meeting in the middle |
 | Price | From $56 per sq ft of opening, installed, before sales tax |
 
 Accessories and other options are extra and are quoted for your project.

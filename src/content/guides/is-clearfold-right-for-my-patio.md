@@ -28,7 +28,7 @@ related:
 |---|---|
 | Panel | Polycarbonate sunshade panel, Smokey Gray or Industrial Blue |
 | Opening | Up to 5 ft per pull, 10 ft meeting in the middle |
-| Wind | Operates to about 40 mph; retract and secure for 100+ mph |
+| Wind | Fold away and secure before storms |
 | Hardware | High-end handle; water stop included; ramp included when the opening is wide enough, otherwise quoted at the visit |
 | Price | From $40 per sq ft of opening, installed, before sales tax |
 

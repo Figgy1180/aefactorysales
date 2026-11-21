@@ -30,7 +30,7 @@ related:
 | Mesh | Honeycomb aluminum, about 115 holes per sq in |
 | Frame | Heat-welded PVC-fiber blend, aluminum core, ceramic coating; stainless steel wheels |
 | Opening | Up to 10 × 10 ft per pull, 20 ft wide meeting in the middle |
-| Wind | Operates to about 40 mph; retract and secure for 100+ mph |
+| Wind | Fold away and secure before storms |
 | Price | From $28 per sq ft of opening, installed, before sales tax |
 
 Wind figures come from factory test data and are everyday durability ratings, not a hurricane rating. Accessories and other options are extra and are quoted for your project.

@@ -20,7 +20,7 @@ const p = byId(id);
 const trio = ['clearfixed', 'clearfold', 'hybrid'].map(byId);
 const moves = { clearfixed: 'Stays in place', clearfold: 'Folds open on our track', hybrid: 'Folds open on our track' } as Record<string, string>;
 const how: Record<string, { lede: string; points: string[] }> = {
-  clearfixed: { lede: 'Tinted polycarbonate panels sit in a welded frame in the opening. Nothing moves, so there is nothing to open, close or adjust.', points: ['Smokey Gray or Industrial Blue tint', 'Cut into arches and angles to fill gables', `Fixed panels rated to ${FACTS.fixedWind} in factory testing`] },
+  clearfixed: { lede: 'Tinted polycarbonate panels sit in a welded frame in the opening. Nothing moves, so there is nothing to open, close or adjust.', points: ['Smokey Gray or Industrial Blue tint', 'Cut into arches and angles to fill gables', `Panel withstood ${FACTS.wind} in our factory wind tunnel test`] },
   clearfold: { lede: 'Equal-width polycarbonate leaves hang from the top track and fold like a fan into a stack at the end, by hand.', points: ['Opens by hand, even in a power outage', 'Up to 5 ft per pull, 10 ft meeting in the middle', 'Handle on the moving edge; a bottom guide keeps every leaf in line'] },
   hybrid: { lede: 'A polycarbonate layer and a honeycomb aluminum mesh layer share the same opening. Each can cover all of it, and each folds back to its own end.', points: ['Run the mesh with the panels folded away', 'Close the panels with the mesh folded away', 'Fold both back for access; your design visit sets which openings fold'] },
 };
@@ -96,12 +96,12 @@ const product = {
             <tr><th scope="row">Warranty</th><td>{WARRANTY}</td></tr>
           </tbody>
         </table>
-        <p class="fine">Wind figures come from manufacturer test data and are everyday durability ratings, not a hurricane rating. <a href="/learn/#performance">Tested numbers</a></p>
+        <p class="fine">Wind figure from our Houston factory's in-house wind tunnel test; not a hurricane rating. <a href="/learn/#performance">Tested numbers</a></p>
         <p class="fine" style="margin-top:10px">Sizes: {SIZES.map((s) => `${s.name.toLowerCase()} is ${s.eg.toLowerCase()}`).join('; ')}. We price the open wall area we fill, and your exact number comes from a free site visit.</p>
       </div>
       <div class="stack">
         <h2 class="h3">What a 3-season room is, and isn't</h2>
-        <p class="muted">It is shaded, sheltered and ventilated through screen doors and doors that open on both sides. It is not air-conditioned. On the hottest August afternoons it feels close to the outdoor temperature, just out of the sun, wind and rain. Spring, fall and most of winter are when it shines.</p>
+        <p class="muted">It is shaded and sheltered, not insulated. Air conditioning is optional, and closed polycarbonate panels help hold cooled air in, so a portable or mini-split unit can make the room more comfortable on hot days. Without it, plan for airflow through folding or screened sections. Spring, fall and most of winter are when it shines.</p>
         <p class="muted">Smokey Gray panels tested at {FACTS.vlt} visible light transmission and {FACTS.shgc} solar heat gain coefficient.</p>
       </div>
     </div>
