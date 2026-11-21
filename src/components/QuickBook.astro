@@ -1,0 +1,58 @@
+---
+// Quick design-visit booking: name and phone required; ZIP, interest and best time optional.
+// Inline on the homepage. Confirms in place. The full form with address, sizes and notes is /book-visit/.
+import { SITE } from '../data/site';
+interface Props { id?: string }
+const { id = 'quick' } = Astro.props;
+const CONSENT = 'By sending this, you agree AE Factory Sales may call, text or email you about your request. Message and data rates may apply. We never sell your information.';
+---
+<div class="qb">
+<form class="form quote-form qb-form" id={id} data-key={SITE.formKey} data-inline="1" data-invalid="Please add your name and a phone number we can call." novalidate>
+  <input type="hidden" name="subject" value="Design visit request (quick)" />
+  <input type="hidden" name="from_name" value="AE website" />
+  <input type="hidden" name="lead_source" value="Homepage quick booking" />
+  <input type="hidden" name="consent_text" value={CONSENT} />
+  <label class="hp" aria-hidden="true">Leave this empty <input type="checkbox" name="botcheck" tabindex="-1" /></label>
+  <fieldset class="qb-pick">
+    <legend>What are you thinking about? <span class="opt-l">(optional)</span></legend>
+    <label><input type="radio" name="interest" value="Three-season room" /> <span>Three-season room</span></label>
+    <label><input type="radio" name="interest" value="Metal screens" /> <span>Metal screens</span></label>
+    <label><input type="radio" name="interest" value="Not sure yet" checked /> <span>Not sure yet</span></label>
+  </fieldset>
+  <div class="qb-row">
+    <div class="field"><label for={`${id}-name`}>Name</label><input id={`${id}-name`} name="name" autocomplete="name" maxlength="80" required /></div>
+    <div class="field"><label for={`${id}-phone`}>Phone</label><input id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="20" pattern="[0-9()+.\- ]{10,20}" required /></div>
+  </div>
+  <div class="qb-row">
+    <div class="field"><label for={`${id}-zip`}>ZIP <span class="opt-l">(optional)</span></label><input id={`${id}-zip`} name="zip" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" maxlength="5" /></div>
+    <div class="field"><label for={`${id}-when`}>Best time <span class="opt-l">(optional)</span></label>
+      <select id={`${id}-when`} name="best_time">
+        <option>Any time</option><option>Weekday morning</option><option>Weekday afternoon</option><option>Weekday evening</option><option>Saturday</option><option>Sunday</option>
+      </select>
+    </div>
+  </div>
+  <button class="btn btn-big" type="submit">Book my free design visit</button>
+  <p class="form-note" role="status" hidden></p>
+  <p class="fine">{CONSENT} <a href="/privacy/">Privacy</a></p>
+  <p class="fine">Want to add your address, sizes or notes now? <a href="/book-visit/">Use the full form</a>.</p>
+</form>
+<div class="cb-done" hidden>
+  <p class="cb-big">You're on the list.</p>
+  <p>We'll call within 1 business day to set a time for your free design visit. Have photos? Text them to <a href={SITE.phoneHref}>{SITE.phone}</a>.</p>
+</div>
+</div>
+<script>import '../scripts/forms';</script>
+<style>
+  .qb-form { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .qb-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .qb-pick { border: 0; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .qb-pick legend { font-weight: 700; margin-bottom: 8px; width: 100%; }
+  .qb-pick label { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border: 1.5px solid var(--line); border-radius: 999px; cursor: pointer; }
+  .qb-pick label:has(input:checked) { border-color: var(--yellow); background: rgba(242, 194, 48, .14); }
+  .qb-pick input { accent-color: var(--yellow); }
+  .opt-l { font-weight: 400; color: var(--ink-2); font-size: .9em; }
+  .qb .fine a, .qb .cb-done a { color: var(--yellow); }
+  .cb-big { font-family: var(--font-head); font-weight: 800; font-size: 1.5rem; margin-bottom: 8px; }
+  .cb-done { display: grid; gap: 12px; }
+  @media (max-width: 520px) { .qb-row { grid-template-columns: minmax(0, 1fr); } }
+</style>

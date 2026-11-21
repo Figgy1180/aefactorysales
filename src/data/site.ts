@@ -158,7 +158,7 @@ export const range = (msrp: number, low: number, high: number) => `${money(msrp 
 export const CITIES = [
   'Houston', 'Katy', 'Sugar Land', 'Cypress', 'The Woodlands', 'Pearland', 'Spring',
   'League City', 'Friendswood', 'Kingwood', 'Missouri City', 'Tomball', 'Bellaire',
-  'West University Place', 'Memorial', 'Humble', 'Richmond', 'Conroe',
+  'West University Place', 'Memorial', 'Humble', 'Richmond', 'Conroe', 'Fulshear', 'Baytown',
 ];
 
 // Cities that have their own page (built from a real project there). Key = name as shown in lists.
@@ -292,6 +292,10 @@ export const FAQ: Record<string, QA[]> = {
       a: 'Motorized roll-down screens run about $40 to $45 per sq ft of opening in Houston. Hexfold starts at $28 per sq ft installed, with no motor or wiring.',
     },
     {
+      q: 'Will my cats claw through the screens?',
+      a: 'Fixed Screen uses 304 stainless steel mesh, which stands up to claws far better than fabric screen. No screen is indestructible, so we never call it pet-proof. A doggy door in small, medium or large can be added; we help you pick the right size for your cats.',
+    },
+    {
       q: 'Can I add a doggy door?',
       a: 'Yes. A doggy door is a $200 add-on in small, medium or large, built into a compatible screen panel. We help you pick the size and spot at the site visit. A pet opening is also a way in for other animals, so we plan its closure with you.',
     },
@@ -327,7 +331,11 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Where do you install?',
-      a: 'We install in Houston and 17 nearby areas. That includes Katy, Sugar Land, Cypress, The Woodlands, Pearland, Spring, League City, Friendswood, Kingwood, Missouri City, Tomball, Bellaire, West University Place, Memorial, Humble, Richmond and Conroe. Every job is built in our factory next to the showroom at 2609 William Tell St, Houston, TX 77093.',
+      a: `We install in Houston and ${CITIES.length - 1} nearby areas. That includes ${CITIES.slice(1, -1).join(', ')} and ${CITIES[CITIES.length - 1]}. Not on the list? Call and ask. Every job is built in our factory next to the showroom at 2609 William Tell St, Houston, TX 77093.`,
+    },
+    {
+      q: 'Can a wheelchair roll over the track?',
+      a: 'Yes. The bottom track is a 3/8 in low profile machined from solid 304 stainless steel, low enough for wheelchairs, walkers, strollers and carts to roll over. A ramp is included when the opening is wide enough. We do not claim ADA compliance; we check access with you at the design visit.',
     },
     {
       q: 'Can I see it in person?',

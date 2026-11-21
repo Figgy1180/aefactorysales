@@ -369,7 +369,7 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .skip { position: absolute; left: -9999px; top: 8px; z-index: 50; background: var(--yellow); color: var(--honey); padding: 10px 14px; font-weight: 700; }
 .skip:focus { left: 12px; }
 
-@media (max-width: 1439px) {
+@media (max-width: 1599px) {
   .top-phone { display: none; }
 }
 @media (max-width: 1180px) { .top-est { display: none; } }

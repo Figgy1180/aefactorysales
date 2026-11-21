@@ -289,6 +289,14 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
     document.querySelector<HTMLElement>('.next-screens')!.hidden = tinted;
     const est = root.querySelector<HTMLInputElement>(`${tinted ? '#quiz-visit' : '#quiz-screens'} input[name="estimate"]`);
     if (est) est.value = `${p.name}${tinted ? ` (${tint})` : ''}, ${$('#q-size').textContent}: ${$('#q-total').textContent}`;
+    // Carry the quiz answers into the form so nobody has to pick them twice.
+    const form = root.querySelector<HTMLFormElement>(tinted ? '#quiz-visit' : '#quiz-screens');
+    if (form) {
+      const choose = (sel: HTMLSelectElement | null, match: (t: string) => boolean) => { if (!sel) return; const o = Array.from(sel.options).find((x) => match(x.text.toLowerCase())); if (o) sel.value = o.value || o.text; };
+      const nm = p.name.toLowerCase();
+      choose(form.querySelector('select[name="project"]'), (t) => (nm === 'hexfold' && t.startsWith('hexfold')) || (nm === 'fixed screen' && t.startsWith('fixed')) || (nm === 'hybrid' && t.startsWith('mix')) || ((nm === 'clearfixed' || nm === 'clearfold') && t.startsWith('3-season')));
+      if (s) choose(form.querySelector('select[name="patio_size"]'), (t) => t.startsWith(s.name.toLowerCase()));
+    }
   }
 
   root.addEventListener('click', (e) => {

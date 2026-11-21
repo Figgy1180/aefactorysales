@@ -76,6 +76,48 @@ const cf = byId('clearfixed'), cfo = byId('clearfold');
     </div>
   </section>
 
+  <!-- Planning a three-season room (moved from the homepage) -->
+  <section class="band on-paper" aria-labelledby="room-title">
+    <div class="wrap">
+      <div class="room-grid">
+        <div class="stack-lg">
+          <p class="kicker dark"><span class="hexdot" aria-hidden="true"></span>Planning a three-season room</p>
+          <h2 id="room-title" class="h2">Fixed where you want shelter, folding where you want air</h2>
+          <p class="lede">A typical layout puts fixed Clearfixed panels across the long front and Hybrid openings on the two shorter sides. Close everything on a windy, rainy day; fold the sides open on a nice one. Your final ventilation plan is designed with you at the site visit.</p>
+          <p class="note">This is a three-season enclosure for an existing covered patio. It is not insulated or air-conditioned, and on the hottest summer afternoons it stays close to the outdoor temperature.</p>
+        </div>
+        <figure class="plan">
+          <svg viewBox="0 0 420 300" role="img" aria-labelledby="plan-t plan-d">
+            <title id="plan-t">Representative three-season room layout</title>
+            <desc id="plan-d">Floor plan of a covered patio against the house. The long front side has fixed polycarbonate panels. The two short sides have Hybrid openings that fold open.</desc>
+            <rect x="20" y="20" width="380" height="26" fill="#3B3430" />
+            <text x="210" y="38" text-anchor="middle" class="pl-house">HOUSE</text>
+            <rect x="40" y="46" width="340" height="200" fill="#F2C230" fill-opacity=".08" />
+            <g stroke="#55595E" stroke-width="10"><line x1="40" y1="246" x2="380" y2="246" /></g>
+            <g stroke="#2E2A27" stroke-width="2">{[0,1,2,3,4].map((i) => <line x1={40 + i * 68} y1="240" x2={40 + i * 68} y2="252" />)}<line x1="380" y1="240" x2="380" y2="252" /></g>
+            <g stroke="#C9A227" stroke-width="10" stroke-dasharray="14 5"><line x1="40" y1="46" x2="40" y2="246" /><line x1="380" y1="46" x2="380" y2="246" /></g>
+            <rect x="34" y="240" width="12" height="12" fill="#2E2A27" /><rect x="374" y="240" width="12" height="12" fill="#2E2A27" />
+            <text x="210" y="276" text-anchor="middle" class="pl-lbl">Long front: fixed polycarbonate (Clearfixed)</text>
+            <text x="56" y="150" class="pl-lbl" transform="rotate(-90 56 150)" text-anchor="middle">Hybrid: folds open</text>
+            <text x="364" y="150" class="pl-lbl" transform="rotate(90 364 150)" text-anchor="middle">Hybrid: folds open</text>
+            <text x="210" y="150" text-anchor="middle" class="pl-mid">Covered patio</text>
+          </svg>
+          <figcaption class="fine">Representative layout, not to scale. Every patio is designed to its own openings.</figcaption>
+        </figure>
+      </div>
+
+      <p class="cmp-teaser">Weighing glass panels, fabric screens or motorized shades? <a href="/compare/#retrofit">See how they compare</a>, fairly, side by side.</p>
+      <details class="tested">
+        <summary>Tested details</summary>
+        <ul>
+          <li>Smokey Gray polycarbonate panel: {FACTS.vlt} visible light transmission and {FACTS.shgc} solar heat gain coefficient. This is a test of the panel, not a rating of an installed room.</li>
+          <li>Wind: {FACTS.windNote}. Fold away folding systems before storms. Not a hurricane rating.</li>
+        </ul>
+        <p><a href="/learn/#performance">Specs and care</a></p>
+      </details>
+    </div>
+  </section>
+
   <section class="band">
     <div class="wrap split">
       <div class="stack">
@@ -162,4 +204,21 @@ const cf = byId('clearfixed'), cfo = byId('clearfold');
   .tints { display: flex; flex-wrap: wrap; gap: 10px 22px; color: var(--ink-2); }
   .tints span { display: inline-flex; align-items: center; gap: 8px; }
   .tints i { width: 22px; height: 22px; border: 2px solid var(--yellow); display: inline-block; }
+  /* room plan */
+  .room-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 56px); align-items: center; margin-bottom: clamp(36px, 5vw, 56px); }
+  .note { border-left: 4px solid var(--yellow); padding: 10px 14px; background: rgba(242, 194, 48, .1); color: var(--paper-ink); border-radius: 0 8px 8px 0; }
+  .plan { margin: 0; display: grid; gap: 8px; }
+  .plan svg { width: 100%; height: auto; background: #fff; border-radius: 12px; box-shadow: var(--shadow); }
+  .pl-house { font: 700 12px var(--font); fill: #F8F6F2; letter-spacing: .2em; }
+  .pl-lbl { font: 600 12px var(--font); fill: #2A2522; }
+  .pl-mid { font: 500 13px var(--font); fill: #6B625A; }
+  @media (max-width: 760px) { .cmp-wrap::before { content: "Swipe to compare \2192" !important; } }
+  .cmp-h { margin-bottom: 6px; color: var(--paper-ink); }
+  .cmp-lede { margin-bottom: 14px; }
+  .cmp td, .cmp th { min-width: 150px; vertical-align: top; }
+  .tested { margin-top: 20px; border-top: 1px solid var(--paper-line); padding-top: 12px; color: var(--paper-2); }
+  .tested summary { cursor: pointer; font-weight: 700; color: var(--paper-ink); min-height: 44px; display: flex; align-items: center; }
+  .tested ul { margin: 6px 0 10px; padding-left: 20px; display: grid; gap: 6px; }
+
+  .cmp-teaser a { color: inherit; }
 </style>

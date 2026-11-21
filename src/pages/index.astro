@@ -1,15 +1,19 @@
 ---
 // Homepage, Nov 2026 refresh (preview). Section order follows the revision brief:
-// 1 hero, 2 patio visualizer (lead), 3 three choices, 3b PC room plan and fair comparison,
+// Merge (Nov 21): live-site full-photo hero, quick booking, cost chart, facts and fold video, plus the redesign's tools.
+// 1 hero, 2 visualizer, 3 three choices, 4 cost chart + facts + finishes, 4b fold video,
 // 4 why AE, 5 real projects, 6 pricing and financing, 7 process, 8 showroom, warranty and aftercare, 9 FAQ and visit invitation.
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Faq from '../components/Faq.astro';
 import ProjectMosaic from '../components/ProjectMosaic.astro';
 import ReviewCards from '../components/ReviewCards.astro';
+import CompareBars from '../components/CompareBars.astro';
+import QuickBook from '../components/QuickBook.astro';
 import { REVIEWS } from '../data/reviews';
 import { GUIDES } from '../data/guides';
-import { PRODUCTS, SIZES, FAQ, FACTS, SITE, WARRANTY, byId, range, type QA } from '../data/site';
+import { PRODUCTS, SIZES, FAQ, FACTS, SITE, WARRANTY, CITIES, CITY_PAGES, byId, range, type QA } from '../data/site';
+import heroBg from '../assets/photos/hero-interior.jpg';
 
 import pcDoors from '../assets/projects/p37/3-inside-doors-closed.jpg';
 import heroReal from '../assets/projects/p34/5-inside-seating.jpg';
@@ -102,40 +106,36 @@ const visitFaq: QA[] = [
   title="Patio Enclosures in Houston | AE Factory Sales"
   description="Custom polycarbonate three-season rooms and metal patio screens for existing covered patios. Prepared in our Houston factory and installed by our own crew."
 >
-  <!-- 1. Hero -->
-  <section class="h-hero hive-dark" aria-labelledby="hero-title">
-    <div class="wrap h-grid">
-      <div class="h-copy">
-        <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Houston three-season rooms and screens</p>
-        <h1 id="hero-title" class="display">Make your patio your <span class="y">favorite place to be.</span></h1>
-        <p class="sub">Custom polycarbonate panels and metal screens for your covered patio, built in our Houston factory and installed within a month.</p>
-        <div class="actions">
-          <a class="btn btn-big" href="/book-visit/">Book free design visit</a>
-          <a class="btn btn-line btn-big" href="/free-quote/">Get my estimate now</a>
-        </div>
-        <p class="micro"><a href="#visualize">See it on your patio</a> · Call <a href={SITE.phoneHref}>{SITE.phone}</a> · <a href="/showroom/">Visit the showroom</a></p>
+  <!-- 1. Hero: full-bleed real interior photo (live-site style) -->
+  <section class="fb-hero" aria-labelledby="hero-title">
+    <Image class="fb-bg" src={heroBg} widths={[640, 960, 1280, 1920, 2400]} sizes="100vw" alt="Furnished seating area inside a Houston covered patio enclosed by AE metal screens" loading="eager" fetchpriority="high" />
+    <div class="wrap fb-in">
+      <p class="fb-tag" aria-hidden="true"><span>Real AE installation · Houston</span></p>
+      <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Built in our Houston factory</p>
+      <h1 id="hero-title" class="display">Screens and three-season rooms <span class="y">for your covered patio</span></h1>
+      <p class="sub">Keep the mosquitoes out and the breeze in, or close out wind and rain. Custom metal screens and polycarbonate panels, installed by our own crew within a month.</p>
+      <div class="fb-cta">
+        <a class="btn btn-big" href="#book">Book free design visit</a>
+        <a class="fb-link" href="/free-quote/">or get a price in 60 seconds →</a>
       </div>
-      <div class="h-media">
-        <figure class="h-concept">
-          <Image src={heroReal} widths={[640, 960, 1400]} sizes="(max-width: 900px) 100vw, 620px" alt="Seating area inside a Houston patio enclosed by AE metal screens" loading="eager" fetchpriority="high" />
-          <figcaption>Real AE installation in Houston, metal screens</figcaption>
-        </figure>
-        <figure class="h-real">
-          <Image src={pcDoors} widths={[240, 420]} sizes="200px" alt="Blue-tinted polycarbonate doors closed on a covered patio in Sugar Land, installed by AE" loading="eager" style="object-position:50% 40%" />
-          <figcaption><b>Real</b> Polycarbonate doors, Sugar Land</figcaption>
-        </figure>
-      </div>
-    </div>
-    <div class="wrap">
-      <ul class="proof" aria-label="Why AE">{proof.map((p) => <li><span class="hexdot" aria-hidden="true"></span>{p}</li>)}</ul>
-      {topReview && (
-        <figure class="h-quote">
-          <blockquote>“{topReview.text.split('. ').slice(0, 2).join('. ')}.”</blockquote>
-          <figcaption>{topReview.name}, {topReview.city} · <a href="#reviews">More from our customers</a></figcaption>
-        </figure>
-      )}
+      <ul class="fb-chips" aria-label="Why AE">
+        <li><b>From $24</b><span>per sq ft of opening, installed</span></li>
+        <li><b>Opens by hand</b><span>No motor, works in a power outage</span></li>
+        <li><b>Within a month</b><span>Installed by our own crew</span></li>
+        <li><b>Lifetime frame</b><span>5 years on all parts</span></li>
+      </ul>
     </div>
   </section>
+  {topReview && (
+    <section class="band-tight quote-band" aria-label="Customer feedback">
+      <div class="wrap">
+        <figure class="h-quote">
+          <blockquote>“{topReview.text.split('. ').slice(0, 2).join('. ')}.”</blockquote>
+          <figcaption>{topReview.name}, {topReview.city} · <a href="#reviews">More from our customers</a> · Call <a href={SITE.phoneHref}>{SITE.phone}</a></figcaption>
+        </figure>
+      </div>
+    </section>
+  )}
 
   <!-- 2. Visualizer leads: see it on your patio, then discover the systems -->
   <section class="band raised hive-dark viz-band" id="visualize" aria-labelledby="viz-title">
@@ -201,63 +201,60 @@ const visitFaq: QA[] = [
     </div>
   </section>
 
-  <!-- 3b. PC room value -->
-  <section class="band on-paper" aria-labelledby="room-title">
+  <!-- 4. What it costs next to other options + the facts -->
+  <section class="band on-paper" aria-labelledby="cmp-title">
     <div class="wrap">
-      <div class="room-grid">
-        <div class="stack-lg">
-          <p class="kicker dark"><span class="hexdot" aria-hidden="true"></span>Planning a three-season room</p>
-          <h2 id="room-title" class="h2">Fixed where you want shelter, folding where you want air</h2>
-          <p class="lede">A typical layout puts fixed Clearfixed panels across the long front and Hybrid openings on the two shorter sides. Close everything on a windy, rainy day; fold the sides open on a nice one. Your final ventilation plan is designed with you at the site visit.</p>
-          <p class="note">This is a three-season enclosure for an existing covered patio. It is not insulated or air-conditioned, and on the hottest summer afternoons it stays close to the outdoor temperature.</p>
-        </div>
-        <figure class="plan">
-          <svg viewBox="0 0 420 300" role="img" aria-labelledby="plan-t plan-d">
-            <title id="plan-t">Representative three-season room layout</title>
-            <desc id="plan-d">Floor plan of a covered patio against the house. The long front side has fixed polycarbonate panels. The two short sides have Hybrid openings that fold open.</desc>
-            <rect x="20" y="20" width="380" height="26" fill="#3B3430" />
-            <text x="210" y="38" text-anchor="middle" class="pl-house">HOUSE</text>
-            <rect x="40" y="46" width="340" height="200" fill="#F2C230" fill-opacity=".08" />
-            <g stroke="#55595E" stroke-width="10"><line x1="40" y1="246" x2="380" y2="246" /></g>
-            <g stroke="#2E2A27" stroke-width="2">{[0,1,2,3,4].map((i) => <line x1={40 + i * 68} y1="240" x2={40 + i * 68} y2="252" />)}<line x1="380" y1="240" x2="380" y2="252" /></g>
-            <g stroke="#C9A227" stroke-width="10" stroke-dasharray="14 5"><line x1="40" y1="46" x2="40" y2="246" /><line x1="380" y1="46" x2="380" y2="246" /></g>
-            <rect x="34" y="240" width="12" height="12" fill="#2E2A27" /><rect x="374" y="240" width="12" height="12" fill="#2E2A27" />
-            <text x="210" y="276" text-anchor="middle" class="pl-lbl">Long front: fixed polycarbonate (Clearfixed)</text>
-            <text x="56" y="150" class="pl-lbl" transform="rotate(-90 56 150)" text-anchor="middle">Hybrid: folds open</text>
-            <text x="364" y="150" class="pl-lbl" transform="rotate(90 364 150)" text-anchor="middle">Hybrid: folds open</text>
-            <text x="210" y="150" text-anchor="middle" class="pl-mid">Covered patio</text>
-          </svg>
-          <figcaption class="fine">Representative layout, not to scale. Every patio is designed to its own openings.</figcaption>
-        </figure>
+      <div class="sec-head">
+        <p class="kicker dark"><span class="hexdot" aria-hidden="true"></span>Value and facts</p>
+        <h2 id="cmp-title" class="h2">The same patio, other options</h2>
+        <p class="lede">Sunroom additions build a new room; we close in the patio you already have. Here is how the money compares. <a href="/compare/">Fair comparison, side by side</a></p>
       </div>
-
-      <p class="cmp-teaser">Weighing glass panels, fabric screens or motorized shades? <a href="/compare/#retrofit">See how they compare</a>, fairly, side by side.</p>
-      <details class="tested">
-        <summary>Tested details</summary>
-        <ul>
-          <li>Smokey Gray polycarbonate panel: {FACTS.vlt} visible light transmission and {FACTS.shgc} solar heat gain coefficient. This is a test of the panel, not a rating of an installed room.</li>
-          <li>Wind: {FACTS.windNote}. Fold away folding systems before storms. Not a hurricane rating.</li>
-        </ul>
-        <p><a href="/learn/#performance">Specs and care</a></p>
-      </details>
+      <CompareBars title="Typical totals for one example patio" />
+      <div class="facts-row">
+        <div>
+          <span class="facts-label">The facts</span>
+          <table class="facts">
+            <caption>Every AE system</caption>
+            <tbody>
+              <tr><th scope="row">Mesh</th><td>Hexfold: honeycomb aluminum. Fixed Screen: 304 stainless steel.</td></tr>
+              <tr><th scope="row">Panels</th><td>Tinted polycarbonate, UV protected on both sides, hard coat. {FACTS.vlt} visible light, {FACTS.shgc} SHGC*</td></tr>
+              <tr><th scope="row">Frames</th><td>Heat-welded corners, aluminum core, ceramic coating. Night Gray or Bright White.</td></tr>
+              <tr><th scope="row">Track</th><td>3/8 in low profile, solid 304 stainless steel; wheelchairs and carts roll over it</td></tr>
+              <tr><th scope="row">Wind</th><td>Panel withstood {FACTS.wind} in our factory's wind tunnel test**</td></tr>
+              <tr><th scope="row">Warranty</th><td>Lifetime on the frame, 5 years on all parts</td></tr>
+            </tbody>
+          </table>
+          <p class="fine">*Smokey Gray 4 mm panel test. **Our Houston factory's in-house test (Beaufort 9); not a hurricane rating.</p>
+        </div>
+        <div class="finishes">
+          <span class="facts-label">Finishes</span>
+          <div class="fin-grid">
+            <figure><Image src={fixedColors} widths={[320, 560]} sizes="(max-width: 760px) 50vw, 260px" alt="Fixed Screen panels in Night Gray and Bright White frames" loading="lazy" /><figcaption>Night Gray and Bright White frames</figcaption></figure>
+            <figure><Image src={roomShowroom} widths={[320, 560]} sizes="(max-width: 760px) 50vw, 260px" alt="Smokey Gray polycarbonate panels in the AE showroom" loading="lazy" /><figcaption>Smokey Gray panels</figcaption></figure>
+            <figure><Image src={pcDoors} widths={[320, 560]} sizes="(max-width: 760px) 50vw, 260px" alt="Industrial Blue polycarbonate doors on a Sugar Land patio" loading="lazy" style="object-position:50% 40%" /><figcaption>Industrial Blue panels, Sugar Land</figcaption></figure>
+            <figure><Image src={hexClosed} widths={[320, 560]} sizes="(max-width: 760px) 50vw, 260px" alt="Honeycomb aluminum Hexfold mesh closed on a brick patio" loading="lazy" /><figcaption>Honeycomb aluminum mesh</figcaption></figure>
+          </div>
+          <p class="fine">We bring real samples to your design visit.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- 4. Why AE -->
-  <section class="band on-white hive-light" aria-labelledby="why-title">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="kicker dark"><span class="hexdot" aria-hidden="true"></span>Why homeowners choose AE</p>
-        <h2 id="why-title" class="h2">Prepared in our factory, so it fits on install day</h2>
-        <p class="lede">Your enclosure is cut, assembled and checked in our factory on William Tell Street before it reaches your home. <a href="/how-we-build/">Tour the factory</a></p>
-      </div>
-      <ol class="why-grid">
-        {why.map((w) => <li><h3>{w.f}</h3><p>{w.b}</p></li>)}
-      </ol>
-      <div class="build-photos" tabindex="0" role="region" aria-label="Factory photos">
-        {factoryPics.map((s) => (
-          <figure><Image src={s.img} alt={s.alt} widths={[360, 640]} sizes="(max-width: 640px) 100vw, 360px" loading="lazy" /><figcaption>{s.t}</figcaption></figure>
-        ))}
+  <!-- 4b. Watch it fold away (live site) -->
+  <section class="band raised fold-band" aria-labelledby="fold-title">
+    <div class="wrap fold-grid">
+      <figure class="fold-video dim-frame">
+        <video width="540" height="960" src="/video/gable-open.mp4" poster="/video/gable-open-poster.jpg" muted loop playsinline controls preload="none" aria-label="Hexfold screens being folded open by hand on a gabled patio"></video>
+      </figure>
+      <div class="stack-lg">
+        <h2 id="fold-title" class="h2">Watch it <span class="y">fold away</span></h2>
+        <p class="lede">Hexfold screens hang from the top track and glide aside by hand. No motor, no remote. Close them in seconds when the mosquitoes come out.</p>
+        <dl class="fold-facts">
+          <div><dt>20 ft</dt><dd>wide, meeting in the middle</dd></div>
+          <div><dt>10 ft</dt><dd>tall</dd></div>
+          <div><dt>$28</dt><dd>per sq ft of opening, installed</dd></div>
+        </dl>
+        <div class="actions"><a class="btn" href="/patio-screens/hexfold/">See Hexfold</a><a class="btn btn-line" href="/patio-enclosures/hybrid/#how-hybrid">See the Hybrid move</a></div>
       </div>
     </div>
   </section>
@@ -300,6 +297,14 @@ const visitFaq: QA[] = [
               <label class="opt"><input type="radio" name="sys" value={p.id} checked={p.id === defSys.id} /><span><b>{p.name}</b> <small><span class="k">{p.kind} · </span>${p.msrp} per sq ft of opening</small></span></label>
             ); })}
           </fieldset>
+          <fieldset class="own">
+            <legend>Or enter your own openings <span class="opt-l">(optional)</span></legend>
+            <p class="own-hint">Add up the width of every open side, then the height. Example: two sides of 16 ft and 14 ft at 8 ft tall is 30 × 8.</p>
+            <div class="own-row">
+              <label>Total width (ft)<input type="number" id="own-w" inputmode="decimal" min="1" max="200" step="0.5" /></label>
+              <label>Height (ft)<input type="number" id="own-h" inputmode="decimal" min="1" max="12" step="0.5" /></label>
+            </div>
+          </fieldset>
         </div>
         <div class="estimate" aria-live="polite">
           <p class="est-label" id="est-label">{defSys.name}, medium patio</p>
@@ -308,7 +313,7 @@ const visitFaq: QA[] = [
           <p class="unit">Prices are {TAX}.</p>
           <p class="fine">{EXTRAS}</p>
           <p class="fine">{LENDERS}</p>
-          <div class="actions"><a class="btn" href="/free-quote/">Get my estimate now</a><a class="btn btn-line" href="/book-visit/">Book free design visit</a></div>
+          <div class="actions"><a class="btn" href="/free-quote/">Get my estimate now</a><a class="btn btn-line" href="#book">Book free design visit</a></div>
         </div>
       </div>
     </div>
@@ -326,6 +331,23 @@ const visitFaq: QA[] = [
     </div>
   </section>
 
+  <!-- 7b. Book: quick form (live site) -->
+  <section class="band hive-dark" id="book" aria-labelledby="offer-title">
+    <div class="wrap offer-grid">
+      <div class="stack-lg">
+        <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Free, no obligation</p>
+        <h2 id="offer-title" class="h2">Your free <span class="y">design visit</span></h2>
+        <ol class="visit-steps">
+          <li><b>Leave your name and number</b><span>Add your ZIP and best time if you like. We call within 1 business day to set a time.</span></li>
+          <li><b>We come to you</b><span>We measure every opening, check your posts, beams and slab, and bring frame, mesh and tint samples.</span></li>
+          <li><b>You get your quote</b><span>We go over it with you on site, then email it within 24 hours. Decide on your own time.</span></li>
+        </ol>
+        <p class="offer-cost">What the visit costs you: <b>nothing.</b></p>
+      </div>
+      <div class="book-card"><QuickBook id="home-book" /></div>
+    </div>
+  </section>
+
   <!-- 8. Showroom, warranty, aftercare -->
   <section class="band on-white" aria-labelledby="show-title">
     <div class="wrap split">
@@ -339,7 +361,7 @@ const visitFaq: QA[] = [
           <li><b>Aftercare</b><span>AE Factory Sales coordinates customer assistance and aftercare through the Houston factory.</span></li>
           <li><b>HOA</b><span>We provide drawings and specifications when your HOA needs them. Approval is up to your HOA.</span></li>
         </ul>
-        <div class="actions"><a class="btn" href="/book-visit/">Book free design visit</a><a class="btn btn-line" href="/showroom/">Address and directions</a></div>
+        <div class="actions"><a class="btn" href="#book">Book free design visit</a><a class="btn btn-line" href="/showroom/">Address and directions</a></div>
       </div>
     </div>
   </section>
@@ -351,12 +373,13 @@ const visitFaq: QA[] = [
         <h2 id="book-title" class="h2">Questions before your visit</h2>
         <Faq items={visitFaq} />
       </div>
-      <div class="book-card">
-        <p class="book-k">Book your free design visit</p>
-        <p class="lede">Tell us who you are and where the patio is. We call to set a time, measure every opening, design the layout with you and give you a written quote.</p>
-        <a class="btn btn-big" href="/book-visit/">Book free design visit</a>
-        <p class="micro">Want a ballpark first? <a href="/free-quote/">Get my estimate now</a>. Rather talk? Call <a href={SITE.phoneHref}>{SITE.phone}</a>, 9 am to 5 pm, 7 days a week.</p>
+      <div class="stack-lg">
+        <h3 class="h3">Serving greater Houston</h3>
+        <ul class="cities">{CITIES.map((c) => <li>{CITY_PAGES[c] ? <a href={CITY_PAGES[c]}>{c}</a> : c}</li>)}</ul>
+        <p class="muted"><a href="/service-area/">See our service area</a> · <a href="/showroom/">Visit the showroom</a></p>
+        <a class="btn btn-big" href="#book">Book free design visit</a>
       </div>
+</div>
     </div>
   </section>
 </Base>
@@ -457,6 +480,13 @@ const visitFaq: QA[] = [
 
   .picker { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(24px, 4vw, 44px); align-items: start; }
   .picker-opts { display: grid; gap: 22px; }
+  .own { border: 0; padding: 0; margin: 0; display: grid; gap: 8px; }
+  .own legend { font-weight: 700; font-size: 1.15rem; margin-bottom: 4px; }
+  .own-hint { color: var(--paper-2); font-size: .95rem; }
+  .own-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .own-row label { display: grid; gap: 6px; font-weight: 600; color: var(--paper-ink); }
+  .own-row input { min-height: 48px; padding: 8px 12px; border: 1.5px solid var(--paper-line); border-radius: 8px; font: inherit; background: #fff; color: var(--paper-ink); color-scheme: light; }
+  .on-paper .opt-l { color: var(--paper-2); }
   .picker fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 10px; }
   .picker legend { font-weight: 700; font-size: 1.15rem; margin-bottom: 8px; }
   .opt { display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border: 1.5px solid var(--paper-line); border-radius: 8px; background: #fff; cursor: pointer; }
@@ -606,6 +636,60 @@ const visitFaq: QA[] = [
     .h-copy .display { font-size: clamp(2.4rem, 11vw, 3rem); }
     .actions .btn { width: 100%; }
   }
+
+  /* merge: full-bleed hero */
+  .fb-hero { position: relative; overflow: hidden; isolation: isolate; min-height: clamp(600px, 86vh, 860px); display: flex; align-items: flex-end; background: var(--honey); }
+  .fb-hero :global(.fb-bg) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 62%; z-index: -2; }
+  .fb-hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(31,27,24,.55) 0%, rgba(31,27,24,.15) 30%, rgba(31,27,24,.78) 62%, rgba(31,27,24,.97) 100%); }
+  .fb-in { width: 100%; padding-block: 110px 44px; display: grid; gap: 18px; }
+  .fb-in .display { max-width: 16ch; font-size: clamp(2.4rem, 5.6vw, 4.6rem); line-height: 1.02; }
+  .fb-in .sub { max-width: 46ch; color: #EDE6DC; text-shadow: 0 1px 10px rgba(0,0,0,.6); }
+  .fb-in .kicker { width: fit-content; background: rgba(31,27,24,.7); padding: 6px 12px; border-radius: 6px; }
+  .fb-in .display { text-shadow: 0 2px 18px rgba(0,0,0,.45); }
+  .fb-tag { position: absolute; top: 24px; right: max(16px, calc((100vw - var(--max)) / 2 + 16px)); margin: 0; font-family: var(--mono); font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; color: #fff; background: rgba(31,27,24,.6); padding: 6px 10px; border-radius: 6px; }
+  .fb-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; }
+  .fb-link { color: #fff; font-weight: 700; text-decoration: underline; text-decoration-color: var(--yellow); text-underline-offset: 4px; text-decoration-thickness: 2px; min-height: 44px; display: inline-flex; align-items: center; }
+  .fb-link:hover { color: var(--yellow); }
+  .fb-chips { list-style: none; margin: 10px 0 0; padding: 16px 0 0; border-top: 1px solid rgba(251, 245, 236, .2); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px 22px; }
+  .fb-chips li { display: grid; gap: 2px; padding-left: 12px; border-left: 3px solid var(--yellow); }
+  .fb-chips b { font-family: var(--font-head); font-size: 1.12rem; color: #fff; }
+  .fb-chips span { font-size: .9rem; color: #D9D2C7; }
+  .quote-band { background: var(--honey); padding-block: 18px 30px; }
+  @media (max-width: 900px) { .fb-chips { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 640px) { .fb-hero { min-height: 0; } .fb-in { padding-top: 220px; } .fb-tag { top: 14px; } .fb-cta .btn { width: 100%; } }
+
+  /* merge: facts + finishes */
+  .facts-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 48px); margin-top: clamp(28px, 4vw, 44px); align-items: start; }
+  .fin-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 10px 0; }
+  .fin-grid figure { margin: 0; min-width: 0; }
+  .fin-grid :global(img) { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 8px; display: block; }
+  .fin-grid figcaption { font-size: .9rem; color: var(--paper-2); margin-top: 6px; }
+  @media (max-width: 860px) { .facts-row { grid-template-columns: minmax(0, 1fr); } }
+
+  /* merge: fold video */
+  .fold-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
+  .fold-video { margin: 0; justify-self: center; }
+  .fold-video video { aspect-ratio: 9 / 16; max-height: 560px; width: auto; max-width: 100%; display: block; background: var(--honey); }
+  .fold-facts { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; max-width: 520px; }
+  .fold-facts div { border-left: 3px solid var(--yellow); padding-left: 12px; }
+  .fold-facts dt { font-family: var(--font-head); font-weight: 800; font-size: 2.2rem; line-height: 1; color: var(--yellow); }
+  .fold-facts dd { margin: 4px 0 0; font-size: .92rem; color: var(--ink-2); }
+  @media (max-width: 820px) { .fold-grid { grid-template-columns: minmax(0, 1fr); } }
+
+  /* merge: booking */
+  .offer-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(28px, 5vw, 56px); align-items: start; }
+  .visit-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; counter-reset: v; }
+  .visit-steps li { counter-increment: v; display: grid; grid-template-columns: 40px minmax(0, 1fr); column-gap: 14px; }
+  .visit-steps li::before { content: counter(v); grid-row: span 2; width: 36px; height: 40px; display: grid; place-items: center; font-family: var(--font-head); font-weight: 800; color: #1a1a1a; background: var(--yellow); clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); }
+  .visit-steps b { font-family: var(--font-head); font-size: 1.08rem; }
+  .visit-steps span { color: var(--ink-2); }
+  .offer-cost { font-size: 1.1rem; }
+  .offer-cost b { color: var(--yellow); }
+  #book .book-card { background: var(--honey-2); }
+  .cities { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .cities li { border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; font-size: .92rem; }
+  .cities a { color: var(--ink); }
+  @media (max-width: 860px) { .offer-grid { grid-template-columns: minmax(0, 1fr); } }
 </style>
 
 <script is:inline>
@@ -619,10 +703,19 @@ const visitFaq: QA[] = [
       var pid = el.querySelector('input[name="sys"]:checked').value;
       var s = d.sizes.find(function (x) { return x.id === sid; });
       var p = d.products.find(function (x) { return x.id === pid; });
+      var w = parseFloat(document.getElementById('own-w').value), h = parseFloat(document.getElementById('own-h').value);
+      if (w > 0 && h > 0) {
+        var area = Math.round(w * h);
+        document.getElementById('est-label').textContent = p.name + ', your ' + area + ' sq ft of openings';
+        document.getElementById('est-range').textContent = 'From ' + fmt(p.msrp * area);
+        document.getElementById('est-note').textContent = w + ' ft × ' + h + ' ft = ' + area + ' sq ft at $' + p.msrp + ' per sq ft of opening, installed, before sales tax. Your exact price comes from the design visit.';
+        return;
+      }
       document.getElementById('est-label').textContent = p.name + ', ' + s.name.toLowerCase() + ' patio';
       document.getElementById('est-range').textContent = fmt(p.msrp * s.low) + ' to ' + fmt(p.msrp * s.high);
       document.getElementById('est-note').textContent = s.low + ' to ' + s.high + ' sq ft of openings at $' + p.msrp + ' per sq ft of opening, installed, before sales tax.';
     }
     el.addEventListener('change', update);
+    el.addEventListener('input', update);
   })();
 </script>
