@@ -1,6 +1,6 @@
 ---
 // Patio visualizer: upload a photo, drag four corners onto an opening, preview each AE system.
-// Runs entirely in the browser (WebGL); the photo never leaves the device.
+// Manual placement runs in-browser (WebGL). Optional AI sends an image only after an explicit action.
 import Base from '../layouts/Base.astro';
 const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
 ---
@@ -40,9 +40,10 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
     <div class="panel">
       <div class="row">
         <label class="file-btn">Upload my patio photo<input type="file" id="file" accept="image/*"></label>
-        <p class="fine upload-note" id="aiNote" hidden>Our AI reads your photo to find the opening and estimate its size. The photo is not saved. <a href="/privacy/">Privacy</a></p>
+        <p class="fine upload-note" id="aiNote" hidden>Optional AI assistance sends a smaller copy of your photo through AE to Anthropic to estimate the opening. Choose the button only if you want to send it. <a href="/privacy/">Privacy</a></p>
       </div>
-      <p class="note">Your photo stays on this device. Nothing is uploaded or saved.</p>
+      <p class="note">Manual placement stays on this device. Choosing a photo does not send it. Optional AI assistance sends a smaller copy only when you press the AI button.</p>
+      <button type="button" class="btn" id="findWithAI" hidden disabled>Send photo to AI to find opening</button>
 
       <fieldset>
         <legend>System</legend>
@@ -502,12 +503,12 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
   }
 
   // ---------- photo loading ----------
-  let sample = true, pendingFind = false, findSeq = 0, aiOn = false;
-  // Photo reading switches itself on only when the Worker has its Claude key.
+  let sample = true, findSeq = 0, aiOn = false;
+  // Offer optional photo reading only when the Worker reports it is enabled.
   fetch('/api/find-opening/', { cache: 'no-store' }).then((r) => r.ok ? r.json() : null).then((j) => {
     if (!j || !j.enabled) return;
-    aiOn = true; $('aiNote').hidden = false;
-    $('stepCorners').textContent = 'We find the opening and its size for you. Drag the yellow corners to fine-tune.';
+    aiOn = true; $('aiNote').hidden = false; $('findWithAI').hidden = false; $('findWithAI').disabled = sample;
+    $('stepCorners').textContent = 'Place the corners yourself, or choose optional AI assistance below.';
   }).catch(() => {});
   function setup() {
     // draw at the screen's real sharpness (up to 2200 px), even when the photo is smaller
@@ -521,7 +522,7 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
       state.openings = [defaultOpening(0)];
     }
     state.sel = 0; syncPanel(); refresh(); drawUI();
-    if (pendingFind && !sample) { pendingFind = false; findOpening(); }
+    $('findWithAI').disabled = sample;
   }
   // keep the whole photo on screen (desktop): limit the stage width by the window height
   function fitStage() {
@@ -538,12 +539,13 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
   $('file').addEventListener('change', (e) => {
     const f = e.target.files && e.target.files[0]; if (!f) return;
     if (!f.type.startsWith('image/')) { $('status').textContent = 'That file is not a photo. Try a JPG or PNG.'; return; }
-    sample = false; pendingFind = aiOn; photo.src = URL.createObjectURL(f);
-    delete $('status').dataset.prev; $('status').textContent = aiOn ? 'Your photo. Looking for the opening…' : 'Your photo. Drag the yellow corners onto an opening.';
+    sample = false; ++findSeq; $('findWithAI').disabled = true; photo.src = URL.createObjectURL(f);
+    delete $('status').dataset.prev; $('status').textContent = 'Your photo. Drag the yellow corners onto an opening.';
   });
 
   // Ask the AE photo reader (Claude, via our Cloudflare Worker) to find the opening and estimate its size.
-  // The photo is shrunk first, sent once, read and not stored. If anything fails, the customer places the corners by hand.
+  // A smaller photo copy is sent only on explicit request. Manual placement remains available on failure.
+  $('findWithAI').addEventListener('click', () => { if (aiOn && !sample && photo.complete) findOpening(); });
   async function findOpening() {
     const seq = ++findSeq, st = $('status');
     stage.classList.add('reading');

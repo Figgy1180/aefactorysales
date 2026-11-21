@@ -1,6 +1,6 @@
 // Seasonal switch. 'holiday' turns on the Santa-hat logo, the winter banner and the
 // 3-season-room homepage. Set back to 'standard' after the holidays (one line, then push).
-export const SEASON: 'standard' | 'holiday' = 'holiday';
+export const SEASON: 'standard' | 'holiday' = 'standard';
 export const HOLIDAY = SEASON === 'holiday';
 
 export const LOGO = HOLIDAY ? '/brand/ae-bee-logo-holiday.svg' : '/brand/ae-bee-logo-on-dark.svg';

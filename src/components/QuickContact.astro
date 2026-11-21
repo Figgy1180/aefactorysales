@@ -1,0 +1,24 @@
+---
+import { SITE } from '../data/site';
+---
+<section class="quick-contact" id="request-call" aria-labelledby="callback-title">
+  <div class="wrap quick-grid">
+    <div><p class="kicker">Start with a conversation</p><h2 id="callback-title">Not sure what fits?</h2><p>Tell us how you want to use your patio. No dimensions or street address needed to request a call.</p><p>Prefer to visit? <a href="/showroom/">Call to arrange a showroom demonstration</a>.</p></div>
+    <div>
+      <form id="quick-callback" class="quote-form" data-key={SITE.formKey} data-inline="true" data-invalid="Please add your name and a valid phone number." novalidate>
+        <input type="hidden" name="subject" value="Callback request" /><input type="hidden" name="lead_source" value="Homepage callback" />
+        <label class="hp" aria-hidden="true">Leave this empty<input type="checkbox" name="botcheck" tabindex="-1" /></label>
+        <div class="quick-fields"><label>Name<input name="name" autocomplete="name" maxlength="80" required /></label><label>Phone<input name="phone" type="tel" autocomplete="tel" maxlength="20" pattern="[0-9()+.\- ]{10,20}" required /></label></div>
+        <input type="hidden" name="consent_text" value="By sending this, you agree AE Factory Sales may call or text about your request. Message and data rates may apply." />
+        <button class="btn" type="submit">Request a call</button><p class="form-note" role="status" hidden></p>
+        <p class="fine">By sending this, you agree AE Factory Sales may call or text about your request. Message and data rates may apply. <a href="/privacy/">Privacy</a></p>
+        <p class="fine">We usually reply within one business day to arrange a time. This requests a callback; it does not reserve an appointment. Or call <a href={SITE.phoneHref}>{SITE.phone}</a>, 9 am to 5 pm daily.</p>
+      </form>
+      <div class="cb-done" hidden role="status" tabindex="-1"><h3>Thanks. Your callback request was received.</h3><p>We usually reply within one business day. Need us sooner? <a href={SITE.phoneHref}>Call {SITE.phone}</a>.</p></div>
+    </div>
+  </div>
+</section>
+<style>
+.quick-contact{background:var(--paper);color:var(--paper-ink);padding:40px 0}.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}.quick-grid h2{font-size:2rem;margin:8px 0 12px}.quick-grid p{margin-bottom:12px}.quick-grid a{color:inherit}.quick-contact .kicker{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em}.quick-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}.quick-fields label{display:grid;gap:6px;font-weight:600}.quick-fields input{width:100%;min-height:48px;background:#fff;color:#201d18;border:1px solid #8d877c;border-radius:5px;padding:10px}.quick-contact .fine{font-size:.78rem;line-height:1.5;margin-top:10px}.form-note{padding:12px;background:#fff;border-left:3px solid #917000}.cb-done:focus{outline:3px solid #917000;outline-offset:6px}@media(max-width:800px){.quick-grid{grid-template-columns:1fr;gap:20px}}@media(max-width:350px){.quick-fields{grid-template-columns:1fr}}
+</style>
+<script>import '../scripts/forms';</script>

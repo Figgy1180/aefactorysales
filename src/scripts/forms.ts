@@ -47,7 +47,7 @@ captureSource();
       const r = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
       const j = await r.json();
       if (!j.success) throw new Error(j.message);
-      track('lead_submit', { form_id: form.id, lead_type: String(data.get('subject') || '').split(' request')[0], lead_source: String(data.get('lead_source') || '') });
+      track('lead_submit', { form_id: form.id, lead_type: form.dataset.leadType || form.id, lead_source: String(data.get('lead_source') || '') });
       if (form.dataset.inline) {
         // Short forms (Call me back) confirm in place instead of leaving the page.
         form.hidden = true;
@@ -56,7 +56,7 @@ captureSource();
           done.hidden = false;
           // The form above it collapses, so bring the confirmation into view (testers missed it on phones).
           done.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          done.querySelector<HTMLElement>('button')?.focus({ preventScroll: true });
+          done.focus({ preventScroll: true });
         }
         form.parentElement?.querySelector<HTMLElement>('.cb-lede')?.setAttribute('hidden', '');
         return;
@@ -86,5 +86,5 @@ document.addEventListener('click', (e) => {
   if (!a) return;
   const href = a.getAttribute('href') || '';
   if (href.startsWith('tel:')) track('phone_click');
-  else if (a.hasAttribute('data-cb-open') || /#book|#quote|free-quote/.test(href)) track('cta_click', { label: (a.textContent || '').trim().slice(0, 60) });
+  else if (a.hasAttribute('data-cb-open') || /#book|#quote|#request-call|free-quote|book-visit/.test(href)) track('cta_click', { label: (a.textContent || '').trim().slice(0, 60) });
 });
