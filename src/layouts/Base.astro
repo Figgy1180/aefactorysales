@@ -243,7 +243,7 @@ const onBooking = Astro.url.pathname.startsWith('/book-visit');
         </p>
       </div>
     </footer>
-    <nav class={`callbar${onEstimate || onBooking ? ' two' : ''}`} aria-label="Quick contact"><a href={SITE.phoneHref}>Call</a>{!onEstimate && <a href="/free-quote/">Get estimate</a>}{!onBooking && <a href="/book-visit/">Book design visit</a>}</nav>
+    <nav class="callbar two" aria-label="Quick contact"><a href={SITE.phoneHref}>Call AE</a><a href={onBooking ? '/#request-call' : '/book-visit/'}>{onBooking ? 'Request a call' : 'Plan my patio'}</a></nav>
     <script>
     import { captureSource } from '../scripts/source';
     captureSource();

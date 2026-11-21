@@ -32,7 +32,7 @@ export const SITE = {
   // Web3Forms access keys are public by design (they only allow sending to the inbox they were created for).
   // Photo uploads on the design-visit form need Web3Forms Pro (file attachments). Turn on once the plan supports it.
   photoUploads: false,
-  formKey: import.meta.env.PUBLIC_PREVIEW ? '' : import.meta.env.PUBLIC_WEB3FORMS_KEY || '7fdb1023-5888-4467-b512-4679a328c925', // all forms (quotes, reviews, dealers) deliver to info@aefactorysales.com
+  formKey: (import.meta.env.DEV || import.meta.env.PUBLIC_PREVIEW) ? '' : import.meta.env.PUBLIC_WEB3FORMS_KEY || '7fdb1023-5888-4467-b512-4679a328c925', // all forms (quotes, reviews, dealers) deliver to info@aefactorysales.com
 } as const;
 
 export const WARRANTY = 'Lifetime on the frame, 5 years on parts';
@@ -307,7 +307,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Do I need a city permit?',
-      a: 'Our enclosures are not considered permanent fixtures, so they do not require a city building permit. Your HOA may still want to approve them; we provide drawings and product details for the application, though approval is up to your HOA.',
+      a: 'Requirements vary by city and project scope. Confirm permitting requirements with your local building department before ordering. Your HOA may also require approval; we provide drawings and product details, though approval is up to your HOA.',
     },
     {
       q: 'How long does installation take?',

@@ -7,9 +7,9 @@ import { SITE, EXAMPLE } from '../data/site';
 const crumbs = [{ name: 'Compare', href: '/compare/' }];
 type Row = { name: string; ours?: boolean; cost: string; bugs: string; weather: string; opens: string; parts: string; ongoing: string; href?: string };
 const rows: Row[] = [
-  { name: 'AE Fixed Screen', ours: true, href: '/patio-screens/fixed-screen/', cost: '$5,800', bugs: 'Yes: 304 stainless steel mesh', weather: 'No', opens: 'No, stays in place', parts: 'None', ongoing: 'Lifetime frame warranty' },
-  { name: 'AE Hexfold', ours: true, href: '/patio-screens/hexfold/', cost: '$6,700', bugs: 'Yes: honeycomb aluminum mesh', weather: 'No', opens: 'Yes, folds by hand', parts: 'Wheels and track, no motor', ongoing: 'Lifetime frame warranty' },
-  { name: 'AE 3-season room', ours: true, href: '/patio-enclosures/three-season-rooms/', cost: '$7,400 to $9,600', bugs: 'Yes', weather: 'Yes: tinted polycarbonate', opens: 'Clearfold and Hybrid fold open', parts: 'No motor', ongoing: 'Lifetime frame warranty' },
+  { name: 'AE Fixed Screen', ours: true, href: '/patio-screens/fixed-screen/', cost: '$5,800', bugs: 'Insects; small pests depend on fit and gaps (304 stainless mesh)', weather: 'No', opens: 'No, stays in place', parts: 'None', ongoing: 'Lifetime frame warranty' },
+  { name: 'AE Hexfold', ours: true, href: '/patio-screens/hexfold/', cost: '$6,700', bugs: 'Insects; small pests depend on fit and gaps (aluminum mesh)', weather: 'No', opens: 'Yes, folds by hand', parts: 'Wheels and track, no motor', ongoing: 'Lifetime frame warranty' },
+  { name: 'AE 3-season room', ours: true, href: '/patio-enclosures/three-season-rooms/', cost: '$7,400 to $9,600', bugs: 'Depends on closed openings and fit', weather: 'Yes: tinted polycarbonate', opens: 'Clearfold and Hybrid fold open', parts: 'No motor', ongoing: 'Lifetime frame warranty' },
   { name: 'Nylon or fiberglass screen', cost: '$2,200 to $5,600', bugs: 'Insects; varies by mesh', weather: 'No', opens: 'Usually no', parts: 'None', ongoing: 'Rescreening over time (HomeGuide: every 5 to 10 years)' },
   { name: 'Motorized roll-down screens', cost: '$9,600 to $10,800', bugs: 'Insects; varies by mesh', weather: 'Varies by product', opens: 'Yes, by motor', parts: 'Motor, wiring, remote', ongoing: 'Motor and electronics to maintain' },
   { name: '3-season sunroom', cost: '$18,000 to $52,000', bugs: 'Yes', weather: 'Yes', opens: 'Depends on windows', parts: 'Windows and doors', ongoing: 'Varies' },
@@ -45,8 +45,8 @@ const vs = [
   },
   {
     id: 'spraying', t: 'Screens vs mosquito yard spraying',
-    lead: 'Spraying lowers mosquito numbers across the yard for a season. Screens keep bugs, mice and snakes off the patio itself, every season.',
-    rows: [['Cost', '$5,800 to $9,600 once, for the example patio', '$350 to $1,000 per season'], ['Over 10 years', 'Same one-time price', '$3,500 to $10,000'], ['Stops snakes and mice', 'Yes, on the patio', 'No'], ['Works in the yard', 'No, only the enclosed patio', 'Yes']],
+    lead: 'Spraying lowers mosquito numbers across the yard for a season. A well-fitted screen enclosure helps limit pest entry to the patio. Gaps, doors, mesh choice and pet openings affect protection.',
+    rows: [['Cost', '$5,800 to $9,600 once, for the example patio', '$350 to $1,000 per season'], ['Over 10 years', 'Same one-time price', '$3,500 to $10,000'], ['Helps limit small-pest entry', 'Depends on fit, mesh and closed openings', 'No physical barrier'], ['Works in the yard', 'No, only the enclosed patio', 'Yes']],
     pick: 'Spraying helps if you spend time across the whole yard. Screens pay for themselves on the patio where you actually sit, and the two work fine together.',
     link: ['/pricing/', 'See our prices'],
   },
@@ -109,7 +109,7 @@ const retrofit = {
       </div>
       <div class="table-wrap" tabindex="0" role="region" aria-label="At a glance (table 1)">
         <table class="tbl matrix">
-          <thead><tr><th scope="col">Option</th><th scope="col">Example patio</th><th scope="col">Bugs, mice, snakes</th><th scope="col">Wind and rain</th><th scope="col">Opens up</th><th scope="col">Moving parts</th><th scope="col">Ongoing</th></tr></thead>
+          <thead><tr><th scope="col">Option</th><th scope="col">Example patio</th><th scope="col">Pest barrier</th><th scope="col">Wind and rain</th><th scope="col">Opens up</th><th scope="col">Moving parts</th><th scope="col">Ongoing</th></tr></thead>
           <tbody>
             {rows.map((r) => (
               <tr class={r.ours ? 'mine' : ''}>
