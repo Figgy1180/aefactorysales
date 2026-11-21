@@ -35,9 +35,9 @@ export const SITE = {
   formKey: import.meta.env.PUBLIC_PREVIEW ? '' : import.meta.env.PUBLIC_WEB3FORMS_KEY || '7fdb1023-5888-4467-b512-4679a328c925', // all forms (quotes, reviews, dealers) deliver to info@aefactorysales.com
 } as const;
 
-export const WARRANTY = 'Lifetime on the frame, 3 years on parts';
+export const WARRANTY = 'Lifetime on the frame, 5 years on parts';
 export const WARRANTY_FULL =
-  'Lifetime on the frame for the original owner, for as long as you own the home (not transferable to a new owner), and 3 years on all parts. Installed and maintained by the manufacturer. Covers normal wear and tear. Excludes accidents, intentional damage and acts of God.';
+  'Lifetime on the frame for the original owner, for as long as you own the home (not transferable to a new owner), and 5 years on all parts. We make and install it, and our Houston factory handles service and warranty work. Covers normal wear and tear. Excludes accidents, intentional damage and acts of God.';
 export const FRAME = {
   short: 'Heat-welded PVC-fiber blend, aluminum core, ceramic coating',
   long: 'Every AE frame has heat-welded corners: a PVC and fiber blend with an aluminum rod inside for strength and a scratch-resistant ceramic coating outside.',
@@ -228,11 +228,11 @@ export const FAQ: Record<string, QA[]> = {
   room: [
     {
       q: 'Is a polycarbonate patio enclosure cheaper than a glass sunroom?',
-      a: 'Usually by a wide margin. For a 16 × 14 ft patio, a 3-season sunroom runs about $18,000 to $52,000 and a 4-season glass sunroom $45,000 to $90,000 (HomeGuide, Oct 2026). Clearfixed or Clearfold on the same patio runs about $7,400 to $9,600. Polycarbonate is also much lighter than glass and flexes instead of shattering.',
+      a: 'They are different projects. A sunroom addition builds a new room with its own foundation, roof and walls; an AE room fills in the open sides of the covered patio you already have. For a 16 × 14 ft space, sunroom additions run about $18,000 (3-season) to $90,000 (4-season glass) (HomeGuide, Oct 2026), while Clearfixed or Clearfold on an existing patio with two open sides runs about $7,400 to $9,600 installed, before sales tax.',
     },
     {
       q: 'Is it air-conditioned?',
-      a: 'No. It is a 3-season room: shaded, sheltered and ventilated through screen doors and doors that open on both sides. On the hottest August afternoons it will feel close to the outdoor temperature, just out of the sun, wind and bugs. Spring, fall and most of winter are when it shines.',
+      a: 'No. It is a 3-season room for an existing covered patio: shaded and sheltered, not insulated or air-conditioned. With everything closed on a hot, still afternoon it can feel as warm as outside, so we design folding or screened sections for airflow at the visit. Spring, fall and most of winter are when it shines.',
     },
     {
       q: 'What is the difference between Clearfixed and Clearfold?',
@@ -244,7 +244,23 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'How do I clean polycarbonate?',
-      a: 'Use a soft cloth, mild soap and water. Skip abrasive pads and harsh cleaners, since polycarbonate scratches more easily than glass.',
+      a: 'Use a soft cloth, mild soap and water. Skip abrasive pads and harsh cleaners. Our panels have a hard coat, but polycarbonate still scratches more easily than glass.',
+    },
+    {
+      q: 'Does rain get in?',
+      a: 'Light rain, no. Rubber gaskets and our own sealing system close the gaps and keep a seamless look. In heavy, wind-driven rain a small amount can get in, so think of it as a sheltered room, not a watertight one.',
+    },
+    {
+      q: 'Are the panels UV protected?',
+      a: 'Yes. Our polycarbonate has UV protection on both sides plus a hard coat against everyday scratches.',
+    },
+    {
+      q: 'Why are the panels tinted?',
+      a: 'On purpose. Untinted polycarbonate would let in too much heat for a Houston patio, so every AE panel is tinted: Smokey Gray, the usual home pick, or Industrial Blue.',
+    },
+    {
+      q: 'Are folding panels hard to open?',
+      a: 'No. Each leaf is about 5 inches wide and folds down to about 0.2 inches, and the panels hang from a free-floating top track, so they glide by hand with little effort.',
     },
   ],
   screens: [
@@ -258,7 +274,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Are your screens metal or fabric?',
-      a: 'Metal. Hexfold uses honeycomb aluminum mesh and Fixed Screen uses 304 stainless steel mesh. The frames are metal-reinforced at the core and carry a lifetime warranty, with 3 years on parts. Ask to see both mesh samples at your site visit.',
+      a: 'Metal. Hexfold uses honeycomb aluminum mesh and Fixed Screen uses 304 stainless steel mesh. The frames are metal-reinforced at the core and carry a lifetime warranty, with 5 years on parts. Ask to see both mesh samples at your site visit.',
     },
     {
       q: 'Do AE folding screens work when the power goes out?',
@@ -266,7 +282,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Do Hexfold screens need maintenance?',
-      a: 'Some. Manual operation removes the motor and controls, not the moving parts: the wheels and track still need simple care. Ask for the current care guide at your site visit.',
+      a: 'A little. Twice a year, spray a light lubricant such as WD-40 into the top track housing. Our install team goes over it with you at the final walkthrough. There is no motor or wiring to service.',
     },
     {
       q: 'Is Hexfold cheaper than motorized screens?',
@@ -274,7 +290,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Can I add a doggy door?',
-      a: 'Yes. A doggy door can be added to a compatible screen panel, in small, medium or large, and is quoted for your project. We help you pick the size and spot at the site visit. A pet opening is also a way in for other animals, so we plan its closure with you.',
+      a: 'Yes. A doggy door is a $200 add-on in small, medium or large, built into a compatible screen panel. We help you pick the size and spot at the site visit. A pet opening is also a way in for other animals, so we plan its closure with you.',
     },
   ],
   general: [
@@ -284,7 +300,11 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Do I need a roof over my patio?',
-      a: 'Yes. Our enclosures and screens are built for existing roofed patios. Our track mounts to your posts, beams and slab, and we add posts or framing where an opening needs it. Panels can be up to 10 ft tall.',
+      a: 'Yes. Our enclosures and screens are built for existing roofed patios. Our track mounts to your posts, beams and slab. We can add posts where an opening needs one, running along your existing beams. Panels can be up to 10 ft tall.',
+    },
+    {
+      q: 'Do I need a city permit?',
+      a: 'Our enclosures are not considered permanent fixtures, so they do not require a city building permit. Your HOA may still want to approve them; we provide drawings and product details for the application, though approval is up to your HOA.',
     },
     {
       q: 'How long does installation take?',
@@ -296,7 +316,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'What are the frames made of, and what colors come standard?',
-      a: 'Every frame has heat-welded corners: a PVC and fiber blend with an aluminum rod inside and a scratch-resistant ceramic coating outside. Frames come in Night Gray or Bright White. Polycarbonate panels come in Smokey Gray or Industrial Blue. Frames carry a lifetime warranty and all parts carry 3 years.',
+      a: 'Every frame has heat-welded corners: a PVC and fiber blend with an aluminum rod inside and a scratch-resistant ceramic coating outside. Frames come in Night Gray or Bright White. Polycarbonate panels come in Smokey Gray or Industrial Blue. Frames carry a lifetime warranty and all parts carry 5 years.',
     },
     {
       q: 'Do you work with HOAs?',

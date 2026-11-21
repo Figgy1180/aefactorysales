@@ -16,7 +16,7 @@ related:
 - **You want the patio screened year round.** The panels stay in place, so there is nothing to open, close or stow.
 - **You want metal mesh, not fabric.** The mesh is 304 stainless steel instead of nylon or fiberglass.
 - **You want the lowest starting price.** At $24 per sq ft of opening installed, it is the lowest starting price of our five systems.
-- **You have pets.** A doggy door can be added to a compatible panel in small, medium or large, quoted for your project.
+- **You have pets.** A doggy door can be added to a compatible panel in small, medium or large, as a $200 add-on.
 
 ## Choose something else if
 
@@ -32,7 +32,7 @@ related:
 | Panel size | Up to 3.5 × 10 ft each, arches available |
 | Frame colors | Night Gray or Bright White |
 | Price | From $24 per sq ft of opening, installed, before sales tax |
-| Warranty | Lifetime on the frame for the original owner, 3 years on parts |
+| Warranty | Lifetime on the frame for the original owner, 5 years on parts |
 
 Accessories and other options are extra and are quoted for your project.
 
