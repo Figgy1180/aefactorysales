@@ -213,7 +213,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'What is included in the price?',
-      a: 'One price covers design, the free site visit, CNC fabrication and testing in our Houston factory, installation by our own crew, parts and the factory warranty. Prices run from $24 to $56 per sq ft of opening, installed. Arches, extra posts and locks add to the total, and your quote lists every item.',
+      a: 'One price covers design, the free site visit, CNC fabrication and testing in our Houston factory, installation by our own crew, parts and our warranty. Prices run from $24 to $56 per sq ft of opening, installed. Arches, extra posts and locks add to the total, and your quote lists every item.',
     },
     {
       q: 'Do you offer financing?',

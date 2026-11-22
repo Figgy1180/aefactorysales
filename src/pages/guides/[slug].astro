@@ -16,7 +16,7 @@ const crumbs = [{ name: 'Guides', href: '/guides/' }, { name: g.data.title, href
 const fmt = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 const article = {
   '@context': 'https://schema.org', '@type': 'Article',
-  headline: g.data.title, description: g.data.description,
+  headline: g.data.title, description: g.data.description, abstract: g.data.answer,
   datePublished: g.data.published, dateModified: g.data.updated,
   author: { '@id': `${SITE.url}/#business` }, publisher: { '@id': `${SITE.url}/#business` },
   mainEntityOfPage: new URL(href, SITE.url).href,

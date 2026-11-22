@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import { FAQ } from '../data/site';
+import { FAQ, SITE } from '../data/site';
 
 const crumbs = [{ name: 'FAQ', href: '/faq/' }];
 const groups = [
@@ -10,8 +10,12 @@ const groups = [
   { id: 'screens', t: 'Hexfold and screens', items: FAQ.screens },
   { id: 'install', t: 'Install, storms and warranty', items: FAQ.general },
 ];
-const all = groups.flatMap((g) => g.items);
-const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: all.map((i) => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: i.a } })) };
+const slug = (t: string) => t.toLowerCase().replace(/&/g, ' and ').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 70).replace(/-+$/, '');
+const seen = new Set<string>();
+const idFor = (t: string) => { let id = slug(t), n = 2; while (seen.has(id)) id = `${slug(t)}-${n++}`; seen.add(id); return id; };
+const keyed = groups.map((g) => ({ ...g, items: g.items.map((q) => ({ ...q, id: idFor(q.q) })) }));
+const all = keyed.flatMap((g) => g.items);
+const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: all.map((i) => ({ '@type': 'Question', '@id': `${SITE.url}/faq/#${i.id}`, url: `${SITE.url}/faq/#${i.id}`, name: i.q, acceptedAnswer: { '@type': 'Answer', text: i.a } })) };
 ---
 <Base
   title="Patio Enclosure FAQ: Cost, Storms, Warranty | AE"
@@ -24,21 +28,52 @@ const ld = { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: a
       <h1 class="display">Patio enclosure <span class="y">questions</span></h1>
       <p class="sub">Straight answers from the people who build and install it.</p>
       <nav aria-label="FAQ sections"><ul class="jump">{groups.map((g) => <li><a href={`#${g.id}`}>{g.t}</a></li>)}</ul></nav>
+      <details class="qindex">
+        <summary>See all {all.length} questions</summary>
+        {keyed.map((g) => (
+          <div class="qi-group">
+            <h2 class="qi-h">{g.t}</h2>
+            <ul>{g.items.map((q) => <li><a href={`#${q.id}`}>{q.q}</a></li>)}</ul>
+          </div>
+        ))}
+      </details>
     </div>
   </PageHero>
-  {groups.map((g, i) => (
+  {keyed.map((g, i) => (
     <section class={`band${i % 2 ? ' on-paper' : ''}`} id={g.id}>
       <div class="wrap split" style="align-items:start">
         <h2 class="h2">{g.t}</h2>
         <div class="faq">
-          {g.items.map((q) => <details open={i === 0}><summary><h3>{q.q}</h3></summary><p>{q.a}</p></details>)}
+          {g.items.map((q) => (
+            <details id={q.id} open={i === 0}>
+              <summary><h3>{q.q}</h3></summary>
+              <p>{q.a}</p>
+              <p class="q-link"><a href={`#${q.id}`}>Link to this answer</a></p>
+            </details>
+          ))}
         </div>
       </div>
     </section>
   ))}
 </Base>
+<script>
+  const openHash = () => {
+    const id = decodeURIComponent(location.hash.slice(1));
+    const el = id ? document.getElementById(id) : null;
+    if (el instanceof HTMLDetailsElement) { el.open = true; el.scrollIntoView({ block: 'start' }); }
+  };
+  window.addEventListener('hashchange', openHash);
+  openHash();
+</script>
 <style>
   .jump { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
   .jump a { display: inline-block; border: 1px solid var(--line); padding: 8px 14px; color: var(--ink); text-decoration: none; font-weight: 600; }
   .jump a:hover { border-color: var(--yellow); color: var(--yellow); }
+  .qindex { border: 1px solid var(--line); padding: 10px 14px; }
+  .qindex > summary { cursor: pointer; font-weight: 700; }
+  .qi-h { font-size: 1rem; margin: 14px 0 6px; }
+  .qindex ul { margin: 0; padding-left: 1.1em; }
+  .qindex li { margin: 4px 0; }
+  .q-link { margin-top: 6px; font-size: .9rem; }
+  details[id] { scroll-margin-top: 110px; }
 </style>
