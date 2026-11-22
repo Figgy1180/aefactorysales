@@ -25,7 +25,12 @@ const steps = [
         <ol class="bv-steps">
           {steps.map(([t, d]) => <li><h2 class="h3">{t}</h2><p class="muted">{d}</p></li>)}
         </ol>
-        <p class="muted">Just want a ballpark first? <a href="/free-quote/">Get my estimate now</a> takes four quick questions.</p>
+        <div class="bv-start">
+          <h2 class="h3">Let's start with your patio</h2>
+          <p>Try metal screens, tinted panels or both on your photo. Explore a few ideas, then let us measure and help you choose. A photo is optional.</p>
+          <div class="bv-two"><a class="btn" href="/patio-visualizer/">Try my patio photo</a><a class="btn" href="#book">Request a free design visit</a></div>
+        </div>
+        <p class="muted">Just want a ballpark? <a href="/free-quote/">Get my estimate now</a> takes four quick questions.</p>
       </div>
       <div class="bv-card">
         <BookForm id="book" source="Book free design visit page" />
@@ -40,5 +45,10 @@ const steps = [
   .bv-steps li::before { content: counter(s); grid-row: span 2; width: 36px; height: 40px; display: grid; place-items: center; font-family: var(--font-head); font-weight: 800; color: #1a1a1a; background: var(--yellow); clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%); }
   .bv-steps h2 { font-size: 1.05rem; }
   .bv-card { background: var(--raised, rgba(255,255,255,.04)); border: 1px solid var(--line); border-radius: calc(var(--radius) * 1.5); padding: clamp(18px, 3vw, 32px); box-shadow: var(--shadow); min-width: 0; }
+  .bv-start { border: 1.5px solid var(--yellow); border-radius: 12px; padding: 18px; display: grid; gap: 10px; background: rgba(242, 194, 48, .06); }
+  .bv-start p { margin: 0; color: var(--ink-2); }
+  .bv-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 4px; }
+  .bv-two .btn { width: 100%; text-align: center; }
+  @media (max-width: 420px) { .bv-two { grid-template-columns: minmax(0, 1fr); } }
   @media (max-width: 900px) { .bv-grid { grid-template-columns: minmax(0, 1fr); } .bv-steps { display: none; } }
 </style>

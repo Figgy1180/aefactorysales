@@ -11,6 +11,12 @@ const photos = SITE.photoUploads; // off: customers text photos to the office nu
   <input type="hidden" name="from_name" value="AE website" />
   <input type="hidden" name="lead_source" value={source} />
   <label class="hp" aria-hidden="true">Leave this empty <input type="checkbox" name="botcheck" tabindex="-1" /></label>
+  <input type="hidden" name="visualizer_pick" value="" data-viz-pick disabled />
+  <div class="bf-pick" data-viz-show hidden>
+    <p class="bf-pick-k">From the patio visualizer</p>
+    <p data-viz-text></p>
+    <p class="hint">We'll send this with your request and bring those samples to the visit. <a href="/patio-visualizer/">Change it</a></p>
+  </div>
 
   <fieldset class="bf-group">
     <legend>Your contact details</legend>
@@ -64,7 +70,26 @@ const photos = SITE.photoUploads; // off: customers text photos to the office nu
     });
   });
 </script>
+<script>
+  // Arriving from the patio visualizer: show the pick and send it with the request.
+  try {
+    const q = new URLSearchParams(location.search);
+    const pick = (q.get('pick') || '').slice(0, 400), sizes = (q.get('sizes') || '').slice(0, 200);
+    if (pick) document.querySelectorAll('form.book-form').forEach((f) => {
+      const inp = f.querySelector('[data-viz-pick]'), box = f.querySelector('[data-viz-show]');
+      if (inp instanceof HTMLInputElement) { inp.value = pick; inp.disabled = false; }
+      const t = f.querySelector('[data-viz-text]'); if (t) t.textContent = pick;
+      if (box instanceof HTMLElement) box.hidden = false;
+      const dims = f.querySelector('input[name="estimated_dimensions"]');
+      if (dims instanceof HTMLInputElement && !dims.value && sizes) dims.value = sizes;
+    });
+  } catch (e) {}
+</script>
 <style>
+  .bf-pick { border-left: 5px solid var(--yellow); background: rgba(242, 194, 48, .1); padding: 12px 16px; border-radius: 6px; display: grid; gap: 4px; }
+  .bf-pick[hidden] { display: none; }
+  .bf-pick p { margin: 0; }
+  .bf-pick-k { font-family: var(--mono); font-size: .74rem; text-transform: uppercase; letter-spacing: .08em; color: var(--yellow); font-weight: 700; }
   .form.book-form { display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; }
   .book-form .hint.field { display: block; }
   .bf-group { border: 0; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 16px; }

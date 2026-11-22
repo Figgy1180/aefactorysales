@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import VizCta from '../../components/VizCta.astro';
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import Faq from '../../components/Faq.astro';
@@ -52,6 +53,7 @@ const product = {
   </PageHero>
 
   <DemoSection sys="fixed" name="Fixed Screen" lede={"Stainless steel mesh panels sit in a heat-welded, metal-reinforced frame and stay in place all year."} points={["304 stainless steel mesh, not nylon or fiberglass", "Night Gray or Bright White frame", "Doggy door available, quoted for your project"]} />
+  <VizCta sys="fixed" name="Fixed Screen" />
 
   <section class="band on-paper" id="vs-nylon">
     <div class="wrap stack-lg">

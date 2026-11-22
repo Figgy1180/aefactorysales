@@ -125,6 +125,7 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
               <li>Design and free site visit</li><li>CNC fabrication and testing in Houston</li><li>Installation by our own crew, within a month</li><li>Lifetime frame warranty, 5 years on parts</li>
             </ul>
             <p class="fine">Arches, extra posts and locks add to the price. Your exact number comes from the site visit.</p>
+            <a class="btn btn-line q-viz" id="q-viz" href="/patio-visualizer/">See what this could look like</a>
             <button type="button" class="linkish dark" data-back="1">Change my answers</button>
           </div>
           <div class="stack">
@@ -203,6 +204,7 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
   .syscards .prod.sel { box-shadow: 0 0 0 3px var(--yellow); }
   .est { font-family: var(--mono); font-size: 0.8rem; font-weight: 600; color: var(--ink) !important; }
   .pick { width: 100%; margin-top: 4px; }
+  .q-viz { justify-self: start; margin-top: 4px; }
   .pick[aria-pressed="true"] { background: var(--yellow); color: var(--honey); }
   .tint-pick { margin-top: 22px; border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: flex; flex-wrap: wrap; gap: 10px 26px; }
   .tint-pick legend { padding: 0 6px; font-weight: 700; }
@@ -279,10 +281,12 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
     $('#q-total').textContent = s ? `${fmt(p.msrp * s.low)} to ${fmt(p.msrp * s.high)}` : `$${p.msrp} per sq ft`;
     $('#q-size').textContent = s ? `${s.name}, ${s.low} to ${s.high} sq ft of openings` : 'Not sure yet, we measure at the visit';
     $('#q-sys').textContent = p.name;
+
     const tinted = p.family !== 'screen';
     const tint = (root.querySelector('input[name="tint"]:checked') as HTMLInputElement)?.value;
     $('#q-tint-row').hidden = !tinted;
     $('#q-tint').textContent = tint;
+    $('#q-viz').setAttribute('href', `/patio-visualizer/?sys=${p.id}${tinted && /blue/i.test(tint || '') ? '&tint=blue' : ''}`);
     $('.quiz-visit').hidden = !tinted;
     $('.quiz-screens').hidden = tinted;
     document.querySelector<HTMLElement>('.next-visit')!.hidden = !tinted;

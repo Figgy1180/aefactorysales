@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import VizCta from '../../components/VizCta.astro';
 import Base from '../../layouts/Base.astro';
 import RelatedLinks from '../../components/RelatedLinks.astro';
 import PageHero from '../../components/PageHero.astro';
@@ -44,7 +45,7 @@ const product = {
         <h1 class="display">Retractable metal patio screens, <span class="y">opened by hand</span></h1>
         <p class="sub">Hexfold is our retractable patio screen. Its honeycomb aluminum mesh folds to the side when you want an open patio and closes when you want a screen across the opening. You move it by hand, so its operation does not depend on electricity.</p>
         <p class="lede"><strong style="color:var(--ink)">In one sentence:</strong> Hexfold is a hand-operated folding patio screen with honeycomb aluminum mesh and a metal-reinforced frame, from $28 per sq ft of opening, installed.</p>
-        <div class="actions"><a class="btn" href="#quote">See Hexfold at my patio</a><a class="btn btn-line" href="#price">What it costs</a></div>
+        <div class="actions"><a class="btn" href="/patio-visualizer/?sys=hexfold">See Hexfold on my patio</a><a class="btn btn-line" href="#price">What it costs</a></div>
       </div>
       <figure class="dim-frame draw hero-video">
         <span class="dim v" aria-hidden="true"><span>Up to 10 ft tall</span></span>
@@ -54,6 +55,7 @@ const product = {
   </PageHero>
 
   <DemoSection sys="hexfold" name="Hexfold" lede={"Pleated honeycomb aluminum mesh rides on the top track and folds into a slim stack at the end. No posts, no motor."} points={["Up to 10 ft per pull, or 20 ft with two pulls meeting in the middle", "Stop it anywhere along the track", "Fold it away and secure it before a storm"]} />
+  <VizCta sys="hexfold" name="Hexfold" />
 
   <section class="band">
     <div class="wrap split">

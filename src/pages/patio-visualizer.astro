@@ -12,13 +12,25 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
   <section class="band hive" style="padding-top:24px">
 <div class="wrap viz">
   <h1 class="display">See AE systems <span class="y">on your patio</span></h1>
-  <p class="sub">Upload a photo of your covered patio, line the yellow corners up with an opening, and try every AE screen and panel system in both frame colors.</p>
-  <label class="file-btn m-upload" for="file">Upload my patio photo</label>
-  <ol class="steps">
-    <li>Upload a photo, or try it on the sample patio below.</li>
-    <li id="stepCorners">Drag the four yellow corners to the corners of one opening.</li>
-    <li>Pick a system and frame color. Add more openings if you have them.</li>
-  </ol>
+  <p class="sub">Try metal screens, tinted panels or both on a photo of your patio. Explore a few ideas, then let us measure and help you choose.</p>
+  <div class="ask">
+    <div class="ask-q">
+      <p class="ask-n"><b>1</b> What would you like?</p>
+      <div class="seg" id="goalSeg">
+        <button type="button" data-goal="clearfixed" aria-pressed="false">Weather shelter</button>
+        <button type="button" data-goal="hexfold" aria-pressed="false">Screened airflow</button>
+        <button type="button" data-goal="hybrid" aria-pressed="false">Both</button>
+      </div>
+    </div>
+    <div class="ask-q">
+      <p class="ask-n"><b>2</b> What's your patio like?</p>
+      <div class="row"><label class="file-btn ask-up" for="file">Use my photo</label><span class="note">or try the sample patio below</span></div>
+    </div>
+    <div class="ask-q">
+      <p class="ask-n"><b>3</b> Which look do you prefer?</p>
+      <p class="note" id="stepCorners">Line the yellow corners up with an opening, then try frame colors, tints and open or closed.</p>
+    </div>
+  </div>
 
   <div class="grid">
     <div class="stage-box">
@@ -38,11 +50,15 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
     </div>
 
     <div class="panel">
+      <div class="nogl" id="noGl" hidden>
+        <p><b>This browser can't draw the preview.</b> You can still get a price or have us come out and show you samples.</p>
+        <div class="row"><a class="btn primary" href="/free-quote/">Get my estimate now</a><a class="btn" href="/book-visit/">Book free design visit</a></div>
+      </div>
       <div class="row">
         <label class="file-btn">Upload my patio photo<input type="file" id="file" accept="image/*"></label>
         <p class="fine upload-note" id="aiNote" hidden>Our AI reads your photo to find the opening and estimate its size. The photo is not saved. <a href="/privacy/">Privacy</a></p>
       </div>
-      <p class="note">Your photo stays on this device. Nothing is uploaded or saved.</p>
+      <p class="note" id="localNote">Your photo stays on this device. Nothing is uploaded or saved.</p>
 
       <fieldset>
         <legend>System</legend>
@@ -105,8 +121,9 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
         </div>
       </fieldset>
 
-      <a class="btn primary" href="/book-visit/" style="text-align:center;text-decoration:none">Book my free design visit</a>
-      <p class="note">This is a preview, not a rendering of your exact job. We measure every opening at the free site visit and go over your quote on site, then email it within 24 hours.</p>
+      <a class="btn primary" id="bookBtn" href="/book-visit/" style="text-align:center;text-decoration:none">Help me make this work</a>
+      <p class="note" id="bookNote">Free design visit. Your picks come with your request, and we bring those samples.</p>
+      <p class="note">Approximate visualization. Final layout is confirmed after we measure at the free design visit. You get your quote on site, then by email within 24 hours.</p>
     </div>
   </div>
 </div>
@@ -161,6 +178,22 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
 .viz .price b { display: block; font-size: 34px; font-weight: 900; font-stretch: 80%; font-variant-numeric: tabular-nums; }
 .viz .price small { color: var(--ink-2); font-family: var(--mono); font-size: 12px; }
 .viz .note { font-family: var(--mono); font-size: 12px; color: var(--ink-2); margin: 0; }
+.viz .ask { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 22px; margin-top: 20px; }
+.viz .ask-q { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.viz .ask-n { margin: 0; font-weight: 700; display: flex; gap: 10px; align-items: center; }
+.viz .ask-n b { flex: none; width: 28px; height: 28px; display: grid; place-items: center; background: var(--yellow); color: var(--honey); border-radius: 6px; font-size: .95rem; }
+.viz .ask-up { min-height: 44px; }
+.viz .nogl { border: 1.5px solid var(--yellow); border-radius: 10px; padding: 14px; display: grid; gap: 10px; }
+.viz .nogl p { margin: 0; }
+@media (max-width: 900px) {
+  .viz .ask { grid-template-columns: minmax(0, 1fr); gap: 10px; margin-top: 14px; }
+  .viz .ask-q:nth-child(3) { display: none; }
+  .viz #goalSeg { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .viz #goalSeg button { padding: 8px 6px; font-size: 13px; }
+  .viz .ask-q:nth-child(2) .row { flex-wrap: nowrap; }
+  .viz .ask-up { padding: 8px 14px; font-size: 13px; }
+  .viz .sub { font-size: 1rem; }
+}
 .viz .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-top: 22px; }
 .viz .steps li { color: var(--ink-2); display: flex; gap: 10px; align-items: flex-start; padding-top: 12px; }
 .viz .steps li::before { flex: none; width: 28px; height: 28px; font-size: .95rem; }
@@ -181,6 +214,13 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
   ];
   const FRAME = { gray: [0.10, 0.105, 0.115], white: [0.95, 0.94, 0.91] };
   const state = { sys: 'hexfold', frame: 'gray', tint: 'gray', open: false, before: false, sel: 0, openings: [] };
+  // Product pages link here with ?sys=hexfold etc. so the visitor starts on that system.
+  try {
+    const q = new URLSearchParams(location.search);
+    if (SYSTEMS.some((s) => s.id === q.get('sys'))) state.sys = q.get('sys');
+    if (q.get('frame') === 'white') state.frame = 'white';
+    if (q.get('tint') === 'blue') state.tint = 'blue';
+  } catch (e) {}
 
   const photo = document.getElementById('photo');
   const canvas = document.getElementById('gl');
@@ -192,7 +232,7 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
   // ---------- WebGL ----------
   const gl = canvas.getContext('webgl', { premultipliedAlpha: true, preserveDrawingBuffer: true });
   if (gl) gl.getExtension('OES_standard_derivatives');
-  if (!gl) { $('status').textContent = 'This browser cannot draw the preview (WebGL is off).'; }
+  if (!gl) { $('status').textContent = 'This browser cannot draw the preview (WebGL is off).'; $('noGl').hidden = false; }
   const vs = `attribute vec2 p; void main(){ gl_Position = vec4(p,0.,1.); }`;
   const fs = `
   #extension GL_OES_standard_derivatives : enable
@@ -454,6 +494,7 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
   const sysSeg = $('sysSeg');
   SYSTEMS.forEach((s) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = s.name; b.dataset.sys = s.id; sysSeg.appendChild(b); });
   function setPressed(seg, attr, val) { seg.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset[attr] === String(val)))); }
+  $('goalSeg').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; state.sys = b.dataset.goal; refresh(); });
   sysSeg.addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; state.sys = b.dataset.sys; refresh(); });
   $('frameSeg').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; state.frame = b.dataset.frame; refresh(); });
   $('tintSeg').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; state.tint = b.dataset.tint; refresh(); });
@@ -476,6 +517,11 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
     const tot = Math.round((sys.rate * all) / 100) * 100;
     $('totalOut').hidden = state.openings.length < 2;
     $('totalOut').textContent = `All ${state.openings.length} openings: about $${tot.toLocaleString('en-US')} (${Math.round(all)} sq ft)`;
+    const frameName = state.frame === 'white' ? 'Bright White' : 'Night Gray';
+    const tint = ['clearfixed', 'clearfold', 'hybrid'].includes(sys.id) ? `, ${state.tint === 'blue' ? 'Industrial Blue' : 'Smokey Gray'} tint` : '';
+    const sizes = state.openings.map((o) => `${o.w || '?'} × ${o.h || '?'} ft`).join(', ');
+    const pick = `${sys.name}, ${frameName} frame${tint}. ${state.openings.length > 1 ? state.openings.length + ' openings' : '1 opening'}: ${sizes}. Rough price about $${tot.toLocaleString('en-US')}.`;
+    $('bookBtn').href = '/book-visit/?' + new URLSearchParams({ pick, sizes }).toString();
   }
   function syncPanel() {
     const o = state.openings[state.sel]; if (!o) return;
@@ -487,6 +533,8 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
   function refresh() {
     const sys = SYSTEMS.find((s) => s.id === state.sys);
     setPressed(sysSeg, 'sys', state.sys); setPressed($('frameSeg'), 'frame', state.frame);
+    const goal = { clearfixed: 'clearfixed', clearfold: 'clearfixed', hexfold: 'hexfold', fixed: 'hexfold', hybrid: 'hybrid' }[state.sys];
+    setPressed($('goalSeg'), 'goal', goal);
     $('openSeg').querySelector('[data-open="1"]').disabled = !sys.folds;
     if (!sys.folds) state.open = false;
     setPressed($('openSeg'), 'open', state.open ? 1 : 0);
@@ -506,7 +554,7 @@ const crumbs = [{ name: 'Patio visualizer', href: '/patio-visualizer/' }];
   // Photo reading switches itself on only when the Worker has its Claude key.
   fetch('/api/find-opening/', { cache: 'no-store' }).then((r) => r.ok ? r.json() : null).then((j) => {
     if (!j || !j.enabled) return;
-    aiOn = true; $('aiNote').hidden = false;
+    aiOn = true; $('aiNote').hidden = false; $('localNote').hidden = true;
     $('stepCorners').textContent = 'We find the opening and its size for you. Drag the yellow corners to fine-tune.';
   }).catch(() => {});
   function setup() {

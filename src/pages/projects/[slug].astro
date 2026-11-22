@@ -5,6 +5,7 @@ import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import QuoteForm from '../../components/QuoteForm.astro';
+import VizCta from '../../components/VizCta.astro';
 import { PROJECTS, photos, altFor, fit, type Project } from '../../data/projects';
 import { SITE } from '../../data/site';
 
@@ -26,6 +27,8 @@ const ld = {
   image: ph.map((x) => new URL(x.img.src, SITE.url).href),
 };
 const rv = REVIEWS.filter((r) => r.project === p.id);
+const vizSys = p.systems.some((x) => /hybrid/i.test(x)) ? 'hybrid' : p.systems.some((x) => /folding/i.test(x)) ? 'hexfold' : 'fixed';
+const vizName = { hybrid: 'the Hybrid', hexfold: 'Hexfold folding screens', fixed: 'Fixed Screen' }[vizSys];
 ---
 <Base
   title={`${p.city} ${p.title} | AE Projects`}
@@ -87,6 +90,8 @@ const rv = REVIEWS.filter((r) => r.project === p.id);
       </div>
     </div>
   </section>
+
+  <VizCta sys={vizSys} band="band on-paper" title="Like this setup? Try it on your patio" text={`Take a photo of your patio and see ${vizName} on it, in Night Gray or Bright White, with a rough installed price. About a minute, right on your phone.`} />
 
   {others.length > 0 && (
     <section class="band raised">

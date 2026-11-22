@@ -1,0 +1,41 @@
+---
+// "See it on your patio" band. Links to the patio visualizer, preset to one system when given.
+import { Image } from 'astro:assets';
+import vizShot from '../assets/renders/visualizer-sample.jpg';
+interface Props {
+  sys?: 'hexfold' | 'fixed' | 'clearfixed' | 'clearfold' | 'hybrid';
+  name?: string;
+  title?: string;
+  text?: string;
+  band?: string;
+  id?: string;
+  book?: boolean;
+}
+const { sys, name, title, text, band = 'band on-paper', id = 'see-it', book = true } = Astro.props;
+const href = sys ? `/patio-visualizer/?sys=${sys}` : '/patio-visualizer/';
+const heading = title ?? (name ? `See ${name} on your patio` : 'See it on your patio');
+const body = text ?? `Take a photo of your patio, drag four corners onto an opening and see ${name ?? 'every AE system'} in Night Gray or Bright White, with a rough installed price. About a minute, right on your phone.`;
+---
+<section class={`${band} vizcta`} id={id} aria-labelledby={`${id}-title`}>
+  <div class="wrap vc-grid">
+    <a href={href} class="vc-shot" tabindex="-1" aria-hidden="true">
+      <Image src={vizShot} widths={[360, 640, 900]} sizes="(max-width: 760px) 100vw, 420px" alt="Visualizer preview: Hexfold screens drawn onto a photo of a brick patio" loading="lazy" />
+      <span class="vc-badge">Visualizer preview</span>
+    </a>
+    <div class="stack">
+      <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Patio visualizer</p>
+      <h2 id={`${id}-title`} class="h2">{heading}</h2>
+      <p class="lede">{body}</p>
+      <div class="actions"><a class="btn" href={href}>See it on my patio</a>{book && <a class="btn btn-line" href="/book-visit/">Book free design visit</a>}</div>
+      <p class="fine">Approximate visualization. Final layout confirmed after we measure at the free design visit.</p>
+    </div>
+  </div>
+</section>
+<style>
+  .vc-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(22px, 4vw, 52px); align-items: center; }
+  .vc-shot { position: relative; display: block; border: 1.5px solid var(--yellow); border-radius: 12px; padding: 8px; background: var(--honey); box-shadow: var(--shadow); }
+  .vc-shot :global(img) { display: block; width: 100%; height: auto; border-radius: 6px; }
+  .vc-badge { position: absolute; left: 16px; bottom: 16px; font-family: var(--mono); font-size: .7rem; letter-spacing: .06em; text-transform: uppercase; color: #fff; background: rgba(31,27,24,.6); padding: 3px 8px; border-radius: 5px; }
+  .vizcta.on-paper .kicker { color: var(--paper-ink); }
+  @media (max-width: 760px) { .vc-grid { grid-template-columns: minmax(0, 1fr); } .vc-shot { order: 2; } }
+</style>
