@@ -3,7 +3,7 @@
 // Merge (Nov 21): live-site full-photo hero, quick booking, cost chart, facts and fold video, plus the redesign's tools.
 // 1 hero, 2 visualizer, 3 three choices, 4 cost chart + facts + finishes, 4b fold video,
 // 4 why AE, 5 real projects, 6 pricing and financing, 7 process, 8 showroom, warranty and aftercare, 9 FAQ and visit invitation.
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Faq from '../components/Faq.astro';
 import ProjectMosaic from '../components/ProjectMosaic.astro';
@@ -14,6 +14,7 @@ import { REVIEWS } from '../data/reviews';
 import { GUIDES } from '../data/guides';
 import { PRODUCTS, SIZES, FAQ, FACTS, SITE, WARRANTY, CITIES, CITY_PAGES, byId, range, type QA } from '../data/site';
 import heroBg from '../assets/photos/hero-interior.jpg';
+import heroPhone from '../assets/projects/p36/3-inside-closed.jpg';
 
 import pcDoors from '../assets/projects/p37/3-inside-doors-closed.jpg';
 import heroReal from '../assets/projects/p34/5-inside-seating.jpg';
@@ -101,6 +102,8 @@ const visitFaq: QA[] = [
   { q: 'Can you help with my HOA?', a: 'Yes. When your HOA needs them, we provide drawings and product specifications for your application. Approval is up to your HOA, so we cannot guarantee it.' },
   FAQ.general[1],
 ];
+const heroPhoneSet = await Promise.all([640, 960, 1170].map((w) => getImage({ src: heroPhone, width: w, format: 'webp' })));
+const heroPhoneSrcset = heroPhoneSet.map((im, k) => `${im.src} ${[640, 960, 1170][k]}w`).join(', ');
 ---
 <Base
   title="Patio Enclosures in Houston | AE Factory Sales"
@@ -108,7 +111,10 @@ const visitFaq: QA[] = [
 >
   <!-- 1. Hero: full-bleed real interior photo (live-site style) -->
   <section class="fb-hero" aria-labelledby="hero-title">
-    <Image class="fb-bg" src={heroBg} widths={[640, 960, 1280, 1920, 2400]} sizes="100vw" alt="Furnished seating area inside a Houston covered patio enclosed by AE metal screens" loading="eager" fetchpriority="high" />
+    <picture>
+      <source media="(max-width: 640px)" srcset={heroPhoneSrcset} sizes="100vw" type="image/webp" />
+      <Image class="fb-bg" src={heroBg} widths={[640, 960, 1280, 1920, 2400]} sizes="100vw" alt="Seating inside a Houston covered patio closed in with AE folding metal screens" loading="eager" fetchpriority="high" />
+    </picture>
     <div class="wrap fb-in">
       <p class="fb-tag" aria-hidden="true"><span>Real AE installation · Houston</span></p>
       <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Built in our Houston factory</p>
@@ -695,11 +701,15 @@ const visitFaq: QA[] = [
   .m-guide { display: none !important; }
   .fb-price { display: none; margin: -4px 0 0; color: #EDE6DC; font-size: .92rem; font-weight: 600; }
   @media (max-width: 640px) {
-    .fb-tag, .fb-in .kicker, .sub-long { display: none; }
-    .fb-in { padding-block: clamp(70px, 22vh, 170px) 22px; gap: 14px; }
+    .fb-in .kicker, .sub-long { display: none; }
+    .fb-hero { display: block; }
+    .fb-hero::after { display: none; }
+    .fb-hero :global(.fb-bg) { position: relative; inset: auto; display: block; height: clamp(220px, 37vh, 380px); z-index: 0; }
+    .fb-tag { top: auto; bottom: auto; right: 10px; top: 10px; font-size: .64rem; padding: 4px 8px; letter-spacing: .08em; }
+    .fb-in { padding-block: 22px 22px; gap: 14px; }
     .fb-in .display { font-size: clamp(1.9rem, 9vw, 2.5rem); }
     .fb-in .sub { font-size: 1rem; }
-    .fb-hero :global(.fb-bg) { object-position: 40% 85%; }
+    .fb-hero :global(.fb-bg) { object-position: center 72%; }
     .fb-chips { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-top: 12px; margin-top: 4px; }
     .fb-chips { display: none; }
     .fb-price { display: block !important; }
