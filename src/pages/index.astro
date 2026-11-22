@@ -39,8 +39,8 @@ type Pic = { src: any; alt: string; cap: string };
 type Card = { id: string; a: Pic; b: Pic; sell: string };
 const cards: Record<string, Card> = {
   clearfixed: { id: 'clearfixed', sell: 'A fixed wall of tinted panels for wind, rain and cooler days. Cut to arches and angles for gables.',
-    a: { src: rClearfixed, alt: 'Concept visualization of Clearfixed tinted polycarbonate panels', cap: 'Concept visualization' },
-    b: { src: clearfixedPhoto, alt: 'Clearfixed polycarbonate panels', cap: 'Clearfixed panels' } },
+    a: { src: clearfixedPhoto, alt: 'Clearfixed polycarbonate panels', cap: 'Clearfixed panels' },
+    b: { src: rClearfixed, alt: 'Concept visualization of Clearfixed tinted polycarbonate panels', cap: 'Concept visualization' } },
   clearfold: { id: 'clearfold', sell: 'Sheltered on cool or rainy days, open on nice ones. Equal-width leaves fold by hand.',
     a: { src: roomShowroom, alt: 'Folding Smokey Gray polycarbonate panels in the AE showroom', cap: 'In our Houston showroom' },
     b: { src: rClearfold, alt: 'Concept visualization of Clearfold folding polycarbonate panels', cap: 'Concept visualization' } },
@@ -113,11 +113,12 @@ const visitFaq: QA[] = [
       <p class="fb-tag" aria-hidden="true"><span>Real AE installation · Houston</span></p>
       <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Built in our Houston factory</p>
       <h1 id="hero-title" class="display">Screens and three-season rooms <span class="y">for your covered patio</span></h1>
-      <p class="sub">Keep the mosquitoes out and the breeze in, or close out wind and rain. Custom metal screens and polycarbonate panels, installed by our own crew within a month.</p>
+      <p class="sub">Keep the mosquitoes out and the breeze in, or close out wind and rain.<span class="sub-long"> Custom metal screens and polycarbonate panels, installed by our own crew within a month.</span></p>
       <div class="fb-cta">
         <a class="btn btn-big" href="#book">Book free design visit</a>
         <a class="fb-link" href="/free-quote/">or get a price in 60 seconds →</a>
       </div>
+      <p class="fb-price">From $24 per sq ft of opening, installed · Opens by hand</p>
       <ul class="fb-chips" aria-label="Why AE">
         <li><b>From $24</b><span>per sq ft of opening, installed</span></li>
         <li><b>Opens by hand</b><span>No motor, works in a power outage</span></li>
@@ -126,6 +127,44 @@ const visitFaq: QA[] = [
       </ul>
     </div>
   </section>
+  <!-- 3. Three choices -->
+  <section class="band" id="systems" aria-labelledby="paths-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Three ways to use your patio</p>
+        <h2 id="paths-title" class="h2">A three-season room, metal screens, or both</h2>
+        <p class="lede">Five systems share one heat-welded, metal-reinforced frame in Night Gray or Bright White, and we mix them opening by opening. Prices are {TAX}.</p>
+      </div>
+      {choices.map((ch) => (
+        <div class="choice" id={`choice-${ch.k}`}>
+          <h3 class="fam"><span class="hexdot" aria-hidden="true"></span>{ch.t}</h3>
+          <p class="fam-d">{ch.d}</p>
+          {ch.ids.length > 1 && <p class="swipe-hint" aria-hidden="true">Swipe to see both →</p>}
+          <div class={`cards ${ch.ids.length === 1 ? 'cards-1' : 'cards-2'}`}>
+            {ch.ids.map((id) => { const c = cards[id]; const p = byId(id); const g = guideOf(id); return (
+              <article class="card">
+                <div class="pics">
+                  <figure><Image src={c.a.src} alt={c.a.alt} widths={[400, 700]} sizes="(max-width: 700px) 50vw, 320px" loading="lazy" /><figcaption>{c.a.cap}</figcaption></figure>
+                  <a class="why" href={`/guides/${g.slug}/`}>
+                    <Image src={c.b.src} alt={c.b.alt} widths={[400, 700]} sizes="(max-width: 700px) 50vw, 320px" loading="lazy" />
+                    <span class="why-cap">{c.b.cap}</span>
+                    <span class="why-tag"><span class="hexdot" aria-hidden="true"></span>{g.q}</span>
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h4><a href={p.href}>{p.name}</a> <em>from ${p.msrp}<small> per sq ft of opening</small></em></h4>
+                  <p class="kind">{p.kind}</p>
+                  <p>{c.sell}</p>
+                  <p class="card-links"><a class="m-guide" href={`/guides/${g.slug}/`}>{g.q}</a><a href={p.href}>{p.name} details</a>{id === 'hybrid' && <><span class="sep" aria-hidden="true"> · </span><a href="/patio-enclosures/hybrid/#how-hybrid">Watch how it opens</a></>}</p>
+                </div>
+              </article>
+            ); })}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
   {topReview && (
     <section class="band-tight quote-band" aria-label="Customer feedback">
       <div class="wrap">
@@ -163,44 +202,6 @@ const visitFaq: QA[] = [
     </div>
   </section>
 
-  <!-- 3. Three choices -->
-  <section class="band" id="systems" aria-labelledby="paths-title">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Three ways to use your patio</p>
-        <h2 id="paths-title" class="h2">A three-season room, metal screens, or both</h2>
-        <p class="lede">Five systems share one heat-welded, metal-reinforced frame in Night Gray or Bright White, and we mix them opening by opening. Prices are {TAX}.</p>
-      </div>
-      {choices.map((ch) => (
-        <div class="choice" id={`choice-${ch.k}`}>
-          <h3 class="fam"><span class="hexdot" aria-hidden="true"></span>{ch.t}</h3>
-          <p class="fam-d">{ch.d}</p>
-          {ch.ids.length > 1 && <p class="swipe-hint" aria-hidden="true">Swipe to see both →</p>}
-          <div class={`cards ${ch.ids.length === 1 ? 'cards-1' : 'cards-2'}`}>
-            {ch.ids.map((id) => { const c = cards[id]; const p = byId(id); const g = guideOf(id); return (
-              <article class="card">
-                <div class="pics">
-                  <figure><Image src={c.a.src} alt={c.a.alt} widths={[400, 700]} sizes="(max-width: 700px) 50vw, 320px" loading="lazy" /><figcaption>{c.a.cap}</figcaption></figure>
-                  <a class="why" href={`/guides/${g.slug}/`}>
-                    <Image src={c.b.src} alt={c.b.alt} widths={[400, 700]} sizes="(max-width: 700px) 50vw, 320px" loading="lazy" />
-                    <span class="why-cap">{c.b.cap}</span>
-                    <span class="why-tag"><span class="hexdot" aria-hidden="true"></span>{g.q}</span>
-                  </a>
-                </div>
-                <div class="card-body">
-                  <h4><a href={p.href}>{p.name}</a> <em>from ${p.msrp}<small> per sq ft of opening</small></em></h4>
-                  <p class="kind">{p.kind}</p>
-                  <p>{c.sell}</p>
-                  <p class="card-links"><a href={p.href}>{p.name} details</a>{id === 'hybrid' && <> · <a href="/patio-enclosures/hybrid/#how-hybrid">Watch how it opens</a></>}</p>
-                </div>
-              </article>
-            ); })}
-          </div>
-        </div>
-      ))}
-    </div>
-  </section>
-
   <!-- 4. What it costs next to other options + the facts -->
   <section class="band on-paper" aria-labelledby="cmp-title">
     <div class="wrap">
@@ -228,7 +229,7 @@ const visitFaq: QA[] = [
         </div>
         <div class="finishes">
           <span class="facts-label">Finishes</span>
-          <div class="fin-grid">
+          <div class="fin-grid" tabindex="0" role="region" aria-label="Finish samples">
             <figure><Image src={fixedColors} widths={[320, 560]} sizes="(max-width: 760px) 50vw, 260px" alt="Fixed Screen panels in Night Gray and Bright White frames" loading="lazy" /><figcaption>Night Gray and Bright White frames</figcaption></figure>
             <figure><Image src={roomShowroom} widths={[320, 560]} sizes="(max-width: 760px) 50vw, 260px" alt="Smokey Gray polycarbonate panels in the AE showroom" loading="lazy" /><figcaption>Smokey Gray panels</figcaption></figure>
             <figure><Image src={pcDoors} widths={[320, 560]} sizes="(max-width: 760px) 50vw, 260px" alt="Industrial Blue polycarbonate doors on a Sugar Land patio" loading="lazy" style="object-position:50% 40%" /><figcaption>Industrial Blue panels, Sugar Land</figcaption></figure>
@@ -607,11 +608,10 @@ const visitFaq: QA[] = [
     .h-concept figcaption { padding-left: 0; }
     .h-real { position: static; width: auto; margin-top: 12px; display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 10px; align-items: center; }
     .h-real figcaption { font-size: .82rem; padding: 0; }
-    .cards-2 { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; padding-bottom: 8px; margin-inline: calc(var(--gutter, 16px) * -1); padding-inline: var(--gutter, 16px); scroll-padding-inline: var(--gutter, 16px); }
-    .cards-2 .card { flex: 0 0 86%; scroll-snap-align: start; }
+    .cards-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
     .build-photos { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; }
     .build-photos figure { flex: 0 0 78%; scroll-snap-align: start; }
-    .swipe-hint { display: block; }
+    .swipe-hint { display: none; }
     .proc { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 14px; }
     .proc p { font-size: .92rem; }
     .picker fieldset:first-child { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
@@ -690,6 +690,42 @@ const visitFaq: QA[] = [
   .cities li { border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; font-size: .92rem; }
   .cities a { color: var(--ink); }
   @media (max-width: 860px) { .offer-grid { grid-template-columns: minmax(0, 1fr); } }
+
+  /* phone: products first, calmer hero */
+  .m-guide { display: none !important; }
+  .fb-price { display: none; margin: -4px 0 0; color: #EDE6DC; font-size: .92rem; font-weight: 600; }
+  @media (max-width: 640px) {
+    .fb-tag, .fb-in .kicker, .sub-long { display: none; }
+    .fb-in { padding-block: clamp(70px, 22vh, 170px) 22px; gap: 14px; }
+    .fb-in .display { font-size: clamp(1.9rem, 9vw, 2.5rem); }
+    .fb-in .sub { font-size: 1rem; }
+    .fb-hero :global(.fb-bg) { object-position: 40% 85%; }
+    .fb-chips { grid-template-columns: repeat(2, minmax(0, 1fr)); padding-top: 12px; margin-top: 4px; }
+    .fb-chips { display: none; }
+    .fb-price { display: block !important; }
+    .card-links .sep { display: none; }
+    .cards-1 .card-body { padding: 12px !important; }
+    .fb-chips span { font-size: .82rem; }
+    #systems .sec-head .lede, .fam-d { display: none; }
+    #systems .sec-head { margin-bottom: 14px; }
+    .choice + .choice { margin-top: 22px; }
+    .pics { grid-template-columns: minmax(0, 1fr) !important; }
+    .pics .why { display: none; }
+    .pics :global(img) { aspect-ratio: 4 / 3; }
+    .card-body { padding: 12px !important; gap: 4px; }
+    .card-body .kind, .card-body > p:not(.card-links) { display: none; }
+    .card-body h4 { font-size: 1.05rem; display: grid; gap: 2px; }
+    .card-body h4 em small { display: none; }
+    .card-links { display: grid; gap: 0; }
+    .card-links a { min-height: 40px; font-size: .9rem; }
+    .m-guide { display: inline-flex !important; color: var(--ink) !important; font-weight: 500 !important; text-decoration: underline; text-decoration-color: var(--yellow); }
+    .cards-1 .card { grid-template-columns: minmax(0, 1fr); }
+    .quote-band { padding-block: 8px 20px; }
+    .fin-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px; }
+    .fin-grid figure { flex: 0 0 62%; scroll-snap-align: start; }
+    .own-hint { display: none; }
+    .facts .fine { font-size: .8rem; }
+  }
 </style>
 
 <script is:inline>

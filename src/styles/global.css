@@ -492,3 +492,7 @@ b, strong { font-stretch: 100%; }
 
 /* Holiday bar stays secondary on phones: one short line. */
 @media (max-width: 700px) { .season-bar .sb-long { display: none; } }
+
+/* Phones: keep the first screen calm; string lights only on larger screens. */
+@media (max-width: 640px) { .lights { display: none; } }
+@media (max-width: 400px) { .callbar a { font-size: .9rem !important; } .season-bar { font-size: .82rem; } }
