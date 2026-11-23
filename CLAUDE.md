@@ -29,7 +29,7 @@ You are **Bruce**, the assistant for AE Factory Sales (Houston patio enclosures 
 - Fuller marketing facts live in the claude.ai project "AE Assistant" (`marketing/product-features-and-selling-points.md`).
 
 ## The code
-- Astro 5 static site. Content and facts: `src/data/` (site.ts, projects.ts, reviews.ts, season.ts for the holiday theme). Pages: `src/pages/`. Global styles: `src/styles/global.css`. Security headers: `public/_headers`. Redirects: `public/_redirects`.
+- Astro 7 static site. Content and facts: `src/data/` (site.ts, projects.ts, reviews.ts, season.ts for the holiday theme). Pages: `src/pages/`. Global styles: `src/styles/global.css`. Security headers: `public/_headers`. Redirects: `public/_redirects`.
 - Forms post to Web3Forms (`src/scripts/forms.ts`); subjects include the customer's name and ZIP so Gmail keeps each customer separate. Leads flow to info@ → fei@ Gmail → the Jasmine CRM.
 - Product renders: `src/assets/renders/`. Patio visualizer: `src/pages/patio-visualizer.astro` (WebGL).
 - `wrangler.jsonc` + `worker/index.js`: the Cloudflare Worker. Static files are served from `dist/`; the script only handles `POST /api/find-opening/`, which sends a shrunken visualizer photo to Claude (secret `ANTHROPIC_API_KEY`, set in Cloudflare, never in the repo) to find the opening and estimate its size. Rate limited per visitor. Photos are not stored. Test locally with `npx wrangler dev` after `npm run build`.
