@@ -16,6 +16,8 @@ export default defineConfig({
     }),
   ],
   image: { responsiveStyles: false },
+  // Astro 7 default is 'jsx', which can drop spaces between inline elements. Keep the Astro 5 behavior.
+  compressHTML: true,
   // Never inline assets as data: URIs; the security policy only allows fonts from our own domain.
   vite: { build: { assetsInlineLimit: 0 } },
 });
