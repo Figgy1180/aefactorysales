@@ -49,15 +49,15 @@ const faq: QA[] = [
         <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Made and installed in Houston</p>
         <h1 id="hero-title" class="display">Screens and 3‑season rooms <span class="y">for your covered patio</span></h1>
         <p class="sub">See them on a photo of your own patio first. It takes about a minute.</p>
-        <div class="hero-cta">
-          <a class="btn btn-big" href="/patio-visualizer/">See it on my patio</a>
-          <a class="btn btn-big btn-line" href="#book">Book free design visit</a>
-        </div>
       </div>
       <figure class="hero-viz">
         <RevealSlider id="viz-reveal" eager closed={vizShot} open={vizBefore} alt="Brick patio in Richmond, TX" words={{ closed: 'With AE', open: 'Your photo', closedAlt: 'Visualizer preview: Hexfold screens drawn onto a photo of a brick patio', openAlt: 'The same brick patio photo before the preview', range: 'Drag to compare the patio photo with and without the visualizer preview', mid: 'Comparing before and after' }} />
         <figcaption>Visualizer preview. Drag to compare.</figcaption>
       </figure>
+      <div class="hero-cta">
+        <a class="btn btn-big" href="/patio-visualizer/">See it on my patio</a>
+        <a class="btn btn-big btn-line" href="#book">Book free design visit</a>
+      </div>
     </div>
     <div class="wrap">
       <ol class="how" aria-label="How the patio visualizer works">
@@ -198,7 +198,10 @@ const faq: QA[] = [
 
   /* hero */
   .hero { background: var(--honey); padding-block: clamp(28px, 5vw, 64px) clamp(24px, 4vw, 44px); border-bottom: 1px solid rgba(242, 194, 48, .3); }
-  .hero-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); grid-template-areas: "copy viz" "copy cta"; column-gap: clamp(24px, 4vw, 56px); row-gap: 16px; align-items: center; }
+  .hero-copy { grid-area: copy; }
+  .hero-viz { grid-area: viz; }
+  .hero-cta { grid-area: cta; align-self: start; }
   .hero-copy { display: grid; gap: 18px; }
   .hero-copy .display { font-size: clamp(2.1rem, 4.6vw, 3.9rem); line-height: 1.03; max-width: 15ch; }
   .hero-copy .sub { max-width: 34ch; }
@@ -296,6 +299,7 @@ const faq: QA[] = [
   @media (max-width: 1100px) { .sys-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
   @media (max-width: 900px) {
     .hero-grid, .picker, .book-grid, .faq-grid { grid-template-columns: minmax(0, 1fr); }
+    .hero-grid { grid-template-areas: "copy" "viz" "cta"; }
     .estimate { position: static; }
     .trust-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
