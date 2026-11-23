@@ -2,7 +2,6 @@
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import Why from '../components/Why.astro';
 import Faq from '../components/Faq.astro';
 import { SITE, WARRANTY_FULL, FAQ, type QA } from '../data/site';
 import cnc from '../assets/photos/factory-cnc.jpg';
@@ -39,8 +38,8 @@ const ld = {
     <div class="split">
       <div class="stack-lg">
         <h1 class="display">One company, <span class="y">start to finish</span></h1>
-        <p class="sub">We make it in Houston, our own crew installs it, and we stand behind it for the life of the frame. No distributor, no out-of-state call center.</p>
-        <div class="actions"><a class="btn" href="/book-visit/">Book a free design visit</a><a class="btn btn-line" href="/compare/">Compare your options</a></div>
+        <p class="sub">We make it in Houston, our crew installs it, and we stand behind it. No distributor, no call center.</p>
+        <div class="actions"><a class="btn" href="/patio-visualizer/">See it on my patio</a><a class="btn btn-line" href="/book-visit/">Book free design visit</a></div>
       </div>
       <figure class="dim-frame draw" style="margin:30px 0 0">
         <span class="dim h" aria-hidden="true"><span>Built in Houston</span></span>
@@ -53,7 +52,7 @@ const ld = {
     <div class="wrap stack-lg">
       <div class="sec-head" style="margin-bottom:0">
         <h2 id="chain-title" class="h2">Fewer hands <span class="y">on your project</span></h2>
-        <p class="lede">Patio enclosures are often designed by one company, sold by another and installed by a third. Every handoff adds cost and time, and makes it harder to know who fixes what later.</p>
+        <p class="lede">Every handoff adds cost, time and confusion about who fixes what.</p>
       </div>
       <div class="chain" role="img" aria-label="Typical path: brand, distributor, local dealer, subcontracted installer, then you. AE path: our Houston factory, our own crew, then you.">
         <div class="lane">
@@ -70,10 +69,10 @@ const ld = {
         </div>
       </div>
       <div class="gets">
-        <div><h3>One phone number</h3><p>Sales, scheduling, install and warranty all go through {SITE.phone}.</p></div>
-        <div><h3>Factory pricing</h3><p>No distributor or dealer markup between our factory and your patio.</p></div>
-        <div><h3>Faster</h3><p>Installed within a month of your order, because we control the schedule from cutting to install.</p></div>
-        <div><h3>Accountable</h3><p>The people who built it are the people who come back if it ever needs attention.</p></div>
+        <div><h3>One number</h3><p>Sales to warranty: {SITE.phone}.</p></div>
+        <div><h3>Factory pricing</h3><p>No dealer markup.</p></div>
+        <div><h3>Faster</h3><p>Installed within a month.</p></div>
+        <div><h3>Accountable</h3><p>The builders are the ones who come back.</p></div>
       </div>
     </div>
   </section>
@@ -82,7 +81,7 @@ const ld = {
     <div class="wrap split">
       <div class="stack-lg">
         <h2 id="local-title" class="h2">Houston made, <span class="y">Houston tested</span></h2>
-        <p class="lede">Our systems are in their fifth generation. The screen systems were refined over four years on Houston job sites and in our factory, through heat, humidity, storms and mosquito season. Before that, our team spent 25 years in the window and door business, which is where we learned how frames, tracks and seals hold up.</p>
+        <p class="lede">Fifth-generation systems. Our screens were refined over four years on Houston job sites, and our team brings 25 years from windows and doors.</p>
         <table class="facts">
           <caption>Where to find us</caption>
           <tbody>
@@ -98,15 +97,6 @@ const ld = {
     </div>
   </section>
 
-  <section class="band raised" aria-labelledby="peace-title">
-    <div class="wrap stack-lg">
-      <div class="sec-head" style="margin-bottom:0">
-        <h2 id="peace-title" class="h2">What you get <span class="y">from the source</span></h2>
-      </div>
-      <Why />
-      <p><a href="/how-we-build/">See how we build it, station by station</a></p>
-    </div>
-  </section>
 
   <section class="band on-paper" id="warranty" aria-labelledby="warranty-title">
     <div class="wrap split" style="align-items:start">
@@ -115,7 +105,7 @@ const ld = {
         <div class="warranty-card">
           <p class="w-big">Lifetime</p><p class="w-sub">on the frame</p>
           <p class="w-big">5 years</p><p class="w-sub">on all parts</p>
-          <p class="fine">Frame warranty is for the original owner, for as long as you own the home, and does not transfer to a new owner. Installed and maintained by the manufacturer. Covers normal wear and tear. Excludes accidents, intentional damage and acts of God.</p>
+          <p class="fine">Frame: original owner, while you own the home. Excludes accidents, intentional damage and acts of God.</p>
         </div>
       </div>
       <Faq items={warrantyFaq} />
@@ -126,7 +116,7 @@ const ld = {
     <div class="wrap split" style="align-items:start">
       <div class="stack">
         <h2 id="ask-title" class="h2">Ask any installer <span class="y">these six questions</span></h2>
-        <p class="lede">Whoever you hire, these answers tell you who is really building and backing your enclosure. Here are ours.</p>
+        <p class="lede">Ask whoever you hire. Here are our answers.</p>
       </div>
       <Faq items={ask} schema={false} />
     </div>
@@ -137,8 +127,7 @@ const ld = {
       <figure style="margin:0"><Image src={wide} alt="Houston covered patio with AE folding screens on two open sides" widths={[480, 900]} sizes="(max-width: 820px) 100vw, 540px" loading="lazy" style="aspect-ratio:4/3;object-fit:cover;border:2px solid var(--yellow)" /></figure>
       <div class="stack">
         <h2 class="h2">See it, <span class="y">then decide</span></h2>
-        <p class="lede">Book a free site visit, or book an appointment to see every system working in our showroom.</p>
-        <div class="actions"><a class="btn" href="/book-visit/">Book a free design visit</a><a class="btn btn-line" href="/projects/">See finished projects</a></div>
+        <div class="actions"><a class="btn" href="/patio-visualizer/">See it on my patio</a><a class="btn btn-line" href="/showroom/">Visit the showroom</a></div>
       </div>
     </div>
   </section>

@@ -71,7 +71,7 @@ const service = {
     <div class="wrap stack-lg">
       <div class="sec-head" style="margin-bottom:0">
         <h2 class="h2">What we install <span class="y">in {a.city}</span></h2>
-        <p class="lede">Every system is built for existing roofed patios, priced by the open wall area we fill, installed.</p>
+        <p class="lede">Priced by the open wall area we fill, installed.</p>
       </div>
       <ul class="ca-sys">
         {PRODUCTS.map((s) => <li><a href={s.href}>{s.name}</a><span>{s.kind}</span><b>From ${s.msrp} per sq ft</b></li>)}
@@ -89,7 +89,7 @@ const service = {
     <div class="wrap split" style="align-items:start">
       <div class="stack">
         <h2 class="h2">Book a free site visit <span class="y">in {a.city}</span></h2>
-        <p class="lede">We come to your home, measure every opening, and bring samples. You get your quote at the visit, then by email within 24 hours.</p>
+        <p class="lede">We measure, bring samples and quote on site. Email follows within 24 hours.</p>
         <p class="muted" style="color:var(--paper-2)">Also serving {others.map((o, i) => <>{i ? ' and ' : ''}<a href={`/service-area/${o.slug}/`} style="color:var(--paper-ink)">{o.label}</a></>)}, and the rest of <a href="/service-area/" style="color:var(--paper-ink)">greater Houston</a>.</p>
       </div>
       <div class="ca-card"><QuoteForm id={`${a.slug}-book`} source={`City page: ${a.name}`} compact /></div>

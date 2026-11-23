@@ -43,7 +43,7 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
         <div class="stack">
           <p class="kicker"><span class="hexdot" aria-hidden="true"></span>Get my estimate now</p>
           <h1 class="h2">Your starting estimate, <span class="y">in four questions</span></h1>
-          <p class="muted">Four quick questions for a starting estimate, then tell us where the patio is. We call to confirm a time.</p>
+          <p class="muted">We price the open wall area we fill, not your floor.</p>
         </div>
         <ol class="progress" aria-label="Steps">
           <li data-step="1" class="now">Size</li><li data-step="2">Room or screens</li><li data-step="3">System</li><li data-step="4">Your price</li>
@@ -53,8 +53,7 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
       <div class="panel" data-panel="1">
         <div>
           <h2 class="q">How big is your patio?</h2>
-          <p class="hint">Pick the closest match. Yellow lines are the open sides we'd fill in; squares are posts.</p>
-          <p class="fast">Prefer to talk? Call <a href={SITE.phoneHref}>{SITE.phone}</a>, 9 am to 5 pm, 7 days a week.</p>
+          <p class="hint">Yellow lines are the open sides we fill.</p>
           <div class="opts">
             {SIZES.map((s) => (
               <button type="button" class="opt" data-size={s.id} aria-pressed="false">
@@ -63,17 +62,16 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
               </button>
             ))}
             <button type="button" class="opt" data-size="x" aria-pressed="false">
-              <span class="t">Not sure</span><span class="s">No problem. We measure every opening at the free site visit.</span><span class="p">Show me prices per sq ft</span>
+              <span class="t">Not sure</span><span class="s">We measure at the free visit.</span><span class="p">Show me prices per sq ft</span>
             </button>
           </div>
         </div>
-        <aside class="aside"><h3>Why we ask</h3><p>We price by the open wall area we fill in, not your floor space. Two open sides on a 16 × 14 ft patio at 8 ft tall is about <b>240 sq ft</b>.</p><p>Every AE system is CNC-cut to your exact measurements in our Houston factory, so it fits the first time.</p></aside>
       </div>
 
       <div class="panel" data-panel="2" hidden>
         <div>
           <h2 class="q">How do you want to use it?</h2>
-          <p class="hint">This decides between polycarbonate panels and metal mesh. You can mix them opening by opening later.</p>
+          <p class="hint">You can mix them per opening later.</p>
           <div class="opts">
             {uses.map((u) => (
               <button type="button" class="opt" data-use={u.id} aria-pressed="false"><span class="t">{u.t}</span><span class="s">{u.s}</span><span class="p">{u.p}</span></button>
@@ -81,20 +79,18 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
           </div>
           <div class="nav-row"><button type="button" class="linkish" data-back="1">Back to size</button></div>
         </div>
-        <aside class="aside"><h3>Room or screens?</h3><p>Polycarbonate (Clearfixed, Clearfold) turns your covered patio into a 3-season room using the roof you already have. It flexes instead of shattering.</p><p>Metal mesh (Hexfold, Fixed Screen) helps keep out mosquitoes, insects and small pests, with metal mesh instead of fabric.</p></aside>
       </div>
 
       <div class="panel" data-panel="3" hidden>
         <div>
           <h2 class="q">Pick your system</h2>
-          <p class="hint">Here's what each one does. Estimates are for your patio size.</p>
+          <p class="hint">Estimates are for your patio size.</p>
           <div class="syscards">
             {PRODUCTS.map((p) => (
               <article class="prod" data-sys={p.id}>
                 <figure><Image src={imgs[p.id]} alt={`${p.name}: ${p.kind}`} widths={[400, 640]} sizes="(max-width: 700px) 100vw, 320px" loading="lazy" /></figure>
                 <div class="prod-body">
-                  <h3>{p.name}</h3><p class="kind">{p.kind}</p><p>{p.blurb}</p>
-                  <dl class="specs">{p.specs.map(([k, v]) => <div><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+                  <h3>{p.name}</h3><p class="kind">{p.kind}</p>
                   <div class="price-line"><b>${p.msrp}<small style="font-size:.55em"> / sq ft</small></b><span class="est" data-est={p.id}></span></div>
                   <button type="button" class="btn btn-line pick" data-pick={p.id} aria-pressed="false">Choose {p.name}</button>
                 </div>
@@ -108,7 +104,6 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
           </fieldset>
           <div class="nav-row"><button type="button" class="btn" data-go="4" disabled>See my price</button><button type="button" class="linkish" data-back="2">Back</button></div>
         </div>
-        <aside class="aside"><h3>Good to know</h3><p>Every system rides on our own track, is built and tested at our factory, and is installed by our crew within a month.</p><p>Price includes design, fabrication, installation, parts and the warranty: <b>{WARRANTY.toLowerCase()}</b>.</p></aside>
       </div>
 
       <div class="panel" data-panel="4" hidden>
@@ -121,10 +116,7 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
               <div><dt>System</dt><dd id="q-sys">Hexfold</dd></div>
               <div id="q-tint-row" hidden><dt>Tint</dt><dd id="q-tint">Smokey Gray</dd></div>
             </dl>
-            <ul class="ticks">
-              <li>Design and free site visit</li><li>CNC fabrication and testing in Houston</li><li>Installation by our own crew, within a month</li><li>Lifetime frame warranty, 5 years on parts</li>
-            </ul>
-            <p class="fine">Arches, extra posts and locks add to the price. Your exact number comes from the site visit.</p>
+            <p class="fine">Installed by our crew within a month. Lifetime frame, 5 years on parts. Before tax; arches, posts and locks are extra.</p>
             <a class="btn btn-line q-viz" id="q-viz" href="/patio-visualizer/">See what this could look like</a>
             <button type="button" class="linkish dark" data-back="1">Change my answers</button>
           </div>
@@ -135,8 +127,7 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
             </div>
             <div class="quiz-screens" hidden>
               <h2 class="q">Get your screen quote</h2>
-              <p class="muted">Fill this in and a rep will call you to go over options and set a time to measure. You get your quote at the visit, then by email within 24 hours.</p>
-              <QuoteForm id="quiz-screens" kind="screens" source="Price quiz: screens" />
+                            <QuoteForm id="quiz-screens" kind="screens" source="Price quiz: screens" />
             </div>
             <div class="aside"><h3>Financing available</h3><p>{FINANCING}</p></div>
           </div>
@@ -145,29 +136,8 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
     </div>
   </section>
 
-  <section class="band raised">
-    <div class="wrap split" style="align-items:start">
-      <div class="stack">
-        <h2 class="h2">Rather <span class="y">talk now?</span></h2>
-        <p class="lede">Call <a href={SITE.phoneHref}>{SITE.phone}</a> or email <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
-        <p class="muted">Or call to book an appointment at the showroom and factory, {SITE.street}, Houston, TX {SITE.zip}.</p>
-      </div>
-      <div class="stack">
-        <h2 class="h3">What happens next</h2>
-        <ol class="next next-visit">
-          <li>We reply within 1 business day to set a time.</li>
-          <li>A free site visit: we measure every opening and bring samples.</li>
-          <li>You get your quote at the visit, then by email within 24 hours.</li>
-          <li>Place your order with a 50% deposit, and our crew installs within a month.</li>
-        </ol>
-        <ol class="next next-screens" hidden>
-          <li>A rep replies within 1 business day to talk through your screens.</li>
-          <li>We measure on site so the price is exact.</li>
-          <li>You get your quote at the visit, then by email within 24 hours.</li>
-          <li>Place your order with a 50% deposit, and our crew installs within a month.</li>
-        </ol>
-      </div>
-    </div>
+  <section class="band-tight raised">
+    <div class="wrap"><p class="muted talk">Rather talk? Call <a href={SITE.phoneHref}>{SITE.phone}</a>, 9 to 5, 7 days a week.</p></div>
   </section>
 </Base>
 
@@ -179,7 +149,7 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
   .progress li::before { content: counter(s) " · "; }
   .progress li.done { border-color: var(--yellow); color: var(--ink); }
   .progress li.now { border-color: var(--yellow); color: var(--yellow); }
-  .panel { margin-top: 34px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 290px); gap: 40px; align-items: start; }
+  .panel { margin-top: 34px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; align-items: start; }
   .panel > * { min-width: 0; }
   .q { font-family: var(--font-head); font-weight: 800; letter-spacing: -0.025em; font-size: clamp(1.7rem, 3.4vw, 2.4rem); line-height: 1.1; }
   .hint { margin-top: 10px; color: var(--ink-2); }
@@ -226,6 +196,8 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
   @media (max-width: 1100px) { .opts { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 900px) { .panel, .result { grid-template-columns: minmax(0, 1fr); } }
   @media (max-width: 640px) { .progress li { font-size: 0.62rem; } }
+  .talk { text-align: center; padding-block: 18px; }
+  .talk a { color: var(--yellow); font-weight: 700; }
 </style>
 
 <script>
@@ -289,8 +261,6 @@ const plan = (s: { w: number; d: number; sides: number; posts?: number }) => {
     $('#q-viz').setAttribute('href', `/patio-visualizer/?sys=${p.id}${tinted && /blue/i.test(tint || '') ? '&tint=blue' : ''}`);
     $('.quiz-visit').hidden = !tinted;
     $('.quiz-screens').hidden = tinted;
-    document.querySelector<HTMLElement>('.next-visit')!.hidden = !tinted;
-    document.querySelector<HTMLElement>('.next-screens')!.hidden = tinted;
     const est = root.querySelector<HTMLInputElement>(`${tinted ? '#quiz-visit' : '#quiz-screens'} input[name="estimate"]`);
     if (est) est.value = `${p.name}${tinted ? ` (${tint})` : ''}, ${$('#q-size').textContent}: ${$('#q-total').textContent}`;
     // Carry the quiz answers into the form so nobody has to pick them twice.

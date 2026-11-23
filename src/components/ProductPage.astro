@@ -1,6 +1,7 @@
 ---
-// One page per polycarbonate system (Clearfixed, Clearfold, Hybrid). Simplified Nov 23 2026 (preview):
-// hero, how it moves, see it on your patio, facts + fit, the three side by side, 4 FAQs, real patios, booking.
+// One short page per system (all five). Simplified Nov 23 2026:
+// hero, how it moves, see it on your patio, optional extra section (slot "extra"), facts + fit, 3 FAQs, real patios, booking.
+// Hero media can be replaced with slot "media".
 // All facts come from src/data/site.ts.
 import { Image } from 'astro:assets';
 import VizCta from './VizCta.astro';
@@ -13,22 +14,26 @@ import RelatedLinks from './RelatedLinks.astro';
 import DemoSection from './DemoSection.astro';
 import { FACTS, SITE, SIZES, byId, range, type QA } from '../data/site';
 interface Props {
-  id: 'clearfixed' | 'clearfold' | 'hybrid';
+  id: 'clearfixed' | 'clearfold' | 'hybrid' | 'hexfold' | 'fixed';
   title: string; description: string; h1: [string, string];
   img: ImageMetadata; alt: string; caption: string;
-  fit: string[]; notFor?: string[]; faq: QA[];
+  fit: string[]; notFor?: string[]; faq: QA[]; schemaExtra?: Record<string, unknown>;
 }
 const { id, title, description, h1, img, alt, caption, fit, faq } = Astro.props;
-const notFor = Astro.props.notFor ?? ['An insulated or air-conditioned room', 'A storm or hurricane shelter'];
+const screens = id === 'hexfold' || id === 'fixed';
+const notFor = Astro.props.notFor ?? (screens ? ['Keeping out wind and rain', 'Guaranteed pet containment'] : ['An insulated or air-conditioned room', 'A storm or hurricane shelter']);
 const p = byId(id);
-const trio = ['clearfixed', 'clearfold', 'hybrid'].map(byId);
-const moves = { clearfixed: 'Stays in place', clearfold: 'Folds by hand', hybrid: 'Folds by hand' } as Record<string, string>;
+const family = (screens ? ['hexfold', 'fixed'] : ['clearfixed', 'clearfold', 'hybrid']).map(byId);
+const moves = { clearfixed: 'stays in place', clearfold: 'folds by hand', hybrid: 'folds by hand', hexfold: 'folds by hand', fixed: 'stays in place' } as Record<string, string>;
+const hasWind = p.specs.some(([, v]) => v.includes('50 mph'));
 const how: Record<string, { lede: string; points: string[] }> = {
   clearfixed: { lede: 'Tinted panels sit in a welded frame. Nothing moves, so there is nothing to adjust.', points: ['Smokey Gray or Industrial Blue', 'Cut to arches and angles for gables', `Withstood ${FACTS.wind} in our factory wind tunnel`] },
   clearfold: { lede: 'Equal-width leaves hang from the top track and fold into a stack at the end, by hand.', points: ['Works in a power outage', 'Up to 5 ft per pull, 10 ft meeting in the middle', 'A bottom guide keeps every leaf in line'] },
   hybrid: { lede: 'A panel layer and a mesh layer share one opening. Each covers all of it and folds back to its own end.', points: ['Mesh only, for the breeze', 'Panels only, for wind and rain', 'Both folded back, for open access'] },
+  hexfold: { lede: 'Pleated aluminum mesh hangs from the top track and folds into a slim stack at the end. No posts, no motor.', points: ['Up to 10 ft per pull, 20 ft meeting in the middle', 'Stop it anywhere along the track', 'Fold it away before a storm'] },
+  fixed: { lede: '304 stainless mesh panels sit in a welded frame and stay put all year.', points: ['304 stainless steel mesh, standard', 'Arches and angles available', 'Screen doors and a $200 doggy door available'] },
 };
-const crumbs = [{ name: 'Patio enclosures', href: '/patio-enclosures/' }, { name: p.name, href: p.href }];
+const crumbs = screens ? [{ name: 'Patio screens', href: '/patio-screens/' }, { name: p.name, href: p.href }] : [{ name: 'Patio enclosures', href: '/patio-enclosures/' }, { name: p.name, href: p.href }];
 const product = {
   '@context': 'https://schema.org', '@type': 'Product',
   name: `${p.name}: ${p.kind.toLowerCase()}`,
@@ -36,6 +41,8 @@ const product = {
   manufacturer: { '@id': `${SITE.url}/#business` },
   description: p.blurb,
   image: new URL(img.src, SITE.url).href,
+  url: `${SITE.url}${p.href}`,
+  ...(Astro.props.schemaExtra ?? {}),
   offers: {
     '@type': 'Offer', price: p.msrp, priceCurrency: 'USD', availability: 'https://schema.org/InStock', seller: { '@id': `${SITE.url}/#business` },
     priceSpecification: { '@type': 'UnitPriceSpecification', price: p.msrp, priceCurrency: 'USD', unitText: 'square foot of opening, installed' },
@@ -52,16 +59,18 @@ const medium = SIZES[1];
         <p class="pp-price">From ${p.msrp} per sq ft of opening, installed</p>
         <div class="actions"><a class="btn" href={`/patio-visualizer/?sys=${id}`}>See it on my patio</a><a class="btn btn-line" href="#book">Book free design visit</a></div>
       </div>
+      {Astro.slots.has('media') ? <slot name="media" /> : (
       <figure class="dim-frame draw" style="margin:30px 30px 0 0">
         <span class="dim h" aria-hidden="true"><span>{p.name}</span></span>
         <Image src={img} alt={alt} widths={[420, 720]} sizes="(max-width: 820px) 100vw, 520px" loading="eager" fetchpriority="high" style="aspect-ratio:4/5;object-fit:cover" />
         <figcaption class="fine" style="padding-top:8px">{caption}</figcaption>
-      </figure>
+      </figure>)}
     </div>
   </PageHero>
 
   <DemoSection sys={id} name={p.name} lede={how[id].lede} points={how[id].points} />
   <VizCta sys={id} name={p.name} book={false} />
+  <slot name="extra" />
 
   {id === 'hybrid' && (
     <section class="band" aria-labelledby="real-hybrid">
@@ -92,13 +101,13 @@ const medium = SIZES[1];
             <tr><th scope="row">Warranty</th><td>Lifetime frame, 5 years on parts</td></tr>
           </tbody>
         </table>
-        <p class="fine">Wind: our Houston factory's in-house test, not a hurricane rating.</p>
-        <p class="others">Also: {trio.filter((t) => t.id !== id).map((t, i) => <>{i > 0 && ' · '}<a href={t.href}>{t.name}</a> ${t.msrp}, {moves[t.id].toLowerCase()}</>)} · <a href="/patio-screens/">Screens</a></p>
+        {hasWind && <p class="fine">Wind: our Houston factory's in-house test, not a hurricane rating.</p>}
+        <p class="others">Also: {family.filter((t) => t.id !== id).map((t, i) => <>{i > 0 && ' · '}<a href={t.href}>{t.name}</a> ${t.msrp}, {moves[t.id]}</>)} · {screens ? <a href="/patio-enclosures/three-season-rooms/">3-season rooms</a> : <a href="/patio-screens/">Screens</a>}</p>
       </div>
       <div class="fit">
         <div><h3>Good fit</h3><ul class="ticks">{fit.map((f) => <li>{f}</li>)}</ul></div>
         <div><h3>Not for</h3><ul class="crosses">{notFor.map((f) => <li>{f}</li>)}</ul></div>
-        <p class="muted">You can add AC, and closed panels help hold it in.</p>
+        {!screens && <p class="muted">You can add AC, and closed panels help hold it in.</p>}
       </div>
     </div>
   </section>
@@ -111,13 +120,14 @@ const medium = SIZES[1];
     </div>
   </section>
 
-  <RelatedLinks match="any" title="Patios our crew has enclosed" links={false} />
+  <RelatedLinks match={id === 'hexfold' ? 'fold' : id === 'fixed' ? 'fixed' : 'any'} title="Patios our crew has enclosed" links={false} />
 
+  <span id="quote" aria-hidden="true"></span>
   <section class="band hive-dark" id="book">
     <div class="wrap split" style="align-items:start">
       <div class="stack">
         <h2 class="h2">Free <span class="y">design visit</span></h2>
-        <p class="lede">We measure every opening, bring tint samples and quote on site. Email follows within 24 hours.</p>
+        <p class="lede">We measure every opening, bring {screens ? 'mesh and frame' : 'tint'} samples and quote on site. Email follows within 24 hours.</p>
       </div>
       <div class="book-card"><QuickBook id={`${id}-visit`} source={`${p.name} page`} /></div>
     </div>

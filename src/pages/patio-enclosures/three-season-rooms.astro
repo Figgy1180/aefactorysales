@@ -6,12 +6,11 @@ import RelatedLinks from '../../components/RelatedLinks.astro';
 import PageHero from '../../components/PageHero.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import Faq from '../../components/Faq.astro';
-import QuoteForm from '../../components/QuoteForm.astro';
+import QuickBook from '../../components/QuickBook.astro';
 import { FAQ, FACTS, SITE, byId, SIZES, range } from '../../data/site';
 import clearfixed from '../../assets/photos/clearfixed-polycarbonate-panels.jpg';
 import smoke from '../../assets/photos/showroom-polycarbonate-smoke.jpg';
 import interior from '../../assets/photos/showroom-room-interior.jpg';
-import rack from '../../assets/photos/factory-pc.jpg';
 
 const crumbs = [{ name: 'Patio enclosures', href: '/patio-enclosures/' }, { name: '3-season rooms', href: '/patio-enclosures/three-season-rooms/' }];
 const service = {
@@ -43,8 +42,9 @@ const cf = byId('clearfixed'), cfo = byId('clearfold');
     <div class="split">
       <div class="stack-lg">
         <h1 class="display">Polycarbonate 3-season rooms <span class="y">for your covered patio</span></h1>
-        <p class="sub">A three-season room closes in the open sides of the patio you already have. Fixed and folding tinted polycarbonate panels in a heat-welded, metal-reinforced frame, with folding or screen sections where you want air. Installed within a month of your order.</p>
-        <div class="actions"><a class="btn" href="/book-visit/">Book free design visit</a><a class="btn btn-line" href="/free-quote/">Get my estimate now</a></div>
+        <p class="sub">Close in the open sides of the patio you already have, with tinted panels that stay put or fold away.</p>
+        <p class="pp-price">From ${cf.msrp} per sq ft of opening, installed</p>
+        <div class="actions"><a class="btn" href="/patio-visualizer/?sys=clearfixed">See it on my patio</a><a class="btn btn-line" href="#book">Book free design visit</a></div>
       </div>
       <figure class="dim-frame draw" style="margin:30px 30px 0 0">
         <span class="dim h" aria-hidden="true"><span>Panels up to 4 ft wide</span></span>
@@ -54,68 +54,64 @@ const cf = byId('clearfixed'), cfo = byId('clearfold');
     </div>
   </PageHero>
 
-  <section class="band on-paper" id="vs-glass">
-    <div class="wrap stack-lg">
-      <div class="sec-head" style="margin-bottom:0">
-        <h2 class="h2">Enclosing a patio <span class="y">vs adding a sunroom</span></h2>
-        <p class="lede">These are different projects. An AE room fills in the open sides of a covered patio you already have, using its roof, slab and posts. A sunroom addition builds a new room, usually with its own foundation, roof and walls, and a 4-season room adds heating and cooling. Compare what is included before comparing prices.</p>
+  <section class="band">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="h2">Three ways <span class="y">to build it</span></h2>
+        <p class="lede">Medium patio (200 to 300 sq ft of openings): Clearfixed {range(31, 200, 300)}, Clearfold {range(40, 200, 300)}, Hybrid {range(56, 200, 300)}.</p>
       </div>
-      <div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable table">
-        <table class="tbl">
-          <thead><tr><th scope="col">Feature</th><th scope="col">AE 3-season room (retrofit)</th><th scope="col">3-season sunroom addition</th><th scope="col">4-season glass sunroom addition</th></tr></thead>
-          <tbody>
-            <tr><th scope="row">What gets built</th><td class="ours">Panels and doors in the open sides of your existing covered patio</td><td>A new room: foundation or deck, roof, walls and windows</td><td>A new conditioned room, usually with heating and cooling</td></tr>
-            <tr><th scope="row">Climate control</th><td class="ours">None; sheltered and ventilated, not insulated</td><td>Usually none</td><td>Heated and cooled</td></tr>
-            <tr><th scope="row">Typical cost for a 16 × 14 ft space</th><td class="ours">$7,400 to $9,600 (two open sides)</td><td>$18,000 to $52,000</td><td>$45,000 to $90,000</td></tr>
-            <tr><th scope="row">Panel material</th><td class="ours">Polycarbonate: lighter and more impact resistant than ordinary glass, but scratches more easily</td><td colspan="2">Glass, often tempered or laminated: clearer and more scratch resistant, and heavier</td></tr>
-                        <tr><th scope="row">Order to install</th><td class="ours">Within a month of your order; most installs take one day on site</td><td colspan="2">Varies by builder; a construction project with its own schedule</td></tr>
-            <tr><th scope="row">Opens up</th><td class="ours">Clearfold and Hybrid fold to the side</td><td colspan="2">Depends on how many windows open</td></tr>
-          </tbody>
-        </table>
+      <div class="lineup">
+        <ProductCard p={byId('clearfixed')} img={clearfixed} alt="Clearfixed polycarbonate panels" />
+        <ProductCard p={byId('clearfold')} img={smoke} alt="Folding polycarbonate panels in the AE showroom" />
+        <ProductCard p={byId('hybrid')} img={interior} alt="Showroom room with polycarbonate panels and metal mesh" />
       </div>
-      <p class="fine">Sunroom ranges from the HomeGuide cost guide (Oct 2026) on 224 sq ft of floor, and include construction work an AE room does not. AE range uses Clearfixed (${cf.msrp}) to Clearfold (${cfo.msrp}) per sq ft of opening on 240 sq ft of openings, installed, before sales tax. Looking at other retrofit options, like glass panel systems or motorized shades on an existing patio? See <a href="/compare/">compare options</a>. Weight and impact resistance are general properties of polycarbonate (Palram Industries), not test results for a complete enclosure.</p>
     </div>
   </section>
 
-  <!-- Planning a three-season room (moved from the homepage) -->
-  <section class="band on-paper" aria-labelledby="room-title">
-    <div class="wrap">
-      <div class="room-grid">
-        <div class="stack-lg">
-          <p class="kicker dark"><span class="hexdot" aria-hidden="true"></span>Planning a three-season room</p>
-          <h2 id="room-title" class="h2">Fixed where you want shelter, folding where you want air</h2>
-          <p class="lede">A typical layout puts fixed Clearfixed panels across the long front and Hybrid openings on the two shorter sides. Close everything on a windy, rainy day; fold the sides open on a nice one. Your final ventilation plan is designed with you at the site visit.</p>
-          <p class="note">This is a three-season enclosure for an existing covered patio. It is not insulated or air-conditioned, and on the hottest summer afternoons it stays close to the outdoor temperature.</p>
-        </div>
-        <figure class="plan">
-          <svg viewBox="0 0 420 300" role="img" aria-labelledby="plan-t plan-d">
-            <title id="plan-t">Representative three-season room layout</title>
-            <desc id="plan-d">Floor plan of a covered patio against the house. The long front side has fixed polycarbonate panels. The two short sides have Hybrid openings that fold open.</desc>
-            <rect x="20" y="20" width="380" height="26" fill="#3B3430" />
-            <text x="210" y="38" text-anchor="middle" class="pl-house">HOUSE</text>
-            <rect x="40" y="46" width="340" height="200" fill="#F2C230" fill-opacity=".08" />
-            <g stroke="#55595E" stroke-width="10"><line x1="40" y1="246" x2="380" y2="246" /></g>
-            <g stroke="#2E2A27" stroke-width="2">{[0,1,2,3,4].map((i) => <line x1={40 + i * 68} y1="240" x2={40 + i * 68} y2="252" />)}<line x1="380" y1="240" x2="380" y2="252" /></g>
-            <g stroke="#C9A227" stroke-width="10" stroke-dasharray="14 5"><line x1="40" y1="46" x2="40" y2="246" /><line x1="380" y1="46" x2="380" y2="246" /></g>
-            <rect x="34" y="240" width="12" height="12" fill="#2E2A27" /><rect x="374" y="240" width="12" height="12" fill="#2E2A27" />
-            <text x="210" y="276" text-anchor="middle" class="pl-lbl">Long front: fixed polycarbonate (Clearfixed)</text>
-            <text x="56" y="150" class="pl-lbl" transform="rotate(-90 56 150)" text-anchor="middle">Hybrid: folds open</text>
-            <text x="364" y="150" class="pl-lbl" transform="rotate(90 364 150)" text-anchor="middle">Hybrid: folds open</text>
-            <text x="210" y="150" text-anchor="middle" class="pl-mid">Covered patio</text>
-          </svg>
-          <figcaption class="fine">Representative layout, not to scale. Every patio is designed to its own openings.</figcaption>
-        </figure>
-      </div>
+  <VizCta sys="clearfixed" title="See a 3-season room on your patio" text="Snap your patio and try Clearfixed, Clearfold or the Hybrid in Smokey Gray or Industrial Blue, with a rough price." book={false} />
 
-      <p class="cmp-teaser">Weighing glass panels, fabric screens or motorized shades? <a href="/compare/#retrofit">See how they compare</a>, fairly, side by side.</p>
-      <details class="tested">
-        <summary>Tested details</summary>
-        <ul>
-          <li>Smokey Gray polycarbonate panel: {FACTS.vlt} visible light transmission and {FACTS.shgc} solar heat gain coefficient. This is a test of the panel, not a rating of an installed room.</li>
-          <li>Wind: {FACTS.windNote}. Fold away folding systems before storms. Not a hurricane rating.</li>
-        </ul>
-        <p><a href="/learn/#performance">Specs and care</a></p>
-      </details>
+  <section class="band" aria-labelledby="room-title">
+    <div class="wrap room-grid">
+      <div class="stack-lg">
+        <h2 id="room-title" class="h2">Fixed for shelter, <span class="y">folding for air</span></h2>
+        <p class="lede">A common layout: fixed panels across the front, Hybrid openings on the sides. Close it all on a rainy day, fold the sides open on a nice one.</p>
+      </div>
+      <figure class="plan">
+        <svg viewBox="0 0 420 300" role="img" aria-labelledby="plan-t plan-d">
+          <title id="plan-t">Representative three-season room layout</title>
+          <desc id="plan-d">Floor plan of a covered patio against the house. The long front side has fixed polycarbonate panels. The two short sides have Hybrid openings that fold open.</desc>
+          <rect x="20" y="20" width="380" height="26" fill="#3B3430" />
+          <text x="210" y="38" text-anchor="middle" class="pl-house">HOUSE</text>
+          <rect x="40" y="46" width="340" height="200" fill="#F2C230" fill-opacity=".08" />
+          <g stroke="#55595E" stroke-width="10"><line x1="40" y1="246" x2="380" y2="246" /></g>
+          <g stroke="#2E2A27" stroke-width="2">{[0,1,2,3,4].map((i) => <line x1={40 + i * 68} y1="240" x2={40 + i * 68} y2="252" />)}<line x1="380" y1="240" x2="380" y2="252" /></g>
+          <g stroke="#C9A227" stroke-width="10" stroke-dasharray="14 5"><line x1="40" y1="46" x2="40" y2="246" /><line x1="380" y1="46" x2="380" y2="246" /></g>
+          <rect x="34" y="240" width="12" height="12" fill="#2E2A27" /><rect x="374" y="240" width="12" height="12" fill="#2E2A27" />
+          <text x="210" y="276" text-anchor="middle" class="pl-lbl">Long front: fixed polycarbonate (Clearfixed)</text>
+          <text x="56" y="150" class="pl-lbl" transform="rotate(-90 56 150)" text-anchor="middle">Hybrid: folds open</text>
+          <text x="364" y="150" class="pl-lbl" transform="rotate(90 364 150)" text-anchor="middle">Hybrid: folds open</text>
+          <text x="210" y="150" text-anchor="middle" class="pl-mid">Covered patio</text>
+        </svg>
+        <figcaption class="fine">Representative layout, not to scale.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="band on-paper" id="vs-glass">
+    <div class="wrap stack-lg">
+      <h2 class="h2">Patio room <span class="y">vs sunroom</span></h2>
+      <div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable table">
+        <table class="tbl">
+          <thead><tr><th scope="col"><span class="sr-only">Feature</span></th><th scope="col">AE 3-season room</th><th scope="col">3-season sunroom</th><th scope="col">4-season sunroom</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">What gets built</th><td class="ours">Panels in your existing patio's open sides</td><td>A new room</td><td>A new heated and cooled room</td></tr>
+            <tr><th scope="row">16 × 14 ft cost</th><td class="ours">$7,400 to $9,600</td><td>$18,000 to $52,000</td><td>$45,000 to $90,000</td></tr>
+            <tr><th scope="row">Panels</th><td class="ours">Polycarbonate: lighter, tougher, scratches easier</td><td colspan="2">Glass: clearer, heavier</td></tr>
+            <tr><th scope="row">Timeline</th><td class="ours">Installed within a month</td><td colspan="2">A construction project</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="fine">Sunroom ranges: HomeGuide (Oct 2026), 224 sq ft of floor. AE: Clearfixed to Clearfold on 240 sq ft of openings, before tax. <a href="/compare/">More comparisons</a></p>
     </div>
   </section>
 
@@ -123,8 +119,7 @@ const cf = byId('clearfixed'), cfo = byId('clearfold');
     <div class="wrap split">
       <div class="stack">
         <h2 class="h2">Bend it. <span class="y">It comes back.</span></h2>
-        <p class="lede">Polycarbonate is far more impact resistant than ordinary glass. Flex a panel hard and it springs back flat, so a stray ball or a falling branch doesn't turn into broken glass on your patio.</p>
-        <p class="muted">Two tints. <strong style="color:var(--ink)">Smokey Gray</strong> is darker from outside while you still see the yard, the usual pick for homes. <strong style="color:var(--ink)">Industrial Blue</strong> is the other option. We bring real samples to your site visit.</p>
+        <p class="lede">Flex a panel hard and it springs back flat. A stray ball doesn't mean broken glass.</p>
         <div class="tints"><span><i style="background:#3a3d40"></i>Smokey Gray</span><span><i style="background:#2f5f8f"></i>Industrial Blue</span></div>
       </div>
       <figure class="dim-frame video-frame">
@@ -135,67 +130,44 @@ const cf = byId('clearfixed'), cfo = byId('clearfold');
   </section>
 
   <section class="band raised">
-    <div class="wrap">
-      <div class="split" style="align-items:start">
-        <div>
-          <span class="facts-label">The facts</span>
-          <table class="facts">
-            <caption>Smokey Gray polycarbonate</caption>
-            <tbody>
-              <tr><th scope="row">Visible light</th><td>{FACTS.vlt} transmission*</td></tr>
-              <tr><th scope="row">Solar heat gain</th><td>{FACTS.shgc} SHGC*</td></tr>
-              <tr><th scope="row">Wind</th><td>Panel withstood {FACTS.wind} in our factory's in-house wind tunnel test**</td></tr>
-              <tr><th scope="row">Panel thickness</th><td>4 mm (Clearfixed); about half that on Clearfold</td></tr>
-              <tr><th scope="row">Surface</th><td>UV protected on both sides, with a hard coat</td></tr>
-              <tr><th scope="row">Frame</th><td>Heat-welded corners. PVC-fiber blend, aluminum core, scratch-resistant ceramic coating. Night Gray or Bright White.</td></tr>
-            </tbody>
-          </table>
-          <p class="fine" style="margin-top:10px">*Panel test on Smokey Gray, not a rating of an installed room. **Source: our Houston factory's in-house wind tunnel test (a strong gale, Beaufort 9). Not a hurricane rating.</p>
-        </div>
-        <div class="stack">
-          <h2 class="h3">What a 3-season room is, and isn't</h2>
-          <p class="muted">It is shaded and sheltered, not insulated. Air conditioning is optional, and closed polycarbonate panels help hold cooled air in, so a portable or mini-split unit can make the room more comfortable on hot days. Without it, plan for airflow through folding or screened sections. Spring, fall and most of winter are when it shines.</p>
-          <p class="muted">Want the breeze on the hottest days? Put polycarbonate on the sunny or windy side and <a href="/patio-screens/hexfold/">Hexfold</a> screens facing the yard, or choose the Hybrid.</p>
-        </div>
+    <div class="wrap split" style="align-items:start">
+      <div>
+        <h2 class="h2" style="margin-bottom:14px">The facts</h2>
+        <table class="facts">
+          <caption class="sr-only">Smokey Gray polycarbonate</caption>
+          <tbody>
+            <tr><th scope="row">Light and heat</th><td>{FACTS.vlt} visible light, {FACTS.shgc} SHGC (Smokey Gray)</td></tr>
+            <tr><th scope="row">Wind</th><td>Panel withstood {FACTS.wind} in our factory wind tunnel</td></tr>
+            <tr><th scope="row">Panels</th><td>4 mm on Clearfixed, about half on Clearfold; UV protected, hard coated</td></tr>
+          </tbody>
+        </table>
+        <p class="fine">Panel tests, not ratings of an installed room. Wind is not a hurricane rating.</p>
       </div>
-    </div>
-  </section>
-
-  <section class="band">
-    <div class="wrap">
-      <div class="sec-head">
-        <h2 class="h2">Three ways <span class="y">to build it</span></h2>
-        <p class="lede">Typical medium patio (about 20 × 12 ft, 200 to 300 sq ft of openings): Clearfixed {range(31, 200, 300)}, Clearfold {range(40, 200, 300)}, Hybrid {range(56, 200, 300)}.</p>
+      <div class="fit">
+        <div><h3>Good fit</h3><ul class="ticks"><li>Wind, rain and glare</li><li>Spring, fall and most of winter</li><li>Opening up on nice days</li></ul></div>
+        <div><h3>Not for</h3><ul class="crosses"><li>An insulated or air-conditioned room</li><li>A storm or hurricane shelter</li></ul></div>
+        <p class="muted">You can add AC, and closed panels help hold it in.</p>
       </div>
-      <div class="lineup">
-        <ProductCard p={byId('clearfixed')} img={clearfixed} alt="Clearfixed polycarbonate panels" />
-        <ProductCard p={byId('clearfold')} img={smoke} alt="Folding polycarbonate panels in the AE showroom" />
-        <ProductCard p={byId('hybrid')} img={interior} alt="Showroom room with polycarbonate panels and metal mesh" />
-      </div>
-      <p class="fine" style="margin-top:16px">Arched and angled fixed panels are priced at 1.5 times the base rate. Locks and some track upgrades are extra; your quote lists every item.</p>
     </div>
   </section>
 
   <section class="band on-paper">
     <div class="wrap split" style="align-items:start">
-      <div class="stack-lg">
-        <h2 class="h2">Straight <span class="y">answers</span></h2>
-        <figure style="margin:0"><Image src={rack} alt="Blue polycarbonate panels on a rack in the AE panel room" widths={[480, 800]} sizes="(max-width: 820px) 100vw, 540px" loading="lazy" style="border:2px solid var(--paper-ink)" /><figcaption class="fine" style="padding-top:8px">Polycarbonate panels cut in our own panel room on William Tell Street.</figcaption></figure>
-      </div>
-      <Faq items={[...FAQ.room, FAQ.general[0], FAQ.general[1]]} />
+      <h2 class="h2">Questions</h2>
+      <Faq items={[FAQ.room[0], FAQ.room[1], FAQ.room[5], FAQ.general[0]]} />
     </div>
   </section>
 
-  <RelatedLinks match="any" title="Patios our crew has enclosed" />
+  <RelatedLinks match="any" title="Patios our crew has enclosed" links={false} />
 
-  <VizCta sys="clearfixed" band="band" title="See a 3-season room on your patio" text="Take a photo of your patio and try Clearfixed, Clearfold or the Hybrid on it, in Smokey Gray or Industrial Blue, with a rough installed price. About a minute, right on your phone." />
-  <section class="band raised" id="quote">
+  <span id="quote" aria-hidden="true"></span>
+  <section class="band hive-dark" id="book">
     <div class="wrap split" style="align-items:start">
       <div class="stack">
-        <h2 class="h2">Get your <span class="y">exact price</span></h2>
-        <p class="lede">Free site visit. We measure every opening, bring tint samples and give you a number you can plan around.</p>
+        <h2 class="h2">Free <span class="y">design visit</span></h2>
+        <p class="lede">We measure every opening, bring tint samples and quote on site. Email follows within 24 hours.</p>
       </div>
-      <QuoteForm id="room-visit" source="3-season rooms page" />
+      <div class="book-card"><QuickBook id="room-visit" source="3-season rooms page" /></div>
     </div>
   </section>
 </Base>
@@ -222,5 +194,14 @@ const cf = byId('clearfixed'), cfo = byId('clearfold');
   .tested summary { cursor: pointer; font-weight: 700; color: var(--paper-ink); min-height: 44px; display: flex; align-items: center; }
   .tested ul { margin: 6px 0 10px; padding-left: 20px; display: grid; gap: 6px; }
 
-  .cmp-teaser a { color: inherit; }
+  .pp-price { font-family: var(--mono); font-weight: 600; color: var(--ink-2); margin: 0; }
+  .fit { display: grid; gap: 20px; }
+  .fit h3 { font-family: var(--font-head); font-size: 1.15rem; margin-bottom: 8px; }
+  .ticks, .crosses { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .ticks li, .crosses li { position: relative; padding-left: 28px; }
+  .ticks li::before { content: ""; position: absolute; left: 2px; top: .4em; width: 14px; height: 8px; border-left: 2.5px solid var(--yellow); border-bottom: 2.5px solid var(--yellow); transform: rotate(-45deg); }
+  .crosses li::before { content: "\00D7"; position: absolute; left: 3px; top: -.15em; font-size: 1.3rem; font-weight: 700; color: var(--ink-2); }
+  .book-card { background: var(--honey-2); color: var(--ink); padding: 26px; border-radius: 12px; border: 1px solid rgba(251, 245, 236, .08); border-top: 3px solid var(--yellow); box-shadow: var(--shadow); }
+  .book-card :global(.fine) { color: var(--ink-2); }
+  @media (max-width: 820px) { .room-grid { grid-template-columns: minmax(0, 1fr); } }
 </style>

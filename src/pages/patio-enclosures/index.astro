@@ -6,15 +6,15 @@ import VizCta from '../../components/VizCta.astro';
 import PageHero from '../../components/PageHero.astro';
 import ProjectMosaic from '../../components/ProjectMosaic.astro';
 import Faq from '../../components/Faq.astro';
-import QuoteForm from '../../components/QuoteForm.astro';
-import { SIZES, FAQ, SITE, CITIES, CITY_PAGES, range, byId, type QA } from '../../data/site';
+import QuickBook from '../../components/QuickBook.astro';
+import { SIZES, FAQ, SITE, CITIES, range, byId, type QA } from '../../data/site';
 
 const crumbs = [{ name: 'Patio enclosures', href: '/patio-enclosures/' }];
 const order = ['fixed', 'hexfold', 'clearfixed', 'clearfold', 'hybrid'].map(byId);
 const lo = Math.min(...order.map((p) => p.msrp)), hi = Math.max(...order.map((p) => p.msrp));
 const faq: QA[] = [
-  { q: 'What is a patio enclosure?', a: `A patio enclosure closes in the open sides of a covered patio with screens, panels or both. AE Factory Sales builds 5 systems for existing roofed patios, from $${lo} to $${hi} per sq ft of opening, installed. Panels can be up to 10 ft tall.` },
-  FAQ.cost[0], FAQ.cost[1], FAQ.cost[2], FAQ.room[0], FAQ.general[2], FAQ.general[3], FAQ.general[1], FAQ.general[6],
+  { q: 'What is a patio enclosure?', a: `A patio enclosure closes in the open sides of a covered patio with screens, panels or both. AE Factory Sales builds 5 systems for existing roofed patios, from $${lo} to $${hi} per sq ft of opening, installed. Panels can be up to 11.5 ft tall.` },
+  FAQ.cost[0], FAQ.cost[2], FAQ.room[0], FAQ.general[1],
 ];
 const service = {
   '@context': 'https://schema.org', '@type': 'Service',
@@ -34,49 +34,31 @@ const service = {
   <PageHero crumbs={crumbs}>
     <div class="stack-lg" style="max-width:54em">
       <h1 class="display">Patio enclosures <span class="y">in Houston</span></h1>
-      <p class="sub">A patio enclosure closes in the open sides of your covered patio with screens, polycarbonate panels or both. We build ours in our own Houston factory and our own crew installs them within a month of your order.</p>
-      <p class="lede"><strong style="color:var(--ink)">Short answer:</strong> {order.length} systems, from ${lo} to ${hi} per sq ft of opening, installed. Lifetime warranty on the frame, 5 years on all parts.</p>
-      <div class="actions"><a class="btn" href="#quote">Get my quote</a><a class="btn btn-line" href="#prices">See prices by patio size</a></div>
+      <p class="sub">Close in the open sides of your covered patio with metal screens, tinted panels or both. Made in our Houston factory, installed by our crew within a month.</p>
+      <p class="pp-price">{order.length} systems, ${lo} to ${hi} per sq ft of opening, installed</p>
+      <div class="actions"><a class="btn" href="/patio-visualizer/">See it on my patio</a><a class="btn btn-line" href="#book">Book free design visit</a></div>
     </div>
   </PageHero>
 
-  <section class="band on-paper" aria-labelledby="what-title">
+  <VizCta band="band on-paper" book={false} />
+
+  <section class="band" aria-labelledby="what-title">
     <div class="wrap stack-lg">
-      <div class="sec-head" style="margin-bottom:0">
-        <h2 id="what-title" class="h2">What a patio enclosure <span class="y">is</span></h2>
-        <p class="lede">You already have the roof. An enclosure fills the openings between your posts, so the patio works in more weather and more months of the year.</p>
-      </div>
+      <h2 id="what-title" class="h2">Screens, panels <span class="y">or both</span></h2>
       <div class="pe-3">
-        <div><h3>Screens</h3><p>Metal mesh keeps the breeze and keeps out mosquitoes and other bugs. Fixed Screen uses 304 stainless steel; Hexfold uses honeycomb aluminum and folds to the side.</p><a href="/patio-screens/">Patio screens</a> · <a href="/patio-screens/fixed-screen/">Fixed Screen</a> · <a href="/patio-screens/hexfold/">Hexfold</a></div>
-        <div><h3>Polycarbonate panels</h3><p>Tinted polycarbonate panels block wind and rain and make a 3-season room. Clearfixed stays in place; Clearfold folds open on a track.</p><a href="/patio-enclosures/three-season-rooms/">3-season rooms</a></div>
-        <div><h3>Both</h3><p>Hybrid puts panels and Hexfold mesh in one folding system, or we mix systems opening by opening around your patio.</p><a href="/patio-enclosures/hybrid/">Hybrid</a></div>
+        <div><h3>Screens</h3><p>Breeze in, bugs out. Stainless or aluminum mesh.</p><a href="/patio-screens/hexfold/">Hexfold</a> · <a href="/patio-screens/fixed-screen/">Fixed Screen</a></div>
+        <div><h3>Panels</h3><p>Tinted polycarbonate for wind and rain: a 3-season room.</p><a href="/patio-enclosures/clearfixed/">Clearfixed</a> · <a href="/patio-enclosures/clearfold/">Clearfold</a></div>
+        <div><h3>Both</h3><p>Panels and mesh on one opening, or mixed around the patio.</p><a href="/patio-enclosures/hybrid/">Hybrid</a></div>
       </div>
-      <p class="fine">Built for existing roofed patios. A 3-season room is not air-conditioned.</p>
     </div>
   </section>
 
-  <section class="band" aria-labelledby="sys-title">
-    <div class="wrap stack-lg">
-      <h2 id="sys-title" class="h2">The {order.length} <span class="y">systems</span></h2>
-      <div class="table-wrap" tabindex="0" role="region" aria-label="The systems (table 1)">
-        <table class="tbl tnum">
-          <thead><tr><th scope="col">System</th><th scope="col">What it is</th><th scope="col">Opens?</th><th scope="col" class="num">From, per sq ft installed</th></tr></thead>
-          <tbody>
-            {order.map((p) => (
-              <tr><th scope="row"><a href={p.href}>{p.name}</a></th><td>{p.kind}</td><td>{['hexfold', 'clearfold', 'hybrid'].includes(p.id) ? 'Folds open by hand' : 'Fixed in place'}</td><td class="num">${p.msrp}</td></tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <p class="fine">Prices are per square foot of opening, not floor area. Source: AE Factory Sales price list, November 2026. <a href="/compare/">Compare with sunrooms and motorized screens</a>.</p>
-    </div>
-  </section>
 
   <section class="band on-paper" id="prices" aria-labelledby="price-title">
     <div class="wrap stack-lg">
       <div class="sec-head" style="margin-bottom:0">
         <h2 id="price-title" class="h2">Prices for three <span class="y">patio sizes</span></h2>
-        <p class="lede">Installed totals for typical Houston covered patios. Your exact quote comes after we measure.</p>
+        <p class="lede">Installed totals. Your exact quote comes after we measure.</p>
       </div>
       <div class="table-wrap" tabindex="0" role="region" aria-label="Prices for three patio sizes (table 2)">
         <table class="tbl tnum">
@@ -86,8 +68,7 @@ const service = {
           </tbody>
         </table>
       </div>
-      <dl class="pe-sizes">{SIZES.map((s) => <div><dt>{s.name}</dt><dd>{s.eg}</dd></div>)}</dl>
-      <p class="fine">Totals are the per sq ft price times the opening area, rounded to the nearest $100. Arched and angled panels, locks and extra posts add to the total. Source: AE Factory Sales price list, November 2026. <a href="/pricing/">Full pricing page</a>.</p>
+      <p class="fine">Before tax. Arches, locks and extra posts add to the total. <a href="/pricing/">Full pricing</a></p>
     </div>
   </section>
 
@@ -95,10 +76,10 @@ const service = {
     <div class="wrap stack-lg">
       <div class="sec-head" style="margin-bottom:0">
         <h2 id="proj-title" class="h2">Real projects <span class="y">around Houston</span></h2>
-        <p class="lede">Finished jobs by our own crew. Tap any photo for the full project.</p>
+
       </div>
       <ProjectMosaic />
-      <p>We install in {CITIES.map((c, i) => <>{i > 0 && (i === CITIES.length - 1 ? ' and ' : ', ')}{CITY_PAGES[c] ? <a href={CITY_PAGES[c]}>{c}</a> : c}</>)}. <a href="/service-area/">Service area</a> · <a href="/projects/">All projects</a></p>
+      <p><a href="/projects/">All projects</a> · <a href="/service-area/">Service area</a></p>
     </div>
   </section>
 
@@ -109,15 +90,14 @@ const service = {
     </div>
   </section>
 
-  <VizCta band="band raised" />
-  <section class="band" id="quote">
+  <span id="quote" aria-hidden="true"></span>
+  <section class="band hive-dark" id="book">
     <div class="wrap split" style="align-items:start">
       <div class="stack">
-        <h2 class="h2">Get your <span class="y">quote</span></h2>
-        <p class="lede">Book a free site visit. We measure every opening and bring samples, then give you a quote on site, then email it within 24 hours.</p>
-        <p>Or call <a href={SITE.phoneHref}>{SITE.phone}</a>, or call to book a showroom appointment at {SITE.street}, {SITE.city}, {SITE.region} {SITE.zip}.</p>
+        <h2 class="h2">Free <span class="y">design visit</span></h2>
+        <p class="lede">We measure, bring samples and quote on site. Email follows within 24 hours.</p>
       </div>
-      <div><QuoteForm id="pe-visit" source="Patio enclosures Houston page" /></div>
+      <div class="book-card"><QuickBook id="pe-visit" source="Patio enclosures Houston page" /></div>
     </div>
   </section>
 </Base>
@@ -130,5 +110,10 @@ const service = {
   .pe-sizes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 0; }
   .pe-sizes dt { font-weight: 800; text-transform: uppercase; font-stretch: 80%; }
   .pe-sizes dd { margin: 0; color: var(--paper-2); }
-  @media (max-width: 760px) { .pe-3, .pe-sizes { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 760px) { .pe-3 { grid-template-columns: minmax(0, 1fr); } }
+  .pe-3 p { color: var(--ink-2); }
+  .pe-3 a { color: var(--yellow); font-weight: 600; }
+  .pp-price { font-family: var(--mono); font-weight: 600; color: var(--ink-2); margin: 0; }
+  .book-card { background: var(--honey-2); color: var(--ink); padding: 26px; border-radius: 12px; border: 1px solid rgba(251, 245, 236, .08); border-top: 3px solid var(--yellow); box-shadow: var(--shadow); }
+  .book-card :global(.fine) { color: var(--ink-2); }
 </style>
