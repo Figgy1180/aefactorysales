@@ -24,12 +24,11 @@ const canonical = new URL(path, SITE.url).href;
 // Every page gets its own share image: a real photo, cropped to 1200 x 630.
 const OG_PHOTOS: Record<string, string> = {
   '/': 'projects/p34/2-front-closed', '/patio-enclosures/three-season-rooms/': 'photos/factory-pc', '/patio-enclosures/clearfixed/': 'photos/clearfixed-polycarbonate-panels',
-  '/patio-enclosures/clearfold/': 'photos/showroom-polycarbonate-smoke', '/patio-enclosures/hybrid/': 'photos/showroom-room-interior', '/winter/': 'photos/clearfixed-polycarbonate-panels',
+  '/patio-enclosures/clearfold/': 'photos/showroom-polycarbonate-smoke', '/patio-enclosures/hybrid/': 'photos/showroom-room-interior',
   '/patio-screens/hexfold/': 'photos/hexfold-patio-closed', '/patio-screens/fixed-screen/': 'photos/fixed-screen-doors-closed', '/patio-enclosures/': 'projects/p36/4-inside-open', '/patio-screens/pet-resistant/': 'projects/p34/5-inside-seating', '/patio-screens/garage/': 'projects/p4/3-right-bays',
   '/pricing/': 'projects/p35/2-long-side', '/projects/': 'projects/p36/2-outside-open', '/why-ae/': 'photos/factory-cnc',
   '/how-we-build/': 'photos/factory-angle', '/showroom/': 'photos/showroom-room-interior', '/learn/': 'photos/hexfold-handle-mesh', '/compare/': 'projects/p14/3-long-side-open',
-  '/faq/': 'projects/p6/2-outside-closed', '/free-quote/': 'projects/p34/5-inside-seating', '/book-visit/': 'projects/p34/5-inside-seating', '/service-area/': 'projects/p6/4-wide',
-  '/every-season/': 'photos/hexfold-patio-open', '/guides/': 'photos/gabled-opening-screens', '/reviews/': 'photos/screened-patio-room-corner',
+  '/faq/': 'projects/p6/2-outside-closed', '/free-quote/': 'projects/p34/5-inside-seating', '/book-visit/': 'projects/p34/5-inside-seating', '/service-area/': 'projects/p6/4-wide', '/guides/': 'photos/gabled-opening-screens', '/reviews/': 'photos/screened-patio-room-corner',
   '/guides/folding-vs-motorized-patio-screens/': 'photos/hexfold-handle',
   '/guides/polycarbonate-vs-glass-patio-enclosure-cost/': 'photos/brick-home-screened-patio',
 };
@@ -124,7 +123,7 @@ const onBooking = Astro.url.pathname.startsWith('/book-visit');
     <a class="skip" href="#main">Skip to content</a>
     {HOLIDAY && (
       <aside class="season-bar" aria-label="Seasonal note">
-        <p class="wrap"><span aria-hidden="true">&#10052;</span> <b>Hosting for the holidays?</b> <span class="sb-long">Polycarbonate panels block the north wind and rain, so your patio stays usable all season.</span> <a href="/winter/">See winter rooms</a></p>
+        <p class="wrap"><span aria-hidden="true">&#10052;</span> <b>Hosting for the holidays?</b> <span class="sb-long">Polycarbonate panels block the north wind and rain, so your patio stays usable all season.</span> <a href="/patio-enclosures/three-season-rooms/#winter">See winter rooms</a></p>
       </aside>
     )}
     <header class="top">

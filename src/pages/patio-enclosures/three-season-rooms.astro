@@ -70,6 +70,17 @@ const cf = byId('clearfixed'), cfo = byId('clearfold');
 
   <VizCta sys="clearfixed" title="See a 3-season room on your patio" text="Snap your patio and try Clearfixed, Clearfold or the Hybrid in Smokey Gray or Industrial Blue, with a rough price." book={false} />
 
+  <section class="band raised" id="every-season" aria-labelledby="season-title">
+    <div class="wrap stack-lg">
+      <h2 id="season-title" class="h2">Use it <span class="y">every season</span></h2>
+      <div class="seasons">
+        <div id="winter"><h3>Winter</h3><p>Close the panels against the north wind and rain. It's sheltered, not insulated, so add a patio heater for cold nights.</p></div>
+        <div><h3>Spring and fall</h3><p>The sweet spot. Fold the panels open on a nice day, close them when a front blows in.</p></div>
+        <div><h3>Summer</h3><p>Pair panels with <a href="/patio-screens/hexfold/">Hexfold screens</a> for airflow without bugs, or get both in one <a href="/patio-enclosures/hybrid/">Hybrid</a>. Add AC if you want it cool.</p></div>
+      </div>
+    </div>
+  </section>
+
   <section class="band" aria-labelledby="room-title">
     <div class="wrap room-grid">
       <div class="stack-lg">
@@ -194,6 +205,12 @@ const cf = byId('clearfixed'), cfo = byId('clearfold');
   .tested summary { cursor: pointer; font-weight: 700; color: var(--paper-ink); min-height: 44px; display: flex; align-items: center; }
   .tested ul { margin: 6px 0 10px; padding-left: 20px; display: grid; gap: 6px; }
 
+  .seasons { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+  .seasons > div { border-top: 3px solid var(--yellow); padding-top: 12px; scroll-margin-top: 110px; }
+  .seasons h3 { font-family: var(--font-head); font-size: 1.2rem; margin-bottom: 6px; }
+  .seasons p { color: var(--ink-2); }
+  .seasons a { color: var(--yellow); }
+  @media (max-width: 760px) { .seasons { grid-template-columns: minmax(0, 1fr); } }
   .pp-price { font-family: var(--mono); font-weight: 600; color: var(--ink-2); margin: 0; }
   .fit { display: grid; gap: 20px; }
   .fit h3 { font-family: var(--font-head); font-size: 1.15rem; margin-bottom: 8px; }
