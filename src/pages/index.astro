@@ -217,21 +217,18 @@ const heroPhoneSrcset = heroPhoneSet.map((im, k) => `${im.src} ${[640, 960, 1170
         <h2 id="cmp-title" class="h2">The same patio, other options</h2>
         <p class="lede">Sunroom additions build a new room; we close in the patio you already have. Here is how the money compares. <a href="/compare/">Fair comparison, side by side</a></p>
       </div>
-      <CompareBars title="Typical totals for one example patio" />
+      <CompareBars title="Typical totals for one example patio" footnote="Sunroom ranges: HomeGuide cost guide (Oct 2026), per floor sq ft on 224 sq ft. Motorized screens: $40 to $45 per sq ft of opening, Houston market pricing. AE: our lowest installed prices on 240 sq ft of openings." />
       <div class="facts-row">
         <div>
           <span class="facts-label">The facts</span>
-          <table class="facts">
-            <caption>Every AE system</caption>
-            <tbody>
-              <tr><th scope="row">Mesh</th><td>Hexfold: honeycomb aluminum. Fixed Screen: 304 stainless steel.</td></tr>
-              <tr><th scope="row">Panels</th><td>Tinted polycarbonate, UV protected on both sides, hard coat. {FACTS.vlt} visible light, {FACTS.shgc} SHGC*</td></tr>
-              <tr><th scope="row">Frames</th><td>Heat-welded corners, aluminum core, ceramic coating. Night Gray or Bright White.</td></tr>
-              <tr><th scope="row">Track</th><td>3/8 in low profile, solid 304 stainless steel; wheelchairs and carts roll over it</td></tr>
-              <tr><th scope="row">Wind</th><td>Panel withstood {FACTS.wind} in our factory's wind tunnel test**</td></tr>
-              <tr><th scope="row">Warranty</th><td>Lifetime on the frame, 5 years on all parts</td></tr>
-            </tbody>
-          </table>
+          <ul class="specs" aria-label="Every AE system">
+            <li><span class="sp-l">Mesh</span><b>Metal</b><span>304 stainless steel or honeycomb aluminum</span></li>
+            <li><span class="sp-l">Panels</span><b>{FACTS.vlt}</b><span>visible light, {FACTS.shgc} SHGC, UV protected both sides*</span></li>
+            <li><span class="sp-l">Frames</span><b>Heat-welded</b><span>corners, aluminum core, ceramic coating</span></li>
+            <li><span class="sp-l">Track</span><b>3/8 in</b><span>solid 304 stainless steel; carts roll over it</span></li>
+            <li><span class="sp-l">Wind</span><b>{FACTS.wind}</b><span>panel held in our factory's wind tunnel test**</span></li>
+            <li><span class="sp-l">Warranty</span><b>Lifetime</b><span>on the frame, plus 5 years on all parts</span></li>
+          </ul>
           <p class="fine">*Smokey Gray 4 mm panel test. **Our Houston factory's in-house test (Beaufort 9); not a hurricane rating.</p>
         </div>
         <div class="finishes">
@@ -279,7 +276,7 @@ const heroPhoneSrcset = heroPhoneSet.map((im, k) => `${im.src} ${[640, 960, 1170
       </div>
       <ProjectMosaic />
       <p class="fine" style="margin-top:12px">Every photo here is a finished AE job. Most use our metal screen systems; the Sugar Land job adds polycarbonate Hybrid doors.</p>
-      {REVIEWS.length > 0 && <div id="reviews" style="margin-top:40px;scroll-margin-top:90px"><ReviewCards /></div>}
+      {REVIEWS.length > 1 && <div id="reviews" style="margin-top:40px;scroll-margin-top:90px"><ReviewCards items={REVIEWS.slice(1)} /></div>}
     </div>
   </section>
 
@@ -305,14 +302,17 @@ const heroPhoneSrcset = heroPhoneSet.map((im, k) => `${im.src} ${[640, 960, 1170
               <label class="opt"><input type="radio" name="sys" value={p.id} checked={p.id === defSys.id} /><span><b>{p.name}</b> <small><span class="k">{p.kind} · </span>${p.msrp} per sq ft of opening</small></span></label>
             ); })}
           </fieldset>
+          <details class="own-d">
+          <summary>Or enter your own openings <span class="opt-l">(optional)</span></summary>
           <fieldset class="own">
-            <legend>Or enter your own openings <span class="opt-l">(optional)</span></legend>
+            <legend class="sr-only">Your own openings</legend>
             <p class="own-hint">Add up the width of every open side, then the height. Example: two sides of 16 ft and 14 ft at 8 ft tall is 30 × 8.</p>
             <div class="own-row">
               <label>Total width (ft)<input type="number" id="own-w" inputmode="decimal" min="1" max="200" step="0.5" /></label>
               <label>Height (ft)<input type="number" id="own-h" inputmode="decimal" min="1" max="12" step="0.5" /></label>
             </div>
           </fieldset>
+          </details>
         </div>
         <div class="estimate" aria-live="polite">
           <p class="est-label" id="est-label">{defSys.name}, medium patio</p>
@@ -364,8 +364,7 @@ const heroPhoneSrcset = heroPhoneSet.map((im, k) => `${im.src} ${[640, 960, 1170
         <h2 id="show-title" class="h2">See every system in person</h2>
         <p class="lede">Our showroom is at {SITE.street}, {SITE.city}, {SITE.region} {SITE.zip}, next to the factory. Open 9 am to 5 pm, 7 days a week, by appointment. Customer parking on site.</p>
         <ul class="support">
-          <li><b>Warranty</b><span>{WARRANTY}, for the original owner while they own the home. Ask for the written terms at your visit.</span></li>
-          <li><b>Aftercare</b><span>AE Factory Sales coordinates customer assistance and aftercare through the Houston factory.</span></li>
+          <li><b>Warranty</b><span>{WARRANTY}, for the original owner, with service through our Houston factory. Written terms at your visit.</span></li>
           <li><b>HOA</b><span>We provide drawings and specifications when your HOA needs them. Approval is up to your HOA.</span></li>
         </ul>
         <div class="actions"><a class="btn" href="#book">Book free design visit</a><a class="btn btn-line" href="/showroom/">Address and directions</a></div>
@@ -382,7 +381,7 @@ const heroPhoneSrcset = heroPhoneSet.map((im, k) => `${im.src} ${[640, 960, 1170
       </div>
       <div class="stack-lg">
         <h3 class="h3">Serving greater Houston</h3>
-        <ul class="cities">{CITIES.map((c) => <li>{CITY_PAGES[c] ? <a href={CITY_PAGES[c]}>{c}</a> : c}</li>)}</ul>
+        <ul class="cities">{CITIES.map((c) => <li>{CITY_PAGES[c] ? <a href={CITY_PAGES[c]}>{c}</a> : c}</li>)}<li class="c-more"><a href="/service-area/">+{CITIES.length - 8} more areas</a></li></ul>
         <p class="muted"><a href="/service-area/">See our service area</a> · <a href="/showroom/">Visit the showroom</a></p>
         <a class="btn btn-big" href="#book">Book free design visit</a>
       </div>
@@ -626,7 +625,7 @@ const heroPhoneSrcset = heroPhoneSet.map((im, k) => `${im.src} ${[640, 960, 1170
     .picker fieldset:first-child .opt { flex-direction: column; gap: 4px; padding: 10px; }
     .picker fieldset:first-child .opt small { display: none; }
     .opt { padding: 10px 12px; }
-    .picker fieldset:last-child .opt small .k { display: none; }
+    .picker-opts > fieldset:nth-of-type(2) .opt small .k { display: none; }
     .pics figcaption { font-size: .7rem; padding: 14px 6px 5px; }
     .why-cap { font-size: .7rem; }
     .why-tag { font-size: .8rem; }
@@ -677,6 +676,18 @@ const heroPhoneSrcset = heroPhoneSet.map((im, k) => `${im.src} ${[640, 960, 1170
   .fold-grid { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 64px); align-items: center; }
   .fold-video { margin: 0; justify-self: center; }
   .fold-video video { aspect-ratio: 9 / 16; max-height: 560px; width: auto; max-width: 100%; display: block; background: var(--honey); }
+  .specs { list-style: none; margin: 12px 0 10px; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .specs li { background: #fff; border: 1px solid var(--paper-line); border-radius: 10px; padding: 12px 14px; display: grid; gap: 2px; align-content: start; }
+  .specs .sp-l { font-family: var(--mono); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--paper-2); }
+  .specs b { font-family: var(--font-head); font-weight: 800; font-size: 1.35rem; line-height: 1.15; color: var(--paper-ink); }
+  .specs li > span:last-child { font-size: .88rem; line-height: 1.4; color: var(--paper-2); }
+  .own-d { border-top: 1px solid var(--paper-line); padding-top: 12px; }
+  .own-d summary { cursor: pointer; font-weight: 700; font-size: 1.05rem; color: var(--paper-ink); min-height: 44px; display: flex; align-items: center; gap: 8px; list-style: none; }
+  .own-d summary::-webkit-details-marker { display: none; }
+  .own-d summary::before { content: "+"; display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--yellow); color: #1f1b18; font-weight: 800; }
+  .own-d[open] summary::before { content: "\2212"; }
+  .own-d .own { margin-top: 8px; }
+  .c-more { display: none; }
   .fold-facts { margin: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; max-width: 520px; }
   .fold-facts div { border-left: 3px solid var(--yellow); padding-left: 12px; }
   .fold-facts dt { font-family: var(--font-head); font-weight: 800; font-size: 2.2rem; line-height: 1; color: var(--yellow); }
@@ -734,8 +745,20 @@ const heroPhoneSrcset = heroPhoneSet.map((im, k) => `${im.src} ${[640, 960, 1170
     .quote-band { padding-block: 8px 20px; }
     .fin-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px; }
     .fin-grid figure { flex: 0 0 62%; scroll-snap-align: start; }
-    .own-hint { display: none; }
-    .facts .fine { font-size: .8rem; }
+    .facts-row .fine { font-size: .8rem; }
+    .specs li { padding: 10px 12px; }
+    .specs b { font-size: 1.15rem; }
+    .specs li > span:last-child { font-size: .8rem; }
+    .fold-video video { max-height: 420px; }
+    .fold-facts dt { font-size: 1.8rem; }
+    .picker-opts > fieldset:nth-of-type(2) { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .picker-opts > fieldset:nth-of-type(2) legend { grid-column: 1 / -1; }
+    .picker-opts > fieldset:nth-of-type(2) .opt { padding: 10px; gap: 8px; }
+    .picker-opts > fieldset:nth-of-type(2) .opt b { font-size: 1rem; }
+    .picker-opts > fieldset:nth-of-type(2) .opt small { font-size: .82rem; }
+    .cities li:nth-child(n+9):not(.c-more) { display: none; }
+    .c-more { display: block; }
+    .c-more a { color: var(--yellow) !important; }
   }
 </style>
 
