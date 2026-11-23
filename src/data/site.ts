@@ -86,7 +86,7 @@ export const PRODUCTS: Product[] = [
     href: '/patio-enclosures/clearfold/',
     specs: [
       ['Panel', 'Polycarbonate sunshade panel, about half the thickness of Clearfixed, UV protected on both sides with a hard coat'],
-      ['Hardware', 'High-end handle; water stop included; ramp included when the opening is wide enough, otherwise quoted at the visit'],
+      ['Hardware', 'High-end handle; water stop included; low 3/8 in track and ramp included on openings 16 ft and wider; on narrower openings it is an add-on, quoted at the visit'],
       ['Opening', 'Up to 5 ft per pull, 10 ft meeting in the middle'],
       ['Storms', 'Fold away and secure before storms; a panel withstood 50 mph in our factory wind tunnel test'],
     ],
@@ -134,7 +134,7 @@ export const PRODUCTS: Product[] = [
     href: '/patio-enclosures/hybrid/',
     specs: [
       ['Panel', 'Polycarbonate sunshade panel and honeycomb aluminum mesh'],
-      ['Hardware', 'High-end handle; water stop included; ramp included when the opening is wide enough, otherwise quoted at the visit'],
+      ['Hardware', 'High-end handle; water stop included; low 3/8 in track and ramp included on openings 16 ft and wider; on narrower openings it is an add-on, quoted at the visit'],
       ['Opening', 'Up to 9.8 ft per side; up to 19.7 ft wide × 11.5 ft tall meeting in the middle'],
     ],
   },
@@ -335,7 +335,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Can a wheelchair roll over the track?',
-      a: 'Yes. The bottom track is a 3/8 in low profile machined from solid 304 stainless steel, low enough for wheelchairs, walkers, strollers and carts to roll over. A ramp is included when the opening is wide enough. We do not claim ADA compliance; we check access with you at the design visit.',
+      a: 'Yes, with our low track. It is a 3/8 in profile machined from solid 304 stainless steel, under the 1/2 in threshold height allowed in the ADA standards, so wheelchairs, walkers, strollers and carts roll over it. It comes standard, with a ramp, on openings 16 ft and wider. On narrower openings it is an add-on, quoted at your design visit; without it the track sits a little higher. We check access with you at the visit.',
     },
     {
       q: 'Can I see it in person?',
