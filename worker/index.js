@@ -57,9 +57,12 @@ const json = (data, status = 200) => new Response(JSON.stringify(data), {
 async function findOpening(request, env) {
   if (request.method === 'GET') return json({ enabled: !!env.ANTHROPIC_API_KEY });
   if (request.method !== 'POST') return json({ error: 'Use POST.' }, 405);
-  // Only the AE site may call this.
+  // Only the AE site may call this. Browsers always send Origin on a POST, so a missing one means a script.
   const origin = request.headers.get('origin') || '';
-  if (origin && !/^https:\/\/(www\.)?aefactorysales\.com$/.test(origin)) return json({ error: 'Not allowed.' }, 403);
+  if (!/^https:\/\/(www\.)?aefactorysales\.com$/.test(origin) && !(env.DEV_ORIGIN && origin === env.DEV_ORIGIN)) return json({ error: 'Not allowed.' }, 403);
+  const site = request.headers.get('sec-fetch-site');
+  if (site && site !== 'same-origin') return json({ error: 'Not allowed.' }, 403);
+  if (!(request.headers.get('content-type') || '').toLowerCase().startsWith('application/json')) return json({ error: 'Bad request.' }, 415);
   if (!env.ANTHROPIC_API_KEY) return json({ error: 'Photo reading is not set up yet.' }, 503);
   // Per-visitor limit (Cloudflare rate limiting binding), so the endpoint can't run up the bill.
   if (env.FIND_LIMIT) {
@@ -67,13 +70,31 @@ async function findOpening(request, env) {
     const { success } = await env.FIND_LIMIT.limit({ key: ip });
     if (!success) return json({ error: 'Too many photos in a short time. Please wait a minute.' }, 429);
   }
+  // Site-wide ceiling as well, so many addresses at once still can't run up the bill.
+  if (env.FIND_GLOBAL) {
+    const { success } = await env.FIND_GLOBAL.limit({ key: 'all' });
+    if (!success) return json({ error: 'The photo reader is busy. Please try again in a minute, or drag the corners yourself.' }, 429);
+  }
   const len = Number(request.headers.get('content-length') || 0);
   if (len > MAX_BODY) return json({ error: 'That photo is too large.' }, 413);
+  // Read the body with a hard cap, even when no content-length was sent.
+  let text = '';
+  try {
+    const reader = request.body.getReader(); const dec = new TextDecoder(); let size = 0;
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > MAX_BODY) { await reader.cancel(); return json({ error: 'That photo is too large.' }, 413); }
+      text += dec.decode(value, { stream: true });
+    }
+    text += dec.decode();
+  } catch { return json({ error: 'Bad request.' }, 400); }
   let body;
-  try { body = await request.json(); } catch { return json({ error: 'Bad request.' }, 400); }
+  try { body = JSON.parse(text); } catch { return json({ error: 'Bad request.' }, 400); }
   const { image, width, height } = body || {};
   const w = Math.round(Number(width)), h = Math.round(Number(height));
-  if (typeof image !== 'string' || image.length > MAX_BODY || !/^[A-Za-z0-9+/=]+$/.test(image)) return json({ error: 'Bad photo.' }, 400);
+  if (typeof image !== 'string' || image.length > MAX_BODY || !/^[A-Za-z0-9+/=]+$/.test(image) || !image.startsWith('/9j/')) return json({ error: 'Bad photo.' }, 400);
   if (!(w >= 64 && w <= 2048 && h >= 64 && h <= 2048)) return json({ error: 'Bad photo size.' }, 400);
 
   const r = await fetch('https://api.anthropic.com/v1/messages', {

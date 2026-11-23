@@ -12,7 +12,9 @@
   },
   // Per-visitor limit for the photo reader: 6 photos a minute.
   "ratelimits": [
-    { "name": "FIND_LIMIT", "namespace_id": "4801", "simple": { "limit": 6, "period": 60 } }
+    { "name": "FIND_LIMIT", "namespace_id": "4801", "simple": { "limit": 6, "period": 60 } },
+    // Site-wide ceiling for the photo reader: 40 photos a minute across all visitors.
+    { "name": "FIND_GLOBAL", "namespace_id": "4802", "simple": { "limit": 40, "period": 60 } }
   ],
   "observability": { "enabled": true }
   // Secret (set in the Cloudflare dashboard, never in this file): ANTHROPIC_API_KEY
