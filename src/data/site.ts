@@ -335,7 +335,7 @@ export const FAQ: Record<string, QA[]> = {
     },
     {
       q: 'Can a wheelchair roll over the track?',
-      a: 'Yes, with our low track. It is a 3/8 in profile machined from solid 304 stainless steel, under the 1/2 in threshold height allowed in the ADA standards, so wheelchairs, walkers, strollers and carts roll over it. It comes standard, with a ramp, on openings 16.5 ft and wider. On narrower openings it is an add-on, quoted at your design visit; without it the track sits a little higher. We check access with you at the visit.',
+      a: 'Yes, with our low track. It is a 3/8 in profile machined from solid 304 stainless steel, under the 1/2 in threshold height allowed in the ADA standards, so wheelchairs, walkers, strollers and carts roll over it. It comes standard, with a ramp, on openings 16.5 ft and wider. On narrower openings it is an add-on, quoted at your design visit; without it the standard track is 5/8 in tall. We check access with you at the visit.',
     },
     {
       q: 'Can I see it in person?',
