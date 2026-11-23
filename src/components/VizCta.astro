@@ -1,7 +1,11 @@
 ---
 // "See it on your patio" band. Links to the patio visualizer, preset to one system when given.
 import { Image } from 'astro:assets';
-import vizShot from '../assets/renders/visualizer-sample.jpg';
+import vizHex from '../assets/renders/visualizer-sample.jpg';
+import vizFixed from '../assets/renders/visualizer-sample-fixed.jpg';
+import vizClearfixed from '../assets/renders/visualizer-sample-clearfixed.jpg';
+import vizClearfold from '../assets/renders/visualizer-sample-clearfold.jpg';
+import vizHybrid from '../assets/renders/visualizer-sample-hybrid.jpg';
 interface Props {
   sys?: 'hexfold' | 'fixed' | 'clearfixed' | 'clearfold' | 'hybrid';
   name?: string;
@@ -12,14 +16,16 @@ interface Props {
   book?: boolean;
 }
 const { sys, name, title, text, band = 'band on-paper', id = 'see-it', book = true } = Astro.props;
+const shots = { hexfold: [vizHex, 'Hexfold screens'], fixed: [vizFixed, 'Fixed Screen panels'], clearfixed: [vizClearfixed, 'Clearfixed panels'], clearfold: [vizClearfold, 'Clearfold panels'], hybrid: [vizHybrid, 'the Hybrid'] } as const;
+const [vizShot, vizWhat] = shots[sys ?? 'hexfold'];
 const href = sys ? `/patio-visualizer/?sys=${sys}` : '/patio-visualizer/';
 const heading = title ?? (name ? `See ${name} on your patio` : 'See it on your patio');
-const body = text ?? `Take a photo of your patio, drag four corners onto an opening and see ${name ?? 'every AE system'} in Night Gray or Bright White, with a rough installed price. About a minute, right on your phone.`;
+const body = text ?? `Snap your patio, drag four corners onto an opening and see ${name ?? 'any AE system'} in your colors, with a rough price.`;
 ---
 <section class={`${band} vizcta`} id={id} aria-labelledby={`${id}-title`}>
   <div class="wrap vc-grid">
     <a href={href} class="vc-shot" tabindex="-1" aria-hidden="true">
-      <Image src={vizShot} widths={[360, 640, 900]} sizes="(max-width: 760px) 100vw, 420px" alt="Visualizer preview: Hexfold screens drawn onto a photo of a brick patio" loading="lazy" />
+      <Image src={vizShot} widths={[360, 640, 900]} sizes="(max-width: 760px) 100vw, 420px" alt={`Visualizer preview: ${vizWhat} drawn onto a photo of a brick patio`} loading="lazy" />
       <span class="vc-badge">Visualizer preview</span>
     </a>
     <div class="stack">
@@ -27,7 +33,7 @@ const body = text ?? `Take a photo of your patio, drag four corners onto an open
       <h2 id={`${id}-title`} class="h2">{heading}</h2>
       <p class="lede">{body}</p>
       <div class="actions"><a class="btn" href={href}>See it on my patio</a>{book && <a class="btn btn-line" href="/book-visit/">Book free design visit</a>}</div>
-      <p class="fine">Approximate visualization. Final layout confirmed after we measure at the free design visit.</p>
+      <p class="fine">A preview. We confirm the layout when we measure.</p>
     </div>
   </div>
 </section>

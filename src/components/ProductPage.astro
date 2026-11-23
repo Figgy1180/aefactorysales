@@ -1,29 +1,32 @@
 ---
-// One page per polycarbonate system (Clearfixed, Clearfold, Hybrid). All facts come from src/data/site.ts.
+// One page per polycarbonate system (Clearfixed, Clearfold, Hybrid). Simplified Nov 23 2026 (preview):
+// hero, how it moves, see it on your patio, facts + fit, the three side by side, 4 FAQs, real patios, booking.
+// All facts come from src/data/site.ts.
 import { Image } from 'astro:assets';
 import VizCta from './VizCta.astro';
 import type { ImageMetadata } from 'astro';
 import Base from '../layouts/Base.astro';
 import PageHero from './PageHero.astro';
 import Faq from './Faq.astro';
-import QuoteForm from './QuoteForm.astro';
+import QuickBook from './QuickBook.astro';
 import RelatedLinks from './RelatedLinks.astro';
 import DemoSection from './DemoSection.astro';
-import { FAQ, FACTS, SITE, SIZES, WARRANTY, byId, range, type QA } from '../data/site';
+import { FACTS, SITE, SIZES, byId, range, type QA } from '../data/site';
 interface Props {
   id: 'clearfixed' | 'clearfold' | 'hybrid';
   title: string; description: string; h1: [string, string];
   img: ImageMetadata; alt: string; caption: string;
-  points: [string, string][]; faq: QA[];
+  fit: string[]; notFor?: string[]; faq: QA[];
 }
-const { id, title, description, h1, img, alt, caption, points, faq } = Astro.props;
+const { id, title, description, h1, img, alt, caption, fit, faq } = Astro.props;
+const notFor = Astro.props.notFor ?? ['An insulated or air-conditioned room', 'A storm or hurricane shelter'];
 const p = byId(id);
 const trio = ['clearfixed', 'clearfold', 'hybrid'].map(byId);
-const moves = { clearfixed: 'Stays in place', clearfold: 'Folds open on our track', hybrid: 'Folds open on our track' } as Record<string, string>;
+const moves = { clearfixed: 'Stays in place', clearfold: 'Folds by hand', hybrid: 'Folds by hand' } as Record<string, string>;
 const how: Record<string, { lede: string; points: string[] }> = {
-  clearfixed: { lede: 'Tinted polycarbonate panels sit in a welded frame in the opening. Nothing moves, so there is nothing to open, close or adjust.', points: ['Smokey Gray or Industrial Blue tint', 'Cut into arches and angles to fill gables', `Panel withstood ${FACTS.wind} in our factory wind tunnel test`] },
-  clearfold: { lede: 'Equal-width polycarbonate leaves hang from the top track and fold like a fan into a stack at the end, by hand.', points: ['Opens by hand, even in a power outage', 'Up to 5 ft per pull, 10 ft meeting in the middle', 'Handle on the moving edge; a bottom guide keeps every leaf in line'] },
-  hybrid: { lede: 'A polycarbonate layer and a honeycomb aluminum mesh layer share the same opening. Each can cover all of it, and each folds back to its own end.', points: ['Run the mesh with the panels folded away', 'Close the panels with the mesh folded away', 'Fold both back for access; your design visit sets which openings fold'] },
+  clearfixed: { lede: 'Tinted panels sit in a welded frame. Nothing moves, so there is nothing to adjust.', points: ['Smokey Gray or Industrial Blue', 'Cut to arches and angles for gables', `Withstood ${FACTS.wind} in our factory wind tunnel`] },
+  clearfold: { lede: 'Equal-width leaves hang from the top track and fold into a stack at the end, by hand.', points: ['Works in a power outage', 'Up to 5 ft per pull, 10 ft meeting in the middle', 'A bottom guide keeps every leaf in line'] },
+  hybrid: { lede: 'A panel layer and a mesh layer share one opening. Each covers all of it and folds back to its own end.', points: ['Mesh only, for the breeze', 'Panels only, for wind and rain', 'Both folded back, for open access'] },
 };
 const crumbs = [{ name: 'Patio enclosures', href: '/patio-enclosures/' }, { name: p.name, href: p.href }];
 const product = {
@@ -38,6 +41,7 @@ const product = {
     priceSpecification: { '@type': 'UnitPriceSpecification', price: p.msrp, priceCurrency: 'USD', unitText: 'square foot of opening, installed' },
   },
 };
+const medium = SIZES[1];
 ---
 <Base title={title} description={description} crumbs={crumbs} schema={[product]} image={img}>
   <PageHero crumbs={crumbs}>
@@ -45,7 +49,8 @@ const product = {
       <div class="stack-lg">
         <h1 class="display">{h1[0]} <span class="y">{h1[1]}</span></h1>
         <p class="sub">{p.blurb}</p>
-        <div class="actions"><a class="btn" href="/book-visit/">Book free design visit</a><a class="btn btn-line" href={`/patio-visualizer/?sys=${id}`}>See it on my patio</a></div>
+        <p class="pp-price">From ${p.msrp} per sq ft of opening, installed</p>
+        <div class="actions"><a class="btn" href={`/patio-visualizer/?sys=${id}`}>See it on my patio</a><a class="btn btn-line" href="#book">Book free design visit</a></div>
       </div>
       <figure class="dim-frame draw" style="margin:30px 30px 0 0">
         <span class="dim h" aria-hidden="true"><span>{p.name}</span></span>
@@ -56,14 +61,14 @@ const product = {
   </PageHero>
 
   <DemoSection sys={id} name={p.name} lede={how[id].lede} points={how[id].points} />
-  <VizCta sys={id} name={p.name} />
+  <VizCta sys={id} name={p.name} book={false} />
 
   {id === 'hybrid' && (
     <section class="band" aria-labelledby="real-hybrid">
       <div class="wrap split">
         <div class="stack">
-          <h2 id="real-hybrid" class="h2">On a real patio <span class="y">in Sugar Land</span></h2>
-          <p class="lede">Blue-tinted polycarbonate Hybrid doors at the corner of a wraparound patio, with folding screens on the long sides. Opened and closed by hand.</p>
+          <h2 id="real-hybrid" class="h2">Installed <span class="y">in Sugar Land</span></h2>
+          <p class="lede">Blue-tinted Hybrid doors at the corner of a wraparound patio, opened by hand.</p>
           <p><a href="/projects/sugar-land-patio-screens-polycarbonate-doors/">See the whole project</a></p>
         </div>
         <figure class="dim-frame video-frame">
@@ -74,88 +79,62 @@ const product = {
     </section>
   )}
 
-  <section class="band on-paper">
-    <div class="wrap stack-lg">
-      <h2 class="h2">Why choose <span class="y">{p.name}</span></h2>
-      <div class="pp-points">
-        {points.map(([t, d]) => <div><h3>{t}</h3><p>{d}</p></div>)}
-      </div>
-    </div>
-  </section>
-
   <section class="band raised" id="price">
     <div class="wrap split" style="align-items:start">
       <div>
-        <span class="facts-label">The facts</span>
+        <h2 class="h2" style="margin-bottom:14px">The facts</h2>
         <table class="facts">
-          <caption>{p.name}</caption>
+          <caption class="sr-only">{p.name} facts</caption>
           <tbody>
             {p.specs.map(([k, v]) => <tr><th scope="row">{k}</th><td>{v}</td></tr>)}
-            <tr><th scope="row">Price</th><td>From ${p.msrp} per sq ft of opening, installed, before sales tax. Accessories quoted for your project.</td></tr>
-            <tr><th scope="row">Typical patio</th><td class="tnum">{SIZES.map((s) => `${s.name} ${range(p.msrp, s.low, s.high)}`).join('; ')}</td></tr>
+            <tr><th scope="row">Price</th><td>${p.msrp}/sq ft of opening, installed, before tax. {medium.name} patio: <span class="tnum">{range(p.msrp, medium.low, medium.high)}</span></td></tr>
             <tr><th scope="row">Frame colors</th><td>Night Gray or Bright White</td></tr>
-            <tr><th scope="row">Install</th><td>Within a month of your order, by our own crew</td></tr>
-            <tr><th scope="row">Warranty</th><td>{WARRANTY}</td></tr>
+            <tr><th scope="row">Warranty</th><td>Lifetime frame, 5 years on parts</td></tr>
           </tbody>
         </table>
-        <p class="fine">Wind figure from our Houston factory's in-house wind tunnel test; not a hurricane rating. <a href="/learn/#performance">Tested numbers</a></p>
-        <p class="fine" style="margin-top:10px">Sizes: {SIZES.map((s) => `${s.name.toLowerCase()} is ${s.eg.toLowerCase()}`).join('; ')}. We price the open wall area we fill, and your exact number comes from a free site visit.</p>
+        <p class="fine">Wind: our Houston factory's in-house test, not a hurricane rating.</p>
+        <p class="others">Also: {trio.filter((t) => t.id !== id).map((t, i) => <>{i > 0 && ' · '}<a href={t.href}>{t.name}</a> ${t.msrp}, {moves[t.id].toLowerCase()}</>)} · <a href="/patio-screens/">Screens</a></p>
       </div>
-      <div class="stack">
-        <h2 class="h3">What a 3-season room is, and isn't</h2>
-        <p class="muted">It is shaded and sheltered, not insulated. Air conditioning is optional, and closed polycarbonate panels help hold cooled air in, so a portable or mini-split unit can make the room more comfortable on hot days. Without it, plan for airflow through folding or screened sections. Spring, fall and most of winter are when it shines.</p>
-        <p class="muted">Smokey Gray panels tested at {FACTS.vlt} visible light transmission and {FACTS.shgc} solar heat gain coefficient.</p>
+      <div class="fit">
+        <div><h3>Good fit</h3><ul class="ticks">{fit.map((f) => <li>{f}</li>)}</ul></div>
+        <div><h3>Not for</h3><ul class="crosses">{notFor.map((f) => <li>{f}</li>)}</ul></div>
+        <p class="muted">You can add AC, and closed panels help hold it in.</p>
       </div>
     </div>
   </section>
 
-  <section class="band">
-    <div class="wrap stack-lg">
-      <h2 class="h2">{p.name} next to <span class="y">the other two</span></h2>
-      <div class="table-wrap" tabindex="0" role="region" aria-label="Scrollable table">
-        <table class="tbl">
-          <thead><tr><th scope="col">System</th><th scope="col">What it is</th><th scope="col">Opens?</th><th scope="col">Installed price</th></tr></thead>
-          <tbody>
-            {trio.map((t) => (
-              <tr>
-                <th scope="row">{t.id === id ? t.name : <a href={t.href}>{t.name}</a>}</th>
-                <td class={t.id === id ? 'ours' : undefined}>{t.kind}</td>
-                <td class={t.id === id ? 'ours' : undefined}>{moves[t.id]}</td>
-                <td class={t.id === id ? 'ours' : undefined}>From ${t.msrp} per sq ft</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-      <p class="muted">Want screens instead of panels on some openings? Look at <a href="/patio-screens/hexfold/">Hexfold</a> folding screens or <a href="/patio-screens/fixed-screen/">Fixed Screen</a> in stainless steel. We mix systems opening by opening. See the whole family on the <a href="/patio-enclosures/three-season-rooms/">3-season rooms page</a>.</p>
-    </div>
-  </section>
 
   <section class="band on-paper">
     <div class="wrap split" style="align-items:start">
-      <h2 class="h2">{p.name} <span class="y">questions</span></h2>
-      <Faq items={faq} />
+      <h2 class="h2">Questions</h2>
+      <Faq items={faq.slice(0, 3)} />
     </div>
   </section>
 
-  <RelatedLinks match="any" title="Patios our crew has enclosed" />
+  <RelatedLinks match="any" title="Patios our crew has enclosed" links={false} />
 
-  <section class="band raised" id="quote">
+  <section class="band hive-dark" id="book">
     <div class="wrap split" style="align-items:start">
       <div class="stack">
-        <h2 class="h2">Get your <span class="y">exact price</span></h2>
-        <p class="lede">Free site visit. We measure every opening, bring tint samples and give you a number you can plan around.</p>
+        <h2 class="h2">Free <span class="y">design visit</span></h2>
+        <p class="lede">We measure every opening, bring tint samples and quote on site. Email follows within 24 hours.</p>
       </div>
-      <QuoteForm id={`${id}-visit`} source={`${p.name} page`} />
+      <div class="book-card"><QuickBook id={`${id}-visit`} source={`${p.name} page`} /></div>
     </div>
   </section>
 </Base>
 <style>
+  .others { margin-top: 14px; color: var(--ink-2); }
+  .others a { color: var(--yellow); font-weight: 600; }
+  .pp-price { font-family: var(--mono); font-weight: 600; color: var(--ink-2); margin: 0; }
   .video-frame video { aspect-ratio: 9 / 16; max-height: 560px; width: auto; max-width: 100%; margin-inline: auto; display: block; background: var(--honey); }
   .video-frame { justify-self: center; }
-  .pp-points { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
-  .pp-points > div { border-top: 2px solid var(--paper-ink); padding-top: 14px; min-width: 0; }
-  .pp-points h3 { font-weight: 800; font-stretch: 78%; font-size: 1.3rem; text-transform: uppercase; }
-  .pp-points p { color: var(--paper-2); margin-top: 6px; }
-  @media (max-width: 760px) { .pp-points { grid-template-columns: minmax(0, 1fr); } }
+  .fit { display: grid; gap: 20px; }
+  .fit h3 { font-family: var(--font-head); font-size: 1.15rem; margin-bottom: 8px; }
+  .ticks, .crosses { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .ticks li, .crosses li { position: relative; padding-left: 28px; }
+  .ticks li::before { content: ""; position: absolute; left: 2px; top: .4em; width: 14px; height: 8px; border-left: 2.5px solid var(--yellow); border-bottom: 2.5px solid var(--yellow); transform: rotate(-45deg); }
+  .crosses li::before { content: "\00D7"; position: absolute; left: 3px; top: -.15em; font-size: 1.3rem; font-weight: 700; color: var(--ink-2); }
+  .book-card { background: var(--honey-2); color: var(--ink); padding: 26px; border-radius: 12px; border: 1px solid rgba(251, 245, 236, .08); border-top: 3px solid var(--yellow); box-shadow: var(--shadow); }
+  .book-card :global(.fine) { color: var(--ink-2); }
 </style>

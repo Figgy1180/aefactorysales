@@ -85,10 +85,10 @@ export const PRODUCTS: Product[] = [
     msrp: 40,
     href: '/patio-enclosures/clearfold/',
     specs: [
-      ['Panel', 'Polycarbonate sunshade panel, about half the thickness of Clearfixed, UV protected on both sides with a hard coat'],
-      ['Hardware', 'High-end handle; water stop included; low 3/8 in track and ramp included on openings 16.5 ft and wider; on narrower openings it is an add-on, quoted at the visit'],
+      ['Panel', 'Tinted polycarbonate, about half as thick as Clearfixed, UV protected both sides'],
+      ['Hardware', 'Handle and water stop included; low 3/8 in track standard on openings 16.5 ft and wider'],
       ['Opening', 'Up to 5 ft per pull, 10 ft meeting in the middle'],
-      ['Storms', 'Fold away and secure before storms; a panel withstood 50 mph in our factory wind tunnel test'],
+      ['Storms', 'Fold away before storms; a panel withstood 50 mph in our factory wind tunnel'],
     ],
   },
   {
@@ -134,7 +134,7 @@ export const PRODUCTS: Product[] = [
     href: '/patio-enclosures/hybrid/',
     specs: [
       ['Panel', 'Polycarbonate sunshade panel and honeycomb aluminum mesh'],
-      ['Hardware', 'High-end handle; water stop included; low 3/8 in track and ramp included on openings 16.5 ft and wider; on narrower openings it is an add-on, quoted at the visit'],
+      ['Hardware', 'Handle and water stop included; low 3/8 in track standard on openings 16.5 ft and wider'],
       ['Opening', 'Up to 9.8 ft per side; up to 19.7 ft wide × 11.5 ft tall meeting in the middle'],
     ],
   },

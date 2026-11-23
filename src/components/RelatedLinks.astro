@@ -2,8 +2,8 @@
 // Cross-links for product pages: matching real projects, then garage screens, pricing and compare.
 import { Image } from 'astro:assets';
 import { PROJECTS, photos, altFor, fit } from '../data/projects';
-interface Props { match?: 'fold' | 'fixed' | 'any'; title?: string; skip?: string }
-const { match = 'any', title = 'See it on real Houston homes', skip } = Astro.props;
+interface Props { match?: 'fold' | 'fixed' | 'any'; title?: string; skip?: string; links?: boolean }
+const { match = 'any', title = 'See it on real Houston homes', skip, links = true } = Astro.props;
 const want = match === 'fold' ? 'Aluminum folding screens' : match === 'fixed' ? 'Fixed steel mesh' : null;
 const hits = PROJECTS.filter((p) => photos(p).length && (!want || p.systems.includes(want)));
 // Fixed Screen has few projects, so fill up with the others to always show three.
@@ -26,9 +26,9 @@ const more = [
         </a>
       ); })}
     </div>
-    <ul class="rel-more">
+    {links && <ul class="rel-more">
       {more.map((m) => <li><a href={m.href}>{m.t}</a><span>{m.d}</span></li>)}
-    </ul>
+    </ul>}
   </div>
 </section>
 <style>

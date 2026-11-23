@@ -2,15 +2,15 @@
 // Quick design-visit booking: name and phone required; ZIP, interest and best time optional.
 // Inline on the homepage. Confirms in place. The full form with address, sizes and notes is /book-visit/.
 import { SITE } from '../data/site';
-interface Props { id?: string }
-const { id = 'quick' } = Astro.props;
+interface Props { id?: string; source?: string }
+const { id = 'quick', source = 'Homepage quick booking' } = Astro.props;
 const CONSENT = 'By sending this, you agree AE Factory Sales may call, text or email you about your request. Message and data rates may apply. We never sell your information.';
 ---
 <div class="qb">
 <form class="form quote-form qb-form" id={id} data-key={SITE.formKey} data-inline="1" data-invalid="Please add your name and a phone number we can call." novalidate>
   <input type="hidden" name="subject" value="Design visit request (quick)" />
   <input type="hidden" name="from_name" value="AE website" />
-  <input type="hidden" name="lead_source" value="Homepage quick booking" />
+  <input type="hidden" name="lead_source" value={source} />
   <input type="hidden" name="consent_text" value={CONSENT} />
   <label class="hp" aria-hidden="true">Leave this empty <input type="checkbox" name="botcheck" tabindex="-1" /></label>
   <fieldset class="qb-pick">
