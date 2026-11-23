@@ -12,7 +12,7 @@ export default defineConfig({
   integrations: [
     sitemap({
       lastmod: new Date(),
-      filter: (page) => !/\/(thank-you|dealers\/thanks|reviews\/thanks|404|winter|every-season)\/?$/.test(page),
+      filter: (page) => !/\/(thank-you|dealers\/thanks|reviews\/thanks|404)\/?$/.test(page),
     }),
   ],
   image: { responsiveStyles: false },
