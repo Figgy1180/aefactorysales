@@ -48,13 +48,13 @@ const cards: Record<string, Card> = {
     a: { src: roomShowroom, alt: 'Folding Smokey Gray polycarbonate panels in the AE showroom', cap: 'In our Houston showroom' },
     b: { src: rClearfold, alt: 'Concept visualization of Clearfold folding polycarbonate panels', cap: 'Concept visualization' } },
   hybrid: { id: 'hybrid', sell: 'Panels and metal mesh on the same opening. Each can cover all of it, either can stop part way, and both fold back for an open passage.',
-    a: { src: pcDoors, alt: 'Blue-tinted polycarbonate Hybrid doors closed on a Sugar Land patio, installed by AE', cap: 'Real installation, Sugar Land' },
+    a: { src: pcDoors, alt: 'Blue-tinted polycarbonate Hybrid doors closed on a Sugar Land patio, installed by AE', cap: 'Installed in Sugar Land' },
     b: { src: hybridConcept, alt: 'Concept visualization of the Hybrid with the polycarbonate layer closed and the mesh folded at one end', cap: 'Concept visualization: panels closed' } },
   hexfold: { id: 'hexfold', sell: 'Pleated honeycomb aluminum mesh that folds away. Up to 20 ft wide with no posts.',
-    a: { src: hexClosed, alt: 'Brick Houston patio closed in with Hexfold folding screens', cap: 'Real installation, closed' },
-    b: { src: hexOpen, alt: 'The same patio with the Hexfold screens folded open', cap: 'Real installation, open' } },
+    a: { src: hexClosed, alt: 'Brick Houston patio closed in with Hexfold folding screens', cap: 'Installed in Houston' },
+    b: { src: hexOpen, alt: 'The same patio with the Hexfold screens folded open', cap: 'Same patio, open' } },
   fixed: { id: 'fixed', sell: '304 stainless steel mesh that stays in place, at our lowest starting price.',
-    a: { src: fixedDoors, alt: 'Fixed Screen panels with screen doors on a Houston patio', cap: 'Real installation' },
+    a: { src: fixedDoors, alt: 'Fixed Screen panels with screen doors on a Houston patio', cap: 'Installed in Houston' },
     b: { src: fixedColors, alt: 'Fixed Screen panels in Night Gray and Bright White frames', cap: 'Frame colors' } },
 };
 const choices = [
@@ -318,7 +318,6 @@ const heroPhoneSrcset = heroPhoneSet.map((im, k) => `${im.src} ${[640, 960, 1170
           <p class="est-label" id="est-label">{defSys.name}, medium patio</p>
           <p class="est-range tnum" id="est-range">{range(defSys.msrp, 200, 300)}</p>
           <p id="est-note" class="muted">200 to 300 sq ft of openings at ${defSys.msrp} {TAX}.</p>
-          <p class="unit">Prices are {TAX}.</p>
           <p class="fine">{EXTRAS}</p>
           <p class="fine">{LENDERS}</p>
           <div class="actions"><a class="btn" href="/free-quote/">Get my estimate now</a><a class="btn btn-line" href="#book">Book free design visit</a></div>
