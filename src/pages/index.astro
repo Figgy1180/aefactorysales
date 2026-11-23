@@ -177,7 +177,7 @@ const heroPhoneSrcset = heroPhoneSet.map((im, k) => `${im.src} ${[640, 960, 1170
     <section class="band-tight quote-band" aria-label="Customer feedback">
       <div class="wrap">
         <figure class="h-quote">
-          <blockquote>“{topReview.text.split('. ').slice(0, 2).join('. ')}.”</blockquote>
+          <blockquote>“{topReview.text.split('. ').length > 2 ? topReview.text.split('. ').slice(0, 2).join('. ') + '. …' : topReview.text}”</blockquote>
           <figcaption>{topReview.name}, {topReview.city} · <a href="#reviews">More from our customers</a> · Call <a href={SITE.phoneHref}>{SITE.phone}</a></figcaption>
         </figure>
       </div>
