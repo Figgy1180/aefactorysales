@@ -24,9 +24,11 @@ const product = {
   brand: { '@type': 'Brand', name: 'AE Factory Sales' },
   manufacturer: { '@id': `${SITE.url}/#business` },
   description: 'Fixed patio screen panels with 304 stainless steel mesh in a heat-welded frame: PVC-fiber blend with an aluminum core and ceramic coating. Panels up to 4 × 11.5 ft, arches and angles available, pet doors available.',
+  image: new URL(doorsClosed.src, SITE.url).href,
+  url: `${SITE.url}/patio-screens/fixed-screen/`,
   material: '304 stainless steel mesh, heat-welded PVC-fiber frame with aluminum core and ceramic coating',
   offers: {
-    '@type': 'Offer', priceCurrency: 'USD', availability: 'https://schema.org/InStock', seller: { '@id': `${SITE.url}/#business` },
+    '@type': 'Offer', price: fx.msrp, priceCurrency: 'USD', availability: 'https://schema.org/InStock', seller: { '@id': `${SITE.url}/#business` },
     priceSpecification: { '@type': 'UnitPriceSpecification', price: fx.msrp, priceCurrency: 'USD', unitText: 'square foot of opening, installed' },
   },
 };

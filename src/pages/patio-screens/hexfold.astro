@@ -23,9 +23,12 @@ const product = {
   brand: { '@type': 'Brand', name: 'AE Factory Sales' },
   manufacturer: { '@id': `${SITE.url}/#business` },
   description: 'Retractable folding patio screen with honeycomb aluminum mesh (about 115 holes per sq in), heat-welded PVC-fiber frame with aluminum core and ceramic coating, and stainless steel wheels. Hung from the top track, opened by hand, no motor. Up to 10 × 10 ft per pull or 20 ft wide meeting in the middle.',
+  image: new URL(closed.src, SITE.url).href,
+  url: `${SITE.url}/patio-screens/hexfold/`,
   material: 'Honeycomb aluminum mesh, PVC-fiber frame with aluminum core and ceramic coating, stainless steel wheels',
   offers: {
     '@type': 'Offer',
+    price: hx.msrp,
     priceCurrency: 'USD',
     availability: 'https://schema.org/InStock',
     seller: { '@id': `${SITE.url}/#business` },

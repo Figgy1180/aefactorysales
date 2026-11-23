@@ -34,7 +34,7 @@ const product = {
   description: p.blurb,
   image: new URL(img.src, SITE.url).href,
   offers: {
-    '@type': 'Offer', priceCurrency: 'USD', availability: 'https://schema.org/InStock', seller: { '@id': `${SITE.url}/#business` },
+    '@type': 'Offer', price: p.msrp, priceCurrency: 'USD', availability: 'https://schema.org/InStock', seller: { '@id': `${SITE.url}/#business` },
     priceSpecification: { '@type': 'UnitPriceSpecification', price: p.msrp, priceCurrency: 'USD', unitText: 'square foot of opening, installed' },
   },
 };
