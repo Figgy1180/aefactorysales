@@ -15,18 +15,18 @@ const fold = 'Aluminum folding screens', fixed = 'Fixed steel mesh';
 export const PROJECTS: Project[] = [
   {
     id: 'p37', slug: 'sugar-land-patio-screens-polycarbonate-doors', title: 'Screens and polycarbonate doors', city: 'Sugar Land', kind: 'Patio',
-    systems: [fold, 'Blue-tinted polycarbonate Hybrid doors'],
-    note: 'A wraparound covered patio closed in with folding aluminum screens on the long sides and a pair of blue-tinted polycarbonate Hybrid doors that open in the middle. Everything opens and closes by hand.',
+    systems: ['Fixed Screen, 304 stainless steel mesh', 'Clearfold doors, Industrial Blue polycarbonate'],
+    note: 'A wraparound covered patio closed in with Fixed Screen panels in 304 stainless steel mesh on the long sides and a pair of Clearfold doors in Industrial Blue polycarbonate that open in the middle. The doors open and close by hand.',
     img: '', source: '',
     captions: {
-      '1-outside-doors': 'Folding screens on the long side, polycarbonate doors at the corner',
+      '1-outside-doors': 'Fixed screens on the long side, Clearfold doors at the corner',
       '2-outside-screens': 'Both screened bays, seen from the pool deck',
-      '3-inside-doors-closed': 'From inside, polycarbonate doors closed',
-      '4-inside-doors-open': 'Same view, doors opened by hand',
-      '5-inside-screens': 'Folding screens closed, seen from inside',
+      '3-inside-doors-closed': 'From inside, Clearfold doors closed',
+      '4-inside-doors-open': 'Same view, doors folded open by hand',
+      '5-inside-screens': 'Fixed screens, seen from inside',
     },
     openClosed: ['3-inside-doors-closed', '4-inside-doors-open'],
-    facts: [['Screens', 'Folding aluminum mesh, meeting in the middle'], ['Doors', 'Polycarbonate Hybrid doors, blue tint'], ['Operation', 'By hand, no motors'], ['Built', 'In our Houston factory, installed by our crew']],
+    facts: [['Screens', 'Fixed Screen, 304 stainless steel mesh'], ['Doors', 'Clearfold, Industrial Blue polycarbonate'], ['Operation', 'Doors fold by hand, no motors'], ['Built', 'In our Houston factory, installed by our crew']],
   },
   {
     id: 'p35', slug: 'houston-20-ft-patio-enclosure', title: '20 ft wide patio enclosure', city: 'Houston', kind: 'Patio',

@@ -27,8 +27,8 @@ const ld = {
   image: ph.map((x) => new URL(x.img.src, SITE.url).href),
 };
 const rv = REVIEWS.filter((r) => r.project === p.id);
-const vizSys = p.systems.some((x) => /hybrid/i.test(x)) ? 'hybrid' : p.systems.some((x) => /folding/i.test(x)) ? 'hexfold' : 'fixed';
-const vizName = { hybrid: 'the Hybrid', hexfold: 'Hexfold folding screens', fixed: 'Fixed Screen' }[vizSys];
+const vizSys = p.systems.some((x) => /hybrid/i.test(x)) ? 'hybrid' : p.systems.some((x) => /clearfold/i.test(x)) ? 'clearfold' : p.systems.some((x) => /folding/i.test(x)) ? 'hexfold' : 'fixed';
+const vizName = { hybrid: 'the Hybrid', clearfold: 'Clearfold', hexfold: 'Hexfold folding screens', fixed: 'Fixed Screen' }[vizSys];
 ---
 <Base
   title={`${p.city} ${p.title} | AE Projects`}

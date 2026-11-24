@@ -12,7 +12,7 @@ import { PRODUCTS, SIZES, SITE, byId, range, type QA } from '../data/site';
 import vizShot from '../assets/renders/visualizer-sample.jpg';
 import vizBefore from '../assets/renders/visualizer-sample-before.jpg';
 import clearfixedPhoto from '../assets/photos/clearfixed-polycarbonate-panels.jpg';
-import roomShowroom from '../assets/photos/showroom-polycarbonate-smoke.jpg';
+import hybridRender from '../assets/renders/hybrid-concept.jpg';
 import pcDoors from '../assets/projects/p37/3-inside-doors-closed.jpg';
 import hexClosed from '../assets/photos/hexfold-patio-closed.jpg';
 import fixedDoors from '../assets/photos/fixed-screen-doors-closed.jpg';
@@ -22,8 +22,8 @@ const short = (t: string) => (t.split('. ').length > 2 ? t.split('. ').slice(0, 
 
 const systems = [
   { id: 'clearfixed', tag: '3-season room', line: 'Fixed tinted panels for wind, rain and cool days.', img: clearfixedPhoto, alt: 'Clearfixed tinted polycarbonate panels', cap: 'Clearfixed panels' },
-  { id: 'clearfold', tag: '3-season room', line: 'Tinted panels that fold away on nice days.', img: roomShowroom, alt: 'Folding Smokey Gray polycarbonate panels in the AE showroom', cap: 'In our showroom' },
-  { id: 'hybrid', tag: 'Both', line: 'Panels and mesh on one opening. Pick either, any day.', img: pcDoors, alt: 'Blue-tinted polycarbonate Hybrid doors on a Sugar Land patio, installed by AE', cap: 'Installed in Sugar Land' },
+  { id: 'clearfold', tag: '3-season room', line: 'Tinted panels that fold away on nice days.', img: pcDoors, alt: 'Clearfold doors in Industrial Blue polycarbonate on a Sugar Land patio, installed by AE', cap: 'Installed in Sugar Land' },
+  { id: 'hybrid', tag: 'Both', line: 'Panels and mesh on one opening. Pick either, any day.', img: hybridRender, alt: 'Render of an AE Hybrid enclosure with polycarbonate panels and mesh on one opening', cap: 'Render' },
   { id: 'hexfold', tag: 'Screens', line: 'Aluminum mesh that folds away. Up to 20 ft, no posts.', img: hexClosed, alt: 'Brick Houston patio closed in with Hexfold folding screens', cap: 'Installed in Houston' },
   { id: 'fixed', tag: 'Screens', line: '304 stainless mesh comes standard. Our lowest price.', img: fixedDoors, alt: 'Fixed Screen panels with screen doors on a Houston patio', cap: 'Installed in Houston' },
 ];
