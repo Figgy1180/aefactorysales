@@ -24,7 +24,7 @@ const canonical = new URL(path, SITE.url).href;
 // Every page gets its own share image: a real photo, cropped to 1200 x 630.
 const OG_PHOTOS: Record<string, string> = {
   '/': 'projects/p34/2-front-closed', '/patio-enclosures/three-season-rooms/': 'photos/factory-pc', '/patio-enclosures/clearfixed/': 'photos/clearfixed-polycarbonate-panels',
-  '/patio-enclosures/clearfold/': 'photos/showroom-polycarbonate-smoke', '/patio-enclosures/hybrid/': 'photos/showroom-room-interior',
+  '/patio-enclosures/clearfold/': 'photos/showroom-polycarbonate-smoke', '/patio-enclosures/hybrid/': 'renders/hybrid-concept',
   '/patio-screens/hexfold/': 'photos/hexfold-patio-closed', '/patio-screens/fixed-screen/': 'photos/fixed-screen-doors-closed', '/patio-enclosures/': 'projects/p36/4-inside-open', '/patio-screens/pet-resistant/': 'projects/p34/5-inside-seating', '/patio-screens/garage/': 'projects/p4/3-right-bays',
   '/pricing/': 'projects/p35/2-long-side', '/projects/': 'projects/p36/2-outside-open', '/why-ae/': 'photos/factory-cnc',
   '/how-we-build/': 'photos/factory-angle', '/showroom/': 'photos/showroom-room-interior', '/learn/': 'photos/hexfold-handle-mesh', '/compare/': 'projects/p14/3-long-side-open',
@@ -32,7 +32,7 @@ const OG_PHOTOS: Record<string, string> = {
   '/guides/folding-vs-motorized-patio-screens/': 'photos/hexfold-handle',
   '/guides/polycarbonate-vs-glass-patio-enclosure-cost/': 'photos/brick-home-screened-patio',
 };
-const ogFiles = import.meta.glob('../assets/{photos,projects}/**/*.jpg', { eager: true }) as Record<string, { default: ImageMetadata }>;
+const ogFiles = import.meta.glob('../assets/{photos,projects,renders}/**/*.jpg', { eager: true }) as Record<string, { default: ImageMetadata }>;
 const ogKey = OG_PHOTOS[path.endsWith('/') ? path : path + '/'];
 const ogPhoto = typeof image === 'object' ? image : !image && ogKey ? ogFiles[`../assets/${ogKey}.jpg`]?.default : undefined;
 const ogSrc = ogPhoto
